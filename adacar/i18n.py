@@ -257,7 +257,7 @@ TEXTS: dict[str, dict[str, str]] = {
         "cs": "{home} · {mode} · {limit}",
         "en": "{home} · {mode} · {limit}",
     },
-    "settings.profile.limit": {"cs": "nejvýš {minutes} min", "en": "up to {minutes} min"},
+    "settings.profile.limit": {"cs": "nejvýš {d}", "en": "up to {d}"},
     "settings.no_home": {"cs": "domov nezadán", "en": "no home set"},
     "settings.sources.summary": {
         "cs": "zapnuto {on} z {total}",
@@ -357,7 +357,7 @@ TEXTS: dict[str, dict[str, str]] = {
         "cs": "Uložit lze nejvýš {n} hledání.",
         "en": "At most {n} searches can be saved.",
     },
-    "sort.travel": {"cs": "Nejkratší cesta", "en": "Shortest commute"},
+    "sort.travel": {"cs": "Nejkratší cesta", "en": "Shortest trip"},
     "wizard.depart": {"cs": "Obvyklý odjezd na prohlídku", "en": "Usual departure to a viewing"},
     "wizard.depart.hint": {
         "cs": "Ve všední den; podle něj se počítají spoje MHD a vlaků.",
@@ -392,7 +392,7 @@ TEXTS: dict[str, dict[str, str]] = {
         "cs": "Počítám přesné doby cesty…",
         "en": "Computing exact travel times…",
     },
-    "commute.too_far": {"cs": "dál než 2 hodiny", "en": "more than 2 hours"},
+    "commute.too_far": {"cs": "dál než {d}", "en": "more than {d}"},
     "commute.unknown": {
         "cs": "Toto místo neznám. Zkuste název obce.",
         "en": "Unknown place. Try the name of a town.",
@@ -408,7 +408,14 @@ TEXTS: dict[str, dict[str, str]] = {
     "commute.depart_or_arrive": {"cs": "Odjezd nebo příjezd", "en": "Departure or arrival"},
     "commute.leave_at": {"cs": "Odjezd v", "en": "Leave at"},
     "commute.arrive_by": {"cs": "Příjezd do", "en": "Arrive by"},
-    "commute.next_workday": {"cs": "nejbližší pracovní den", "en": "next working day"},
+    "commute.day": {"cs": "Den prohlídky", "en": "Day of the viewing"},
+    "commute.day.workday": {"cs": "nejbližší pracovní den", "en": "next working day"},
+    "commute.day.sat": {"cs": "sobota", "en": "Saturday"},
+    "commute.day.sun": {"cs": "neděle", "en": "Sunday"},
+    "commute.back_by_car": {
+        "cs": "Zpátky koupeným autem asi {d}.",
+        "en": "Back in the car you buy: about {d}.",
+    },
     "commute.transfers": {"cs": "přestupy: {n}", "en": "transfers: {n}"},
     "commute.walk_leg": {"cs": "pěšky {m} min", "en": "walk {m} min"},
     "commute.towards": {"cs": "směr", "en": "towards"},
@@ -420,7 +427,7 @@ TEXTS: dict[str, dict[str, str]] = {
         "cs": "V tuto dobu nenacházím žádné spojení.",
         "en": "No connection found at this time.",
     },
-    "commute.estimate_minutes": {"cs": "Odhadem asi {m} min.", "en": "Roughly {m} min."},
+    "commute.estimate_minutes": {"cs": "Odhadem asi {d}.", "en": "Roughly {d}."},
     "commute.estimate_why": {
         "cs": "Přesné trasy budou k dispozici, až se připraví mapy a jízdní řády.",
         "en": "Exact routes will be available once the maps and timetables are ready.",
@@ -434,6 +441,38 @@ TEXTS: dict[str, dict[str, str]] = {
         "en": "Timetables: Spojenka (CIS JŘ and others, non-commercial use only). Map: © "
         "OpenStreetMap contributors. Routing: MOTIS.",
     },
+    "visit.add": {"cs": "Na prohlídku", "en": "Add to viewings"},
+    "visit.marked": {"cs": "V prohlídkách", "en": "In viewings"},
+    "visit.hint": {
+        "cs": "Auta na prohlídku seřadím do jedné cesty autem, s nejkratší jízdou.",
+        "en": "Cars to view are put in one drive, in the order with the least driving.",
+    },
+    "visit.open": {"cs": "Prohlídky ({n})", "en": "Viewings ({n})"},
+    "visit.title": {"cs": "Cesta na prohlídky", "en": "Viewing trip"},
+    "visit.intro": {
+        "cs": "Z místa {origin} ke všem autům a zpět, v pořadí s nejkratší jízdou autem.",
+        "en": "From {origin} to every car and back, in the order with the least driving.",
+    },
+    "visit.none": {
+        "cs": "Zatím tu žádné auto není. Přidejte ho v okně „Jak se tam dostanu“ tlačítkem "
+        "„Na prohlídku“.",
+        "en": 'No car yet. Add one in the "How to get there" window with "Add to viewings".',
+    },
+    "visit.back": {"cs": "Zpátky: {d}", "en": "Back: {d}"},
+    "visit.total": {
+        "cs": "Za volantem celkem {d} (bez času na prohlídky)",
+        "en": "{d} at the wheel in all (viewings not counted)",
+    },
+    "visit.unplaced": {
+        "cs": "U těchto aut neznám místo, v trase nejsou:",
+        "en": "These cars have no known place and are not on the route:",
+    },
+    "visit.too_many": {
+        "cs": "Na jednu cestu nejvýš {n} aut; tato zbývají na další:",
+        "en": "At most {n} cars per trip; these are left for another:",
+    },
+    "visit.remove": {"cs": "Odebrat", "en": "Remove"},
+    "visit.ended": {"cs": "inzerát skončil", "en": "ad ended"},
     "routing.title": {"cs": "Mapy a jízdní řády", "en": "Maps and timetables"},
     "routing.step.download_osm": {"cs": "Stahuji mapu", "en": "Downloading the map"},
     "routing.step.download_gtfs": {"cs": "Stahuji jízdní řády", "en": "Downloading timetables"},

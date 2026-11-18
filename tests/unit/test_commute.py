@@ -18,7 +18,7 @@ from adacar.db.models import Car, TravelSet, TravelTime
 from adacar.db.session import make_engine, make_sessionmaker, migrate
 from adacar.geo.home import Origin, locate, parse_point
 from adacar.geo.places import PlaceResolver, distance_km
-from adacar.routing import deeplinks, gtfs
+from adacar.routing import deeplinks, gtfs, tour
 from adacar.routing.commute import (
     CAR_FACTOR,
     DEPARTURES,
@@ -26,6 +26,7 @@ from adacar.routing.commute import (
     CommuteService,
     decode_polyline,
     departure,
+    estimate,
     routes,
 )
 from adacar.routing.data import GTFS_EVERY, LOOK_EVERY, WAIT_FOR_HOME, Area, RoutingData, fetch
@@ -837,3 +838,102 @@ def test_import_progress_from_its_log(tmp_path):
     )
     assert import_percent(log_path) == 60  # the last of each task: (100 + 20) / 2
     assert import_percent(tmp_path / "missing.log") == 0
+
+
+# --- M5: the trip to the seller ----------------------------------------------------------------
+
+
+def test_a_car_is_worth_a_longer_trip_than_a_walk(sessions):
+    """By car and public transport six hours (across the country), on foot two."""
+    assert estimate(250, "car") == 338 and estimate(250, "transit") is None  # 692 min
+    assert estimate(10, "walk") is None  # 133 min
+    server = FakeServer()
+    commute = CommuteService(sessions, FakeData(ready=True, version=1), server)
+    commute.compute(KOLIN, "07:00")
+    limits = {mode: limit for mode, _, limit in server.motis.calls if mode != "TRANSIT"}
+    assert limits == {"CAR": int(360 * 60 / CAR_FACTOR), "WALK": 7200, "BIKE": 7200}
+
+
+def test_a_viewing_can_be_at_the_weekend():
+    friday = datetime(2026, 10, 16, 15, 0)
+    assert departure("10:00", friday, "sat").weekday() == 5
+    assert departure("10:00", friday, "sun").date() == datetime(2026, 10, 18).date()
+    saturday = datetime(2026, 10, 17, 9, 0)
+    assert departure("10:00", saturday, "sat").date() == datetime(2026, 10, 24).date()
+
+
+def test_the_viewing_trip_has_the_least_driving():
+    import itertools
+    import random
+
+    rng = random.Random(5)
+    for n in range(1, 8):
+        m = [[0.0 if i == j else rng.uniform(5, 200) for j in range(n + 1)] for i in range(n + 1)]
+
+        def length(order, m=m):
+            path = [0, *order, 0]
+            return sum(m[a][b] for a, b in itertools.pairwise(path))
+
+        best = min(itertools.permutations(range(1, n + 1)), key=length)
+        found = tour.best_order(m)
+        assert sorted(found) == list(range(1, n + 1))
+        assert length(found) == pytest.approx(length(best))
+        assert sum(tour.legs(m, found)) == pytest.approx(length(found), abs=n + 1)
+    assert tour.best_order([[0.0]]) == []
+
+
+def test_the_viewing_trip_by_the_map_or_by_estimates(sessions):
+    import itertools
+
+    tour._known.clear()
+    stops = [(50.08, 14.43), (50.04, 15.78), (50.031, 15.201)]  # Praha, Pardubice, Kolín
+    rough = tour.round_trip(CommuteService(sessions, FakeData(), FakeServer()), KOLIN.point, stops)
+    assert not rough["exact"] and sorted(rough["order"]) == [0, 1, 2]
+    m = tour.estimate_matrix([KOLIN.point, *stops])
+    shortest = min(
+        sum(m[a][b] for a, b in itertools.pairwise([0, *order, 0]))
+        for order in itertools.permutations([1, 2, 3])
+    )
+    assert sum(rough["legs"]) == pytest.approx(shortest, abs=4)
+    server = FakeServer()
+    commute = CommuteService(sessions, FakeData(ready=True, version=1), server)
+    exact = tour.round_trip(commute, KOLIN.point, stops)
+    assert exact["exact"] and len(exact["legs"]) == 4
+    assert [c[0] for c in server.motis.calls] == ["CAR"] * 4  # a row of times per point
+    assert tour.round_trip(commute, KOLIN.point, stops[:2]) and len(server.motis.calls) == 4
+    # a car taken off the trip: its places' times are known, MOTIS is not asked again
+    far = FakeData(ready=True, version=1, area=Area(10, 50.03, 15.20))  # Praha outside the map
+    assert not tour.round_trip(CommuteService(sessions, far, server), KOLIN.point, stops)["exact"]
+
+
+def test_deep_links_of_a_trip():
+    path = [(50.0, 15.2), (50.1, 14.4), (50.2, 15.7), (50.0, 15.2)]
+    google = deeplinks.google_tour(path)
+    assert "origin=50.0%2C15.2&destination=50.0%2C15.2" in google
+    assert "waypoints=50.1%2C14.4%7C50.2%2C15.7&travelmode=driving" in google
+    mapy = deeplinks.mapy_tour(path)
+    assert "start=15.2%2C50.0&end=15.2%2C50.0&waypoints=14.4%2C50.1%3B15.7%2C50.2" in mapy
+
+
+def test_times_of_the_two_hour_limit_are_dropped_on_upgrade(tmp_path):
+    """Stored times are a cache valid until the map changes; those cut at 2 h would stay."""
+    from alembic import command
+    from alembic.config import Config
+
+    from adacar.db.session import MIGRATIONS_DIR
+
+    engine = make_engine(tmp_path / "old.db")
+    migrate(engine)
+    cfg = Config()
+    cfg.set_main_option("script_location", str(MIGRATIONS_DIR))
+    with engine.begin() as conn:
+        cfg.attributes["connection"] = conn
+        command.downgrade(cfg, "5c1e8a3f9b20")  # the M4 schema, with times stored
+    sessions = make_sessionmaker(engine)
+    with sessions() as s:
+        s.add(TravelSet(origin="50.0300,15.2000", depart="07:00", mode="car"))
+        s.commit()
+    migrate(engine)
+    with sessions() as s:
+        assert s.scalar(select(func.count(TravelSet.id))) == 0
+    engine.dispose()

@@ -1,0 +1,36 @@
+{# The viewing trip (routes/visits.py), in the trip window: the marked cars in the order with
+   the least driving from the start point and back. #}
+{% from "_icons.html" import icon %}
+<header>
+  <button type="button" aria-label="{{ t('commute.close') }}" rel="prev" onclick="this.closest('dialog').close()"></button>
+  <h3>{{ icon("route") }}{{ t("visit.title") }}</h3>
+  {% if origin and stops %}<p class="muted small">{{ t("visit.intro", origin=f.origin_label) }}</p>{% endif %}
+</header>
+{% if not cars %}
+  <p>{{ t("visit.none") }}</p>
+{% elif not origin %}
+  <p>{{ t("commute.missing_start") }}</p>
+{% endif %}
+{% macro remove(car) %}<button type="button" class="secondary outline small" hx-post="/cars/{{ car.id }}/visit?on=0&amp;tour=1&amp;{{ qs }}"
+  hx-target="#commute-body">{{ t("visit.remove") }}</button>{% endmacro %}
+{% macro name(car) %}<a href="/cars/{{ car.id }}" class="car-open" data-car="{{ car.id }}">{{ car.title }}</a>
+  <small class="muted">{{ [car.place_text or "", price(car)] | select | join(" · ") }}{% if car.status != "active" %} · {{ t("visit.ended") }}{% endif %}</small>{% endmacro %}
+{% if origin and stops %}
+  <ol class="tour">
+    {% for car, minutes in stops %}
+      <li><small class="muted">{{ icon("mode-car") }}{{ minutes | duration }}</small><br>{{ name(car) }} {{ remove(car) }}</li>
+    {% endfor %}
+  </ol>
+  <p>{{ t("visit.back", d=back | duration) }}<br>
+    <strong>{{ t("visit.total", d=total | duration) }}</strong>{% if not exact %} <span class="muted">({{ t("commute.estimate_short") }})</span>{% endif %}</p>
+  <p class="links small">{{ t("commute.open_in") }}
+    <a href="{{ links.mapy }}" target="_blank" rel="noopener">Mapy.com{{ icon("external", "icon-sm") }}</a> ·
+    <a href="{{ links.google }}" target="_blank" rel="noopener">Google Maps{{ icon("external", "icon-sm") }}</a></p>
+{% endif %}
+{# Cars off the route: without a start point all of them; else those with no known place and
+   those beyond the most one trip takes. #}
+{% for note, group in [("", cars if not origin else []), ("visit.unplaced", unplaced), ("visit.too_many", rest)] if group %}
+  {% if note %}<p class="muted small">{{ t(note, n=max_stops) }}</p>{% endif %}
+  <ul class="tour-rest">{% for car in group %}<li>{{ name(car) }} {{ remove(car) }}</li>{% endfor %}</ul>
+{% endfor %}
+{% if oob %}{% include "_visits_open.html" %}{% endif %}

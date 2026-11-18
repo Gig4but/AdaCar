@@ -15,7 +15,7 @@ from adacar import __version__
 from adacar.db.models import Car, Run
 from adacar.i18n import translate
 from adacar.normalize.vocab import VOCABULARIES, label
-from adacar.routing.commute import MODES
+from adacar.routing.commute import MAX_MINUTES, MODES
 from adacar.scraper.sources import LABELS as SOURCE_LABELS
 from adacar.search.service import TRAVEL_MODES
 from adacar.services import Services
@@ -88,6 +88,16 @@ def _format_datetime(value: datetime | None) -> str:
     return f"{_format_date(value)} {value:%H:%M}" if value else ""
 
 
+def duration(minutes: float | None) -> str:
+    """ "45 min", "2 h", "3 h 15 min" (trips across the country take hours)."""
+    if minutes is None:
+        return ""
+    hours, rest = divmod(round(minutes), 60)
+    if not hours:
+        return f"{rest}\xa0min"
+    return f"{hours}\xa0h {rest}\xa0min" if rest else f"{hours}\xa0h"
+
+
 def local_time(utc: datetime) -> datetime:
     """A stored (naive UTC) time in this computer's time zone."""
     return datetime.fromtimestamp((utc - datetime(1970, 1, 1)).total_seconds())
@@ -97,6 +107,7 @@ TEMPLATES.env.filters["safe_url"] = _safe_url
 TEMPLATES.env.filters["date"] = _format_date
 TEMPLATES.env.filters["datetime"] = _format_datetime
 TEMPLATES.env.filters["number"] = number
+TEMPLATES.env.filters["duration"] = duration
 TEMPLATES.env.filters["source_label"] = lambda source_id: SOURCE_LABELS.get(source_id, source_id)
 
 
@@ -116,6 +127,7 @@ def render(request: Request, name: str, **context) -> HTMLResponse:
         "label": lambda vocab, code: label(vocab, code, lang),
         "vocab": VOCABULARIES,
         "commute_modes": MODES,
+        "commute_limits": MAX_MINUTES,
         "travel_modes": TRAVEL_MODES,
         "commute_on": svc.travel.on(),
     }

@@ -21,7 +21,7 @@ Shared services: a small **local AI model** (reads free-text ads, flags suspicio
 puts the photo of the car from the front first, turns a question in a sentence into filters)
 and a **local routing engine** (MOTIS: travel times, routes, offline map).
 
-Status: **M0–M4 done** (2026-11-18). Next: M5 (trip to the seller, polished). How the code is
+Status: **M0–M5 done** (2026-11-18). Next: M6 (automation and alerts). How the code is
 organized: [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ---
@@ -194,10 +194,22 @@ ratings with the user's key (the background at most 25 a day), again after 30 da
 sellers get no card, and a sole trader (a person) is never looked up or stored.
 
 ### 4.6 Trip to the seller (`routing/` + `search/travel.py`)
-Unchanged from AdaWork: travel times from the start point (profile home or typed) to every
-car location, for car / transit / walk / bike and "any", leaving at the profile's time on a
-weekday, kept up to 120 minutes so the slider only filters; straight-line estimates until
-MOTIS data is imported; route window with deep links; reachable-area overlay on the map.
+From AdaWork: travel times from the start point (profile home or typed) to every car
+location, for car / transit / walk / bike and "any", leaving at the profile's time on a
+weekday, kept so the slider only filters; straight-line estimates until MOTIS data is
+imported; route window with deep links; reachable-area overlay on the map.
+
+For cars (M5): by car and public transport up to 6 hours (a car is worth a trip across the
+country; walk and bike stay at 2 h), shown as "3 h 15 min"; the slider and the profile's
+longest trip go to 6 h. The trip window picks the viewing's day (the next working day,
+Saturday or Sunday), says how long the drive back in the bought car takes, and marks the car
+"Na prohlídku". The marked cars make one viewing trip (`routing/tour.py`, "Prohlídky" in the
+travel bar): from the start point to each and back in the order with the least driving
+(Held-Karp over MOTIS car times between all the places, exact for up to 9 cars, the most a
+Google Maps link takes; the times between two places are kept per map version, so taking a
+car off asks MOTIS nothing), with the minutes of each drive and the whole trip in Mapy.com or
+Google Maps; cars without a place or with only a region stay off the route. The upgrade drops
+the travel times stored with the 2-hour limit (they are computed again when used).
 
 ---
 
@@ -210,7 +222,8 @@ description), `car_ads` (one per source ad: url, price, status, detail read time
 input). `cars.warnings` (warning signs), `cars.ai_hash` (the version the AI read),
 `car_images.kind` (what the AI saw on a photo). `vehicle_checks` (by VIN: km readings, the
 register's record), `dealers` (a name as the ads write it, its company and checks),
-`cars.dealer_id`, `cars.check_warnings`. Planned: `price_history` (M6).
+`cars.dealer_id`, `cars.check_warnings`, `cars.visit_at` (marked for the viewing trip).
+Planned: `price_history` (M6).
 
 ---
 
@@ -338,9 +351,17 @@ sure, 4 to pick, e.g. "Porsche České Budějovice", which is not the importer P
 republika; 4 not in ARES under that name, e.g. "Porsche Praha Smíchov"). The VIN check found
 ads a dealer had rewritten for another car while the site kept the old make.
 
-### M5 — Trip to the seller, polished
+### M5 — Trip to the seller, polished — done (2026-11-18)
 Verify MOTIS import and times in AdaCar; trip window texts for viewings; "visit several cars"
 order (nice to have).
+**Done when:** checks green (433 tests); the app's own import of the whole country worked (the
+map 4 min 37 s after the downloads); on a copy of it, from home: Praha 80 min by car (117
+km), Brno 3 h 13 min, Ostrava 4 h 48 min (482 km; before M5 the window found no car route over
+2 h and the list said "more than 2 hours" for most of the country); by car within 6 h 6 224 of
+the 6 256 municipalities in 7 s, public transport 0.4 s a departure; a viewing trip through 5
+towns ordered in 5.8 s, again without one of them at once. Found on the real data: of 53 516 cars only 8 556 have a place to
+route to: cars.cz (33 029) names the place only on the ad's page, which the one run so far
+had not read, and autanet (11 804) only the region; the places come as the pages are read.
 
 ### M6 — Automation and alerts
 Price history per ad, price-drop marks and notifications, "new for my saved search" alerts

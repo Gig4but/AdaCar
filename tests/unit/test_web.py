@@ -679,7 +679,7 @@ def test_settings_list_the_wizard_steps_in_order(app, client):
     assert r.headers["location"] == "/settings/cars?saved=1"
     assert profile.makes == ["skoda"] and profile.max_price == 250_000
     page = client.get("/settings").text
-    assert "Kolín · Auto · nejvýš 30 min" in page and "Škoda · do 250\xa0000 Kč" in page
+    assert "Kolín · Auto · nejvýš 30\xa0min" in page and "Škoda · do 250\xa0000 Kč" in page
     client.post("/settings/profile", data=form | {"max_minutes": "0"})  # no limit
     assert profile.max_minutes == 0 and "Kolín · Auto · bez omezení" in client.get("/settings").text
     page = client.get("/settings/cars").text
@@ -1226,3 +1226,106 @@ def test_filters_by_the_checks(app, client, monkeypatch):
     card = page.split('id="car-2"')[1].split("</article>")[0]
     assert "Pozor: prodejce: insolvence" in card
     assert 'name="no_warnings" value="1" checked' in client.get("/facets?no_warnings=1").text
+
+
+# --- M5: the trip to the seller ----------------------------------------------------------------
+
+
+def test_long_trips_read_in_hours():
+    from adacar.web.pages import duration
+
+    assert [duration(m) for m in (None, 5, 60, 75, 300)] == [
+        "", "5\xa0min", "1\xa0h", "1\xa0h 15\xa0min", "5\xa0h"
+    ]  # fmt: skip
+
+
+def test_the_trip_window_for_a_viewing(app, client, municipalities):
+    app.state.services.settings.wizard_completed = True
+    ids = commute_cars(app, municipalities)
+    params = {"at": "50.0300,15.2000", "from": "Kolín", "mode": "transit", "day": "sat"}
+    window = client.get(f"/commute/car/{ids['Octavia Pardubice']}", params=params).text
+    assert '<option value="sat" selected>sobota</option>' in window
+    assert "Zpátky koupeným autem asi" not in window  # no routes without the map
+    assert "Na prohlídku" in window and 'aria-pressed="false"' in window
+    odd = client.get(f"/commute/car/{ids['Octavia Pardubice']}", params=params | {"day": "x"})
+    assert '<option value="" selected>' in odd.text
+
+
+def test_several_cars_in_one_drive(app, client, municipalities):
+    app.state.services.settings.wizard_completed = True
+    ids = commute_cars(app, municipalities)
+    with app.state.services.sessions() as s:
+        store = CarStore(s, "bazos")
+        store.add(ParsedCar(external_id="x", title="Octavia kdekoli", make="skoda",
+                            price=1, images=["https://img.test/1.jpg"]))  # fmt: skip
+        store.commit()
+        nowhere = s.scalar(select(Car.id).where(Car.title == "Octavia kdekoli"))
+    assert 'class="visits-open secondary outline" hidden>' in client.get("/").text  # none yet
+    r = client.post(f"/cars/{ids['Octavia Praha']}/visit")
+    assert "V prohlídkách" in r.text and 'aria-pressed="true"' in r.text
+    assert "Prohlídky (1)" in r.text and 'hx-swap-oob="true"' in r.text
+    for name in ("Octavia Pardubice", "Octavia Kolín"):
+        client.post(f"/cars/{ids[name]}/visit")
+    client.post(f"/cars/{nowhere}/visit")
+    assert "Prohlídky (4)" in client.get("/").text
+
+    start = {"at": "50.0300,15.2000", "from": "Kolín"}
+    trip = client.get("/visits", params=start).text
+    assert "Cesta na prohlídky" in trip and "Z místa Kolín" in trip
+    assert trip.index("Octavia Kolín") < trip.index("Octavia Praha")  # Kolín is on the way
+    assert "(odhad)" in trip and "Za volantem celkem" in trip
+    assert "mapy.com/fnc/v1/route?" in trip and "waypoints=" in trip and "google.com/maps" in trip
+    assert "neznám místo" in trip and trip.index("neznám místo") < trip.index("Octavia kdekoli")
+    assert "Nejdřív zadejte" in client.get("/visits", params={"at": ""}).text
+
+    r = client.post(
+        f"/cars/{ids['Octavia Praha']}/visit?on=0&tour=1&at=50.0300%2C15.2000&from=Kol%C3%ADn"
+    )
+    assert "Cesta na prohlídky" in r.text and "Octavia Praha" not in r.text
+    assert "Prohlídky (3)" in r.text
+    window = client.get(f"/commute/car/{ids['Octavia Kolín']}", params=start).text
+    assert "V prohlídkách" in window
+    assert "visit?on=0&amp;tour=1&amp;at=" in r.text and "tour=1&amp;tour=1" not in r.text
+    again = client.post(f"/cars/{ids['Octavia Praha']}/visit?on=0")  # a double click
+    assert "Na prohlídku" in again.text and "Prohlídky (3)" in again.text
+    assert client.post("/cars/999999/visit").status_code == 404
+
+
+def test_the_viewing_trip_is_capped(app, client, municipalities, monkeypatch):
+    from adacar.web.routes import visits
+
+    monkeypatch.setattr(visits, "MAX_STOPS", 2)
+    app.state.services.settings.wizard_completed = True
+    ids = commute_cars(app, municipalities)
+    for car_id in ids.values():
+        client.post(f"/cars/{car_id}/visit")
+    trip = client.get("/visits", params={"at": "50.0300,15.2000", "from": "Kolín"}).text
+    assert "nejvýš 2 aut" in trip and trip.count('class="tour-rest"') == 1
+
+
+def test_the_profile_keeps_a_trip_of_hours(app, client):
+    form = {"home_address": "Kolín", "travel_mode": "car", "max_minutes": "300",
+            "depart_time": "09:00"}  # fmt: skip
+    client.post("/settings/profile", data=form)
+    assert app.state.services.settings.profile.max_minutes == 300
+    assert "nejvýš 5\xa0h" in client.get("/settings").text
+
+
+def test_a_failing_map_leaves_the_viewing_trip_estimated(app, client, municipalities, monkeypatch):
+    import httpx
+
+    from adacar.web.routes import visits
+
+    real = visits.round_trip
+
+    def failing(commute, origin, stops, use_map=True):
+        if use_map:
+            raise httpx.ConnectError("MOTIS is gone")
+        return real(commute, origin, stops, use_map=False)
+
+    monkeypatch.setattr(visits, "round_trip", failing)
+    app.state.services.settings.wizard_completed = True
+    ids = commute_cars(app, municipalities)
+    client.post(f"/cars/{ids['Octavia Praha']}/visit")
+    trip = client.get("/visits", params={"at": "50.0300,15.2000", "from": "Kolín"})
+    assert trip.status_code == 200 and "(odhad)" in trip.text and "Octavia Praha" in trip.text

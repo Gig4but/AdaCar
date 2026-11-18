@@ -61,13 +61,14 @@
       {% for m in travel_modes %}<option value="{{ m }}" {% if f.travel_mode == m %}selected{% endif %}>{{ t("commute.mode." ~ m) }}</option>{% endfor %}
     </select>
     <label class="limit">
-      <span>{{ t("commute.within") }} <output id="max-label" data-none="{{ t('commute.no_limit') }}">{% if f.travel_max %}{{ f.travel_max }} {{ t("minutes") }}{% else %}{{ t("commute.no_limit") }}{% endif %}</output></span>
-      <input type="range" name="max_min" min="0" max="120" step="5" value="{{ f.travel_max or 0 }}"
-             aria-label="{{ t('wizard.max_minutes') }}" data-minutes="{{ t('minutes') }}">
+      <span>{{ t("commute.within") }} <output id="max-label" data-none="{{ t('commute.no_limit') }}">{% if f.travel_max %}{{ f.travel_max | duration }}{% else %}{{ t("commute.no_limit") }}{% endif %}</output></span>
+      <input type="range" name="max_min" min="0" max="360" step="5" value="{{ f.travel_max or 0 }}"
+             aria-label="{{ t('wizard.max_minutes') }}">
     </label>
     <label class="depart" title="{{ t('commute.depart') }}">{{ icon("clock") }}
       <input type="time" name="depart" value="{{ f.depart }}" aria-label="{{ t('commute.depart') }}">
     </label>
+    {% include "_visits_open.html" %}
     {% include "_commute_state.html" %}
   </div>
   <div class="layout">

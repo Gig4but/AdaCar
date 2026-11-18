@@ -15,7 +15,15 @@ from adacar.db.models import Car
 from adacar.geo.places import distance_km
 from adacar.normalize.text import fold
 from adacar.routing import deeplinks
-from adacar.routing.commute import MODES, MOTIS_MODES, departure, estimate, routes
+from adacar.routing.commute import (
+    DAYS,
+    MAX_MINUTES,
+    MODES,
+    MOTIS_MODES,
+    departure,
+    estimate,
+    routes,
+)
 from adacar.routing.motis import MotisUnavailable
 from adacar.search.service import MAX_TRAVEL, filters_from
 from adacar.search.travel import origin_of
@@ -105,9 +113,11 @@ def commute_window(
     mode: str = "",
     time_: Annotated[str, Query(alias="time")] = "",
     arrive_: Annotated[str, Query(alias="arrive")] = "",  # "1": arrive by `time`
+    day: str = "",  # routing/commute.py DAYS: a working day, or the weekend
 ) -> HTMLResponse:
     """ "Jak se tam dostanu": routes by one mode with the time, legs and line numbers,
-    the reachable area, and the same route in Mapy.com, IDOS or Google Maps."""
+    the reachable area, and the same route in Mapy.com, IDOS or Google Maps; the car can be
+    marked for the viewing trip (routes/visits.py)."""
     f = svc.travel.filters(request.query_params)
     origin = origin_of(f)
     arrive = arrive_ == "1"
@@ -118,13 +128,20 @@ def commute_window(
         location = car.location
         times = svc.travel.times(s, f, [car]).get(car.location_id, {})
     place = (location and (location.address_text or location.municipality)) or car.place_text
-    context = {"car": car, "location": location, "place": place or "", "origin": origin}
+    context = {
+        "car": car,
+        "location": location,
+        "place": place or "",
+        "origin": origin,
+        "marked": car.visit_at is not None,
+    }
     if origin is None or location is None or location.lat is None or location.lon is None:
         return render(request, "_commute.html", f=f, missing=True, **context)
     if mode not in MODES:
         mode = f.travel_mode if f.travel_mode in MODES else "transit"
     depart = time_ if re.fullmatch(TIME_OF_DAY, time_) else f.depart
-    when = departure(depart)
+    day = day if day in DAYS else ""
+    when = departure(depart, day=day)
     destination = (location.lat, location.lon)
     found, error = [], None
     area = svc.routing.area
@@ -141,6 +158,7 @@ def commute_window(
                     "transit" if mode == "transit" else MOTIS_MODES[mode],
                     arrive_by=arrive,
                     count=5,
+                    max_direct=MAX_MINUTES[mode] * 60,
                 )
             found = routes(plan, mode)
         except (httpx.HTTPError, MotisUnavailable) as exc:
@@ -178,6 +196,8 @@ def commute_window(
         geo=json.dumps(geo, separators=(",", ":")),
         ends=json.dumps([[origin.lon, origin.lat], [destination[1], destination[0]]]),
         depart=depart,
+        day=day,
+        days=DAYS,
         when=when,
         arrive=arrive,
         links=links,

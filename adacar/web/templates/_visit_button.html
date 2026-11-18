@@ -1,0 +1,5 @@
+{# Marks the car for the viewing trip, or takes it off (routes/visits.py). #}
+{% from "_icons.html" import icon %}
+<button type="button" class="visit{% if not marked %} secondary outline{% endif %}" aria-pressed="{{ 'true' if marked else 'false' }}"
+        title="{{ t('visit.hint') }}" hx-post="/cars/{{ car_id }}/visit?on={{ 0 if marked else 1 }}" hx-target="this" hx-swap="outerHTML">{{ icon("star") }}{{ t("visit.marked") if marked else t("visit.add") }}</button>
+{% if oob %}{% include "_visits_open.html" %}{% endif %}

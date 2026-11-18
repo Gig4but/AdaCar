@@ -52,15 +52,16 @@ class TravelSet(Base):
 
 
 class TravelTime(Base):
-    """Minutes to a location (PLAN §4.6), computed up to two hours ahead, so moving the
-    travel-time slider only filters. Stored by key only (WITHOUT ROWID): one lookup per car."""
+    """Minutes to a location (PLAN §4.6), computed as far as each mode's limit (by car 6 h,
+    on foot 2 h: routing/commute.py MAX_MINUTES), so moving the travel-time slider only
+    filters. Stored by key only (WITHOUT ROWID): one lookup per car."""
 
     __tablename__ = "travel_times"
     __table_args__ = {"sqlite_with_rowid": False}
 
     set_id: Mapped[int] = mapped_column(ForeignKey("travel_sets.id"), primary_key=True)
     location_id: Mapped[int] = mapped_column(ForeignKey("locations.id"), primary_key=True)
-    minutes: Mapped[int | None]  # None: not within two hours
+    minutes: Mapped[int | None]  # None: farther than the mode's limit
     version: Mapped[int] = mapped_column(default=0)  # routing data version; 0 = an estimate
 
 
@@ -133,6 +134,8 @@ class Car(Base):
     # normalize/cars.py). Kept, so they are not read again, but never listed.
     is_offer: Mapped[bool] = mapped_column(default=True, index=True)
     hidden_at: Mapped[datetime | None] = mapped_column(index=True)  # hidden from the list
+    # Marked for a viewing: the cars of one drive in the best order (routing/tour.py).
+    visit_at: Mapped[datetime | None] = mapped_column(index=True)
     # Warning signs (ai/enrich.py: rules and the AI), e.g. ["deposit", "price_low"].
     warnings: Mapped[list[str]] = mapped_column(default=list)
     # The checks' warnings (checks/service.py), merged into `warnings` by the rules pass; a

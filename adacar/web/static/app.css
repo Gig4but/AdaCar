@@ -494,6 +494,14 @@ body[data-view="map"] #results { display: none; }
 .legs .icon { margin-right: var(--aw-space-1); vertical-align: -.18em; }
 .area-range { display: flex; align-items: center; gap: var(--aw-space-2); }
 .area-range input { flex: 1; margin: 0; }
+/* The viewing trip (_tour.html): its mark in the trip window and its list of cars */
+#commute header button.visit, .commute-bar .visits-open { width: auto; margin: 0; padding: .2rem .7rem;
+  font-size: var(--aw-text-sm); }
+#commute header button.visit { margin-top: var(--aw-space-2); }
+.tour li, .tour-rest li { margin-bottom: var(--aw-space-3); }
+.tour .icon { margin-right: var(--aw-space-1); vertical-align: -.18em; }
+:is(.tour, .tour-rest) button.small { margin: 0 0 0 var(--aw-space-2); padding: .1rem .6rem;
+  font-size: var(--aw-text-xs); width: auto; }
 
 /* Employer card (PLAN §4.5) and its marks on car cards */
 button.link { display: inline; background: none; border: 0; padding: 0; margin: 0; width: auto;

@@ -5,6 +5,7 @@
   <button type="button" aria-label="{{ t('commute.close') }}" rel="prev" onclick="this.closest('dialog').close()"></button>
   <h3>{{ icon("route") }}{{ t("commute.title") }}</h3>
   <p class="muted small">{{ car.title }}{% if place %} · {{ place }}{% endif %}</p>
+  {% set car_id = car.id %}{% include "_visit_button.html" %}
 </header>
 
 {% if missing %}
@@ -23,7 +24,7 @@
               class="{{ '' if m == mode else 'secondary outline' }}"
               onclick="this.form.mode.value='{{ m }}'; htmx.trigger(this.form, 'submit')">
         {{ icon("mode-" ~ m) }}{{ t("mode." ~ m) }}
-        {% if tm and tm[0] is not none %}<small>{{ tm[0] }} {{ t("minutes") }}</small>{% endif %}
+        {% if tm and tm[0] is not none %}<small>{{ tm[0] | duration }}</small>{% endif %}
       </button>
     {% endfor %}
   </div>
@@ -33,7 +34,10 @@
       <option value="1" {% if arrive %}selected{% endif %}>{{ t("commute.arrive_by") }}</option>
     </select>
     <input type="time" name="time" value="{{ depart }}" aria-label="{{ t('commute.depart') }}">
-    <small class="muted">{{ when | date }} ({{ t("commute.next_workday") }})</small>
+    <select name="day" aria-label="{{ t('commute.day') }}">
+      {% for d in days %}<option value="{{ d }}" {% if d == day %}selected{% endif %}>{{ t("commute.day." ~ (d or "workday")) }}</option>{% endfor %}
+    </select>
+    <small class="muted">{{ when | date }}</small>
   </div>
 </form>
 
@@ -47,7 +51,7 @@
         <li>
           <details {% if loop.first %}open{% endif %} data-route="{{ loop.index0 }}">
             <summary>
-              <strong>{{ r.minutes }} {{ t("minutes") }}</strong>
+              <strong>{{ r.minutes | duration }}</strong>
               {% if mode == "transit" %}· {{ r.start.strftime("%H:%M") }} → {{ r.end.strftime("%H:%M") }}
                 · {{ t("commute.transfers", n=r.transfers) }}{% endif %}
               {% if r.km %}· {{ r.km }} km{% endif %}
@@ -70,12 +74,16 @@
         </li>
       {% endfor %}
       </ol>
+      {% set by_car = times.get("car") %}
+      {% if mode == "transit" and by_car and by_car[0] is not none %}
+        <p class="small">{{ icon("mode-car") }}{{ t("commute.back_by_car", d=by_car[0] | duration) }}{% if not by_car[1] %} <span class="muted">({{ t("commute.estimate_short") }})</span>{% endif %}</p>
+      {% endif %}
     {% elif error %}
       <p class="error">{{ t("commute.failed") }}</p>
     {% elif routable %}
-      <p>{{ t("commute.no_route") if times.get(mode) and times[mode][0] is not none else t("commute.too_far") }}</p>
+      <p>{{ t("commute.no_route") if times.get(mode) and times[mode][0] is not none else t("commute.too_far", d=commute_limits[mode] | duration) }}</p>
     {% else %}
-      <p>{% if estimate %}{{ t("commute.estimate_minutes", m=estimate) }}{% else %}{{ t("commute.too_far") }}{% endif %}</p>
+      <p>{% if estimate %}{{ t("commute.estimate_minutes", d=estimate | duration) }}{% else %}{{ t("commute.too_far", d=commute_limits[mode] | duration) }}{% endif %}</p>
       <p class="muted small">{{ t("commute.estimate_why") }}{% if not commute_on and not settings.routing_download %}
         <a href="/settings/map">{{ t("routing.download") }}</a>{% endif %}</p>
     {% endif %}
@@ -85,8 +93,8 @@
       <a href="{{ links.google }}" target="_blank" rel="noopener">Google Maps{{ icon("external", "icon-sm") }}</a></p>
   </div>
 </div>
-<label class="area-range">{{ t("commute.area") }} <output>{{ f.travel_max or 45 }}</output> {{ t("minutes") }}
-  <input type="range" min="5" max="120" step="5" value="{{ f.travel_max or 45 }}">
+<label class="area-range">{{ t("commute.area") }} <output>{{ (f.travel_max or 45) | duration }}</output>
+  <input type="range" min="5" max="{{ commute_limits.values() | max }}" step="5" value="{{ f.travel_max or 45 }}">
 </label>
 <p class="muted small">{{ t("commute.attribution") }}</p>
 {% endif %}

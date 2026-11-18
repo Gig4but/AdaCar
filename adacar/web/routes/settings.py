@@ -14,9 +14,9 @@ from adacar.config import TIME_OF_DAY, IntervalHours, Language, Settings, Theme
 from adacar.i18n import translate
 from adacar.normalize.vocab import MAKES
 from adacar.scraper.sources import SWITCHABLE
-from adacar.search.service import TRAVEL_MODES
+from adacar.search.service import MAX_TRAVEL, TRAVEL_MODES
 from adacar.services import Services
-from adacar.web.pages import THEMES, Svc, number, render, status_context
+from adacar.web.pages import THEMES, Svc, duration, number, render, status_context
 from adacar.web.routes.ai import ai_summary
 from adacar.web.routes.checks import checks_summary
 
@@ -43,7 +43,7 @@ def save_profile(svc: Services, form) -> None:
     if form.get("travel_mode") in TRAVEL_MODES:
         profile.travel_mode = form["travel_mode"]
     minutes = str(form.get("max_minutes") or "")
-    if minutes.isdigit() and (int(minutes) == 0 or 5 <= int(minutes) <= 180):
+    if minutes.isdigit() and (int(minutes) == 0 or 5 <= int(minutes) <= MAX_TRAVEL):
         profile.max_minutes = int(minutes)
     depart = str(form.get("depart_time") or "")
     if re.fullmatch(TIME_OF_DAY, depart):
@@ -131,7 +131,7 @@ def catalog(svc: Services) -> list[dict]:
                 "settings.profile.summary",
                 home=p.home_address or tr("settings.no_home"),
                 mode=tr("mode." + p.travel_mode),
-                limit=tr("settings.profile.limit", minutes=p.max_minutes)
+                limit=tr("settings.profile.limit", d=duration(p.max_minutes))
                 if p.max_minutes
                 else tr("commute.no_limit"),
             ),

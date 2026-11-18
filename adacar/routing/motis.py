@@ -34,6 +34,7 @@ MIN_CHUNK = 500
 WORKERS = min(8, os.cpu_count() or 2)
 # How far a point may be from a road or path and still be routed (m).
 MATCHING_DISTANCE = 250
+MAX_DIRECT = 6 * 3600  # seconds: the longest drive, walk or ride routed (the server's limit)
 
 Point = tuple[float, float]  # (lat, lon)
 
@@ -126,8 +127,9 @@ class MotisClient:
         mode: str,
         arrive_by: bool = False,
         count: int = 3,
+        max_direct: int = MAX_DIRECT,
     ) -> dict:
-        """Routes for the commute window: `mode` "transit" (with walking), or a street mode
+        """Routes for the trip window: `mode` "transit" (with walking), or a street mode
         (CAR, WALK, BIKE) as one direct route."""
         params: dict[str, str | int] = {
             "fromPlace": f"{origin[0]},{origin[1]}",
@@ -138,8 +140,9 @@ class MotisClient:
         if mode == "transit":
             params["numItineraries"] = count
         else:
-            # MOTIS limits direct street routes to 30 min unless told otherwise.
-            params |= {"directModes": mode, "transitModes": "", "maxDirectTime": 2 * 3600}
+            # MOTIS limits direct street routes to 30 min unless told otherwise; its server
+            # allows 6 h (street_routing_max_direct_seconds), a drive across the country.
+            params |= {"directModes": mode, "transitModes": "", "maxDirectTime": max_direct}
         return self._get("/api/v6/plan", params)
 
     def geocode(self, text: str) -> list[dict]:

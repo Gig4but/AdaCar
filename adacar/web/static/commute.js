@@ -1,6 +1,9 @@
-// Travel time on the search page (PLAN §4.6): the start point box, the time limit, and the
-// "Jak se tam dostanu" window with its map.
+// Travel time on the search page (PLAN §4.6): the start point box, the time limit, the
+// "Jak se tam dostanu" window with its map, and the viewing trip ("Prohlídky").
 (() => {
+  // pages.duration: "45 min", "2 h", "3 h 15 min".
+  const duration = (m) => (m < 60 ? `${m}\u00a0min`
+    : `${Math.floor(m / 60)}\u00a0h${m % 60 ? ` ${m % 60}\u00a0min` : ""}`);
   const form = document.getElementById("search-form");
   const from = form && form.querySelector("input[name=from]");
   if (!from) return;
@@ -67,7 +70,7 @@
 
   limit.addEventListener("input", () => {
     const value = Number(limit.value);
-    limitLabel.textContent = value ? `${value} ${limit.dataset.minutes}` : limitLabel.dataset.none;
+    limitLabel.textContent = value ? duration(value) : limitLabel.dataset.none;
     document.dispatchEvent(new CustomEvent("adacar:limit", { detail: value }));
   });
 
@@ -81,6 +84,12 @@
   document.addEventListener("click", (event) => {
     const button = event.target.closest(".commute-open");
     if (button) window.adacarCommute(button.dataset.car, button);
+    const visits = event.target.closest(".visits-open");
+    if (visits) {
+      trigger = visits;
+      const params = new URLSearchParams(new FormData(form));
+      htmx.ajax("GET", `/visits?${params}`, { source: visits, target: body, swap: "innerHTML" });
+    }
   });
 
   let map = null;
@@ -160,7 +169,7 @@
       map.setFilter("route-ride", ["all", route, ["!", walking]]);
     }
     range.addEventListener("input", () => {
-      output.textContent = range.value;
+      output.textContent = duration(Number(range.value));
       if (map.getLayer("area")) filterArea(Number(range.value));
     });
     // Another connection opened in the list: drawn instead.

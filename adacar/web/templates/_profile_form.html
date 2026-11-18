@@ -15,9 +15,9 @@
   {% endfor %}
 </fieldset>
 
-<label>{{ t("wizard.max_minutes") }}: <output id="max-out">{% if p.max_minutes %}{{ p.max_minutes }} {{ t("minutes") }}{% else %}{{ t("commute.no_limit") }}{% endif %}</output>
-  <input type="range" name="max_minutes" min="0" max="120" step="5" value="{{ p.max_minutes }}"
-         oninput="document.getElementById('max-out').value = +this.value ? this.value + ' {{ t('minutes') }}' : '{{ t('commute.no_limit') }}'">
+<label>{{ t("wizard.max_minutes") }}: <output id="max-out">{% if p.max_minutes %}{{ p.max_minutes | duration }}{% else %}{{ t("commute.no_limit") }}{% endif %}</output>
+  <input type="range" name="max_minutes" min="0" max="360" step="5" value="{{ p.max_minutes }}"
+         oninput="document.getElementById('max-out').value = +this.value ? (m => m < 60 ? m + '\u00a0min' : Math.floor(m / 60) + '\u00a0h' + (m % 60 ? ' ' + m % 60 + '\u00a0min' : ''))(+this.value) : '{{ t('commute.no_limit') }}'">
 </label>
 
 <label>{{ t("wizard.depart") }}

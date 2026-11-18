@@ -1,0 +1,4 @@
+{# Opens the viewing trip (_tour.html) in the trip window; hidden while no car is marked.
+   `oob`: sent after a car was marked or unmarked. #}
+{% from "_icons.html" import icon %}
+<button type="button" id="visits-open" class="visits-open secondary outline"{% if not visits %} hidden{% endif %}{% if oob %} hx-swap-oob="true"{% endif %}>{{ icon("route") }}{{ t("visit.open", n=visits or 0) }}</button>

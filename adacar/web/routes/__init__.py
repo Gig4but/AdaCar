@@ -10,9 +10,11 @@ from adacar.web.routes import (
     search,
     settings,
     sources,
+    visits,
     wizard,
 )
 
 ROUTERS = [
-    m.router for m in (search, maps, commute, saved, sources, wizard, settings, ai, add, checks)
+    m.router
+    for m in (search, maps, commute, visits, saved, sources, wizard, settings, ai, add, checks)
 ]

@@ -25,6 +25,7 @@ from adacar.search.service import (
 from adacar.services import Services
 from adacar.web.pages import PAGE_SIZE, POSTED_DAYS, Svc, query_string, render, status_context
 from adacar.web.routes.ai import ai_context
+from adacar.web.routes.visits import visit_count
 
 router = APIRouter()
 
@@ -63,12 +64,14 @@ def index(request: Request, svc: Svc) -> Response:
         since = newest_id(svc, s)
         result = search_cars(s, f, limit=PAGE_SIZE, up_to_id=since)
         hidden = hidden_count(s)
+        visits = visit_count(s)
         times = svc.travel.times(s, f, result.cars)
         marks = unchecked_of(svc, s, [j.id for j in result.cars])
         fresh_from = new_after(s)
     return render(
         request,
         "search.html",
+        visits=visits,
         times=times,
         unchecked=marks,
         new_after=fresh_from,

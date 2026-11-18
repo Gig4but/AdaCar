@@ -45,7 +45,7 @@ class Profile(BaseModel):
 
     home_address: str = ""
     travel_mode: TravelMode = "any"
-    max_minutes: int = Field(default=0, ge=0, le=180)  # 0 = no limit
+    max_minutes: int = Field(default=0, ge=0, le=360)  # 0 = no limit
     depart_time: str = Field(default="09:00", pattern=f"^{TIME_OF_DAY}$")  # on weekdays
     makes: list[str] = Field(default_factory=list)  # make codes; empty = every make
     max_price: int | None = Field(default=None, ge=10_000, le=50_000_000)  # CZK

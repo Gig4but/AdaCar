@@ -17,7 +17,7 @@ A package imports only from the layers below it; `uv run lint-imports` checks th
 | features | `desktop`, `scheduler` | window and tray; automatic searches and alerts |
 | | `scraper` | reading the sources, storing and merging cars |
 | | `ai`, `checks` | the local model: choice, downloads, `llama-server`; reading ads, photos, questions · vehicle and seller checks: VIN, register, km history, dealers (ARES, ISIR, VAT, Google) |
-| | `search`, `routing` | queries, filters and facets; travel times (MOTIS) |
+| | `search`, `routing` | queries, filters and facets; travel times (MOTIS), the viewing trip's order |
 | shared | `geo`, `db`, `normalize` | places; the SQLite schema; text, car vocabulary and free-text rules |
 | base | `core`, `net`, `system`, `config`, `i18n`, `worker`, … | parsed cars, HTTP, this PC, settings |
 
@@ -37,6 +37,7 @@ write theirs to `Car.check_warnings`, which the rules pass merges in) and
 `Car.extra["origin"]` the fields the AI filled in; `llm_cache` keeps the model's answers.
 `vehicle_checks` keeps per VIN the km the app saw and the register's record; a `Dealer` is a
 dealer's name as the ads write it, with the company behind it (`cars.dealer_id`).
+`Car.visit_at` marks the cars of the viewing trip (`routing/tour.py`, `web/routes/visits.py`).
 
 ## One request
 

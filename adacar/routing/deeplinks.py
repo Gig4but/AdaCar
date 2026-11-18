@@ -33,6 +33,31 @@ def mapy(origin: Point, destination: Point, mode: str) -> str | None:
     )
 
 
+def google_tour(points: list[Point]) -> str:
+    """A drive from the first point through the others to the last."""
+    return "https://www.google.com/maps/dir/?" + urlencode(
+        {
+            "api": 1,
+            "origin": f"{points[0][0]},{points[0][1]}",
+            "destination": f"{points[-1][0]},{points[-1][1]}",
+            "waypoints": "|".join(f"{lat},{lon}" for lat, lon in points[1:-1]),
+            "travelmode": "driving",
+        }
+    )
+
+
+def mapy_tour(points: list[Point]) -> str:
+    """The same in Mapy.com ("waypoints": up to 15, lon,lat separated by ";")."""
+    return "https://mapy.com/fnc/v1/route?" + urlencode(
+        {
+            "start": f"{points[0][1]},{points[0][0]}",
+            "end": f"{points[-1][1]},{points[-1][0]}",
+            "waypoints": ";".join(f"{lon},{lat}" for lat, lon in points[1:-1]),
+            "routeType": MAPY_MODES["car"],
+        }
+    )
+
+
 def idos(origin_name: str, destination_name: str, when: datetime, arrive: bool = False) -> str:
     """Public transport connections by place names (IDOS does not take coordinates)."""
     params = {

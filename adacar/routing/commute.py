@@ -1,12 +1,13 @@
 """Travel times from a start point to every car location, routes, and the reachable area
 (PLAN §4.6).
 
-Times are kept in `travel_times` for all four modes up to two hours, plus "any" (the fastest
-of them), so the travel-time filter and its slider only look rows up by key. A new start point
-gets straight-line estimates at once (labelled as such); MOTIS then replaces them in the
-background: one-to-many requests per street mode and intermodal ones for public transport.
-Only locations that can be reached in two hours at all (by straight line) are asked; the rest
-are "not within two hours".
+Times are kept in `travel_times` for all four modes, plus "any" (the fastest of them), so the
+travel-time filter and its slider only look rows up by key: by car and public transport up to
+six hours (a car is worth a trip across the country), on foot and by bike up to two. A new
+start point gets straight-line estimates at once (labelled as such); MOTIS then replaces them
+in the background: one-to-many requests per street mode and intermodal ones for public transport.
+Only locations that can be reached within the limit at all (by straight line) are asked; the
+rest are "farther".
 
 Cars without a place, or only with a region, cannot be judged and always pass the filter.
 """
@@ -33,13 +34,16 @@ log = logging.getLogger(__name__)
 
 MODES = ("car", "transit", "walk", "bike")
 MOTIS_MODES = {"car": "CAR", "walk": "WALK", "bike": "BIKE"}
-MAX_MINUTES = 120
+# The longest trip kept per mode (M5, from home on the real data: by car 6 h reach 6 224 of
+# the 6 256 municipalities in 7 s, public transport 0.4 s a departure).
+MAX_MINUTES = {"car": 360, "transit": 360, "walk": 120, "bike": 120}
+LONGEST = max(MAX_MINUTES.values())
 # Estimates: a door-to-door average speed along the straight line (km/h) plus minutes to get
 # going (parking, waiting for the first connection). Rough on purpose; labelled "odhad".
 ESTIMATE = {"car": (45, 5), "transit": (22, 10), "walk": (4.5, 0), "bike": (14, 2)}
 UNJUDGED = ("region",)  # place precisions the filter cannot judge
 AREA_CELLS = 40  # grid cells across the reachable area's radius
-AREA_BUCKETS = (30, 60, 90, 120)  # the slider's ranges with their own grid
+AREA_BUCKETS = (30, 60, 90, 120, 180, 240, LONGEST)  # the slider's ranges with their own grid
 AREA_CACHE = 24
 # MOTIS counts the wait from the asked time, while a commuter takes the connection that fits:
 # the best of several departures within the hour is kept (the wait left is at most 15 min).
@@ -76,20 +80,25 @@ def transit_seconds(motis, origin, points, when: datetime, max_minutes: int) -> 
 def estimate(km: float, mode: str) -> int | None:
     speed, start = ESTIMATE[mode]
     minutes = start + km / speed * 60
-    return round(minutes) if minutes <= MAX_MINUTES else None
+    return round(minutes) if minutes <= MAX_MINUTES[mode] else None
 
 
-def reach_km(mode: str, minutes: int = MAX_MINUTES) -> float:
-    return REACH_KM_PER_MINUTE[mode] * minutes
+def reach_km(mode: str, minutes: int | None = None) -> float:
+    return REACH_KM_PER_MINUTE[mode] * min(minutes or MAX_MINUTES[mode], MAX_MINUTES[mode])
 
 
-def departure(depart: str, today: datetime | None = None) -> datetime:
-    """The next working day (from tomorrow) at `depart` ("07:00"), local time, aware."""
-    day = (today or datetime.now()).date() + timedelta(days=1)
-    while day.weekday() >= 5:
-        day += timedelta(days=1)
+DAYS = ("", "sat", "sun")  # the next working day, Saturday, Sunday
+
+
+def departure(depart: str, today: datetime | None = None, day: str = "") -> datetime:
+    """The next working day (from tomorrow), or the next Saturday or Sunday (`day` "sat",
+    "sun": viewings are often at the weekend), at `depart` ("07:00"), local time, aware."""
+    on = (today or datetime.now()).date() + timedelta(days=1)
+    weekdays = {"sat": (5,), "sun": (6,)}.get(day, (0, 1, 2, 3, 4))
+    while on.weekday() not in weekdays:
+        on += timedelta(days=1)
     hour, minute = map(int, depart.split(":"))
-    return datetime(day.year, day.month, day.day, hour, minute).astimezone()
+    return datetime(on.year, on.month, on.day, hour, minute).astimezone()
 
 
 def set_id(origin: str, depart: str, mode: str):
@@ -331,17 +340,18 @@ class CommuteService:
                             -version,
                         )
                     continue
+                limit = MAX_MINUTES[mode]
                 if not points:
                     seconds = []
                 elif mode == "transit":
-                    seconds = transit_seconds(motis, origin.point, points, when, MAX_MINUTES)
+                    seconds = transit_seconds(motis, origin.point, points, when, limit)
                 else:
-                    seconds = street_seconds(motis, origin.point, points, mode, MAX_MINUTES * 60)
+                    seconds = street_seconds(motis, origin.point, points, mode, limit * 60)
                 found = dict(zip((t[0] for t in near), seconds, strict=True))
                 for loc_id, _, _ in inside:
                     sec = found.get(loc_id)
                     minutes = math.ceil(sec / 60) if sec is not None else None
-                    if minutes is not None and minutes > MAX_MINUTES:
+                    if minutes is not None and minutes > limit:
                         minutes = None
                     result.setdefault(loc_id, {})[mode] = (minutes, version)
                 self.progress = int((i + 1) * 100 / len(MODES))
@@ -389,7 +399,7 @@ class CommuteService:
         """GeoJSON grid cells around `origin`, each with the minutes to its centre by the
         fastest of `modes` (property "m"), for slider values up to `minutes`' bucket. The map
         shows the cells with m <= the slider, so moving it needs no new request."""
-        bucket = next((b for b in AREA_BUCKETS if minutes <= b), MAX_MINUTES)
+        bucket = next((b for b in AREA_BUCKETS if minutes <= b), LONGEST)
         version = self.data.version if self.data.ready else 0
         key = (origin.key, modes, depart, bucket, version)
         with self._area_lock:  # the same area asked twice (a slider moved) is made once
@@ -440,10 +450,11 @@ class CommuteService:
                         if distance_km(origin.lat, origin.lon, *c) <= reach_km(mode, bucket)
                     ]  # fmt: skip
                     points = [centres[k] for k in near]
+                    limit = min(bucket, MAX_MINUTES[mode])
                     if mode == "transit":
-                        seconds = transit_seconds(motis, origin.point, points, when, bucket)
+                        seconds = transit_seconds(motis, origin.point, points, when, limit)
                     else:
-                        seconds = street_seconds(motis, origin.point, points, mode, bucket * 60)
+                        seconds = street_seconds(motis, origin.point, points, mode, limit * 60)
                     for k, sec in zip(near, seconds, strict=True):
                         take(k, sec / 60 if sec is not None else None)
         else:

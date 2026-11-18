@@ -29,7 +29,7 @@ from sqlalchemy.orm import Session, selectinload
 from adacar.config import TIME_OF_DAY
 from adacar.core import utcnow
 from adacar.db.models import Car, CarAd, CarImage, Dealer, Location, SourceState
-from adacar.routing.commute import travel_table, within
+from adacar.routing.commute import LONGEST, travel_table, within
 
 # Column weights for bm25: title, make, model, place_text, description.
 _BM25 = "bm25(cars_fts, 10.0, 5.0, 5.0, 2.0, 1.0)"
@@ -38,7 +38,7 @@ _TOKEN = re.compile(r"\w+", re.UNICODE)
 Sort = Literal["relevance", "date", "price", "price_desc", "km", "year", "travel"]
 SORTS = ("relevance", "date", "price", "price_desc", "km", "year", "travel")
 TRAVEL_MODES = ("any", "car", "transit", "walk", "bike")
-MAX_TRAVEL = 120  # minutes; the slider's end (routing/commute.py computes this far)
+MAX_TRAVEL = LONGEST  # minutes; the slider's end (routing/commute.py computes this far)
 # Single-value columns the list can be narrowed by, each with counts.
 VALUE_FIELDS = ("make", "fuel", "gearbox", "body", "drive", "seller_kind")
 CHECKS = ("no_warnings", "verified_dealer", "with_vin")  # switches: "1" or missing
