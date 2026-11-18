@@ -1,0 +1,22 @@
+<div class="popup">
+  {% if cars and cars[0].location %}
+    <p class="muted small">
+      {{ cars[0].location.address_text or cars[0].place_text or "" }}
+      {% if cars[0].location.precision != "address" %} · {{ t("map.approx") }}{% endif %}
+    </p>
+    {% set car = cars[0] %}{% include "_travel.html" %}
+  {% endif %}
+  <ul>
+    {% for car in cars %}
+      <li>
+        {% set active = car.ads | selectattr("status", "equalto", "active") | list %}
+        {% set url = (active or car.ads)[0].url if car.ads else None %}
+        {% if url %}<a href="{{ url | safe_url }}" target="_blank" rel="noopener">{{ car.title }}</a>{% else %}{{ car.title }}{% endif %}
+        <br><small>{{ price(car) }}{% for fact in facts(car)[:2] %} · {{ fact }}{% endfor %}</small>
+      </li>
+    {% endfor %}
+  </ul>
+  {% if total > cars | length %}
+    <p class="muted small">{{ t("map.more", n=total - cars | length) }}</p>
+  {% endif %}
+</div>

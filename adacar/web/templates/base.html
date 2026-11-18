@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="{{ lang }}"{% if theme_base %} data-theme="{{ theme_base }}"{% endif %} data-scheme="{{ settings.theme }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}AdaCar{% endblock %}</title>
+  <link rel="stylesheet" href="/static/vendor/pico.min.css">
+  <link rel="stylesheet" href="/static/app.css">
+  <script src="/static/vendor/htmx.min.js" defer></script>
+  <script src="/static/frame.js" defer></script>
+  {% block head %}{% endblock %}
+</head>
+<body>
+  {% from "_icons.html" import icon %}
+  {% macro nav_item(href, name, text, current, kind="") %}
+    <li><a href="{{ href }}" class="nav-button{% if kind %} {{ kind }}{% endif %}"{% if current %} aria-current="page"{% endif %}
+           {%- if kind == "icon-only" %} title="{{ text }}" aria-label="{{ text }}">{{ icon(name) }}{% else %}>{{ icon(name) }}<span>{{ text }}</span>{% endif %}</a></li>
+  {% endmacro %}
+  <header class="container app-header">
+    <nav>
+      <ul><li><span class="brand">Ad<span class="sparked">a<svg class="spark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1l2.6 8.4L23 12l-8.4 2.6L12 23l-2.6-8.4L1 12l8.4-2.6z"/></svg></span>Car</span></li></ul>
+      <ul>
+        {# The wizard opens by itself on first start; later from Settings. #}
+        {% if settings.wizard_completed %}
+        {{ nav_item("/", "search", t("nav.search"), path == "/") }}
+        {{ nav_item("/settings", "settings", t("nav.settings"), path == "/settings", "icon-only") }}
+        {% endif %}
+      </ul>
+    </nav>
+  </header>
+  <main class="container" id="page">
+    {% block content %}{% endblock %}
+  </main>
+  {% block after_page %}{% endblock %}
+  <footer class="container muted small">AdaCar {{ version }}</footer>
+</body>
+</html>

@@ -1,0 +1,12 @@
+User-agent: *
+Disallow: /payu/
+Disallow: /cron/
+Disallow: /secure/
+Disallow: /scripts/
+Disallow: /rss/
+Disallow: /naseptavace/
+Disallow: /fotoinzerce/
+
+Sitemap: https://www.bazar.cz/sitemap.xml
+
+

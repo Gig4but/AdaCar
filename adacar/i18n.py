@@ -1,0 +1,553 @@
+"""UI texts. Czech is the default; English is selectable in the wizard and Settings."""
+
+TEXTS: dict[str, dict[str, str]] = {
+    "nav.search": {"cs": "Hledat", "en": "Search"},
+    "wizard.title": {"cs": "Průvodce nastavením", "en": "Setup wizard"},
+    "wizard.step": {"cs": "Krok {n} ze {total}", "en": "Step {n} of {total}"},
+    "wizard.next": {"cs": "Další", "en": "Next"},
+    "wizard.back": {"cs": "Zpět", "en": "Back"},
+    "wizard.welcome": {
+        "cs": "Všechna auta na prodej ve vašem okolí na jednom místě",
+        "en": "Every car for sale near you, in one place",
+    },
+    "wizard.welcome.text": {
+        "cs": "Aplikace prochází inzertní servery s auty a ukáže vám ta, která odpovídají "
+        "tomu, co hledáte, i tomu, jak daleko jste ochotni za nimi jet. Nastavení "
+        "zabere minutu.",
+        "en": "The app reads car ad sites and shows you the cars that match what you want and "
+        "how far you are willing to travel to see them. Setup takes a minute.",
+    },
+    "wizard.language": {"cs": "Jazyk aplikace", "en": "App language"},
+    "wizard.theme": {"cs": "Barevné schéma", "en": "Colour scheme"},
+    "theme.system": {"cs": "Podle Windows", "en": "Follow Windows"},
+    "theme.light": {"cs": "Světlé", "en": "Light"},
+    "theme.dark": {"cs": "Tmavé", "en": "Dark"},
+    "theme.ocean": {"cs": "Oceán", "en": "Ocean"},
+    "theme.forest": {"cs": "Les", "en": "Forest"},
+    "theme.sunset": {"cs": "Západ slunce", "en": "Sunset"},
+    "theme.plum": {"cs": "Švestka", "en": "Plum"},
+    "theme.midnight": {"cs": "Půlnoc", "en": "Midnight"},
+    "wizard.profile": {"cs": "Odkud vyrážíte", "en": "Where you start from"},
+    "wizard.cars": {"cs": "Modely a cena", "en": "Models and price"},
+    "wizard.cars.text": {
+        "cs": "Jaká auta hledáte. Obojí je nepovinné a ve výsledcích to jde kdykoli změnit.",
+        "en": "Which cars you are after. Both are optional and can be changed in the results at "
+        "any time.",
+    },
+    "wizard.home": {
+        "cs": "Odkud pojedete auta obhlédnout",
+        "en": "Where you will travel from to see cars",
+    },
+    "wizard.home.hint": {
+        "cs": "Přesná adresa nebo jen obec, např. „Kolín“. Slouží k výpočtu doby cesty k prodejci.",
+        "en": "A precise address or just a town, e.g. “Kolín”. Used to compute the trip to a "
+        "seller.",
+    },
+    "wizard.mode": {"cs": "Jak se k prodejci dopravíte", "en": "How you will get to a seller"},
+    "mode.any": {"cs": "Nevím, ukaž vše", "en": "Not sure, show all"},
+    "mode.car": {"cs": "Auto", "en": "Car"},
+    "mode.transit": {"cs": "MHD a vlaky", "en": "Public transport"},
+    "mode.walk": {"cs": "Pěšky", "en": "Walking"},
+    "mode.bike": {"cs": "Kolo", "en": "Bike"},
+    "wizard.max_minutes": {"cs": "Nejdelší cesta k prodejci", "en": "Longest trip to a seller"},
+    "wizard.later": {
+        "cs": "Vše můžete později změnit v Nastavení.",
+        "en": "You can change all of this later in Settings.",
+    },
+    "wizard.done": {
+        "cs": "Vše je nastaveno, můžeme stáhnout první auta",
+        "en": "All set: let's download the first cars",
+    },
+    "wizard.done.text": {
+        "cs": "Po kliknutí na Start projdeme vybrané inzertní servery pro kraje ve vašem "
+        "dosahu. Čteme pomalu, aby nás nezablokovaly, takže první hledání může trvat i "
+        "desítky minut. Auta v seznamu přibývají průběžně.",
+        "en": "After Start, the chosen ad sites are read for the regions within your reach. "
+        "They are read slowly so that they do not block us, so the first search can "
+        "take tens of minutes. Cars appear in the list as they are found.",
+    },
+    "wizard.sources": {"cs": "Kde máme auta hledat", "en": "Where to look for cars"},
+    "sources.title": {"cs": "Zdroje inzerátů", "en": "Ad sources"},
+    "sources.text": {
+        "cs": "Vyberte, odkud má aplikace auta stahovat.",
+        "en": "Choose where the app downloads cars from.",
+    },
+    "sources.kind.portal": {"cs": "Autoportály", "en": "Car portals"},
+    "sources.kind.classifieds": {"cs": "Inzertní servery", "en": "Classified ad boards"},
+    "sources.classifieds.hint": {
+        "cs": "Inzeráty od kohokoli. Ty, které auto neprodávají (výkup, „koupím“, náhradní "
+        "díly), aplikace nezobrazí. Rok, nájezd a další údaje čte z textu inzerátu, "
+        "takže u některých aut mohou chybět.",
+        "en": "Ads by anyone. Those that sell no car (buyers, “I'll buy”, spare parts) are "
+        "not shown. Year, mileage and other details are read from the ad's text, so "
+        "some cars may lack them.",
+    },
+    "sources.off_default": {"cs": "ve výchozím stavu vypnuto", "en": "off by default"},
+    "sources.consent": {
+        "cs": "Rozumím riziku a chci tento zdroj zapnout",
+        "en": "I understand the risk and want to switch this source on",
+    },
+    "sources.consent_missing": {
+        "cs": "{source} se zapne, až zaškrtnete, že rozumíte riziku.",
+        "en": "{source} is switched on only after you tick that you understand the risk.",
+    },
+    "sources.save": {"cs": "Uložit", "en": "Save"},
+    "sources.saved": {
+        "cs": "Uloženo. Projeví se při příštím hledání.",
+        "en": "Saved. It applies from the next check.",
+    },
+    "wizard.auto_off": {
+        "cs": "Automatické hledání je vypnuté. Zapnout ho můžete později v Nastavení.",
+        "en": "Automatic checks are off. You can switch them on later in Settings.",
+    },
+    "wizard.start": {"cs": "Start", "en": "Start"},
+    "wizard.skip": {"cs": "Přeskočit", "en": "Skip"},
+    "minutes": {"cs": "min", "en": "min"},
+    "search.placeholder": {
+        "cs": "Model, výbava nebo místo – např. octavia kombi",
+        "en": "Model, equipment or place – e.g. octavia estate",
+    },
+    "search.found": {"cs": "Nalezená auta: {n}", "en": "Cars found: {n}"},
+    "search.empty": {
+        "cs": "Zatím tu nejsou žádná auta. Klikněte na „Obnovit nabídky“.",
+        "en": "No cars here yet. Click “Refresh offers”.",
+    },
+    "search.more": {"cs": "Další auta", "en": "More cars"},
+    "search.empty_filtered": {
+        "cs": "Těmto filtrům neodpovídá žádné auto. Zkuste některý filtr zrušit.",
+        "en": "No car matches these filters. Try removing one.",
+    },
+    "filters.title": {"cs": "Filtry", "en": "Filters"},
+    "view.list": {"cs": "Seznam", "en": "List"},
+    "view.map": {"cs": "Mapa", "en": "Map"},
+    "map.empty": {
+        "cs": "Auta zatím nemají určené místo. Doplní se po dokončení hledání.",
+        "en": "The cars have no place yet. It is added when the search finishes.",
+    },
+    "map.approx": {
+        "cs": "přibližná poloha (obec nebo okres)",
+        "en": "approximate (town or district)",
+    },
+    "map.more": {
+        "cs": "…a další auta: {n}. Upřesněte hledání nebo filtry.",
+        "en": "…and {n} more cars. Narrow the search or the filters.",
+    },
+    "filters.loading": {"cs": "Načítám filtry…", "en": "Loading filters…"},
+    "filters.reset": {"cs": "Zrušit filtry", "en": "Clear filters"},
+    "filters.any": {"cs": "Nezáleží", "en": "Any"},
+    "filters.posted": {"cs": "Vloženo", "en": "Posted"},
+    "filters.days": {"cs": "za posledních {n} dní", "en": "in the last {n} days"},
+    "filters.day1": {"cs": "za poslední den", "en": "in the last day"},
+    "filters.kraj": {"cs": "Kraj", "en": "Region"},
+    "filters.sources": {"cs": "Zdroje", "en": "Sources"},
+    "filters.sort": {"cs": "Řazení", "en": "Sort"},
+    "sort.relevance": {"cs": "Nejrelevantnější", "en": "Most relevant"},
+    "sort.date": {"cs": "Nejnověji vložené", "en": "Newest ads"},
+    "car.posted": {"cs": "Vloženo", "en": "Posted"},
+    "car.open": {"cs": "Otevřít původní inzerát", "en": "Open the original ad"},
+    "car.full_text": {"cs": "Celý popis", "en": "Full description"},
+    "car.new": {"cs": "Nové – našlo ho poslední hledání", "en": "New: found by the last search"},
+    "car.no_text": {
+        "cs": "Inzerát nemá popis. Celý text najdete v původním inzerátu.",
+        "en": "The ad has no description. See the original ad for the whole text.",
+    },
+    "car.close": {"cs": "Zavřít", "en": "Close"},
+    "car.unchecked": {
+        "cs": "Ověřuji, zda je stále v prodeji…",
+        "en": "Checking it is still for sale…",
+    },
+    "page.top": {"cs": "Nahoru", "en": "Back to top"},
+    "car.hide": {"cs": "Skrýt", "en": "Hide"},
+    "car.hide_hint": {"cs": "Skrýt auto ze seznamu", "en": "Hide the car from the list"},
+    "hidden.count": {"cs": "Skryto: {n}", "en": "Hidden: {n}"},
+    "hidden.restore_last": {"cs": "Vrátit poslední", "en": "Show the last one"},
+    "hidden.restore_all": {"cs": "Vrátit všechny", "en": "Show all"},
+    "scrape.button": {"cs": "Obnovit nabídky", "en": "Refresh offers"},
+    "scrape.button_hint": {
+        "cs": "Ověří, zda auta v seznamu jsou stále v prodeji, a doplní nová nad ně.",
+        "en": "Checks the listed cars are still for sale and adds new ones on top.",
+    },
+    "scrape.check": {
+        "cs": "Ověřuji, zda auta jsou stále v prodeji: {n}",
+        "en": "Checking the cars are still for sale: {n}",
+    },
+    "scrape.restarting": {
+        "cs": "Zastavuji hledání a začínám od začátku…",
+        "en": "Stopping the search to start over…",
+    },
+    "scrape.geocode": {"cs": "Určuji polohu aut…", "en": "Placing the cars on the map…"},
+    "scrape.addresses": {
+        "cs": "Stahuji adresy obcí z RÚIAN (jednou za měsíc, asi 63 MB): {mb} MB…",
+        "en": "Downloading the addresses of towns from RÚIAN (once a month, about 63 MB): {mb} MB…",
+    },
+    "scrape.listing": {"cs": "Procházím {source}: {n} aut", "en": "Reading {source}: {n} cars"},
+    "scrape.parallel": {"cs": "Procházím portály:", "en": "Browsing portals:"},
+    "scrape.details": {
+        "cs": "Čtu podrobnosti inzerátů na {source}: {n}",
+        "en": "Reading ad details on {source}: {n}",
+    },
+    "scrape.merged": {
+        "cs": "Sloučeno s inzerátem z jiného serveru: {n}.",
+        "en": "Merged with an ad on another site: {n}.",
+    },
+    "scrape.partial": {
+        "cs": "Některé zdroje se nepodařilo načíst: {sources}.",
+        "en": "Some sources could not be read: {sources}.",
+    },
+    "scrape.start": {"cs": "Spouštím…", "en": "Starting…"},
+    "scrape.clear": {"cs": "Mažu dříve nalezená auta…", "en": "Deleting the cars found before…"},
+    "scrape.fresh": {"cs": "Obnovit od začátku", "en": "Start over"},
+    "scrape.fresh_hint": {
+        "cs": "Smaže všechna nalezená auta a najde je znovu.",
+        "en": "Deletes every car found and finds them again.",
+    },
+    "scrape.fresh_confirm": {
+        "cs": "Smazat všechna nalezená auta, i skrytá, a hledat znovu?",
+        "en": "Delete every car found, hidden ones too, and search again?",
+    },
+    "scrape.done": {
+        "cs": "Hotovo: {new} nových, {updated} změněných, {removed} již neprodávaných.",
+        "en": "Done: {new} new, {updated} changed, {removed} no longer for sale.",
+    },
+    "scrape.failed": {"cs": "Stahování selhalo: {msg}", "en": "Download failed: {msg}"},
+    "status.last_run": {"cs": "poslední aktualizace {when}", "en": "last updated {when}"},
+    "status.auto_off": {"cs": "automatické hledání vypnuto", "en": "automatic checks off"},
+    "status.next": {"cs": "další hledání {when}", "en": "next check {when}"},
+    "status.paused": {
+        "cs": "automatické hledání pozastaveno do {when}",
+        "en": "automatic checks paused until {when}",
+    },
+    "nav.settings": {"cs": "Nastavení", "en": "Settings"},
+    "settings.title": {"cs": "Nastavení", "en": "Settings"},
+    "settings.saved": {"cs": "Uloženo.", "en": "Saved."},
+    "settings.data": {"cs": "Data aplikace", "en": "App data"},
+    "settings.data_dir": {"cs": "Složka s daty", "en": "Data folder"},
+    "settings.log_dir": {"cs": "Záznamy (logy)", "en": "Logs"},
+    "settings.save": {"cs": "Uložit", "en": "Save"},
+    "settings.wizard": {"cs": "Spustit průvodce znovu", "en": "Run the setup wizard again"},
+    "settings.wizard.hint": {
+        "cs": "Projde všechna nastavení krok za krokem.",
+        "en": "Goes through all settings step by step.",
+    },
+    "licenses.title": {"cs": "Licence", "en": "Licenses"},
+    "licenses.open": {"cs": "Zobrazit licence", "en": "Show licenses"},
+    "licenses.hint": {
+        "cs": "Licenční texty programů a knihoven, které AdaCar obsahuje.",
+        "en": "License texts of the programs and libraries AdaCar includes.",
+    },
+    "licenses.intro": {
+        "cs": "AdaCar obsahuje tyto programy a knihovny. Kliknutím zobrazíte licenční text.",
+        "en": "AdaCar includes these programs and libraries. Click one to read its license.",
+    },
+    "licenses.group.notices": {"cs": "Přehled", "en": "Overview"},
+    "licenses.group.programs": {"cs": "Programy", "en": "Programs"},
+    "licenses.group.runtime": {"cs": "Python", "en": "Python"},
+    "licenses.group.python": {"cs": "Balíčky Pythonu", "en": "Python packages"},
+    "licenses.group.web": {"cs": "Webové knihovny", "en": "Web libraries"},
+    "licenses.none": {"cs": "Licenční texty nebyly nalezeny.", "en": "No license texts found."},
+    "settings.appearance": {"cs": "Jazyk a vzhled", "en": "Language and appearance"},
+    "settings.instant": {"cs": "Změny se ukládají hned.", "en": "Changes are saved at once."},
+    "settings.profile": {"cs": "Odkud vyrážím", "en": "Where I start from"},
+    "settings.cars": {"cs": "Modely a cena", "en": "Models and price"},
+    "settings.cars.summary": {"cs": "{makes} · {price}", "en": "{makes} · {price}"},
+    "settings.cars.all": {"cs": "všechny značky", "en": "all brands"},
+    "settings.cars.any_price": {"cs": "jakákoli cena", "en": "any price"},
+    "settings.cars.price": {"cs": "do {price} Kč", "en": "up to {price} CZK"},
+    "settings.profile.summary": {
+        "cs": "{home} · {mode} · {limit}",
+        "en": "{home} · {mode} · {limit}",
+    },
+    "settings.profile.limit": {"cs": "nejvýš {minutes} min", "en": "up to {minutes} min"},
+    "settings.no_home": {"cs": "domov nezadán", "en": "no home set"},
+    "settings.sources.summary": {
+        "cs": "zapnuto {on} z {total}",
+        "en": "{on} of {total} switched on",
+    },
+    "settings.off": {"cs": "vypnuto", "en": "off"},
+    "auto.title": {"cs": "Automatické hledání", "en": "Automatic checks"},
+    "auto.enabled": {"cs": "Automaticky hledat nová auta", "en": "Look for new cars automatically"},
+    "auto.interval": {"cs": "Jak často", "en": "How often"},
+    "auto.every": {"cs": "každých {h} h", "en": "every {h} h"},
+    "auto.start_with_windows": {
+        "cs": "Spouštět se systémem Windows (v oznamovací oblasti)",
+        "en": "Start with Windows (in the notification area)",
+    },
+    "auto.notifications": {"cs": "Upozornit mě na nová auta", "en": "Tell me about new cars"},
+    "auto.hint": {
+        "cs": "Aplikace pak běží i se zavřeným oknem, ikonou vpravo dole u hodin. S vypnutým "
+        "automatickým hledáním hledá aplikace jen po kliknutí na „Obnovit nabídky“.",
+        "en": "The app then keeps running with its window closed, as an icon next to the "
+        "clock. With automatic searching off, the app searches only when you click "
+        "“Refresh offers”.",
+    },
+    "auto.save": {"cs": "Uložit", "en": "Save"},
+    "update.title": {"cs": "Aktualizace", "en": "Updates"},
+    "update.version": {
+        "cs": "Nainstalovaná verze: {version}",
+        "en": "Installed version: {version}",
+    },
+    "update.auto": {
+        "cs": "Instalovat aktualizace automaticky",
+        "en": "Install updates automatically",
+    },
+    "update.auto_on": {"cs": "automaticky", "en": "automatic"},
+    "update.auto_hint": {
+        "cs": "Jednou denně se podívá na github.com/Gig4but/AdaCar. Novou verzi stáhne, ověří "
+        "její kontrolní součet a nainstaluje ji při příštím spuštění.",
+        "en": "Looks at github.com/Gig4but/AdaCar once a day. A new version is downloaded, "
+        "its checksum verified, and it is installed at the next start.",
+    },
+    "update.check": {"cs": "Zkontrolovat aktualizace", "en": "Check for updates"},
+    "update.install": {"cs": "Nainstalovat", "en": "Install"},
+    "update.checking": {"cs": "Hledám novou verzi…", "en": "Looking for a new version…"},
+    "update.current": {"cs": "Máte nejnovější verzi.", "en": "You have the latest version."},
+    "update.available": {
+        "cs": "Je k dispozici verze {version}.",
+        "en": "Version {version} is available.",
+    },
+    "update.downloading": {
+        "cs": "Stahuji verzi {version}: {percent} %",
+        "en": "Downloading version {version}: {percent} %",
+    },
+    "update.ready": {
+        "cs": "Verze {version} je stažená a nainstaluje se při příštím spuštění.",
+        "en": "Version {version} is downloaded and is installed at the next start.",
+    },
+    "update.installing": {
+        "cs": "AdaCar se zavře, nainstaluje verzi {version} a znovu se spustí.",
+        "en": "AdaCar closes, installs version {version} and starts again.",
+    },
+    "update.failed": {"cs": "Aktualizace se nepovedla: {msg}", "en": "The update failed: {msg}"},
+    "update.dev": {
+        "cs": "Aktualizovat se dá jen nainstalovaná aplikace.",
+        "en": "Only the installed app can update itself.",
+    },
+    "auto.pause": {"cs": "Pozastavit na 24 h", "en": "Pause for 24 h"},
+    "auto.resume": {"cs": "Pokračovat", "en": "Resume"},
+    "wizard.auto_on": {
+        "cs": "Automatické hledání je zapnuté: každých {h} h.",
+        "en": "Automatic checks are on: every {h} h.",
+    },
+    "tray.open": {"cs": "Otevřít", "en": "Open"},
+    "tray.auto": {"cs": "Automatické hledání", "en": "Automatic checks"},
+    "tray.pause": {"cs": "Pozastavit na 24 h", "en": "Pause for 24 h"},
+    "tray.resume": {"cs": "Pokračovat v automatickém hledání", "en": "Resume automatic checks"},
+    "tray.quit": {"cs": "Ukončit", "en": "Quit"},
+    "notify.new": {"cs": "Nová auta: {n}", "en": "New cars: {n}"},
+    "notify.saved": {"cs": "{name}: nová auta {n}", "en": "{name}: {n} new cars"},
+    "saved.title": {"cs": "Uložená hledání", "en": "Saved searches"},
+    "saved.save": {"cs": "Uložit hledání", "en": "Save search"},
+    "saved.prompt": {"cs": "Název hledání", "en": "Name of the search"},
+    "saved.default_name": {"cs": "Moje hledání", "en": "My search"},
+    "saved.new": {"cs": "nové: {n}", "en": "new: {n}"},
+    "saved.none": {
+        "cs": "Zatím žádná. Nastavte filtry a klikněte na „Uložit hledání“.",
+        "en": "None yet. Set the filters and click “Save search”.",
+    },
+    "saved.notify_on": {
+        "cs": "Upozorňovat na nová auta (zapnuto)",
+        "en": "Tell me about new cars (on)",
+    },
+    "saved.notify_off": {
+        "cs": "Upozorňovat na nová auta (vypnuto)",
+        "en": "Tell me about new cars (off)",
+    },
+    "saved.delete": {"cs": "Smazat", "en": "Delete"},
+    "saved.full": {
+        "cs": "Uložit lze nejvýš {n} hledání.",
+        "en": "At most {n} searches can be saved.",
+    },
+    "sort.travel": {"cs": "Nejkratší cesta", "en": "Shortest commute"},
+    "wizard.depart": {"cs": "Obvyklý odjezd na prohlídku", "en": "Usual departure to a viewing"},
+    "wizard.depart.hint": {
+        "cs": "Ve všední den; podle něj se počítají spoje MHD a vlaků.",
+        "en": "On a weekday; public transport connections are computed for this time.",
+    },
+    "commute.title": {"cs": "Jak se tam dostanu", "en": "How to get there"},
+    "commute.open": {"cs": "Jak se tam dostanu", "en": "How to get there"},
+    "commute.close": {"cs": "Zavřít", "en": "Close"},
+    "commute.from": {"cs": "Odkud pojedete", "en": "Travelling from"},
+    "commute.mode.any": {"cs": "Čímkoli", "en": "Any way"},
+    "commute.mode.car": {"cs": "Autem", "en": "By car"},
+    "commute.mode.transit": {"cs": "MHD a vlakem", "en": "By public transport"},
+    "commute.mode.walk": {"cs": "Pěšky", "en": "On foot"},
+    "commute.mode.bike": {"cs": "Na kole", "en": "By bike"},
+    "commute.within": {"cs": "do", "en": "within"},
+    "commute.no_limit": {"cs": "bez omezení", "en": "no limit"},
+    "commute.depart": {"cs": "Odjezd", "en": "Departure"},
+    "commute.no_start": {
+        "cs": "Zadejte, odkud pojedete, a uvidíte dobu cesty k autům.",
+        "en": "Enter where you travel from to see the trip to each car.",
+    },
+    "commute.estimate": {
+        "cs": "Doba cesty je zatím odhad",
+        "en": "Travel times are estimates for now",
+    },
+    "commute.estimate_short": {"cs": "odhad", "en": "estimate"},
+    "commute.no_map": {
+        "cs": "Doba cesty je odhad vzdušnou čarou; přesné časy a trasy dá offline mapa.",
+        "en": "Travel times are straight-line estimates; the offline map makes them exact.",
+    },
+    "commute.computing": {
+        "cs": "Počítám přesné doby cesty…",
+        "en": "Computing exact travel times…",
+    },
+    "commute.too_far": {"cs": "dál než 2 hodiny", "en": "more than 2 hours"},
+    "commute.unknown": {
+        "cs": "Toto místo neznám. Zkuste název obce.",
+        "en": "Unknown place. Try the name of a town.",
+    },
+    "commute.missing_start": {
+        "cs": "Nejdřív zadejte, odkud pojedete (pole nad seznamem).",
+        "en": "First enter where you travel from (the field above the list).",
+    },
+    "commute.missing_place": {
+        "cs": "U tohoto auta není známé místo, takže cestu nelze spočítat.",
+        "en": "This car has no known place, so the trip cannot be computed.",
+    },
+    "commute.depart_or_arrive": {"cs": "Odjezd nebo příjezd", "en": "Departure or arrival"},
+    "commute.leave_at": {"cs": "Odjezd v", "en": "Leave at"},
+    "commute.arrive_by": {"cs": "Příjezd do", "en": "Arrive by"},
+    "commute.next_workday": {"cs": "nejbližší pracovní den", "en": "next working day"},
+    "commute.transfers": {"cs": "přestupy: {n}", "en": "transfers: {n}"},
+    "commute.walk_leg": {"cs": "pěšky {m} min", "en": "walk {m} min"},
+    "commute.towards": {"cs": "směr", "en": "towards"},
+    "commute.failed": {
+        "cs": "Trasu se nepodařilo spočítat. Zkuste to za chvíli znovu.",
+        "en": "The route could not be computed. Try again in a moment.",
+    },
+    "commute.no_route": {
+        "cs": "V tuto dobu nenacházím žádné spojení.",
+        "en": "No connection found at this time.",
+    },
+    "commute.estimate_minutes": {"cs": "Odhadem asi {m} min.", "en": "Roughly {m} min."},
+    "commute.estimate_why": {
+        "cs": "Přesné trasy budou k dispozici, až se připraví mapy a jízdní řády.",
+        "en": "Exact routes will be available once the maps and timetables are ready.",
+    },
+    "commute.open_in": {"cs": "Otevřít v:", "en": "Open in:"},
+    "commute.area": {"cs": "Kam se dostanu za", "en": "Where I can get within"},
+    "commute.start_here": {"cs": "Vyrážet odsud", "en": "Start from here"},
+    "commute.attribution": {
+        "cs": "Jízdní řády: Spojenka (CIS JŘ a další, jen pro nekomerční použití). Mapa: © "
+        "přispěvatelé OpenStreetMap. Výpočet tras: MOTIS.",
+        "en": "Timetables: Spojenka (CIS JŘ and others, non-commercial use only). Map: © "
+        "OpenStreetMap contributors. Routing: MOTIS.",
+    },
+    "routing.title": {"cs": "Mapy a jízdní řády", "en": "Maps and timetables"},
+    "routing.step.download_osm": {"cs": "Stahuji mapu", "en": "Downloading the map"},
+    "routing.step.download_gtfs": {"cs": "Stahuji jízdní řády", "en": "Downloading timetables"},
+    "routing.step.clip": {"cs": "Vyřezávám okolí domova", "en": "Cutting out the home area"},
+    "routing.step.timetable": {"cs": "Připravuji jízdní řády", "en": "Preparing timetables"},
+    "routing.step.import": {"cs": "Připravuji vyhledávání tras", "en": "Preparing route search"},
+    "routing.not_ready": {
+        "cs": "Zatím nejsou připravené; doba cesty bude k dispozici, až budou.",
+        "en": "Not ready yet; travel times will be available once they are.",
+    },
+    "routing.not_downloaded": {"cs": "Nestaženo", "en": "Not downloaded"},
+    "routing.download": {"cs": "Stáhnout mapu", "en": "Download the map"},
+    "routing.download.text": {
+        "cs": "Doba cesty k prodejci, filtr podle dojezdu a trasy potřebují offline mapu a "
+        "jízdní řády. Stáhne se asi 1 GB a pak se na pozadí několik minut připravují; "
+        "aplikaci můžete mezitím používat. Bez mapy je doba cesty jen odhad vzdušnou "
+        "čarou.",
+        "en": "The trip to a seller, the travel-time filter and routes need an offline map "
+        "and timetables. About 1 GB is downloaded and then prepared in the background "
+        "for a few minutes; you can use the app meanwhile. Without the map, trips are "
+        "straight-line estimates.",
+    },
+    "routing.needs_home": {
+        "cs": "Pro okolí domova nejdřív zadejte, odkud vyrážíte (Co hledám).",
+        "en": "For the area around home, first enter where you start from (What I look for).",
+    },
+    "routing.ready": {"cs": "Připraveno", "en": "Ready"},
+    "routing.failed": {"cs": "Poslední aktualizace selhala", "en": "The last update failed"},
+    "routing.area": {"cs": "Oblast", "en": "Area"},
+    "routing.area.auto": {"cs": "Podle počítače", "en": "Depending on this PC"},
+    "routing.area.whole": {"cs": "celá Česká republika", "en": "all of Czechia"},
+    "routing.area.home": {"cs": "okolí domova (150 km)", "en": "home area (150 km)"},
+    "routing.area.home_km": {"cs": "okolí domova ({km} km)", "en": "home area ({km} km)"},
+    "routing.area.hint": {
+        "cs": "Celá republika potřebuje asi 6 GB paměti při přípravě a 5 GB na disku; okolí "
+        "domova jen zlomek.",
+        "en": "All of Czechia needs about 6 GB of memory to prepare and 5 GB of disk; the "
+        "home area only a fraction.",
+    },
+    "routing.update_now": {"cs": "Aktualizovat teď", "en": "Update now"},
+    "routing.osm_at": {"cs": "Mapa stažena", "en": "Map downloaded"},
+    "routing.gtfs_at": {"cs": "Jízdní řády staženy", "en": "Timetables downloaded"},
+    "routing.imported_at": {"cs": "Připraveno", "en": "Prepared"},
+    "wizard.makes": {"cs": "Značky (nepovinné)", "en": "Brands (optional)"},
+    "wizard.makes.hint": {
+        "cs": "Nic nevybráno = všechny značky. Vybrané značky stáhneme a předvyplníme do hledání.",
+        "en": "None chosen = every brand. The chosen brands are downloaded and preset in the "
+        "search.",
+    },
+    "wizard.max_price": {
+        "cs": "Nejvyšší cena v Kč (nepovinné)",
+        "en": "Highest price in CZK (optional)",
+    },
+    "sources.sauto.warning": {
+        "cs": "Sauto.cz automatické čtení svých stránek v souboru robots.txt zakazuje "
+        "(povoluje ho jen vyhledávačům). Aplikace čte jen veřejné inzeráty bez "
+        "přihlášení, pomalu (jeden dotaz za 3 sekundy) a při prvním odmítnutí na 12 "
+        "hodin přestane. Sauto.cz ale může váš počítač (IP adresu) na čas zablokovat.",
+        "en": "Sauto.cz forbids automatic reading of its pages in its robots.txt file (it "
+        "allows only search engines). The app reads only public ads without logging in, "
+        "slowly (one request every 3 seconds), and stops for 12 hours at the first "
+        "refusal. Sauto.cz may still block your computer (IP address) for a while.",
+    },
+    "filters.make": {"cs": "Značka", "en": "Brand"},
+    "filters.fuel": {"cs": "Palivo", "en": "Fuel"},
+    "filters.gearbox": {"cs": "Převodovka", "en": "Gearbox"},
+    "filters.body": {"cs": "Karoserie", "en": "Body"},
+    "filters.drive": {"cs": "Pohon", "en": "Drive"},
+    "filters.seller_kind": {"cs": "Prodejce", "en": "Seller"},
+    "filters.price": {"cs": "Cena (Kč)", "en": "Price (CZK)"},
+    "filters.year": {"cs": "Rok výroby", "en": "Year"},
+    "filters.from": {"cs": "od", "en": "from"},
+    "filters.to": {"cs": "do", "en": "to"},
+    "filters.km_max": {"cs": "Najeto nejvýš (km)", "en": "Mileage at most (km)"},
+    "filters.power_min": {"cs": "Výkon alespoň (kW)", "en": "Power at least (kW)"},
+    "filters.with_price": {"cs": "Jen s uvedenou cenou", "en": "Only with a price"},
+    "filters.with_photo": {"cs": "Jen s fotkou", "en": "Only with a photo"},
+    "filters.apply": {"cs": "Použít", "en": "Apply"},
+    "sort.price": {"cs": "Nejlevnější", "en": "Cheapest"},
+    "sort.price_desc": {"cs": "Nejdražší", "en": "Most expensive"},
+    "sort.km": {"cs": "Nejméně najeto", "en": "Lowest mileage"},
+    "sort.year": {"cs": "Nejmladší", "en": "Newest model year"},
+    "car.price_none": {"cs": "Cena dohodou", "en": "Price on request"},
+    "car.vat": {"cs": "lze odečíst DPH", "en": "VAT deductible"},
+    "car.photo": {"cs": "Fotka auta", "en": "Photo of the car"},
+    "car.specs": {"cs": "Parametry", "en": "Specifications"},
+    "car.equipment": {"cs": "Výbava", "en": "Equipment"},
+    "car.year": {"cs": "Rok výroby", "en": "Year"},
+    "car.mileage": {"cs": "Najeto", "en": "Mileage"},
+    "car.engine": {"cs": "Motor", "en": "Engine"},
+    "car.power": {"cs": "Výkon", "en": "Power"},
+    "car.fuel": {"cs": "Palivo", "en": "Fuel"},
+    "car.gearbox": {"cs": "Převodovka", "en": "Gearbox"},
+    "car.body": {"cs": "Karoserie", "en": "Body"},
+    "car.drive": {"cs": "Pohon", "en": "Drive"},
+    "car.condition": {"cs": "Stav", "en": "Condition"},
+    "car.color": {"cs": "Barva", "en": "Colour"},
+    "car.doors_seats": {"cs": "Dveře / místa", "en": "Doors / seats"},
+    "car.origin": {"cs": "Země původu", "en": "Country of origin"},
+    "car.vin": {"cs": "VIN", "en": "VIN"},
+    "car.seller": {"cs": "Prodejce", "en": "Seller"},
+    "car.history": {"cs": "Historie", "en": "History"},
+    "car.first_owner": {"cs": "1. majitel", "en": "First owner"},
+    "car.service_book": {"cs": "servisní knížka", "en": "service book"},
+    "car.crashed": {"cs": "havarováno", "en": "previously damaged"},
+    "car.not_crashed": {"cs": "nehavarováno", "en": "not damaged"},
+    "car.price_differs": {"cs": "Jinde za {price}", "en": "Elsewhere for {price}"},
+    "status.cars": {"cs": "Auta v prodeji: {n}", "en": "Cars for sale: {n}"},
+}
+
+
+def translate(lang: str, key: str, **kwargs: object) -> str:
+    entry = TEXTS.get(key)
+    if entry is None:
+        return key
+    text = entry.get(lang) or entry["cs"]
+    return text.format(**kwargs) if kwargs else text

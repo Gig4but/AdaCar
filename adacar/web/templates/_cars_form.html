@@ -1,0 +1,15 @@
+{# Which cars: brands and the highest price; shared by the wizard and Settings. #}
+{% set p = settings.profile %}
+<fieldset class="makes">
+  <legend>{{ t("wizard.makes") }}</legend>
+  <small>{{ t("wizard.makes.hint") }}</small>
+  <div class="make-grid">
+    {% for code, names in makes.items() %}
+      <label><input type="checkbox" name="makes" value="{{ code }}" {% if code in p.makes %}checked{% endif %}> {{ names[lang] }}</label>
+    {% endfor %}
+  </div>
+</fieldset>
+
+<label>{{ t("wizard.max_price") }}
+  <input type="number" name="max_price" min="10000" step="10000" value="{{ p.max_price or '' }}" inputmode="numeric">
+</label>

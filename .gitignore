@@ -1,0 +1,20 @@
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+.import_linter_cache/
+build/
+dist/
+*.egg-info/
+
+# Large downloaded data and binaries (fetched by scripts, never committed)
+vendor/llama.cpp/
+vendor/motis/
+vendor/osmium/
+vendor/licenses/
+data/
+spikes/**/data/
+*.gguf
+*.pbf
+*.zip

@@ -1,0 +1,3164 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-NJJFCJ');</script>
+
+    <!-- Meta Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return;
+            n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n;
+            n.push = n;
+            n.loaded = !0;
+            n.version = '2.0';
+            n.queue = [];
+            t = b.createElement(e);
+            t.async = !0;
+            t.src = v;
+            s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1233084501283271');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+                   src="https://www.facebook.com/tr?id=1233084501283271&ev=PageView&noscript=1"
+        /></noscript>
+    <!-- End Meta Pixel Code -->
+
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://use.typekit.net/qir3knc.css">
+    <title>    Lada  na prodej | Autanet.cz
+</title>
+            <meta name="description" content="
+    	    		        		Aktuální nabídka vozů Lada na prodej z autobazarů a autosalonů. Nové, předváděcí a ojeté vozy Lada na jednom místě.
+    			">
+                        <link rel="canonical" href="https://www.autanet.cz/osobni-vozidla/lada">
+        <link rel="icon" type="image/png" href="/img/favicon/favicon-96x96.png" sizes="96x96"/>
+    <link rel="icon" type="image/svg+xml" href="/img/favicon/favicon.svg"/>
+    <link rel="shortcut icon" href="/img/favicon/favicon.ico"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png"/>
+    <meta name="apple-mobile-web-app-title" content="Autanet.cz"/>
+    <link rel="manifest" href="/img/favicon/site.webmanifest"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+            integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
+
+    <link href="/plugins/OverlayScrollbars-1.x/css/OverlayScrollbars.min.css" rel="stylesheet">
+    <link href="/plugins/Gallery-master/css/blueimp-gallery.min.css" rel="stylesheet">
+
+    <link href="/plugins/slick/slick.css" rel="stylesheet">
+
+    <link href="/fonts/style.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/header-mobile-home.css?v=2">
+                <link rel="stylesheet" href="/build/app.261d31e8.css">
+        <link rel="stylesheet" href="/homepage-models.css?v=1">
+        <link rel="stylesheet" href="/vehicle-tip/tip.css?v=1">
+    
+    <link rel="stylesheet" href="/vehicle-listing/listing.css?v=1222">
+    <link rel="stylesheet" href="/vehicle-saved/saved.css?v=6">
+    <link rel="stylesheet" href="/pagination/pagination.css?v=2">
+            <script src="/build/runtime.8bca0894.js" defer></script><script src="/build/803.88ddaa39.js" defer></script><script src="/build/562.74ec6b3f.js" defer></script><script src="/build/app.0153bfea.js" defer></script>
+    
+        <script>
+        window.AutanetAnalytics = (() => {
+            const VISITOR_COOKIE = 'autanet_analytics_visitor';
+            const SESSION_STORAGE_KEY = 'autanet_analytics_session';
+            const SESSION_TIMEOUT_MS = 30 * 60 * 1000;
+            const CMP_RETRY_INTERVAL_MS = 100;
+            const CMP_RETRY_LIMIT_MS = 30 * 1000;
+
+            const pageviewKey = createKey();
+            const pendingIdentityCallbacks = [];
+
+            let consentKnown = false;
+            let consentGranted = false;
+            let cmpListenerAttached = false;
+            let cmpStartedAt = Date.now();
+
+            initConsent();
+
+            function createKey() {
+                if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+                    return window.crypto.randomUUID();
+                }
+
+                return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, character => {
+                    const random = Math.random() * 16 | 0;
+                    const value = character === 'x' ? random : (random & 0x3 | 0x8);
+
+                    return value.toString(16);
+                });
+            }
+
+            function getCookie(name) {
+                const prefix = name + '=';
+                const cookies = document.cookie ? document.cookie.split('; ') : [];
+
+                for (const cookie of cookies) {
+                    if (cookie.startsWith(prefix)) {
+                        return decodeURIComponent(cookie.substring(prefix.length));
+                    }
+                }
+
+                return null;
+            }
+
+            function setVisitorCookie(value) {
+                document.cookie = VISITOR_COOKIE
+                    + '=' + encodeURIComponent(value)
+                    + '; Path=/; Max-Age=31536000; SameSite=Lax; Secure';
+            }
+
+            function deleteVisitorCookie() {
+                document.cookie = VISITOR_COOKIE
+                    + '=; Path=/; Max-Age=0; SameSite=Lax; Secure';
+            }
+
+            function clearIdentity() {
+                deleteVisitorCookie();
+
+                try {
+                    localStorage.removeItem(SESSION_STORAGE_KEY);
+                } catch (error) {
+                    // Pokud localStorage není dostupný, není třeba dělat nic dalšího.
+                }
+            }
+
+            function getIdentity() {
+                if (!consentKnown || !consentGranted) {
+                    return null;
+                }
+
+                let visitorKey = getCookie(VISITOR_COOKIE);
+
+                if (!visitorKey) {
+                    visitorKey = createKey();
+                    setVisitorCookie(visitorKey);
+                }
+
+                const now = Date.now();
+                let sessionData = null;
+
+                try {
+                    sessionData = JSON.parse(localStorage.getItem(SESSION_STORAGE_KEY));
+                } catch (error) {
+                    sessionData = null;
+                }
+
+                if (
+                    !sessionData
+                    || typeof sessionData.key !== 'string'
+                    || typeof sessionData.lastActivity !== 'number'
+                    || now - sessionData.lastActivity > SESSION_TIMEOUT_MS
+                ) {
+                    sessionData = {
+                        key: createKey(),
+                        lastActivity: now
+                    };
+                } else {
+                    sessionData.lastActivity = now;
+                }
+
+                try {
+                    localStorage.setItem(
+                        SESSION_STORAGE_KEY,
+                        JSON.stringify(sessionData)
+                    );
+                } catch (error) {
+                    sessionData = null;
+                }
+
+                return {
+                    visitorKey: visitorKey,
+                    sessionKey: sessionData ? sessionData.key : null,
+                    pageviewKey: pageviewKey
+                };
+            }
+
+            function flushPendingIdentityCallbacks() {
+                if (!consentKnown) {
+                    return;
+                }
+
+                const identity = consentGranted ? getIdentity() : null;
+
+                while (pendingIdentityCallbacks.length > 0) {
+                    const callback = pendingIdentityCallbacks.shift();
+                    callback(identity);
+                }
+            }
+
+            function withIdentity(callback, timeoutMs = 5000) {
+                if (consentKnown) {
+                    callback(consentGranted ? getIdentity() : null);
+                    return;
+                }
+
+                let completed = false;
+
+                const wrappedCallback = identity => {
+                    if (completed) {
+                        return;
+                    }
+
+                    completed = true;
+                    callback(identity);
+                };
+
+                pendingIdentityCallbacks.push(wrappedCallback);
+
+                setTimeout(() => {
+                    wrappedCallback(null);
+                }, timeoutMs);
+            }
+
+            function applyConsent(tcData) {
+                const consents = tcData.purpose && tcData.purpose.consents
+                    ? tcData.purpose.consents
+                    : {};
+
+                consentKnown = true;
+                consentGranted = (
+                    tcData.gdprApplies === false
+                    || (
+                        consents[1] === true
+                        && consents[8] === true
+                        && consents[9] === true
+                    )
+                );
+
+                if (!consentGranted) {
+                    clearIdentity();
+                }
+
+                flushPendingIdentityCallbacks();
+            }
+
+            function attachCmpListener() {
+                if (cmpListenerAttached) {
+                    return;
+                }
+
+                if (typeof window.__tcfapi !== 'function') {
+                    if (Date.now() - cmpStartedAt < CMP_RETRY_LIMIT_MS) {
+                        setTimeout(attachCmpListener, CMP_RETRY_INTERVAL_MS);
+                    }
+
+                    return;
+                }
+
+                cmpListenerAttached = true;
+
+                window.__tcfapi('addEventListener', 2, (tcData, success) => {
+                    if (!success || !tcData) {
+                        return;
+                    }
+
+                    if (
+                        tcData.eventStatus !== 'tcloaded'
+                        && tcData.eventStatus !== 'useractioncomplete'
+                    ) {
+                        return;
+                    }
+
+                    applyConsent(tcData);
+                });
+            }
+
+            function initConsent() {
+                cmpStartedAt = Date.now();
+                attachCmpListener();
+            }
+
+            function getState() {
+                return {
+                    consentKnown: consentKnown,
+                    consentGranted: consentGranted,
+                    pageviewKey: pageviewKey,
+                    visitorKey: consentGranted ? getCookie(VISITOR_COOKIE) : null,
+                    session: consentGranted
+                        ? localStorage.getItem(SESSION_STORAGE_KEY)
+                        : null
+                };
+            }
+
+            return {
+                getIdentity: getIdentity,
+                withIdentity: withIdentity,
+                clearIdentity: clearIdentity,
+                getState: getState
+            };
+        })();
+    </script>
+
+    <script language="JavaScript" type="text/javascript">
+        document.write('<img src=https://toplist.cz/dot.asp?id=61738&amp;http=' + escape(document.referrer) + '&amp;wi=' + escape(window.screen.width) + '&amp;he=' + escape(window.screen.height) + '&amp;t=' + escape(document.title) + ' width="1" height="1" border=0 alt=" " />');
+    </script>
+    <noscript><img src=https://toplist.cz/dot.asp?id=61738 border="0" alt=" " width="1" height="1"/></noscript>
+
+    <!-- (C)2000-2015 Gemius SA - gemiusAudience / autanet.cz / Homepage -->
+    <script type="text/javascript">
+        var pp_gemius_identifier = 'ogg70HNn3AMZzJdBUqRQipcPzStg1JrY61PGru.QL2P.47';
+        var pp_gemius_use_cmp = true;
+
+        function gemius_pending(i) {
+            window[i] = window[i] || function () {
+                var x = window[i + '_pdata'] = window[i + '_pdata'] || [];
+                x[x.length] = arguments;
+            };
+        };
+        gemius_pending('gemius_hit');
+        gemius_pending('gemius_event');
+        gemius_pending('pp_gemius_hit');
+        gemius_pending('pp_gemius_event');
+        (function (d, t) {
+            try {
+                var gt = d.createElement(t), s = d.getElementsByTagName(t)[0],
+                    l = 'http' + ((location.protocol == 'https:') ? 's' : '');
+                gt.setAttribute('async', 'async');
+                gt.setAttribute('defer', 'defer');
+                gt.src = l + '://spir.hit.gemius.pl/xgemius.js';
+                s.parentNode.insertBefore(gt, s);
+            } catch (e) {
+            }
+        })(document, 'script');
+
+    </script>
+    <meta name="robots" content="index, follow">
+            
+        
+            </head>
+
+
+<body class="">
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJJFCJ"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="header">
+    <div class="header__overlay js-header__overlay"></div>
+    <div class="header__container">
+        <a class="header__logo" href="/">
+            <img src="/img/header__logo.svg" alt="" loading="lazy">
+        </a>
+        <div class="header__collapse js-header__collapse">
+            <nav class="header__nav">
+                <a class="header__nav-home" href="/">Hlavní stránka</a>
+                <div class="header__nav-dropdown">
+                    <div class="header__nav-dropdown-toggler js-header__nav-dropdown-toggler">Nabídka vozidel</div>
+                    <div class="header__nav-dropdown-collapse">
+                        <div class="header__nav-submenu">
+                            <a class="header__nav-submenu-item" href="/osobni-vozidla">Osobní</a>
+                            <a class="header__nav-submenu-item" href="/uzitkova-vozidla">Užitková</a>
+                            <a class="header__nav-submenu-item" href="/nakladni-vozidla">Nákladní</a>
+                            <a class="header__nav-submenu-item" href="/obytna-vozidla">Obytná</a>
+                            <a class="header__nav-submenu-item" href="/motorky-skutry">Motorky</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="/autobazary">Prodejci</a>
+                <a href="/clanky/testy-aut">Testy aut</a>
+                <a href="/proverit-auto">Prověřit auto</a>
+                <div class="header__nav-dropdown">
+                    <div class="header__nav-dropdown-toggler js-header__nav-dropdown-toggler">Magazín</div>
+                    <div class="header__nav-dropdown-collapse">
+                        <div class="header__nav-submenu">
+                            <a class="header__nav-submenu-item" href="/clanky/novinky">Novinky</a>
+                            <a class="header__nav-submenu-item"
+                               href="/clanky/rady-a-tipy">Rady a tipy</a>
+                            <a class="header__nav-submenu-item"
+                               href="/clanky/nove-modely">Nové modely</a>
+                            <a class="header__nav-submenu-item" href="/clanky/ojetiny">Ojetiny</a>
+                            <a class="header__nav-submenu-item"
+                               href="/clanky/auto-a-zivot"> Auto a život</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="header__toggler js-header__toggler">
+            <span></span>
+        </div>
+    </div>
+</header>
+
+
+<main>
+                    	
+	
+  <nav class="vehicle-breadcrumb-row vehicle-breadcrumb-row--listing" aria-label="Drobečková navigace">
+ <div class="vehicle-breadcrumb">
+ <a href="/">Autanet</a><span>›</span>
+ <a href="/osobni-vozidla">Osobní vozidla</a> <span>›</span><span class="vehicle-breadcrumb__current">Lada</span>  </div>
+ </nav>
+ <script type="application/ld+json">{"@context":"https:\/\/schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Autanet","item":"https:\/\/www.autanet.cz\/"},{"@type":"ListItem","position":2,"name":"Osobn\u00ed vozidla","item":"https:\/\/www.autanet.cz\/osobni-vozidla"},{"@type":"ListItem","position":3,"name":"Lada","item":"https:\/\/www.autanet.cz\/osobni-vozidla\/lada"}]}</script>
+  <div class="vehicle-search__head">
+ <div class="vehicle-search__head-copy">
+    <h1 class="vehicle-search__title">Lada na prodej</h1>
+    <div class="vehicle-search__summary"><strong>13</strong> vozů z nabídky autobazarů a autosalonů</div>
+ </div>
+ <div class="vehicle-search__filter-toggle">
+ <button class="form__toggler-mobile js-form__show-filter-desktop button" type="button">
+ <span class="form__toggler-mobile-more">Zobrazit filtr</span>
+ <span class="form__toggler-mobile-less">Skrýt filtr</span>
+ <i class="icon icon-chevron-down"></i>
+ </button>
+ </div>
+ </div>
+
+    <form id="form-search" class="form form--mobile-sticky" data-count-kind="1">
+
+        <div class="form__hidden-mobile">
+            <button class="form__toggler-mobile js-form__show-filter-desktop button" type="button">
+                <span class="form__toggler-mobile-more">Zobrazit filtr</span>
+                <span class="form__toggler-mobile-less">Skrýt filtr</span>
+                <i class="icon icon-chevron-down"></i>
+            </button>
+        </div>
+
+        <div class="form__hidden-desktop">
+            <button class="form__toggler-mobile js-form__toggler-mobile button" type="button">
+                <span class="form__toggler-mobile-more">Zobrazit filtr</span>
+                <span class="form__toggler-mobile-less">Skrýt filtr</span>
+                <i class="icon icon-chevron-down"></i>
+            </button>
+        </div>
+
+        <div class="form__collapse-mobile js-form__collapse-mobile" style="display: none;">
+            <div class="form__checkboxes" style="display: none;">
+
+                
+
+                    
+
+                    
+
+
+                
+
+                    
+
+                                            <div class="form__check-radio form__check-radio--strong">
+                            <input type="checkbox" id="cat-1" name="category[]" value="1"
+  checked  >
+                            <label for="cat-1">Nové  </label>
+                        </div>
+                    
+
+
+                
+
+                                            <div class="form__check-radio form__check-radio--strong">
+                            <input type="checkbox" id="condition-2" name="condition[]" value="2"
+                                       checked    >
+                            <label for="condition-2">Předváděcí</label>
+                        </div>
+                    
+
+                                            <div class="form__check-radio form__check-radio--strong">
+                            <input type="checkbox" id="cat-2" name="category[]" value="2"
+  checked  >
+                            <label for="cat-2">Ojeté  </label>
+                        </div>
+                    
+
+
+                
+
+                    
+
+                    
+
+
+                
+
+                    
+
+                                            <div class="form__check-radio form__check-radio--strong">
+                            <input type="checkbox" id="cat-3" name="category[]" value="3"
+  >
+                            <label for="cat-3">Veterán  </label>
+                        </div>
+                    
+
+
+                
+                <div class="form__check-radio form__check-radio--strong">
+                    <input type="checkbox" id="condition-14" name="condition[]" value="14"
+  >
+                    <label for="condition-14">Havarované</label>
+                </div>
+            </div>
+
+
+            <div class="form__columns form__columns--3">
+                <fieldset>
+
+
+                    <div class="form__group">
+                        <label>Značka</label>
+                        <!-- if you need a search input in select 2 use class .js-select2-search -->
+                        <select id="manufacturer" class="js-select2" name="manufacturer">
+                            <option value="">Nezadáno</option>
+                                                            <option value="abarth"  >Abarth</option>
+                                                            <option value="aixam"  >Aixam</option>
+                                                            <option value="alfa-romeo"  >Alfa Romeo</option>
+                                                            <option value="alpina"  >ALPINA</option>
+                                                            <option value="alpine"  >Alpine</option>
+                                                            <option value="aston-martin"  >Aston Martin</option>
+                                                            <option value="audi"  >Audi</option>
+                                                            <option value="austin"  >Austin</option>
+                                                            <option value="baic"  >BAIC</option>
+                                                            <option value="bentley"  >Bentley</option>
+                                                            <option value="bmw"  >BMW</option>
+                                                            <option value="buick"  >Buick</option>
+                                                            <option value="byd"  >BYD</option>
+                                                            <option value="cadillac"  >Cadillac</option>
+                                                            <option value="chery"  >Chery</option>
+                                                            <option value="chevrolet"  >Chevrolet</option>
+                                                            <option value="chrysler"  >Chrysler</option>
+                                                            <option value="citroen"  >Citroën</option>
+                                                            <option value="cupra"  >Cupra</option>
+                                                            <option value="dacia"  >Dacia</option>
+                                                            <option value="daihatsu"  >Daihatsu</option>
+                                                            <option value="dodge"  >Dodge</option>
+                                                            <option value="dongfeng"  >Dongfeng</option>
+                                                            <option value="ds-automobiles"  >DS Automobiles</option>
+                                                            <option value="ferrari"  >Ferrari</option>
+                                                            <option value="fiat"  >Fiat</option>
+                                                            <option value="ford"  >Ford</option>
+                                                            <option value="forthing"  >Forthing</option>
+                                                            <option value="foton"  >Foton</option>
+                                                            <option value="genesis"  >Genesis</option>
+                                                            <option value="gmc"  >GMC</option>
+                                                            <option value="great-wall"  >Great Wall</option>
+                                                            <option value="honda"  >Honda</option>
+                                                            <option value="hummer"  >Hummer</option>
+                                                            <option value="hyundai"  >Hyundai</option>
+                                                            <option value="infiniti"  >Infiniti</option>
+                                                            <option value="isuzu"  >Isuzu</option>
+                                                            <option value="jac"  >JAC</option>
+                                                            <option value="jaecoo"  >Jaecoo</option>
+                                                            <option value="jaguar"  >Jaguar</option>
+                                                            <option value="jeep"  >Jeep</option>
+                                                            <option value="kaipan"  >Kaipan</option>
+                                                            <option value="kgm"  >KGM</option>
+                                                            <option value="kia"  >Kia</option>
+                                                            <option value="ktm"  >KTM</option>
+                                                            <option value="lada"   selected   >Lada</option>
+                                                            <option value="lamborghini"  >Lamborghini</option>
+                                                            <option value="lancia"  >Lancia</option>
+                                                            <option value="land-rover"  >Land Rover</option>
+                                                            <option value="leapmotor"  >Leapmotor</option>
+                                                            <option value="lexus"  >Lexus</option>
+                                                            <option value="ligier"  >Ligier</option>
+                                                            <option value="lincoln"  >Lincoln</option>
+                                                            <option value="lotus"  >Lotus</option>
+                                                            <option value="lynk-co"  >Lynk &amp; Co</option>
+                                                            <option value="mahindra"  >Mahindra </option>
+                                                            <option value="maserati"  >Maserati</option>
+                                                            <option value="maxus"  >Maxus</option>
+                                                            <option value="mazda"  >Mazda</option>
+                                                            <option value="mclaren"  >McLaren</option>
+                                                            <option value="mercedes-benz"  >Mercedes-Benz</option>
+                                                            <option value="mg"  >MG</option>
+                                                            <option value="mini"  >Mini</option>
+                                                            <option value="mitsubishi"  >Mitsubishi</option>
+                                                            <option value="moskvic"  >Moskvič</option>
+                                                            <option value="nio"  >NIO</option>
+                                                            <option value="nissan"  >Nissan</option>
+                                                            <option value="omoda"  >Omoda</option>
+                                                            <option value="opel"  >Opel</option>
+                                                            <option value="ostatni"  >Ostatní</option>
+                                                            <option value="peugeot"  >Peugeot</option>
+                                                            <option value="pontiac"  >Pontiac</option>
+                                                            <option value="porsche"  >Porsche</option>
+                                                            <option value="ram"  >RAM</option>
+                                                            <option value="renault"  >Renault</option>
+                                                            <option value="rolls-royce"  >Rolls-Royce</option>
+                                                            <option value="rover"  >Rover</option>
+                                                            <option value="saab"  >Saab</option>
+                                                            <option value="seat"  >Seat</option>
+                                                            <option value="skoda"  >Škoda</option>
+                                                            <option value="smart"  >Smart</option>
+                                                            <option value="ssangyong"  >SsangYong</option>
+                                                            <option value="subaru"  >Subaru</option>
+                                                            <option value="suzuki"  >Suzuki</option>
+                                                            <option value="tata"  >Tata</option>
+                                                            <option value="tesla"  >Tesla</option>
+                                                            <option value="toyota"  >Toyota</option>
+                                                            <option value="trabant"  >Trabant</option>
+                                                            <option value="volkswagen"  >Volkswagen</option>
+                                                            <option value="volvo"  >Volvo</option>
+                                                            <option value="voyah"  >Voyah</option>
+                                                    </select>
+                    </div>
+                    <div class="form__group">
+                        <label>Model</label>
+                        <select class="js-select2" name="model">
+                            <option value="">Nezadáno</option>
+                                                            <option value="2106"  >2106</option>
+                                                            <option value="kalina"  >Kalina</option>
+                                                            <option value="niva"  >Niva</option>
+                                                            <option value="samara"  >Samara</option>
+                                                            <option value="vesta"  >Vesta</option>
+                                                    </select>
+                    </div>
+ <div class="form__group">
+ <label>Stav</label>
+  <select id="vehicle-status" class="js-select2" multiple data-placeholder="Nezadáno">
+ <option value="category:1" selected>Nové</option>
+ <option value="condition:2" selected>Předváděcí</option>
+ <option value="category:2" selected>Ojeté</option>
+ <option value="category:3" >Veterán</option>
+ <option value="condition:14" >Havarované</option>
+ </select>
+ </div>
+                    <script>
+                        document.getElementById('vehicle-status').addEventListener('change', function () {
+                            document.querySelectorAll('input[name="category[]"], input[name="condition[]"]').forEach(function (input) {
+                                input.checked = false;
+                            });
+                            Array.from(this.selectedOptions).forEach(function (option) {
+                                var parts = option.value.split(':');
+                                var input = document.querySelector('input[name="' + parts[0] + '[]"][value="' + parts[1] + '"]');
+                                if (input) input.checked = true;
+                            });
+                        });
+                    </script>
+                        <div class="form__group">
+                            <label>Karoserie</label>
+                            <select class="js-select2" name="body[]" multiple data-placeholder="Nezadáno">
+                                                                    <option value="86"  >hatchback</option>
+                                                                    <option value="2"  >sedan</option>
+                                                                    <option value="4"  >SUV</option>
+                                                                    <option value="93"  >terénní</option>
+                                                            </select>
+                        </div>
+
+                    <script>
+						const modelSelect = document.querySelector('select[name="model"]')
+ const bodySelect = document.querySelector('select[name="body[]"]')
+					
+						function loadBodies(manufacturer, model = '') {
+							const kind = document.getElementById('form-search').dataset.countKind;
+							let url = '/api/vehicle-bodies?vehicles.visible=true&vehicles.kind=' + encodeURIComponent(kind);
+							if (manufacturer) url += '&vehicles.manufacturer.url=' + encodeURIComponent(manufacturer);
+							if (model) url += '&vehicles.model.url=' + encodeURIComponent(model);
+							fetch(url, {headers: {'Accept': 'application/json'}})
+								.then(response => response.json())
+								.then(function (response) {
+									bodySelect.innerHTML = '';
+									response.forEach(function (item) {
+										bodySelect.innerHTML += '<option value="' + item.id + '">' + item.name + '</option>';
+									});
+									$(bodySelect).val(null).trigger('change.select2'); bodySelect.dispatchEvent(new Event('change', { bubbles: true }));
+								});
+						}
+						$('#manufacturer').on("select2:select", function (e) {
+					
+							fetch('/api/vehicle-models?vehicles.visible=true&vehicles.manufacturer.url=' + encodeURIComponent(e.target.value) + '&vehicles.kind=' + encodeURIComponent(document.getElementById('form-search').dataset.countKind), {
+								method: 'GET',
+								headers: {
+									'Accept': 'application/json',
+								},
+							})
+								.then(response => response.json())
+								.then(
+									function (response) {
+										//add to select values
+										modelSelect.innerHTML = '<option value="">Model</option>'
+										response.forEach(function (item) {
+											modelSelect.innerHTML += '<option value="' + item.url + '">' + item.name + '</option>'
+										})
+ window.jQuery(modelSelect).val("").trigger("change.select2");
+ loadBodies(e.target.value);
+									})
+						});
+ window.jQuery(modelSelect).on("select2:select", function () { loadBodies(document.getElementById("manufacturer").value || "", this.value || ""); });
+					</script>
+
+                                    </fieldset>
+                <fieldset>
+                    <div class="form__row">
+                        <div class="form__group">
+                            <label>Rok od</label>
+                            <select class="js-select2" name="yearFrom">
+                                <option value="">Nezadáno</option>
+                                                                    <option value="2026"  >2026</option>
+                                                                    <option value="2025"  >2025</option>
+                                                                    <option value="2024"  >2024</option>
+                                                                    <option value="2023"  >2023</option>
+                                                                    <option value="2022"  >2022</option>
+                                                                    <option value="2021"  >2021</option>
+                                                                    <option value="2020"  >2020</option>
+                                                                    <option value="2019"  >2019</option>
+                                                                    <option value="2018"  >2018</option>
+                                                                    <option value="2017"  >2017</option>
+                                                                    <option value="2016"  >2016</option>
+                                                                    <option value="2015"  >2015</option>
+                                                                    <option value="2014"  >2014</option>
+                                                                    <option value="2013"  >2013</option>
+                                                                    <option value="2012"  >2012</option>
+                                                                    <option value="2011"  >2011</option>
+                                                                    <option value="2010"  >2010</option>
+                                                                    <option value="2009"  >2009</option>
+                                                                    <option value="2008"  >2008</option>
+                                                                    <option value="2007"  >2007</option>
+                                                                    <option value="2006"  >2006</option>
+                                                                    <option value="2005"  >2005</option>
+                                                                    <option value="2004"  >2004</option>
+                                                                    <option value="2003"  >2003</option>
+                                                                    <option value="2002"  >2002</option>
+                                                                    <option value="2001"  >2001</option>
+                                                                    <option value="2000"  >2000</option>
+                                                                    <option value="1999"  >1999</option>
+                                                                    <option value="1998"  >1998</option>
+                                                                    <option value="1997"  >1997</option>
+                                                                    <option value="1996"  >1996</option>
+                                                                    <option value="1995"  >1995</option>
+                                                                    <option value="1994"  >1994</option>
+                                                                    <option value="1993"  >1993</option>
+                                                                    <option value="1992"  >1992</option>
+                                                                    <option value="1991"  >1991</option>
+                                                                    <option value="1990"  >1990</option>
+                                                                <option value="1980"  >
+                                    1980
+                                </option>
+                                <option value="1970"  >
+                                    1970
+                                </option>
+                                <option value="1930"  >
+                                    1930
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form__group">
+                            <label>Rok do</label>
+                            <select class="js-select2" name="yearTo">
+                                <option value="">Nezadáno</option>
+                                                                    <option value="2026"  >2026</option>
+                                                                    <option value="2025"  >2025</option>
+                                                                    <option value="2024"  >2024</option>
+                                                                    <option value="2023"  >2023</option>
+                                                                    <option value="2022"  >2022</option>
+                                                                    <option value="2021"  >2021</option>
+                                                                    <option value="2020"  >2020</option>
+                                                                    <option value="2019"  >2019</option>
+                                                                    <option value="2018"  >2018</option>
+                                                                    <option value="2017"  >2017</option>
+                                                                    <option value="2016"  >2016</option>
+                                                                    <option value="2015"  >2015</option>
+                                                                    <option value="2014"  >2014</option>
+                                                                    <option value="2013"  >2013</option>
+                                                                    <option value="2012"  >2012</option>
+                                                                    <option value="2011"  >2011</option>
+                                                                    <option value="2010"  >2010</option>
+                                                                    <option value="2009"  >2009</option>
+                                                                    <option value="2008"  >2008</option>
+                                                                    <option value="2007"  >2007</option>
+                                                                    <option value="2006"  >2006</option>
+                                                                    <option value="2005"  >2005</option>
+                                                                    <option value="2004"  >2004</option>
+                                                                    <option value="2003"  >2003</option>
+                                                                    <option value="2002"  >2002</option>
+                                                                    <option value="2001"  >2001</option>
+                                                                    <option value="2000"  >2000</option>
+                                                                    <option value="1999"  >1999</option>
+                                                                    <option value="1998"  >1998</option>
+                                                                    <option value="1997"  >1997</option>
+                                                                    <option value="1996"  >1996</option>
+                                                                    <option value="1995"  >1995</option>
+                                                                    <option value="1994"  >1994</option>
+                                                                    <option value="1993"  >1993</option>
+                                                                    <option value="1992"  >1992</option>
+                                                                    <option value="1991"  >1991</option>
+                                                                    <option value="1990"  >1990</option>
+                                                                <option value="1980"  >
+                                    1980
+                                </option>
+                                <option value="1970"  >
+                                    1970
+                                </option>
+                                <option value="1930"  >
+                                    1930
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form__row">
+                        <div class="form__group">
+                            <label>Cena od</label>
+                            <select class="js-select2" name="priceFrom">
+                                <option value="">Nezadáno</option>
+                                                                    <option value="25000" >25 000</option>
+                                                                    <option value="50000" >50 000</option>
+                                                                    <option value="75000" >75 000</option>
+                                                                    <option value="100000" >100 000</option>
+                                                                    <option value="125000" >125 000</option>
+                                                                    <option value="150000" >150 000</option>
+                                                                    <option value="175000" >175 000</option>
+                                                                    <option value="200000" >200 000</option>
+                                                                    <option value="225000" >225 000</option>
+                                                                    <option value="250000" >250 000</option>
+                                                                    <option value="275000" >275 000</option>
+                                                                    <option value="300000" >300 000</option>
+                                                                    <option value="325000" >325 000</option>
+                                                                    <option value="350000" >350 000</option>
+                                                                    <option value="375000" >375 000</option>
+                                                                    <option value="400000" >400 000</option>
+                                                                    <option value="425000" >425 000</option>
+                                                                    <option value="450000" >450 000</option>
+                                                                    <option value="475000" >475 000</option>
+                                                                    <option value="500000" >500 000</option>
+                                                                    <option value="525000" >525 000</option>
+                                                                    <option value="550000" >550 000</option>
+                                                                    <option value="575000" >575 000</option>
+                                                                    <option value="600000" >600 000</option>
+                                                                    <option value="625000" >625 000</option>
+                                                                    <option value="650000" >650 000</option>
+                                                                    <option value="675000" >675 000</option>
+                                                                    <option value="700000" >700 000</option>
+                                                                    <option value="725000" >725 000</option>
+                                                                    <option value="750000" >750 000</option>
+                                                                    <option value="775000" >775 000</option>
+                                                                    <option value="800000" >800 000</option>
+                                                                    <option value="825000" >825 000</option>
+                                                                    <option value="850000" >850 000</option>
+                                                                    <option value="875000" >875 000</option>
+                                                                    <option value="900000" >900 000</option>
+                                                                    <option value="925000" >925 000</option>
+                                                                    <option value="950000" >950 000</option>
+                                                                    <option value="975000" >975 000</option>
+                                                                    <option value="1000000" >1 000 000</option>
+                                                                    <option value="1050000" >1 050 000</option>
+                                                                    <option value="1100000" >1 100 000</option>
+                                                                    <option value="1150000" >1 150 000</option>
+                                                                    <option value="1200000" >1 200 000</option>
+                                                                    <option value="1250000" >1 250 000</option>
+                                                                    <option value="1300000" >1 300 000</option>
+                                                                    <option value="1350000" >1 350 000</option>
+                                                                    <option value="1400000" >1 400 000</option>
+                                                                    <option value="1450000" >1 450 000</option>
+                                                                    <option value="1500000" >1 500 000</option>
+                                                                    <option value="1550000" >1 550 000</option>
+                                                                    <option value="1600000" >1 600 000</option>
+                                                                    <option value="1650000" >1 650 000</option>
+                                                                    <option value="1700000" >1 700 000</option>
+                                                                    <option value="1750000" >1 750 000</option>
+                                                                    <option value="1800000" >1 800 000</option>
+                                                                    <option value="1850000" >1 850 000</option>
+                                                                    <option value="1900000" >1 900 000</option>
+                                                                    <option value="1950000" >1 950 000</option>
+                                                                    <option value="2000000" >2 000 000</option>
+                                                                    <option value="2100000" >2 100 000</option>
+                                                                    <option value="2200000" >2 200 000</option>
+                                                                    <option value="2300000" >2 300 000</option>
+                                                                    <option value="2400000" >2 400 000</option>
+                                                                    <option value="2500000" >2 500 000</option>
+                                                                    <option value="2600000" >2 600 000</option>
+                                                                    <option value="2700000" >2 700 000</option>
+                                                                    <option value="2800000" >2 800 000</option>
+                                                                    <option value="2900000" >2 900 000</option>
+                                                                    <option value="3000000" >3 000 000</option>
+                                                                    <option value="3100000" >3 100 000</option>
+                                                                    <option value="3200000" >3 200 000</option>
+                                                                    <option value="3300000" >3 300 000</option>
+                                                                    <option value="3400000" >3 400 000</option>
+                                                                    <option value="3500000" >3 500 000</option>
+                                                                    <option value="3600000" >3 600 000</option>
+                                                                    <option value="3700000" >3 700 000</option>
+                                                                    <option value="3800000" >3 800 000</option>
+                                                                    <option value="3900000" >3 900 000</option>
+                                                                    <option value="4000000" >4 000 000</option>
+                                                                    <option value="4100000" >4 100 000</option>
+                                                                    <option value="4200000" >4 200 000</option>
+                                                                    <option value="4300000" >4 300 000</option>
+                                                                    <option value="4400000" >4 400 000</option>
+                                                                    <option value="4500000" >4 500 000</option>
+                                                                    <option value="4600000" >4 600 000</option>
+                                                                    <option value="4700000" >4 700 000</option>
+                                                                    <option value="4800000" >4 800 000</option>
+                                                                    <option value="4900000" >4 900 000</option>
+                                                                    <option value="5000000" >5 000 000</option>
+                                                            </select>
+                        </div>
+                        <div class="form__group">
+                            <label>Cena do</label>
+                            <select class="js-select2" name="priceTo">
+                                <option value="">Nezadáno</option>
+                                                                    <option value="25000" >25 000</option>
+                                                                    <option value="50000" >50 000</option>
+                                                                    <option value="75000" >75 000</option>
+                                                                    <option value="100000" >100 000</option>
+                                                                    <option value="125000" >125 000</option>
+                                                                    <option value="150000" >150 000</option>
+                                                                    <option value="175000" >175 000</option>
+                                                                    <option value="200000" >200 000</option>
+                                                                    <option value="225000" >225 000</option>
+                                                                    <option value="250000" >250 000</option>
+                                                                    <option value="275000" >275 000</option>
+                                                                    <option value="300000" >300 000</option>
+                                                                    <option value="325000" >325 000</option>
+                                                                    <option value="350000" >350 000</option>
+                                                                    <option value="375000" >375 000</option>
+                                                                    <option value="400000" >400 000</option>
+                                                                    <option value="425000" >425 000</option>
+                                                                    <option value="450000" >450 000</option>
+                                                                    <option value="475000" >475 000</option>
+                                                                    <option value="500000" >500 000</option>
+                                                                    <option value="525000" >525 000</option>
+                                                                    <option value="550000" >550 000</option>
+                                                                    <option value="575000" >575 000</option>
+                                                                    <option value="600000" >600 000</option>
+                                                                    <option value="625000" >625 000</option>
+                                                                    <option value="650000" >650 000</option>
+                                                                    <option value="675000" >675 000</option>
+                                                                    <option value="700000" >700 000</option>
+                                                                    <option value="725000" >725 000</option>
+                                                                    <option value="750000" >750 000</option>
+                                                                    <option value="775000" >775 000</option>
+                                                                    <option value="800000" >800 000</option>
+                                                                    <option value="825000" >825 000</option>
+                                                                    <option value="850000" >850 000</option>
+                                                                    <option value="875000" >875 000</option>
+                                                                    <option value="900000" >900 000</option>
+                                                                    <option value="925000" >925 000</option>
+                                                                    <option value="950000" >950 000</option>
+                                                                    <option value="975000" >975 000</option>
+                                                                    <option value="1000000" >1 000 000</option>
+                                                                    <option value="1050000" >1 050 000</option>
+                                                                    <option value="1100000" >1 100 000</option>
+                                                                    <option value="1150000" >1 150 000</option>
+                                                                    <option value="1200000" >1 200 000</option>
+                                                                    <option value="1250000" >1 250 000</option>
+                                                                    <option value="1300000" >1 300 000</option>
+                                                                    <option value="1350000" >1 350 000</option>
+                                                                    <option value="1400000" >1 400 000</option>
+                                                                    <option value="1450000" >1 450 000</option>
+                                                                    <option value="1500000" >1 500 000</option>
+                                                                    <option value="1550000" >1 550 000</option>
+                                                                    <option value="1600000" >1 600 000</option>
+                                                                    <option value="1650000" >1 650 000</option>
+                                                                    <option value="1700000" >1 700 000</option>
+                                                                    <option value="1750000" >1 750 000</option>
+                                                                    <option value="1800000" >1 800 000</option>
+                                                                    <option value="1850000" >1 850 000</option>
+                                                                    <option value="1900000" >1 900 000</option>
+                                                                    <option value="1950000" >1 950 000</option>
+                                                                    <option value="2000000" >2 000 000</option>
+                                                                    <option value="2100000" >2 100 000</option>
+                                                                    <option value="2200000" >2 200 000</option>
+                                                                    <option value="2300000" >2 300 000</option>
+                                                                    <option value="2400000" >2 400 000</option>
+                                                                    <option value="2500000" >2 500 000</option>
+                                                                    <option value="2600000" >2 600 000</option>
+                                                                    <option value="2700000" >2 700 000</option>
+                                                                    <option value="2800000" >2 800 000</option>
+                                                                    <option value="2900000" >2 900 000</option>
+                                                                    <option value="3000000" >3 000 000</option>
+                                                                    <option value="3100000" >3 100 000</option>
+                                                                    <option value="3200000" >3 200 000</option>
+                                                                    <option value="3300000" >3 300 000</option>
+                                                                    <option value="3400000" >3 400 000</option>
+                                                                    <option value="3500000" >3 500 000</option>
+                                                                    <option value="3600000" >3 600 000</option>
+                                                                    <option value="3700000" >3 700 000</option>
+                                                                    <option value="3800000" >3 800 000</option>
+                                                                    <option value="3900000" >3 900 000</option>
+                                                                    <option value="4000000" >4 000 000</option>
+                                                                    <option value="4100000" >4 100 000</option>
+                                                                    <option value="4200000" >4 200 000</option>
+                                                                    <option value="4300000" >4 300 000</option>
+                                                                    <option value="4400000" >4 400 000</option>
+                                                                    <option value="4500000" >4 500 000</option>
+                                                                    <option value="4600000" >4 600 000</option>
+                                                                    <option value="4700000" >4 700 000</option>
+                                                                    <option value="4800000" >4 800 000</option>
+                                                                    <option value="4900000" >4 900 000</option>
+                                                                    <option value="5000000" >5 000 000</option>
+                                                            </select>
+                        </div>
+                    </div>
+
+                    
+                        <div class="form__group">
+
+                            <label>Stav tachometru</label>
+                            <select class="js-select2" name="millage">
+                                <option value="">Nezadáno</option>
+                                                                    <option value="0-10000" >do 10000 km</option>
+                                                                    <option value="10000-30000" >10 000 - 30 000 km</option>
+                                                                    <option value="30000-50000" >30 000 - 50 000 km</option>
+                                                                    <option value="50000-100000" >50 000 - 100 000 km</option>
+                                                                    <option value="100000-150000" >100 000 - 150 000 km</option>
+                                                                    <option value="150000-200000" >150 000 - 200 000 km</option>
+                                                                    <option value="200000-300000" >200 000 - 300 000 km</option>
+                                                                    <option value="300000-10000000" >300 000 a více km</option>
+                                                            </select>
+
+                        </div>
+ <div class="form__row">
+ <div class="form__group">
+ <label>Objem od</label>
+ <select class="js-select2" name="engineVolumeFrom">
+ <option value="">Nezadáno</option>
+  <option value="1000" >1000 cm³</option>
+  <option value="1200" >1200 cm³</option>
+  <option value="1400" >1400 cm³</option>
+  <option value="1600" >1600 cm³</option>
+  <option value="1800" >1800 cm³</option>
+  <option value="2000" >2000 cm³</option>
+  <option value="2500" >2500 cm³</option>
+  <option value="3000" >3000 cm³</option>
+  <option value="3500" >3500 cm³</option>
+  <option value="4000" >4000 cm³</option>
+  <option value="5000" >5000 cm³</option>
+  </select>
+ </div>
+ <div class="form__group">
+ <label>Objem do</label>
+ <select class="js-select2" name="engineVolumeTo">
+ <option value="">Nezadáno</option>
+  <option value="1000" >1000 cm³</option>
+  <option value="1200" >1200 cm³</option>
+  <option value="1400" >1400 cm³</option>
+  <option value="1600" >1600 cm³</option>
+  <option value="1800" >1800 cm³</option>
+  <option value="2000" >2000 cm³</option>
+  <option value="2500" >2500 cm³</option>
+  <option value="3000" >3000 cm³</option>
+  <option value="3500" >3500 cm³</option>
+  <option value="4000" >4000 cm³</option>
+  <option value="5000" >5000 cm³</option>
+  </select>
+ </div>
+ </div>
+
+                                    </fieldset>
+                <fieldset>
+
+
+                                            <div class="form__group">
+                            <label>Palivo</label>
+                            <select class="js-select2" name="fuel[]" multiple data-placeholder="Nezadáno">
+                                                                    <option value="1"  >benzin</option>
+                                                                    <option value="6"  >CNG</option>
+                                                                    <option value="4"  >elektro</option>
+                                                                    <option value="11"  >ethanol</option>
+                                                                    <option value="2"  >hybridní - benzin</option>
+                                                                    <option value="8"  >hybridní - nafta</option>
+                                                                    <option value="5"  >LPG</option>
+                                                                    <option value="3"  >nafta</option>
+                                                                    <option value="7"  >neuvedeno</option>
+                                                            </select>
+                        </div>
+                        <div class="form__group">
+                            <label>Převodovka</label>
+                            <select class="js-select2" name="gearbox">
+                                <option value="">Nezadáno</option>
+                                                                    <option value="aut. převodovka"  >aut. převodovka</option>
+                                                                    <option value="manuální převodovka"  >manuální převodovka</option>
+                                                                    <option value="poloaut. převodovka"  >poloaut. převodovka</option>
+                                                            </select>
+                        </div>
+ <div class="form__row">
+ <div class="form__group">
+ <label>Výkon od</label>
+ <select class="js-select2" name="powerFrom">
+ <option value="">Nezadáno</option>
+  <option value="40" >40 kW</option>
+  <option value="60" >60 kW</option>
+  <option value="80" >80 kW</option>
+  <option value="100" >100 kW</option>
+  <option value="125" >125 kW</option>
+  <option value="150" >150 kW</option>
+  <option value="200" >200 kW</option>
+  <option value="300" >300 kW</option>
+  </select>
+ </div>
+ <div class="form__group">
+ <label>Výkon do</label>
+ <select class="js-select2" name="powerTo">
+ <option value="">Nezadáno</option>
+  <option value="40" >40 kW</option>
+  <option value="60" >60 kW</option>
+  <option value="80" >80 kW</option>
+  <option value="100" >100 kW</option>
+  <option value="125" >125 kW</option>
+  <option value="150" >150 kW</option>
+  <option value="200" >200 kW</option>
+  <option value="300" >300 kW</option>
+  </select>
+ </div>
+ </div>
+                    
+                    
+                    <div class="form__group">
+                        <label>Kraj</label>
+                        <select class="js-select2" name="region">
+                            <option value="">Nezadáno</option>
+                                                            <option value="hlavni-mesto-praha"  >Hlavní město Praha</option>
+                                                            <option value="jihocesky-kraj"  >Jihočeský kraj</option>
+                                                            <option value="jihomoravsky-kraj"  >Jihomoravský kraj</option>
+                                                            <option value="karlovarsky-kraj"  >Karlovarský kraj</option>
+                                                            <option value="kraj-vysocina"  >Kraj Vysočina</option>
+                                                            <option value="kralovehradecky-kraj"  >Královéhradecký kraj</option>
+                                                            <option value="liberecky-kraj"  >Liberecký kraj</option>
+                                                            <option value="moravskoslezsky-kraj"  >Moravskoslezský kraj</option>
+                                                            <option value="olomoucky-kraj"  >Olomoucký kraj</option>
+                                                            <option value="pardubicky-kraj"  >Pardubický kraj</option>
+                                                            <option value="plzensky-kraj"  >Plzeňský kraj</option>
+                                                            <option value="stredocesky-kraj"  >Středočeský kraj</option>
+                                                            <option value="ustecky-kraj"  >Ústecký kraj</option>
+                                                            <option value="zlinsky-kraj"  >Zlínský kraj</option>
+                                                    </select>
+                    </div>
+                </fieldset>
+            </div>
+
+
+            <footer class="form__footer">
+                <div class="form__footer-cell"></div>
+
+                <div class="form__footer-cell">
+                    <div class="form__submit-actions">
+                        <button class="form__reset js-filter-reset" type="button" aria-label="Vyčistit filtr" title="Vyčistit filtr">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5a7 7 0 1 1-6.32 10H4l2.5-2.5L9 15H7.25A5.5 5.5 0 1 0 12 6.5a5.47 5.47 0 0 0-3.47 1.23L7.6 6.55A6.96 6.96 0 0 1 12 5Z" fill="currentColor"/></svg>
+                        </button>
+                        <button class="form__submit" type="submit">
+                            Zobrazit vozidla
+                        </button>
+                    </div>
+                </div>
+            </footer>
+            <div class="form__sticky">
+                <div class="form__submit-actions">
+                    <button class="form__reset js-filter-reset" type="button" aria-label="Vyčistit filtr" title="Vyčistit filtr">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5a7 7 0 1 1-6.32 10H4l2.5-2.5L9 15H7.25A5.5 5.5 0 1 0 12 6.5a5.47 5.47 0 0 0-3.47 1.23L7.6 6.55A6.96 6.96 0 0 1 12 5Z" fill="currentColor"/></svg>
+                    </button>
+                    <button class="form__submit" type="submit">
+                        Zobrazit vozidla
+                    </button>
+                </div>
+            </div>        </div>
+
+        <input type="hidden" name="order" value="">
+        <input type="hidden" name="kind" value="">
+
+    </form>
+
+        <section class="vehicle-seo-brand-models">
+    <h2>Vyberte model Lada</h2>
+
+    <div class="vehicle-seo-brand-models__list">
+                    <a href="/osobni-vozidla/lada/2106">2106</a>
+                    <a href="/osobni-vozidla/lada/kalina">Kalina</a>
+                    <a href="/osobni-vozidla/lada/niva">Niva</a>
+                    <a href="/osobni-vozidla/lada/samara">Samara</a>
+                    <a href="/osobni-vozidla/lada/vesta">Vesta</a>
+            </div>
+</section>
+
+    <section class="grid grid--padding40 grid--gap20" id="order">
+        <div>
+            <div class="grid__results vehicle-results-head">
+                                                <div class="grid__results-label vehicle-results-count">13 inzerátů</div>
+                 <form class="grid__results-form vehicle-results-order" style="min-width: 220px">
+                    <select id="select-order" class="js-select2" name="order">
+                        <option value="1" >Nejlevnější
+                        </option>
+                        <option value="2" >Nejdražší
+                        </option>
+                        <option value="3" >Stav
+                            tachometru
+                        </option>
+                        <option value="4" >Rok výroby
+                        </option>
+                        <option value="5"  selected >Nejnovější
+                        </option>
+                    </select>
+                </form>
+ <div id="vehicle-results-summary" class="vehicle-results-summary" hidden></div>
+                            </div>
+
+
+            <script>
+
+                const formSearch = document.getElementById('form-search')
+
+                $(document).ready(function () {
+                    const hasActiveFilters = checkActiveFilters();
+                    const wasFormSubmitted = sessionStorage.getItem('formSubmitted') === 'true';
+
+                    if (!hasActiveFilters && !wasFormSubmitted) {
+                        $('.js-form__collapse-mobile').show();
+                        $('.js-form__show-filter').hide();
+                        $('.js-form__show-filter-desktop').show();
+
+                        $('.form__toggler-mobile-more').hide();
+                        $('.form__toggler-mobile-less').show();
+                        $('.js-form__toggler-mobile').addClass('active');
+
+                        if ($('.form__hidden-desktop').is(':visible')) {
+                            $('.form').addClass('fixed');
+                            $('body').addClass('no-scroll');
+                        }
+                    } else {
+                        $('.js-form__collapse-mobile').hide();
+                        $('.js-form__show-filter').show();
+
+                        $('.form__toggler-mobile-more').show();
+                        $('.form__toggler-mobile-less').hide();
+                        $('.js-form__toggler-mobile').removeClass('active');
+                    }
+
+                    if (wasFormSubmitted) {
+                        sessionStorage.removeItem('formSubmitted');
+                    }
+                });
+
+                function checkActiveFilters() {
+                    const pathData = window.location.pathname.split('/');
+                    return pathData.length > 2;
+                }
+
+                formSearch.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const formData = new FormData(document.getElementById('form-search'))
+
+                    formData.delete('order')
+
+                    let manufacturer = formData.get('manufacturer')
+                    let model = formData.get('model')
+
+                    formData.delete('manufacturer')
+                    formData.delete('model')
+
+                    for (const [k,v] of [...formData]) if (!v.trim()) formData.delete(k);
+                    if (formData.getAll("category[]").slice().sort().join(",") === "1,2" && formData.getAll("condition[]").join(",") === "2") { formData.delete("category[]"); formData.delete("condition[]"); }
+                    const asString = new URLSearchParams(formData).toString();
+
+                    sessionStorage.setItem('formSubmitted', 'true');
+
+                    $('.js-form__collapse-mobile').slideUp();
+                    $('.js-form__toggler-mobile').parent().hide();
+                    $('.js-form__toggler-mobile').removeClass('active');
+                    $('.js-form__show-filter').show();
+                    $('.form').removeClass('fixed');
+                    $('body').removeClass('no-scroll');
+
+                    if (manufacturer && model) {
+                        window.location.href = "/osobni-vozidla/" + manufacturer + "/" + model + "/?" + asString;
+                    } else if (manufacturer) {
+                        window.location.href = "/osobni-vozidla/" + manufacturer + "/?" + asString;
+                    } else {
+                        window.location.href = "/osobni-vozidla/?" + asString;
+                    }
+
+                })
+
+                $('.js-form__show-filter-btn').click(function () {
+                    $('.js-form__show-filter').hide();
+                    $('.js-form__toggler-mobile').parent().show();
+                    $('.js-form__collapse-mobile').slideDown();
+                });
+
+                $('.js-form__show-filter-desktop').click(function () {
+                    const $btn = $(this);
+                    const $collapse = $('.js-form__collapse-mobile');
+
+                    if ($collapse.is(':visible')) {
+                        $collapse.slideUp();
+                        $btn.find('.form__toggler-mobile-more').show();
+                        $btn.find('.form__toggler-mobile-less').hide();
+                        $btn.removeClass('active');
+                    } else {
+                        $collapse.slideDown();
+                        $btn.find('.form__toggler-mobile-more').hide();
+                        $btn.find('.form__toggler-mobile-less').show();
+                        $btn.addClass('active');
+                    }
+                });
+
+                $('#select-order').on("select2:select", function (e) {
+                    const formData = new FormData(document.getElementById('form-search'))
+                    const selectedOrder = $(this).val();
+                    if (selectedOrder === "5") formData.delete("order");
+                    else formData.set("order", selectedOrder);
+
+
+                    let manufacturer = formData.get('manufacturer')
+                    let model = formData.get('model')
+
+                    formData.delete('manufacturer')
+                    formData.delete('model')
+
+
+                    for (const [k,v] of [...formData]) if (!v.trim()) formData.delete(k);
+                    if (formData.getAll("category[]").slice().sort().join(",") === "1,2" && formData.getAll("condition[]").join(",") === "2") { formData.delete("category[]"); formData.delete("condition[]"); }
+                    const asString = new URLSearchParams(formData).toString();
+
+                    if (manufacturer && model) {
+                        window.location.href = "/osobni-vozidla/" + manufacturer + "/" + model + "/?" + asString;
+                    } else if (manufacturer) {
+                        window.location.href = "/osobni-vozidla/" + manufacturer + "/?" + asString;
+                    } else {
+                        window.location.href = "/osobni-vozidla/?" + asString;
+                    }
+
+
+                });
+            </script>
+
+                                    
+
+                <article class="basic-3" data-vehicle-id="153033">
+    <figure class="basic-3__image">
+
+
+        
+        <a href="/detail/lada-niva-17-4x4-153033" class="basic-3__image-img">
+
+                        <img
+                    src="/img-vehicle-webp/600/330/153033/lada-niva-17-4x4-18690143-1.webp"
+                    alt="Lada Niva 1,7 4x4"
+                    data-controller="symfony--ux-lazy-image--lazy-image" data-symfony--ux-lazy-image--lazy-image-src-value="&#x2F;img-vehicle-webp&#x2F;600&#x2F;330&#x2F;153033&#x2F;lada-niva-17-4x4-18690143-1.webp"
+                    width="150"
+            >
+                    </a>
+                <button type="button" class="vehicle-save" data-vehicle-save="153033" aria-label="Uložit vůz" title="Uložit vůz"></button>
+                <div class="basic-3__gallery">
+            <i class="icon icon-camera"></i>
+            24
+        </div>
+    </figure>
+    <div class="basic-3__text">
+        <h4 class="basic-3__title">
+            <a href="/detail/lada-niva-17-4x4-153033">
+                <span class="basic-3__title-main">Lada Niva</span>
+                <span class="basic-3__title-type">1,7  4x4</span>            </a>
+        </h4>
+        <div class="basic-3__price">
+            99 000 Kč
+        </div>
+        <div class="basic-3__specs">
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Rok výroby</span>
+                <span class="basic-3__spec-value">2005</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Tachometr</span>
+                <span class="basic-3__spec-value">155 975 km</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Palivo</span>
+                <span class="basic-3__spec-value">benzin</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Převodovka</span>
+                <span class="basic-3__spec-value">manuální</span>
+            </div>
+        </div>
+                        
+                                                                                                                                                                                                                
+        
+                            
+        
+        
+                                    
+                                    
+        
+                                    
+        
+        
+                                    
+        
+        
+                                    
+                                                                                                                                                                                                                                                                                                            
+                            <div class="basic-3__highlights">
+                                    <span class="basic-3__highlight">Pohon 4x4</span>
+                            </div>
+        
+        <div class="basic-3__footer">
+            <div class="basic-3__locality"><strong>Středočeský kraj</strong></div>
+                    </div>
+    </div>
+</article>
+
+                
+ 
+                
+
+            
+
+                <article class="basic-3" data-vehicle-id="152200">
+    <figure class="basic-3__image">
+
+
+        
+        <a href="/detail/lada-niva-cr-16i-60kw-tazny-152200" class="basic-3__image-img">
+
+                        <img
+                    src="/img-vehicle-webp/600/229/152200/lada-niva-cr-16i-60kw-tazny-28912069-1.webp"
+                    alt="Lada Niva ČR 1.6i 60KW – TAŽNÝ"
+                    data-controller="symfony--ux-lazy-image--lazy-image" data-symfony--ux-lazy-image--lazy-image-src-value="&#x2F;img-vehicle-webp&#x2F;600&#x2F;229&#x2F;152200&#x2F;lada-niva-cr-16i-60kw-tazny-28912069-1.webp"
+                    width="150"
+            >
+                    </a>
+                <button type="button" class="vehicle-save" data-vehicle-save="152200" aria-label="Uložit vůz" title="Uložit vůz"></button>
+                <div class="basic-3__gallery">
+            <i class="icon icon-camera"></i>
+            26
+        </div>
+    </figure>
+    <div class="basic-3__text">
+        <h4 class="basic-3__title">
+            <a href="/detail/lada-niva-cr-16i-60kw-tazny-152200">
+                <span class="basic-3__title-main">Lada Niva</span>
+                <span class="basic-3__title-type">ČR 1.6i 60KW – TAŽNÝ</span>            </a>
+        </h4>
+        <div class="basic-3__price">
+            59 990 Kč
+        </div>
+        <div class="basic-3__specs">
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Rok výroby</span>
+                <span class="basic-3__spec-value">1998</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Tachometr</span>
+                <span class="basic-3__spec-value">184 000 km</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Palivo</span>
+                <span class="basic-3__spec-value">benzin</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Převodovka</span>
+                <span class="basic-3__spec-value">manuální</span>
+            </div>
+        </div>
+                        
+                                                                    
+        
+                            
+        
+        
+                                    
+                                    
+        
+                                    
+        
+        
+                                                                
+        
+        
+                                    
+                                                                                                                                                                                                                                                                                                            
+                            <div class="basic-3__highlights">
+                                    <span class="basic-3__highlight">Pohon 4x4</span>
+                                    <span class="basic-3__highlight">Tažné zařízení</span>
+                            </div>
+        
+        <div class="basic-3__footer">
+            <div class="basic-3__locality"><strong>Jihomoravský kraj</strong></div>
+                    </div>
+    </div>
+</article>
+
+                
+ 
+                
+
+            
+
+                <article class="basic-3" data-vehicle-id="143997">
+    <figure class="basic-3__image">
+
+
+        
+        <a href="/detail/lada-samara-13-64ps-2108-143997" class="basic-3__image-img">
+
+                        <img
+                    src="/img-vehicle-webp/600/420/143997/lada-samara-13-64ps-2108-31460077-1.webp"
+                    alt="Lada Samara 1,3 64PS 2108"
+                    data-controller="symfony--ux-lazy-image--lazy-image" data-symfony--ux-lazy-image--lazy-image-src-value="&#x2F;img-vehicle-webp&#x2F;600&#x2F;420&#x2F;143997&#x2F;lada-samara-13-64ps-2108-31460077-1.webp"
+                    width="150"
+            >
+                    </a>
+                <button type="button" class="vehicle-save" data-vehicle-save="143997" aria-label="Uložit vůz" title="Uložit vůz"></button>
+                <div class="basic-3__gallery">
+            <i class="icon icon-camera"></i>
+            42
+        </div>
+    </figure>
+    <div class="basic-3__text">
+        <h4 class="basic-3__title">
+            <a href="/detail/lada-samara-13-64ps-2108-143997">
+                <span class="basic-3__title-main">Lada Samara</span>
+                <span class="basic-3__title-type">1,3 64PS  2108</span>            </a>
+        </h4>
+        <div class="basic-3__price">
+            89 000 Kč
+        </div>
+        <div class="basic-3__specs">
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Rok výroby</span>
+                <span class="basic-3__spec-value">1990</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Tachometr</span>
+                <span class="basic-3__spec-value">57 735 km</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Palivo</span>
+                <span class="basic-3__spec-value">benzin</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Převodovka</span>
+                <span class="basic-3__spec-value">neuvedeno</span>
+            </div>
+        </div>
+                        
+                                                                                        
+        
+        
+        
+        
+                                    
+                                    
+        
+                                    
+        
+        
+                                                                
+        
+        
+                                    
+                                                                                                                                                                                                                                                                                                            
+                            <div class="basic-3__highlights">
+                                    <span class="basic-3__highlight">Tažné zařízení</span>
+                            </div>
+        
+        <div class="basic-3__footer">
+            <div class="basic-3__locality"><strong>Liberecký kraj</strong></div>
+                                                                                        <div class="basic-3__logo">
+                            <img
+                                    src="/img-dealer/68c1fc7cce8d8.png"
+                                    alt="JS Autocentrum s.r.o."
+                                    data-autanet-partner-logo-l05
+                                    data-autanet-partner-id="4"                                    data-dealer-id="420"
+                                    data-vehicle-id="143997"
+                            >
+                        </div>
+                                                        </div>
+    </div>
+</article>
+
+                 <section class="partner-listing-promo" aria-label="Vybrané vozy z nabídky">
+ <div class="partner-listing-promo__title" style="width: 100%; text-align: right;">Vybrané vozy z nabídky</div>
+ <div class="partner-listing-promo__vehicles">
+  <div class="partner-listing-promo__vehicle" data-vehicle-id="143997" data-dealer-id="420">
+ <article class="basic-3" data-vehicle-id="143997">
+    <figure class="basic-3__image">
+
+
+        
+        <a href="/detail/lada-samara-13-64ps-2108-143997" class="basic-3__image-img">
+
+                        <img
+                    src="/img-vehicle-webp/600/420/143997/lada-samara-13-64ps-2108-31460077-1.webp"
+                    alt="Lada Samara 1,3 64PS 2108"
+                    data-controller="symfony--ux-lazy-image--lazy-image" data-symfony--ux-lazy-image--lazy-image-src-value="&#x2F;img-vehicle-webp&#x2F;600&#x2F;420&#x2F;143997&#x2F;lada-samara-13-64ps-2108-31460077-1.webp"
+                    width="150"
+            >
+                    </a>
+                <button type="button" class="vehicle-save" data-vehicle-save="143997" aria-label="Uložit vůz" title="Uložit vůz"></button>
+                <div class="basic-3__gallery">
+            <i class="icon icon-camera"></i>
+            42
+        </div>
+    </figure>
+    <div class="basic-3__text">
+        <h4 class="basic-3__title">
+            <a href="/detail/lada-samara-13-64ps-2108-143997">
+                <span class="basic-3__title-main">Lada Samara</span>
+                <span class="basic-3__title-type">1,3 64PS  2108</span>            </a>
+        </h4>
+        <div class="basic-3__price">
+            89 000 Kč
+        </div>
+        <div class="basic-3__specs">
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Rok výroby</span>
+                <span class="basic-3__spec-value">1990</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Tachometr</span>
+                <span class="basic-3__spec-value">57 735 km</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Palivo</span>
+                <span class="basic-3__spec-value">benzin</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Převodovka</span>
+                <span class="basic-3__spec-value">neuvedeno</span>
+            </div>
+        </div>
+                        
+                                                                                        
+        
+        
+        
+        
+                                    
+                                    
+        
+                                    
+        
+        
+                                                                
+        
+        
+                                    
+                                                                                                                                                                                                                                                                                                            
+                            <div class="basic-3__highlights">
+                                    <span class="basic-3__highlight">Tažné zařízení</span>
+                            </div>
+        
+        <div class="basic-3__footer">
+            <div class="basic-3__locality"><strong>Liberecký kraj</strong></div>
+                                                                <div class="basic-3__logo">
+                        <img src="/img-dealer/68c1fc7cce8d8.png" alt="JS Autocentrum s.r.o.">
+                    </div>
+                                    </div>
+    </div>
+</article>
+ </div>
+  </div>
+ </section>
+ 
+ 
+                
+
+            
+
+                <article class="basic-3" data-vehicle-id="141317">
+    <figure class="basic-3__image">
+
+
+        
+        <a href="/detail/lada-niva-taiga-17-4x4-141317" class="basic-3__image-img">
+
+                        <img
+                    src="/img-vehicle-webp/600/330/141317/lada-niva-taiga-17-4x4-18690122-1.webp"
+                    alt="Lada Niva Taiga 1.7 , 4x4"
+                    data-controller="symfony--ux-lazy-image--lazy-image" data-symfony--ux-lazy-image--lazy-image-src-value="&#x2F;img-vehicle-webp&#x2F;600&#x2F;330&#x2F;141317&#x2F;lada-niva-taiga-17-4x4-18690122-1.webp"
+                    width="150"
+            >
+                    </a>
+                <button type="button" class="vehicle-save" data-vehicle-save="141317" aria-label="Uložit vůz" title="Uložit vůz"></button>
+                <div class="basic-3__gallery">
+            <i class="icon icon-camera"></i>
+            22
+        </div>
+    </figure>
+    <div class="basic-3__text">
+        <h4 class="basic-3__title">
+            <a href="/detail/lada-niva-taiga-17-4x4-141317">
+                <span class="basic-3__title-main">Lada Niva</span>
+                <span class="basic-3__title-type">Taiga  1.7 , 4x4</span>            </a>
+        </h4>
+        <div class="basic-3__price">
+            135 000 Kč
+        </div>
+        <div class="basic-3__specs">
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Rok výroby</span>
+                <span class="basic-3__spec-value">2015</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Tachometr</span>
+                <span class="basic-3__spec-value">136 460 km</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Palivo</span>
+                <span class="basic-3__spec-value">benzin</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Převodovka</span>
+                <span class="basic-3__spec-value">manuální</span>
+            </div>
+        </div>
+                        
+                                                                                                                                                    
+        
+                            
+        
+        
+                                    
+                                    
+        
+                                    
+        
+        
+                                    
+        
+        
+                                    
+                                                                                                                                                                                                                                                                                                            
+                            <div class="basic-3__highlights">
+                                    <span class="basic-3__highlight">Pohon 4x4</span>
+                            </div>
+        
+        <div class="basic-3__footer">
+            <div class="basic-3__locality"><strong>Středočeský kraj</strong></div>
+                    </div>
+    </div>
+</article>
+
+                
+ 
+                
+
+            
+
+                <article class="basic-3" data-vehicle-id="38515">
+    <figure class="basic-3__image">
+
+
+        
+        <a href="/detail/lada-niva-17-61kw-4x4-lpg-tazne-38515" class="basic-3__image-img">
+
+                        <img
+                    src="/img-vehicle-webp/600/330/38515/lada-niva-17-61kw-4x4-lpg-tazne-18690144-1.webp"
+                    alt="Lada Niva 1.7, 61kW, 4x4, LPG, Tažné"
+                    data-controller="symfony--ux-lazy-image--lazy-image" data-symfony--ux-lazy-image--lazy-image-src-value="&#x2F;img-vehicle-webp&#x2F;600&#x2F;330&#x2F;38515&#x2F;lada-niva-17-61kw-4x4-lpg-tazne-18690144-1.webp"
+                    width="150"
+            >
+                    </a>
+                <button type="button" class="vehicle-save" data-vehicle-save="38515" aria-label="Uložit vůz" title="Uložit vůz"></button>
+                <div class="basic-3__gallery">
+            <i class="icon icon-camera"></i>
+            17
+        </div>
+    </figure>
+    <div class="basic-3__text">
+        <h4 class="basic-3__title">
+            <a href="/detail/lada-niva-17-61kw-4x4-lpg-tazne-38515">
+                <span class="basic-3__title-main">Lada Niva</span>
+                <span class="basic-3__title-type">1.7, 61kW, 4x4, LPG, Tažné</span>            </a>
+        </h4>
+        <div class="basic-3__price">
+            239 000 Kč
+        </div>
+        <div class="basic-3__specs">
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Rok výroby</span>
+                <span class="basic-3__spec-value">2018</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Tachometr</span>
+                <span class="basic-3__spec-value">90 143 km</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Palivo</span>
+                <span class="basic-3__spec-value">benzin</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Převodovka</span>
+                <span class="basic-3__spec-value">manuální</span>
+            </div>
+        </div>
+                        
+                                                                                                                                                                                                                                    
+        
+                            
+        
+        
+                                    
+                                    
+        
+                                    
+        
+        
+                                                                
+        
+        
+                                    
+                                                                                                                                                                                                                                                                                                            
+                            <div class="basic-3__highlights">
+                                    <span class="basic-3__highlight">Pohon 4x4</span>
+                                    <span class="basic-3__highlight">Tažné zařízení</span>
+                            </div>
+        
+        <div class="basic-3__footer">
+            <div class="basic-3__locality"><strong>Středočeský kraj</strong></div>
+                    </div>
+    </div>
+</article>
+
+                
+ 
+                                    <div id="adform_squarem"></div>
+                
+
+            
+
+                <article class="basic-3" data-vehicle-id="121071">
+    <figure class="basic-3__image">
+
+
+        
+        <a href="/detail/lada-2106-21061-15-55kw-eko-zaplaceno-121071" class="basic-3__image-img">
+
+                        <img
+                    src="/img-vehicle-webp/600/229/121071/lada-2106-21061-15-55kw-eko-zaplaceno-28911904-1.webp"
+                    alt="Lada 2106 21061 1.5 55KW – EKO ZAPLACENO"
+                    data-controller="symfony--ux-lazy-image--lazy-image" data-symfony--ux-lazy-image--lazy-image-src-value="&#x2F;img-vehicle-webp&#x2F;600&#x2F;229&#x2F;121071&#x2F;lada-2106-21061-15-55kw-eko-zaplaceno-28911904-1.webp"
+                    width="150"
+            >
+                    </a>
+                <button type="button" class="vehicle-save" data-vehicle-save="121071" aria-label="Uložit vůz" title="Uložit vůz"></button>
+                <div class="basic-3__gallery">
+            <i class="icon icon-camera"></i>
+            33
+        </div>
+    </figure>
+    <div class="basic-3__text">
+        <h4 class="basic-3__title">
+            <a href="/detail/lada-2106-21061-15-55kw-eko-zaplaceno-121071">
+                <span class="basic-3__title-main">Lada 2106</span>
+                <span class="basic-3__title-type">21061 1.5 55KW – EKO ZAPLACENO</span>            </a>
+        </h4>
+        <div class="basic-3__price">
+            49 990 Kč
+        </div>
+        <div class="basic-3__specs">
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Rok výroby</span>
+                <span class="basic-3__spec-value">1986</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Tachometr</span>
+                <span class="basic-3__spec-value">91 000 km</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Palivo</span>
+                <span class="basic-3__spec-value">benzin</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Převodovka</span>
+                <span class="basic-3__spec-value">manuální</span>
+            </div>
+        </div>
+                        
+        
+                            
+        
+        
+        
+                                    
+                                    
+        
+                                    
+        
+        
+                                    
+        
+        
+                                    
+                                                                                                                                                                                                                                                                                                            
+                            <div class="basic-3__highlights">
+                                    <span class="basic-3__highlight">První majitel</span>
+                            </div>
+        
+        <div class="basic-3__footer">
+            <div class="basic-3__locality"><strong>Jihomoravský kraj</strong></div>
+                    </div>
+    </div>
+</article>
+
+                
+ 
+                
+
+            
+
+                <article class="basic-3" data-vehicle-id="20360">
+    <figure class="basic-3__image">
+
+
+        
+        <a href="/detail/lada-niva-17-61kw-4x4-tazne-20360" class="basic-3__image-img">
+
+                        <img
+                    src="/img-vehicle-webp/600/330/20360/lada-niva-17-61kw-4x4-tazne-18690005-1.webp"
+                    alt="Lada Niva 1.7, 61kW, 4x4, Tažné"
+                    data-controller="symfony--ux-lazy-image--lazy-image" data-symfony--ux-lazy-image--lazy-image-src-value="&#x2F;img-vehicle-webp&#x2F;600&#x2F;330&#x2F;20360&#x2F;lada-niva-17-61kw-4x4-tazne-18690005-1.webp"
+                    width="150"
+            >
+                    </a>
+                <button type="button" class="vehicle-save" data-vehicle-save="20360" aria-label="Uložit vůz" title="Uložit vůz"></button>
+                <div class="basic-3__gallery">
+            <i class="icon icon-camera"></i>
+            13
+        </div>
+    </figure>
+    <div class="basic-3__text">
+        <h4 class="basic-3__title">
+            <a href="/detail/lada-niva-17-61kw-4x4-tazne-20360">
+                <span class="basic-3__title-main">Lada Niva</span>
+                <span class="basic-3__title-type">1.7, 61kW, 4x4, Tažné</span>            </a>
+        </h4>
+        <div class="basic-3__price">
+            159 000 Kč
+        </div>
+        <div class="basic-3__specs">
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Rok výroby</span>
+                <span class="basic-3__spec-value">2013</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Tachometr</span>
+                <span class="basic-3__spec-value">103 734 km</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Palivo</span>
+                <span class="basic-3__spec-value">benzin</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Převodovka</span>
+                <span class="basic-3__spec-value">manuální</span>
+            </div>
+        </div>
+                        
+                                                                                                                                                                        
+        
+                            
+        
+        
+                                    
+                                    
+        
+                                    
+        
+        
+                                                                
+        
+        
+                                    
+                                                                                                                                                                                                                                                                                                            
+                            <div class="basic-3__highlights">
+                                    <span class="basic-3__highlight">Pohon 4x4</span>
+                                    <span class="basic-3__highlight">Tažné zařízení</span>
+                            </div>
+        
+        <div class="basic-3__footer">
+            <div class="basic-3__locality"><strong>Středočeský kraj</strong></div>
+                    </div>
+    </div>
+</article>
+
+                
+ 
+                
+
+            
+
+                <article class="basic-3" data-vehicle-id="20302">
+    <figure class="basic-3__image">
+
+
+        
+        <a href="/detail/lada-niva-17-60kw-lpg-4x4-tazne-20302" class="basic-3__image-img">
+
+                        <img
+                    src="/img-vehicle-webp/600/330/20302/lada-niva-17-60kw-lpg-4x4-tazne-18690066-1.webp"
+                    alt="Lada Niva 1.7, 60kW, LPG, 4x4, Tažné"
+                    data-controller="symfony--ux-lazy-image--lazy-image" data-symfony--ux-lazy-image--lazy-image-src-value="&#x2F;img-vehicle-webp&#x2F;600&#x2F;330&#x2F;20302&#x2F;lada-niva-17-60kw-lpg-4x4-tazne-18690066-1.webp"
+                    width="150"
+            >
+                    </a>
+                <button type="button" class="vehicle-save" data-vehicle-save="20302" aria-label="Uložit vůz" title="Uložit vůz"></button>
+                <div class="basic-3__gallery">
+            <i class="icon icon-camera"></i>
+            11
+        </div>
+    </figure>
+    <div class="basic-3__text">
+        <h4 class="basic-3__title">
+            <a href="/detail/lada-niva-17-60kw-lpg-4x4-tazne-20302">
+                <span class="basic-3__title-main">Lada Niva</span>
+                <span class="basic-3__title-type">1.7, 60kW, LPG, 4x4, Tažné</span>            </a>
+        </h4>
+        <div class="basic-3__price">
+            169 000 Kč
+        </div>
+        <div class="basic-3__specs">
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Rok výroby</span>
+                <span class="basic-3__spec-value">2010</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Tachometr</span>
+                <span class="basic-3__spec-value">34 716 km</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Palivo</span>
+                <span class="basic-3__spec-value">LPG</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Převodovka</span>
+                <span class="basic-3__spec-value">manuální</span>
+            </div>
+        </div>
+                        
+                                                                                                                                                                        
+        
+                            
+        
+        
+                                    
+                                    
+        
+                                    
+        
+        
+                                                                
+        
+        
+                                    
+                                                                                                                                                                                                                                                                                                            
+                            <div class="basic-3__highlights">
+                                    <span class="basic-3__highlight">Pohon 4x4</span>
+                                    <span class="basic-3__highlight">Tažné zařízení</span>
+                            </div>
+        
+        <div class="basic-3__footer">
+            <div class="basic-3__locality"><strong>Středočeský kraj</strong></div>
+                    </div>
+    </div>
+</article>
+
+                
+ 
+                
+
+            
+
+                <article class="basic-3" data-vehicle-id="43604">
+    <figure class="basic-3__image">
+
+
+        
+        <a href="/detail/lada-niva-17-i-4x4-61kw-lpg-dph-cr-43604" class="basic-3__image-img">
+
+                        <img
+                    src="/img-vehicle-webp/600/408/43604/lada-niva-17-i-4x4-61kw-lpg-dph-cr-15780089-1.webp"
+                    alt="Lada Niva 1,7 i 4x4 61kW LPG, DPH, ČR"
+                    data-controller="symfony--ux-lazy-image--lazy-image" data-symfony--ux-lazy-image--lazy-image-src-value="&#x2F;img-vehicle-webp&#x2F;600&#x2F;408&#x2F;43604&#x2F;lada-niva-17-i-4x4-61kw-lpg-dph-cr-15780089-1.webp"
+                    width="150"
+            >
+                    </a>
+                <button type="button" class="vehicle-save" data-vehicle-save="43604" aria-label="Uložit vůz" title="Uložit vůz"></button>
+                <div class="basic-3__gallery">
+            <i class="icon icon-camera"></i>
+            37
+        </div>
+    </figure>
+    <div class="basic-3__text">
+        <h4 class="basic-3__title">
+            <a href="/detail/lada-niva-17-i-4x4-61kw-lpg-dph-cr-43604">
+                <span class="basic-3__title-main">Lada Niva</span>
+                <span class="basic-3__title-type">1,7 i 4x4 61kW LPG, DPH, ČR</span>            </a>
+        </h4>
+        <div class="basic-3__price">
+            249 865 Kč
+        </div>
+        <div class="basic-3__specs">
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Rok výroby</span>
+                <span class="basic-3__spec-value">2021</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Tachometr</span>
+                <span class="basic-3__spec-value">128 681 km</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Palivo</span>
+                <span class="basic-3__spec-value">LPG</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Převodovka</span>
+                <span class="basic-3__spec-value">manuální</span>
+            </div>
+        </div>
+                        
+                                                                                                                                                                                                                                                                            
+                            
+                            
+        
+        
+                                    
+                                    
+        
+                                    
+        
+        
+                                    
+        
+        
+                                    
+                                                                                                                                                                                                                                                                                                            
+                            <div class="basic-3__highlights">
+                                    <span class="basic-3__highlight">První majitel</span>
+                                    <span class="basic-3__highlight">Pohon 4x4</span>
+                            </div>
+        
+        <div class="basic-3__footer">
+            <div class="basic-3__locality"><strong>Pardubický kraj</strong></div>
+                    </div>
+    </div>
+</article>
+
+                
+ 
+                
+
+            
+
+                <article class="basic-3" data-vehicle-id="20338">
+    <figure class="basic-3__image">
+
+
+        
+        <a href="/detail/lada-vesta-16-78kw-klima-vyhrevy-lpg-20338" class="basic-3__image-img">
+
+                        <img
+                    src="/img-vehicle-webp/600/330/20338/lada-vesta-16-78kw-klima-vyhrevy-lpg-18690016-1.webp"
+                    alt="Lada Vesta 1.6, 78kW, Klima, Výhřevy, LPG"
+                    data-controller="symfony--ux-lazy-image--lazy-image" data-symfony--ux-lazy-image--lazy-image-src-value="&#x2F;img-vehicle-webp&#x2F;600&#x2F;330&#x2F;20338&#x2F;lada-vesta-16-78kw-klima-vyhrevy-lpg-18690016-1.webp"
+                    width="150"
+            >
+                    </a>
+                <button type="button" class="vehicle-save" data-vehicle-save="20338" aria-label="Uložit vůz" title="Uložit vůz"></button>
+                <div class="basic-3__gallery">
+            <i class="icon icon-camera"></i>
+            16
+        </div>
+    </figure>
+    <div class="basic-3__text">
+        <h4 class="basic-3__title">
+            <a href="/detail/lada-vesta-16-78kw-klima-vyhrevy-lpg-20338">
+                <span class="basic-3__title-main">Lada Vesta</span>
+                <span class="basic-3__title-type">1.6, 78kW, Klima, Výhřevy, LPG</span>            </a>
+        </h4>
+        <div class="basic-3__price">
+            118 900 Kč
+        </div>
+        <div class="basic-3__specs">
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Rok výroby</span>
+                <span class="basic-3__spec-value">2017</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Tachometr</span>
+                <span class="basic-3__spec-value">189 346 km</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Palivo</span>
+                <span class="basic-3__spec-value">benzin</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Převodovka</span>
+                <span class="basic-3__spec-value">manuální</span>
+            </div>
+        </div>
+                        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+        
+        
+        
+        
+                                    
+                                    
+                            
+                                    
+        
+        
+                                                                
+        
+        
+                                                                
+                                                                                                                                                                                                                                                                                                                                                                    
+                            <div class="basic-3__highlights">
+                                    <span class="basic-3__highlight">Vyhř. sedadla</span>
+                                    <span class="basic-3__highlight">Tažné zařízení</span>
+                                    <span class="basic-3__highlight">Man. klima</span>
+                                    <span class="basic-3__highlight">4x airbag</span>
+                            </div>
+        
+        <div class="basic-3__footer">
+            <div class="basic-3__locality"><strong>Středočeský kraj</strong></div>
+                    </div>
+    </div>
+</article>
+
+                
+ 
+                
+
+            
+
+                <article class="basic-3" data-vehicle-id="125501">
+    <figure class="basic-3__image">
+
+
+        
+        <a href="/detail/lada-kalina-16i-lpg-125501" class="basic-3__image-img">
+
+                        <img
+                    src="/img-vehicle-webp/600/437/125501/lada-kalina-16i-lpg-37867379-1.webp"
+                    alt="Lada Kalina 1.6i LPG"
+                    data-controller="symfony--ux-lazy-image--lazy-image" data-symfony--ux-lazy-image--lazy-image-src-value="&#x2F;img-vehicle-webp&#x2F;600&#x2F;437&#x2F;125501&#x2F;lada-kalina-16i-lpg-37867379-1.webp"
+                    width="150"
+            >
+                    </a>
+                <button type="button" class="vehicle-save" data-vehicle-save="125501" aria-label="Uložit vůz" title="Uložit vůz"></button>
+                <div class="basic-3__gallery">
+            <i class="icon icon-camera"></i>
+            10
+        </div>
+    </figure>
+    <div class="basic-3__text">
+        <h4 class="basic-3__title">
+            <a href="/detail/lada-kalina-16i-lpg-125501">
+                <span class="basic-3__title-main">Lada Kalina</span>
+                <span class="basic-3__title-type">1.6i LPG</span>            </a>
+        </h4>
+        <div class="basic-3__price">
+            7 500 Kč
+        </div>
+        <div class="basic-3__specs">
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Rok výroby</span>
+                <span class="basic-3__spec-value">2007</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Tachometr</span>
+                <span class="basic-3__spec-value">107 000 km</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Palivo</span>
+                <span class="basic-3__spec-value">LPG</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Převodovka</span>
+                <span class="basic-3__spec-value">manuální</span>
+            </div>
+        </div>
+                        
+                                                                                                                                                                                                                                                                            
+        
+        
+        
+        
+                                    
+                                    
+        
+                                    
+        
+        
+                                    
+        
+        
+                                    
+                                                                                                                                                                                                                                                                                                                                                                    
+                            <div class="basic-3__highlights">
+                                    <span class="basic-3__highlight">2x airbag</span>
+                            </div>
+        
+        <div class="basic-3__footer">
+            <div class="basic-3__locality"><strong>Plzeňský kraj</strong></div>
+                    </div>
+    </div>
+</article>
+
+                
+ 
+                
+
+            
+
+                <article class="basic-3" data-vehicle-id="20361">
+    <figure class="basic-3__image">
+
+
+        
+        <a href="/detail/lada-niva-17-61kw-4x4-20361" class="basic-3__image-img">
+
+                        <img
+                    src="/img-vehicle-webp/600/330/20361/lada-niva-17-61kw-4x4-18690048-1.webp"
+                    alt="Lada Niva 1.7, 61kW, 4x4"
+                    data-controller="symfony--ux-lazy-image--lazy-image" data-symfony--ux-lazy-image--lazy-image-src-value="&#x2F;img-vehicle-webp&#x2F;600&#x2F;330&#x2F;20361&#x2F;lada-niva-17-61kw-4x4-18690048-1.webp"
+                    width="150"
+            >
+                    </a>
+                <button type="button" class="vehicle-save" data-vehicle-save="20361" aria-label="Uložit vůz" title="Uložit vůz"></button>
+                <div class="basic-3__gallery">
+            <i class="icon icon-camera"></i>
+            18
+        </div>
+    </figure>
+    <div class="basic-3__text">
+        <h4 class="basic-3__title">
+            <a href="/detail/lada-niva-17-61kw-4x4-20361">
+                <span class="basic-3__title-main">Lada Niva</span>
+                <span class="basic-3__title-type">1.7, 61kW, 4x4</span>            </a>
+        </h4>
+        <div class="basic-3__price">
+            159 000 Kč
+        </div>
+        <div class="basic-3__specs">
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Rok výroby</span>
+                <span class="basic-3__spec-value">2014</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Tachometr</span>
+                <span class="basic-3__spec-value">138 356 km</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Palivo</span>
+                <span class="basic-3__spec-value">benzin</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Převodovka</span>
+                <span class="basic-3__spec-value">manuální</span>
+            </div>
+        </div>
+                        
+                                                                                                                                                    
+        
+                            
+        
+        
+                                    
+                                    
+        
+                                    
+        
+        
+                                    
+        
+        
+                                    
+                                                                                                                                                                                                                                                                                                            
+                            <div class="basic-3__highlights">
+                                    <span class="basic-3__highlight">Pohon 4x4</span>
+                            </div>
+        
+        <div class="basic-3__footer">
+            <div class="basic-3__locality"><strong>Středočeský kraj</strong></div>
+                    </div>
+    </div>
+</article>
+
+                
+ 
+                
+
+            
+
+                <article class="basic-3" data-vehicle-id="57808">
+    <figure class="basic-3__image">
+
+
+        
+        <a href="/detail/lada-niva-17-i4x4bronto1majpuvodcr-57808" class="basic-3__image-img">
+
+                        <img
+                    src="/img-vehicle-webp/600/379/57808/lada-niva-17-i4x4bronto1majpuvodcr-49320067-1.webp"
+                    alt="Lada Niva 1,7 i,4x4,BRONTO,1.maj,původČR"
+                    data-controller="symfony--ux-lazy-image--lazy-image" data-symfony--ux-lazy-image--lazy-image-src-value="&#x2F;img-vehicle-webp&#x2F;600&#x2F;379&#x2F;57808&#x2F;lada-niva-17-i4x4bronto1majpuvodcr-49320067-1.webp"
+                    width="150"
+            >
+                    </a>
+                <button type="button" class="vehicle-save" data-vehicle-save="57808" aria-label="Uložit vůz" title="Uložit vůz"></button>
+                <div class="basic-3__gallery">
+            <i class="icon icon-camera"></i>
+            46
+        </div>
+    </figure>
+    <div class="basic-3__text">
+        <h4 class="basic-3__title">
+            <a href="/detail/lada-niva-17-i4x4bronto1majpuvodcr-57808">
+                <span class="basic-3__title-main">Lada Niva</span>
+                <span class="basic-3__title-type">1,7 i,4x4,BRONTO,1.maj,původČR</span>            </a>
+        </h4>
+        <div class="basic-3__price">
+            299 800 Kč
+        </div>
+        <div class="basic-3__specs">
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Rok výroby</span>
+                <span class="basic-3__spec-value">2020</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Tachometr</span>
+                <span class="basic-3__spec-value">72 264 km</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Palivo</span>
+                <span class="basic-3__spec-value">benzin</span>
+            </div>
+            <div class="basic-3__spec">
+                <span class="basic-3__spec-label">Převodovka</span>
+                <span class="basic-3__spec-value">manuální</span>
+            </div>
+        </div>
+                        
+                                                                                                                                                                                                                                                                                                                                                                                                                        
+                            
+                            
+        
+        
+                                    
+                                    
+                            
+                                    
+        
+        
+                                                                
+        
+        
+                
+                
+                            <div class="basic-3__highlights">
+                                    <span class="basic-3__highlight">První majitel</span>
+                                    <span class="basic-3__highlight">Pohon 4x4</span>
+                                    <span class="basic-3__highlight">Vyhř. sedadla</span>
+                                    <span class="basic-3__highlight">Tažné zařízení</span>
+                            </div>
+        
+        <div class="basic-3__footer">
+            <div class="basic-3__locality"><strong>Olomoucký kraj</strong></div>
+                    </div>
+    </div>
+</article>
+
+                
+ 
+                
+
+                        <article class="vehicle-watch-promo" data-internal-promo="IP02_WATCH">
+    <div class="vehicle-watch-promo__content">
+        <h2 class="vehicle-watch-promo__title">Nenašli jste vhodné auto? Aktivujte Hlídače.</h2>
+        <p>Hlídač vozidel bude za Vás hlídat nově přidané vozy a slevy. Týdně je do nabídky přidáno přes 1000 nových vozů. S Hlídačem Vám žádné auto neunikne.</p>
+    </div>
+
+    <div class="vehicle-watch-promo__action">
+        <a class="vehicle-watch-promo__button" data-internal-promo-click href="/?moje-vozy=1&amp;tab=watch">
+            Aktivovat Hlídače <i class="icon icon-arrow-right"></i>
+        </a>
+    </div>
+</article>            
+                        <div class="navigation">
+                
+            </div>
+            
+        </div>
+                <div>
+            <div id="adform_halfpage"></div>
+            <br>
+            <div id="banner-container" class="banner" data-autanet-partner-banner-placement="B02"></div>
+            <section class="tips-box">
+    <header class="tips-box__header">
+        <h2>Doporučené vozy</h2>
+    </header>
+    <div class="tips-box__items">
+                    <a class="box box--compact"
+   href="/detail/lada-samara-13-64ps-2108-143997"
+   data-tip-vehicle-id="143997"          data-recommended-vehicle-id="143997"
+       data-autanet-partner-id="4"
+       data-recommended-placement="R02"
+       data-recommended-page-context="vehicle_listing"   >
+    <figure class="box__image">
+                            <img
+                    src="/img-vehicle-webp/600/420/143997/lada-samara-13-64ps-2108-31460077-1.webp"
+                    alt="Lada Samara 1,3 64PS 2108"
+                    data-controller="symfony--ux-lazy-image--lazy-image" data-symfony--ux-lazy-image--lazy-image-src-value="&#x2F;img-vehicle-webp&#x2F;600&#x2F;420&#x2F;143997&#x2F;lada-samara-13-64ps-2108-31460077-1.webp"
+                    width="150"
+            >
+            </figure>
+    <div class="box__text">
+        <h3 class="box__title">Lada Samara 1,3 64PS 2108</h3>                    <p class="box__year">Rok výroby <strong>1990</strong></p>
+                        <div class="box__price">
+            89 000 Kč
+        </div>
+            </div>
+</a>
+                    <a class="box box--compact"
+   href="/detail/bmw-rada-3-320d-xdrive-m-zaruka-cr-1m-150711"
+   data-tip-vehicle-id="150711"          data-recommended-vehicle-id="150711"
+       data-autanet-partner-id="5"
+       data-recommended-placement="R02"
+       data-recommended-page-context="vehicle_listing"   >
+    <figure class="box__image">
+                            <img
+                    src="/img-vehicle-webp/600/405/150711/bmw-rada-3-320d-xdrive-m-zaruka-cr-1m-52930113-1.webp"
+                    alt="BMW Řada 3 320d xDrive ///M*ZÁRUKA*ČR 1.M"
+                    data-controller="symfony--ux-lazy-image--lazy-image" data-symfony--ux-lazy-image--lazy-image-src-value="&#x2F;img-vehicle-webp&#x2F;600&#x2F;405&#x2F;150711&#x2F;bmw-rada-3-320d-xdrive-m-zaruka-cr-1m-52930113-1.webp"
+                    width="150"
+            >
+            </figure>
+    <div class="box__text">
+        <h3 class="box__title">BMW Řada 3 20d xD ///M*ZÁRUKA 1/28*ČR 1.M</h3>                    <p class="box__year">Rok výroby <strong>2025</strong></p>
+                        <div class="box__price">
+            928 000 Kč
+        </div>
+            </div>
+</a>
+                    <a class="box box--compact"
+   href="/detail/audi-q7-s-line-210kw-tazne-53609"
+   data-tip-vehicle-id="53609"          data-recommended-vehicle-id="53609"
+       data-autanet-partner-id="1"
+       data-recommended-placement="R02"
+       data-recommended-page-context="vehicle_listing"   >
+    <figure class="box__image">
+                            <img
+                    src="/img-vehicle-webp/600/458/53609/audi-q7-s-line-210kw-tazne-07450021-1.webp"
+                    alt="Audi Q7 S-line 210kW Tažné"
+                    data-controller="symfony--ux-lazy-image--lazy-image" data-symfony--ux-lazy-image--lazy-image-src-value="&#x2F;img-vehicle-webp&#x2F;600&#x2F;458&#x2F;53609&#x2F;audi-q7-s-line-210kw-tazne-07450021-1.webp"
+                    width="150"
+            >
+            </figure>
+    <div class="box__text">
+        <h3 class="box__title">Audi Q7 S-line 210kW Tažné</h3>                    <p class="box__year">Rok výroby <strong>2023</strong></p>
+                        <div class="box__price">
+            1 229 000 Kč
+        </div>
+            </div>
+</a>
+                    <a class="box box--compact"
+   href="/detail/porsche-356-speedster-tribute-replica-149260"
+   data-tip-vehicle-id="149260"          data-recommended-vehicle-id="149260"
+       data-autanet-partner-id="3"
+       data-recommended-placement="R02"
+       data-recommended-page-context="vehicle_listing"   >
+    <figure class="box__image">
+                            <img
+                    src="/img-vehicle-webp/600/392/149260/porsche-356-speedster-tribute-replica-02897293-1.webp"
+                    alt="Porsche 356 Speedster Tribute replica"
+                    data-controller="symfony--ux-lazy-image--lazy-image" data-symfony--ux-lazy-image--lazy-image-src-value="&#x2F;img-vehicle-webp&#x2F;600&#x2F;392&#x2F;149260&#x2F;porsche-356-speedster-tribute-replica-02897293-1.webp"
+                    width="150"
+            >
+            </figure>
+    <div class="box__text">
+        <h3 class="box__title">Porsche 356 Speedster Tribute replica</h3>                    <p class="box__year">Rok výroby <strong>1962</strong></p>
+                        <div class="box__price">
+            1 250 000 Kč
+        </div>
+            </div>
+</a>
+            </div>
+</section>
+
+<script>
+    (function () {
+        const items = document.querySelectorAll(
+            '[data-recommended-placement="R02"][data-recommended-vehicle-id][data-autanet-partner-id][data-recommended-page-context]'
+        );
+
+        if (
+            !items.length
+            || !window.AutanetAnalytics
+            || typeof window.AutanetAnalytics.withIdentity !== 'function'
+        ) {
+            return;
+        }
+
+        function sendRecommendedEvent(item, eventType) {
+            const vehicleId = item.dataset.recommendedVehicleId;
+            const partnerId = item.dataset.autanetPartnerId;
+            const pageContext = item.dataset.recommendedPageContext;
+
+            if (!vehicleId || !partnerId || !pageContext) {
+                return;
+            }
+
+            window.AutanetAnalytics.withIdentity(function (identity) {
+                if (!identity) {
+                    return;
+                }
+
+                const formData = new FormData();
+                formData.append('event_type', eventType);
+                formData.append('vehicle_id', vehicleId);
+                formData.append('partner_id', partnerId);
+                formData.append('placement', 'R02');
+                formData.append('page_context', pageContext);
+                formData.append(
+                    'device',
+                    window.matchMedia('(max-width: 766px)').matches
+                        ? 'mobile'
+                        : 'desktop'
+                );
+                formData.append('visitor_key', identity.visitorKey);
+                formData.append('session_key', identity.sessionKey);
+                formData.append('pageview_key', identity.pageviewKey);
+
+                fetch('/analytics/event', {
+                    method: 'POST',
+                    body: formData,
+                    keepalive: true
+                }).catch(function () {
+                });
+            }, 5000);
+        }
+
+        items.forEach(function (item) {
+            item.addEventListener('click', function () {
+                sendRecommendedEvent(item, 'recommended_vehicle_click');
+            });
+        });
+
+        if (typeof window.IntersectionObserver !== 'function') {
+            return;
+        }
+
+        const impressionTimers = new Map();
+        const trackedVehicleIds = new Set();
+
+        function clearImpressionTimer(vehicleId) {
+            const timer = impressionTimers.get(vehicleId);
+
+            if (timer) {
+                clearTimeout(timer);
+                impressionTimers.delete(vehicleId);
+            }
+        }
+
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                const item = entry.target;
+                const vehicleId = item.dataset.recommendedVehicleId;
+
+                if (!vehicleId || trackedVehicleIds.has(vehicleId)) {
+                    return;
+                }
+
+                if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+                    if (impressionTimers.has(vehicleId)) {
+                        return;
+                    }
+
+                    const timer = setTimeout(function () {
+                        impressionTimers.delete(vehicleId);
+
+                        if (trackedVehicleIds.has(vehicleId)) {
+                            return;
+                        }
+
+                        trackedVehicleIds.add(vehicleId);
+                        sendRecommendedEvent(item, 'recommended_vehicle_impression');
+                    }, 1000);
+
+                    impressionTimers.set(vehicleId, timer);
+                    return;
+                }
+
+                clearImpressionTimer(vehicleId);
+            });
+        }, {
+            threshold: [0, 0.5, 1]
+        });
+
+        items.forEach(function (item) {
+            observer.observe(item);
+        });
+    })();
+</script>
+
+            <div id="adform_halfpage2"></div>
+        </div>
+            </section>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const logos = document.querySelectorAll('[data-autanet-partner-logo-l05]');
+
+            if (!logos.length || !window.IntersectionObserver || !window.AutanetAnalytics) {
+                return;
+            }
+
+            const visibleTimers = new Map();
+            const tracked = new Set();
+
+            const observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    const logo = entry.target;
+                    const partnerId = logo.dataset.autanetPartnerId;
+                    const dealerId = logo.dataset.dealerId;
+                    const vehicleId = logo.dataset.vehicleId;
+                    const trackingKey = partnerId + ':' + vehicleId;
+
+                    if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+                        if (tracked.has(trackingKey) || visibleTimers.has(logo)) {
+                            return;
+                        }
+
+                        const timer = window.setTimeout(function () {
+                            visibleTimers.delete(logo);
+
+                            if (tracked.has(trackingKey)) {
+                                return;
+                            }
+
+                            tracked.add(trackingKey);
+
+                            window.AutanetAnalytics.withIdentity(function (identity) {
+                                if (!identity) {
+                                    tracked.delete(trackingKey);
+                                    return;
+                                }
+
+                                const body = new URLSearchParams({
+                                    event_type: 'logo_impression',
+                                    placement: 'L05',
+                                    partner_id: partnerId,
+                                    dealer_id: dealerId,
+                                    vehicle_id: vehicleId,
+                                    device: window.matchMedia('(max-width: 767px)').matches ? 'mobile' : 'desktop',
+                                    visitor_key: identity.visitorKey,
+                                    session_key: identity.sessionKey,
+                                    pageview_key: identity.pageviewKey
+                                });
+
+                                fetch('/analytics/event', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                                    },
+                                    body: body.toString(),
+                                    keepalive: true
+                                }).then(function (response) {
+                                    if (!response.ok) {
+                                        tracked.delete(trackingKey);
+                                    }
+                                }).catch(function () {
+                                    tracked.delete(trackingKey);
+                                });
+                            });
+                        }, 1000);
+
+                        visibleTimers.set(logo, timer);
+                    } else {
+                        const timer = visibleTimers.get(logo);
+
+                        if (timer) {
+                            window.clearTimeout(timer);
+                            visibleTimers.delete(logo);
+                        }
+                    }
+                });
+            }, {
+                threshold: [0.5]
+            });
+
+            logos.forEach(function (logo) {
+                observer.observe(logo);
+            });
+        });
+    </script>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+
+
+ if ($("#select-order").length && !new URLSearchParams(window.location.search).has("order")) {
+ $("#select-order").val("5");
+ }
+
+        $(".js-select2:not([multiple])").select2({
+            language: "cs",
+            minimumResultsForSearch: -1,
+            width: "100%",
+        });
+
+        $(".js-select2[multiple]").select2({
+            language: "cs",
+            minimumResultsForSearch: -1,
+            width: "100%",
+            closeOnSelect: false,
+ dropdownCssClass: "vehicle-filter-multi-dropdown",
+ });
+$(".js-select2[multiple]").each(function () {
+    $(this).next(".select2").find(".select2-selection--multiple").attr("data-filter-placeholder", $(this).data("placeholder"));
+});
+$(".js-select2").on("select2:select select2:unselect select2:clear", function () { this.dispatchEvent(new Event("change", { bubbles: true })); });
+        if (window.matchMedia("(max-width: 767px)").matches) {
+            $(".js-select2[multiple]").each(function () {
+                const input = $(this).next(".select2").find(".select2-search__field")[0];
+                if (input) { input.readOnly = true; input.setAttribute("inputmode", "none"); }
+            }).on("select2:open.mobileKeyboard select2:close.mobileKeyboard", function () {
+                const input = $(this).next(".select2").find(".select2-search__field")[0];
+                if (input) { input.readOnly = true; input.setAttribute("inputmode", "none"); input.blur(); }
+                if (document.activeElement && document.activeElement.matches(".select2-search__field")) document.activeElement.blur();
+            });
+        }
+        $(".js-select2[multiple]").on("select2:open.vehicleMultiOk", function () {
+            const e = $(this).next(".select2").find(".select2-selection--multiple")[0];
+            e.classList.add("vehicle-multi-open");
+            const b = document.createElement("span");
+            b.className = "vehicle-multi-ok";
+            b.textContent = "OK";
+            e.appendChild(b);
+        }).on("select2:close.vehicleMultiOk", function () {
+            const e = $(this).next(".select2").find(".select2-selection--multiple")[0];
+            e.classList.remove("vehicle-multi-open");
+            e.querySelector(".vehicle-multi-ok")?.remove();
+        });
+    </script>
+
+
+
+
+
+
+
+ <script src="/vehicle-listing/filter-reset.js?v=1" defer></script>
+ <script src="/vehicle-listing/filter-summary.js?v=1" defer></script>
+ <script src="/vehicle-listing/filter-count.js?v=1" defer></script>
+    <script src="/vehicle-saved/workspace-sync.js?v=2" defer></script>
+    <script src="/vehicle-saved/saved.js?v=8" defer></script>
+    <script src="/vehicle-listing/visited.js?v=3" defer></script>
+    <script src="/internal-promo/promo.js?v=2" defer></script>
+
+
+    <script>
+        const bannerBasePath = '/img/partner/banner';
+        const bannerRoutes = {
+            desktop: '/banner',
+            mobile: '/mobile-banner'
+        };
+
+        const currentPath = window.location.pathname;
+
+        Promise.all([
+            fetch(bannerRoutes.desktop).then(response => response.json()),
+            fetch(bannerRoutes.mobile).then(response => response.json())
+        ])
+            .then(([desktopBannerData, mobileBannerData]) => {
+                const bannerContainer = document.getElementById('banner-container');
+                let mobileBannerContainer = document.getElementById('banner-mobile-container');
+
+                const blogTextContainer = document.getElementById('blog-text');
+
+                if (blogTextContainer) {
+                    if (mobileBannerContainer) {
+                        mobileBannerContainer.dataset.autanetPartnerBannerPlacement = 'B08';
+                    }
+
+                    const allParagraphs = Array.from(blogTextContainer.querySelectorAll('p')).filter(p => !p.querySelector('img'));
+                    const fifthParagraph = allParagraphs[4];
+
+                    if (fifthParagraph) {
+                        if (!mobileBannerContainer) {
+                            mobileBannerContainer = document.createElement('div');
+                            mobileBannerContainer.id = 'banner-mobile-container';
+                            mobileBannerContainer.classList.add('banner-mobile');
+                            mobileBannerContainer.dataset.autanetPartnerBannerPlacement = 'B08';
+                            document.body.appendChild(mobileBannerContainer);
+                        }
+
+                        mobileBannerContainer.innerHTML = `
+                <a href="${mobileBannerData.url}">
+                    <img src="${bannerBasePath}/${mobileBannerData.image}" alt="Partner banner">
+                </a>
+            `;
+                        fifthParagraph.insertAdjacentElement('afterend', mobileBannerContainer);
+                    }
+                }
+
+                if (bannerContainer && desktopBannerData) {
+                    bannerContainer.innerHTML = `
+            <a href="${desktopBannerData.url}" data-banner-id="${desktopBannerData.id}" data-autanet-partner-id="${desktopBannerData.autanet_partner_id}" class="banner-link">
+                <img src="${bannerBasePath}/${desktopBannerData.image}" alt="Partner banner">
+            </a>
+        `;
+                }
+                if (mobileBannerContainer && mobileBannerData) {
+                    mobileBannerContainer.innerHTML = `
+            <a href="${mobileBannerData.url}" data-banner-id="${mobileBannerData.id}" data-autanet-partner-id="${mobileBannerData.autanet_partner_id}" class="banner-link">
+                <img src="${bannerBasePath}/${mobileBannerData.image}" alt="Partner banner">
+            </a>
+        `;
+                }
+                const trackAutanetPartnerBannerImpression = (link, container) => {
+                    if (!container) {
+                        return;
+                    }
+
+                    const placement = container.dataset.autanetPartnerBannerPlacement;
+
+                    if (!['B01', 'B02', 'B03', 'B04', 'B05', 'B06', 'B07', 'B08'].includes(placement)) {
+                        return;
+                    }
+
+                    const bannerId = link.getAttribute('data-banner-id');
+                    const partnerId = link.getAttribute('data-autanet-partner-id');
+
+                    if (!bannerId || !partnerId || !window.AutanetAnalytics) {
+                        return;
+                    }
+
+                    let visibleSince = null;
+                    let impressionSent = false;
+
+                    const observer = new IntersectionObserver(entries => {
+                        entries.forEach(entry => {
+                            if (impressionSent) {
+                                return;
+                            }
+
+                            if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+                                if (visibleSince === null) {
+                                    visibleSince = Date.now();
+                                }
+
+                                if (Date.now() - visibleSince >= 1000) {
+                                    impressionSent = true;
+                                    observer.disconnect();
+
+                                    window.AutanetAnalytics.withIdentity(identity => {
+                                        if (!identity) {
+                                            return;
+                                        }
+
+                                        const body = new URLSearchParams({
+                                            event_type: 'banner_impression',
+                                            placement: placement,
+                                            banner_id: bannerId,
+                                            partner_id: partnerId,
+                                            device: window.matchMedia('(max-width: 767px)').matches ? 'mobile' : 'desktop',
+                                            visitor_key: identity.visitorKey,
+                                            session_key: identity.sessionKey,
+                                            pageview_key: identity.pageviewKey
+                                        });
+
+                                        fetch('/analytics/event', {
+                                            method: 'POST',
+                                            headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
+                                            body: body.toString(),
+                                            keepalive: true
+                                        });
+                                    });
+                                }
+                            } else {
+                                visibleSince = null;
+                            }
+                        });
+                    }, {threshold: [0, 0.5, 1]});
+
+                    observer.observe(link);
+
+                    const timer = window.setInterval(() => {
+                        if (impressionSent || !document.body.contains(link)) {
+                            window.clearInterval(timer);
+                            return;
+                        }
+
+                        const rect = link.getBoundingClientRect();
+                        const visibleHeight = Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));
+                        const ratio = rect.height > 0 ? visibleHeight / rect.height : 0;
+
+                        if (ratio >= 0.5) {
+                            if (visibleSince === null) {
+                                visibleSince = Date.now();
+                            }
+
+                            if (Date.now() - visibleSince >= 1000) {
+                                impressionSent = true;
+                                window.clearInterval(timer);
+                                observer.disconnect();
+
+                                window.AutanetAnalytics.withIdentity(identity => {
+                                    if (!identity) {
+                                        return;
+                                    }
+
+                                    const body = new URLSearchParams({
+                                        event_type: 'banner_impression',
+                                        placement: placement,
+                                        banner_id: bannerId,
+                                        partner_id: partnerId,
+                                        device: window.matchMedia('(max-width: 767px)').matches ? 'mobile' : 'desktop',
+                                        visitor_key: identity.visitorKey,
+                                        session_key: identity.sessionKey,
+                                        pageview_key: identity.pageviewKey
+                                    });
+
+                                    fetch('/analytics/event', {
+                                        method: 'POST',
+                                        headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
+                                        body: body.toString(),
+                                        keepalive: true
+                                    });
+                                });
+                            }
+                        } else {
+                            visibleSince = null;
+                        }
+                    }, 250);
+                };
+
+                document.querySelectorAll('.banner-link').forEach(link => {
+                    const container = link.closest('#banner-container, #banner-mobile-container');
+                    trackAutanetPartnerBannerImpression(link, container);
+
+                    link.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const bannerId = this.getAttribute('data-banner-id');
+                        const partnerId = this.getAttribute('data-autanet-partner-id');
+                        const container = this.closest('#banner-container, #banner-mobile-container');
+                        const placement = container ? container.dataset.autanetPartnerBannerPlacement : null;
+
+                        if (
+                            ['B01', 'B02', 'B03', 'B04', 'B05', 'B06', 'B07', 'B08'].includes(placement)
+                            && partnerId
+                            && window.AutanetAnalytics
+                        ) {
+                            window.AutanetAnalytics.withIdentity(identity => {
+                                if (identity) {
+                                    const body = new URLSearchParams({
+                                        event_type: 'banner_click',
+                                        placement: placement,
+                                        banner_id: bannerId,
+                                        partner_id: partnerId,
+                                        device: window.matchMedia('(max-width: 767px)').matches ? 'mobile' : 'desktop',
+                                        visitor_key: identity.visitorKey,
+                                        session_key: identity.sessionKey,
+                                        pageview_key: identity.pageviewKey
+                                    });
+
+                                    fetch('/analytics/event', {
+                                        method: 'POST',
+                                        headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
+                                        body: body.toString(),
+                                        keepalive: true
+                                    });
+                                }
+                            });
+                        }
+
+                        fetch(`/banner/${bannerId}/click`, {method: 'POST'})
+                            .then(() => {
+                                window.location.href = this.href;
+                            });
+                    });
+                });
+            })
+            .catch(error => console.error('Error loading banners:', error));
+    </script>
+
+</main>
+
+        <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__row">
+                <a class="footer__logo" href="/">
+                    <img src="/img/footer__logo.svg" alt="" loading="lazy">
+                </a>
+                <nav class="footer__nav">
+                    <div class="footer__nav-group">
+                        <a class="footer__nav-item" href="/osobni-vozidla">Osobní vozy</a>
+                        <a class="footer__nav-item" href="/uzitkova-vozidla">Užitková vozidla</a>
+                        <a class="footer__nav-item" href="/nakladni-vozidla">Nákladní vozy</a>
+                        <a class="footer__nav-item" href="/obytna-vozidla">Obytná vozidla</a>
+                        <a class="footer__nav-item" href="/motorky-skutry">Motorky</a>
+                        <a class="footer__nav-item" href="/privesy-a-navesy">Přívěsy a návěsy</a>
+                        <a class="footer__nav-item" href="/autobusy">Autobusy</a>
+                        <a class="footer__nav-item" href="/pracovni-stroje">Pracovní stroje</a>
+                        <a class="footer__nav-item" href="/nahradni-dily">Náhradní díly</a>
+                        <a class="footer__nav-item" href="/prislusenstvi">Příslušenství</a>
+                    </div>
+                    <div class="footer__nav-group">
+                        <a class="footer__nav-item" href="/autobazary">Seznam prodejců</a>
+                        <a class="footer__nav-item" href="/clanky/testy-aut">Testy
+                            aut</a>
+                        <a class="footer__nav-item" href="/proverit-auto">Prověřit auto</a>
+                        <a class="footer__nav-item" href="/clanky/novinky">Novinky</a>
+                        <a class="footer__nav-item" href="/clanky/rady-a-tipy">Rady a
+                            tipy</a>
+                        <a class="footer__nav-item" href="/clanky/nove-modely">Nové
+                            modely</a>
+                        <a class="footer__nav-item" href="/clanky/ojetiny">Ojetiny</a>
+                        <a class="footer__nav-item" href="/clanky/auto-a-zivot">Auto a
+                            život</a>
+                    </div>
+                </nav>
+                <div class="footer__social">
+                    <a target="_blank" href="https://www.facebook.com/autanetczauto"><i class="icon icon-facebook"></i></a>
+                    <a target="_blank" href="https://x.com/autanet"><i class="icon icon-x"></i></a>
+                    <a target="_blank" href="https://www.instagram.com/autanet.cz"><i
+                                class="icon icon-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer__container">
+            <div class="footer__row">
+                                <nav class="footer__menu">
+                                            <a href="/pro-prodejce">Pro prodejce </a>
+                                            <a href="/reklama-autanet">Reklama </a>
+                                            <a href="/kontakt">Kontakty </a>
+                                                                <a href="/zasady-pouzivani-souboru-cookies">Soukromí </a>
+                                            <a href="/ochrana-osobnich-udaju">Ochrana osobních údajů </a>
+                                        <div>Copyright 2003 - 2026, Autanet.cz</div>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+
+<script src="/plugins/OverlayScrollbars-1.x/js/jquery.overlayScrollbars.min.js"></script>
+<script src="/plugins/Gallery-master/js/blueimp-gallery.min.js"></script>
+<script src="/plugins/slick/slick.min.js"></script>
+<script src="/js/default.js?v=2026091601"></script>
+
+
+</body>
+</html>

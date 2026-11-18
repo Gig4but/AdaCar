@@ -1,0 +1,28 @@
+{% from "_icons.html" import icon %}
+<article class="car{% if unchecked and car.id in unchecked %} unchecked{% endif %}{% if arrived %} arrived{% endif %}" id="car-{{ car.id }}" data-id="{{ car.id }}"{% if row is defined %} style="--row: {{ row }}"{% endif %}>
+  {% if new_after and car.id > new_after %}<span class="new-mark" title="{{ t('car.new') }}"></span>{% endif %}
+  {% set photo = car.images[0].url if car.images else None %}
+  {% if photo %}<a href="/cars/{{ car.id }}" class="car-open car-photo" data-car="{{ car.id }}"><img src="{{ photo | safe_url }}" alt="{{ t('car.photo') }}" loading="lazy" referrerpolicy="no-referrer"></a>{% endif %}
+  <div class="car-body">
+    <header>
+      <h3><a href="/cars/{{ car.id }}" class="car-open" data-car="{{ car.id }}">{{ car.title }}</a></h3>
+      <div class="car-side">
+        <small class="checking-note muted" aria-busy="true">{{ t("car.unchecked") }}</small>
+        <span class="price">{{ price(car) }}</span>
+        <button type="button" class="hide secondary outline" hx-post="/cars/{{ car.id }}/hide"
+                hx-target="closest .car" hx-swap="outerHTML swap:160ms" title="{{ t('car.hide_hint') }}">{{ t("car.hide") }}</button>
+      </div>
+    </header>
+    {% set shown = facts(car) %}
+    {% if shown %}<p class="facts">{% for fact in shown %}<span>{{ fact }}</span>{% endfor %}</p>{% endif %}
+    <p class="meta">
+      {% if car.place_text %}{{ car.place_text }}{% endif %}
+      {% if car.seller_kind %}{% if car.place_text %} · {% endif %}{{ label("seller_kinds", car.seller_kind) }}{% if car.seller_name %} {{ car.seller_name }}{% endif %}{% endif %}
+      {% if car.posted_at %}{% if car.place_text or car.seller_kind %} · {% endif %}<time class="muted" title="{{ t('car.posted') }}">{{ car.posted_at | date }}</time>{% endif %}
+    </p>
+    {% include "_travel.html" %}
+    <footer>
+      {% include "_car_links.html" %}
+    </footer>
+  </div>
+</article>

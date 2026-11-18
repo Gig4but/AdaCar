@@ -1,0 +1,24 @@
+{% if progress.running %}
+  <div hx-get="/scrape/progress" hx-trigger="every 1s" hx-target="#progress" aria-busy="true">
+    {% if progress.restarting %}{{ t("scrape.restarting") }}
+    {% elif progress.phase == "clear" %}{{ t("scrape.clear") }}
+    {% elif progress.phase == "check" %}{{ t("scrape.check", n=progress.processed) }}
+    {% elif progress.active %}
+      {{ t("scrape.parallel") }}
+      {% for label, phase, n in progress.active_labels() %}{{ label }} ({{ n }}){% if not loop.last %}, {% endif %}{% endfor %}
+    {% elif progress.phase == "listing" %}{{ t("scrape.listing", source=progress.source_label, n=progress.processed) }}
+    {% elif progress.phase == "details" %}{{ t("scrape.details", source=progress.source_label, n=progress.processed) }}
+    {% elif progress.phase == "addresses" %}{{ t("scrape.addresses", mb=progress.processed) }}
+    {% elif progress.phase == "geocode" %}{{ t("scrape.geocode") }}
+    {% else %}{{ t("scrape.start") }}{% endif %}
+  </div>
+{% elif progress.phase == "done" %}
+  {% if progress.results %}
+    {% set r = progress.totals() %}
+    <small class="muted">{{ t("scrape.done", new=r.new, updated=r.updated, removed=r.removed) }}
+      {% if r.merged %}{{ t("scrape.merged", n=r.merged) }}{% endif %}</small>
+  {% endif %}
+  {% if progress.errors %}<small class="error">{{ t("scrape.partial", sources=progress.error_labels()) }}</small>{% endif %}
+{% elif progress.phase == "failed" %}
+  <small class="error">{{ t("scrape.failed", msg=progress.message) }}</small>
+{% endif %}

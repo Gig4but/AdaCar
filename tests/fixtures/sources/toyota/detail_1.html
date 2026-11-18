@@ -1,0 +1,1862 @@
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style nonce="ayQSfYIsdgyXYttngZ2KPA=="></style>
+<script nonce="ayQSfYIsdgyXYttngZ2KPA==">
+    (function (nonce) {
+        function stamp(node) {
+            if (node && 'STYLE' === node.nodeName && !node.nonce) {
+                node.setAttribute('nonce', nonce);
+            }
+        }
+
+        function patch(proto, method) {
+            let original = proto[method];
+
+            if (typeof original !== 'function') {
+                return;
+            }
+
+            proto[method] = function () {
+                for (let i = 0; i < arguments.length; i++) {
+                    stamp(arguments[i]);
+                }
+
+                return original.apply(this, arguments);
+            };
+        }
+
+        function patchFrameAccess(win) {
+            let proto = win.HTMLIFrameElement.prototype;
+
+            ['contentWindow', 'contentDocument'].forEach(function (property) {
+                let descriptor = Object.getOwnPropertyDescriptor(proto, property);
+
+                if (!descriptor || typeof descriptor.get !== 'function') {
+                    return;
+                }
+
+                Object.defineProperty(proto, property, {
+                    configurable: true,
+                    enumerable: descriptor.enumerable,
+                    get: function () {
+                        let value = descriptor.get.call(this);
+
+                        try {
+                            patchWindow('contentWindow' === property ? value : value && value.defaultView);
+                        } catch (e) {
+                            // Cross-origin frame: it has its own CSP.
+                        }
+
+                        return value;
+                    }
+                });
+            });
+        }
+
+        // Frames only: LiveChat writes the frame's <head> as markup (innerHTML / document.write).
+        function stampMarkup(html) {
+            return String(html).replace(/<style\b(?![^>]*\snonce=)/gi, '<style nonce="' + nonce + '"');
+        }
+
+        function patchMarkupSinks(win) {
+            let descriptor = Object.getOwnPropertyDescriptor(win.Element.prototype, 'innerHTML');
+
+            if (descriptor && typeof descriptor.set === 'function') {
+                Object.defineProperty(win.Element.prototype, 'innerHTML', {
+                    configurable: true,
+                    enumerable: descriptor.enumerable,
+                    get: descriptor.get,
+                    set: function (html) { descriptor.set.call(this, stampMarkup(html)); }
+                });
+            }
+
+            ['write', 'writeln'].forEach(function (method) {
+                let original = win.Document.prototype[method];
+
+                win.Document.prototype[method] = function () {
+                    return original.apply(this, Array.prototype.map.call(arguments, stampMarkup));
+                };
+            });
+        }
+
+        // RTB House pixels: setAttribute('style', 'display:none') is blocked by style-src-attr, the same CSSOM
+        // assignment is not - and any script can already do the latter.
+        function patchStyleAttribute(win) {
+            let original = win.Element.prototype.setAttribute;
+
+            win.Element.prototype.setAttribute = function (name, value) {
+                if ('style' === String(name).toLowerCase() && this.style) {
+                    this.style.cssText = String(value);
+
+                    return;
+                }
+
+                return original.apply(this, arguments);
+            };
+        }
+
+        function patchWindow(win) {
+            if (!win || win.__cspStyleNoncePatched) {
+                return;
+            }
+
+            win.__cspStyleNoncePatched = true;
+
+            ['appendChild', 'insertBefore', 'replaceChild'].forEach(function (method) { patch(win.Node.prototype, method); });
+            ['insertAdjacentElement', 'append', 'prepend', 'before', 'after', 'replaceWith'].forEach(function (method) { patch(win.Element.prototype, method); });
+            patchFrameAccess(win);
+            patchStyleAttribute(win);
+
+            if (win !== window) {
+                patchMarkupSinks(win);
+            }
+        }
+
+        function adoptBlockedStyles(doc) {
+            let styles = doc.querySelectorAll('style:not([nonce])');
+
+            for (let i = 0; i < styles.length; i++) {
+                if (null === styles[i].sheet) {
+                    styles[i].setAttribute('nonce', nonce);
+                    styles[i].parentNode.insertBefore(styles[i], styles[i].nextSibling);
+                }
+            }
+        }
+
+        function watchFrame(frame) {
+            try {
+                let doc = frame.contentDocument;
+
+                if (!doc || doc.__cspStyleNonceWatched) {
+                    return;
+                }
+
+                doc.__cspStyleNonceWatched = true;
+                adoptBlockedStyles(doc);
+                new frame.contentWindow.MutationObserver(function () { adoptBlockedStyles(doc); })
+                    .observe(doc, { childList: true, subtree: true });
+            } catch (e) {
+                // Cross-origin frame: it has its own CSP.
+            }
+        }
+
+        function watchFrames(node) {
+            let frames = 'IFRAME' === node.nodeName ? [node] : node.querySelectorAll('iframe');
+
+            for (let i = 0; i < frames.length; i++) {
+                watchFrame(frames[i]);
+                frames[i].addEventListener('load', function (event) { watchFrame(event.target); });
+            }
+        }
+
+        patchWindow(window);
+
+        new MutationObserver(function (mutations) {
+            mutations.forEach(function (mutation) {
+                mutation.addedNodes.forEach(function (node) {
+                    if (1 === node.nodeType) {
+                        watchFrames(node);
+                    }
+                });
+            });
+        }).observe(document.documentElement, { childList: true, subtree: true });
+    })('ayQSfYIsdgyXYttngZ2KPA==');
+</script>
+
+                    <title>Toyota RAV4 2.5 Benzín 2022 - 879 900 Kč | Toyota Prověřené vozy</title>
+                    <meta name="description" content="Ojeté vozy značky Toyota.">
+                    <meta name="keywords" content="keywords">
+                    <meta content="Toyota RAV4 2.5 Benzín 2022 - 879 900 Kč | Toyota Prověřené vozy" property="og:title">
+                    <meta content="2022 | 31 924 km | Benzín | Automatická | Emil Frey ojeté vozy - Praha 9 - Kyje" property="og:description">
+                    <meta content="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e21cfe80.jpg" property="og:image">
+                    <meta content="cs_CZ" property="og:locale">
+                    <meta content="Toyota<br>Prověřené vozy" property="og:site_name">
+                    <meta content="product" property="og:type">
+            
+            <link rel="stylesheet" href="/assets/common/styles/core-xg4_Epi.css">
+    <link rel="stylesheet" href="/assets/common/styles/site-tkzMKN4.css">
+            <link rel="stylesheet" href="/assets/toyota-pl/styles/toyota-pl-custom-JBSNRIz.css">
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/toyota-pl/images/favicon-32x32-whNRYzf.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/toyota-pl/images/favicon-16x16-wn8n4pA.png">
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://www.google-analytics.com">
+
+                        
+<script nonce="ayQSfYIsdgyXYttngZ2KPA==" type="importmap">
+{
+    "imports": {
+        "toyota-pl": "/assets/toyota-pl-WxAaZch.js",
+        "/assets/common/js/menu.js": "/assets/common/js/menu-FTykSS1.js",
+        "/assets/common/js/search.js": "/assets/common/js/search-ZBbHkgp.js",
+        "/assets/common/js/helpers.js": "/assets/common/js/helpers-5DFGnje.js",
+        "/assets/common/js/components.js": "/assets/common/js/components-vlhSNlQ.js",
+        "/assets/common/js/slider.js": "/assets/common/js/slider-dbFd6SN.js",
+        "/assets/common/js/finance.js": "/assets/common/js/finance-7LuBmQi.js",
+        "/assets/common/js/forms.js": "/assets/common/js/forms-6HhdGuh.js",
+        "/assets/common/js/indicata.js": "/assets/common/js/indicata-Eskpbwv.js",
+        "/assets/common/js/gaEvents.js": "/assets/common/js/gaEvents-95nyD_D.js",
+        "/assets/common/js/map.js": "/assets/common/js/map-4OES35S.js",
+        "/assets/common/js/dealerMapPicker.js": "/assets/common/js/dealerMapPicker-YDmQKWP.js",
+        "/assets/common/js/clipboard.js": "/assets/common/js/clipboard-IbamJTG.js",
+        "/assets/common/js/trackingData.js": "/assets/common/js/trackingData-3onAK08.js",
+        "/assets/common/js/translations.js": "/assets/common/js/translations-XylZzYI.js",
+        "/assets/common/js/settings.js": "/assets/common/js/settings-F4AzhrS.js",
+        "/assets/common/js/mapHelpers.js": "/assets/common/js/mapHelpers-IN5rE-W.js",
+        "/assets/common/js/test.js": "/assets/common/js/test-m0oh41Y.js",
+        "/assets/common/js/campaignData.js": "/assets/common/js/campaignData-6KC2AVt.js",
+        "/assets/common/js/leadSource.js": "/assets/common/js/leadSource-GCKWgHb.js",
+        "/assets/common/js/gaEventNames.js": "/assets/common/js/gaEventNames-rBjuhJ4.js",
+        "/assets/common/js/gmapsLoader.js": "/assets/common/js/gmapsLoader-T4kElMP.js",
+        "makolab": "/assets/common/js/makolab-Qcz-2Ff.js",
+        "lexus-pl": "/assets/lexus-pl-ICkwhbR.js",
+        "/assets/lexus-pl/js/lexusGaEvents.js": "/assets/lexus-pl/js/lexusGaEvents-VLH3Bef.js",
+        "cargo-toyota-pl": "/assets/cargo-toyota-pl-ZurNiiV.js",
+        "/assets/toyota-pl.js": "/assets/toyota-pl-WxAaZch.js",
+        "toyota-hu-35": "/assets/toyota-hu-35-suZrgIq.js",
+        "/assets/toyota-hu-35/js/settings.js": "/assets/toyota-hu-35/js/settings-yn8Nfb5.js",
+        "/assets/toyota-hu-35/js/recentlyAdded.js": "/assets/toyota-hu-35/js/recentlyAdded-n58AdtM.js",
+        "lexus-hu-new": "/assets/lexus-hu-new-IMEzM_W.js",
+        "/assets/lexus-pl.js": "/assets/lexus-pl-ICkwhbR.js",
+        "jquery": "/assets/vendor/jquery/jquery.index-vwCPStR.js"
+    }
+}
+</script><script nonce="ayQSfYIsdgyXYttngZ2KPA==">
+if (!HTMLScriptElement.supports || !HTMLScriptElement.supports('importmap')) (function () {
+    const script = document.createElement('script');
+    script.src = 'https://ga.jspm.io/npm:es-module-shims@1.10.0/dist/es-module-shims.js';
+    if (document.currentScript?.nonce) script.nonce = document.currentScript.nonce;
+    script.setAttribute('crossorigin', 'anonymous');
+    script.setAttribute('integrity', 'sha384-ie1x72Xck445i0j4SlNJ5W5iGeL3Dpa0zD48MZopgWsjNB/lt60SuG1iduZGNnJn');
+    document.head.appendChild(script);
+})();
+</script>
+<link nonce="ayQSfYIsdgyXYttngZ2KPA==" rel="modulepreload" href="/assets/toyota-pl-WxAaZch.js">
+<link nonce="ayQSfYIsdgyXYttngZ2KPA==" rel="modulepreload" href="/assets/common/js/menu-FTykSS1.js">
+<link nonce="ayQSfYIsdgyXYttngZ2KPA==" rel="modulepreload" href="/assets/common/js/search-ZBbHkgp.js">
+<link nonce="ayQSfYIsdgyXYttngZ2KPA==" rel="modulepreload" href="/assets/common/js/helpers-5DFGnje.js">
+<link nonce="ayQSfYIsdgyXYttngZ2KPA==" rel="modulepreload" href="/assets/common/js/components-vlhSNlQ.js">
+<link nonce="ayQSfYIsdgyXYttngZ2KPA==" rel="modulepreload" href="/assets/common/js/slider-dbFd6SN.js">
+<link nonce="ayQSfYIsdgyXYttngZ2KPA==" rel="modulepreload" href="/assets/common/js/finance-7LuBmQi.js">
+<link nonce="ayQSfYIsdgyXYttngZ2KPA==" rel="modulepreload" href="/assets/common/js/forms-6HhdGuh.js">
+<link nonce="ayQSfYIsdgyXYttngZ2KPA==" rel="modulepreload" href="/assets/common/js/indicata-Eskpbwv.js">
+<link nonce="ayQSfYIsdgyXYttngZ2KPA==" rel="modulepreload" href="/assets/common/js/gaEvents-95nyD_D.js">
+<link nonce="ayQSfYIsdgyXYttngZ2KPA==" rel="modulepreload" href="/assets/common/js/map-4OES35S.js">
+<link nonce="ayQSfYIsdgyXYttngZ2KPA==" rel="modulepreload" href="/assets/common/js/dealerMapPicker-YDmQKWP.js">
+<link nonce="ayQSfYIsdgyXYttngZ2KPA==" rel="modulepreload" href="/assets/common/js/clipboard-IbamJTG.js">
+<link nonce="ayQSfYIsdgyXYttngZ2KPA==" rel="modulepreload" href="/assets/common/js/trackingData-3onAK08.js">
+<link nonce="ayQSfYIsdgyXYttngZ2KPA==" rel="modulepreload" href="/assets/common/js/translations-XylZzYI.js">
+<link nonce="ayQSfYIsdgyXYttngZ2KPA==" rel="modulepreload" href="/assets/common/js/settings-F4AzhrS.js">
+<link nonce="ayQSfYIsdgyXYttngZ2KPA==" rel="modulepreload" href="/assets/common/js/mapHelpers-IN5rE-W.js">
+<link nonce="ayQSfYIsdgyXYttngZ2KPA==" rel="modulepreload" href="/assets/common/js/test-m0oh41Y.js">
+<link nonce="ayQSfYIsdgyXYttngZ2KPA==" rel="modulepreload" href="/assets/common/js/campaignData-6KC2AVt.js">
+<link nonce="ayQSfYIsdgyXYttngZ2KPA==" rel="modulepreload" href="/assets/common/js/leadSource-GCKWgHb.js">
+<link nonce="ayQSfYIsdgyXYttngZ2KPA==" rel="modulepreload" href="/assets/common/js/gaEventNames-rBjuhJ4.js">
+<link nonce="ayQSfYIsdgyXYttngZ2KPA==" rel="modulepreload" href="/assets/common/js/gmapsLoader-T4kElMP.js">
+<script nonce="ayQSfYIsdgyXYttngZ2KPA==" type="module">import 'toyota-pl';</script>
+                
+    
+                
+    
+    <script nonce="ayQSfYIsdgyXYttngZ2KPA==">
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({"offerId":"446147","offerIds":["446147"]});
+    </script>
+    <script nonce="ayQSfYIsdgyXYttngZ2KPA==">
+    window.dataLayer = window.dataLayer || [];
+    window.SP = window.SP || {};
+    window.SP.googleTagConfig = {
+        analytics_storage: 'denied',
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied'
+    };
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('consent', 'default', {
+        analytics_storage: 'denied',
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied'
+    });
+
+    
+    
+    </script>
+
+    <script nonce="ayQSfYIsdgyXYttngZ2KPA==" src="//www.googletagmanager.com/gtag/js?id=G-9MFC263M78"></script>
+
+    <script nonce="ayQSfYIsdgyXYttngZ2KPA==" async src="https://www.googletagmanager.com/gtag/js?id=G-9MFC263M78"></script>
+    <script nonce="ayQSfYIsdgyXYttngZ2KPA==">
+        gtag('js', new Date());
+        gtag('config', 'G-9MFC263M78');
+    </script>
+                        
+    </head>
+
+    <body class="layout" data-find-dealer-path="/najit-dealera">
+                <!--email_off-->
+            <!-- HEADER -->
+<header class="site__header">
+    <div class="site__header__container">
+
+        <div class="site__header__logo">
+            <a href="/">
+                <img src="/assets/toyota-pl/images/site-logo-toyota_dark_cs-MVtpczs.svg" alt="Toyota hlavní stránka">
+            </a>
+        </div>
+
+        <a href="#main" id="skip-navigation"><span>Přeskočit navigaci</span></a>
+
+<nav class="site__header__short-links" aria-label="Základní navigace">
+    <ul>
+                    <li>
+    <a href="/financovani" target="_self" aria-label="" rel="" >
+                <i class="w-icon-calculator" aria-hidden="true"></i>
+        <span>Financování</span>
+    </a>
+    </li>
+                    <li>
+    <a href="/benefity" target="_self" aria-label="" rel="" >
+                <i class="w-icon-shield" aria-hidden="true"></i>
+        <span>Benefity</span>
+    </a>
+    </li>
+                    <li>
+    <a href="/ocenit-vozidlo" target="_self" aria-label="" rel="" >
+                <i class="w-icon-wallet" aria-hidden="true"></i>
+        <span>Ocenit vozidlo</span>
+    </a>
+    </li>
+                    <li>
+    <a href="/najit-dealera" target="_self" aria-label="" rel="" >
+                <i class="w-icon-location" aria-hidden="true"></i>
+        <span>Najít prodejce</span>
+    </a>
+    </li>
+                    <li>
+    <a href="/zanechte-zpravu" target="_self" aria-label="" rel="" >
+                <i class="w-icon-phone-wave" aria-hidden="true"></i>
+        <span>Zanechte zprávu</span>
+    </a>
+    </li>
+            </ul>
+</nav>
+
+<nav id="main-nav" class="site__header__navigation" aria-label="Hlavní navigace" aria-hidden="true" inert>
+    <ul>
+                    <li>
+    <a href="/ocenit-vozidlo" target="_self" aria-label="" rel="" data-testid="bnav-valuation" >
+            <span>Ocenit vozidlo</span>
+    </a>
+    </li>
+                    <li>
+    <a href="/zanechte-zpravu" target="_self" aria-label="" rel="" data-testid="bnav-contact" >
+            <span>Zanechte zprávu</span>
+    </a>
+    </li>
+                    <li>
+    <a href="/najit-dealera" target="_self" aria-label="" rel="" >
+            <span>Najít prodejce</span>
+    </a>
+    </li>
+                    <li>
+    <a href="https://www.toyota.cz/elektrifikace/hybrid#/cz" target="_blank" aria-label="" rel="noopener noreferrer" >
+            <span>Výhody hybridního pohonu</span>
+    </a>
+    </li>
+                    <li>
+    <a href="/financovani" target="_self" aria-label="" rel="" >
+            <span>Financování</span>
+    </a>
+    </li>
+                    <li>
+    <a href="/prislusenstvi" target="_self" aria-label="" rel="" >
+            <span>Příslušenství</span>
+    </a>
+    </li>
+                    <li>
+    <a href="/servis" target="_self" aria-label="" rel="" >
+            <span>Servis</span>
+    </a>
+    </li>
+                    <li>
+    <a href="/svolavaci-akce-takata" target="_self" aria-label="" rel="" data-testid="bnav-takata-recall" >
+            <span>Svolávací akce – airbagy Takata</span>
+    </a>
+    </li>
+                    <li>
+    <a href="/benefity" target="_self" aria-label="" rel="" >
+            <span>Benefity</span>
+    </a>
+    </li>
+            </ul>
+</nav>
+
+<button menu-toggle
+        class="site__header__toggle"
+        type="button"
+        aria-controls="main-nav"
+        aria-expanded="false"
+        aria-label="Zobrazit/skrýt menu"
+        data-testid="bnav-toggle">
+    <span></span> <span></span> <span></span> <span></span>
+</button>
+
+    </div>
+</header>
+
+            <div id="main" class="site__content" role="main">
+            <!-- BREADCRUMBS -->
+    <nav class="site__breadcrubs" aria-label="Navigační cesta">
+        <div class="site__breadcrubs__wrapper">
+            <ol>
+                <li>
+                    <a href="/">Domovská stránka</a>
+                </li>
+                <li>
+                    <a href="/nabidky">Seznam nabídek</a>
+                </li>
+                <li aria-current="page">
+                    <strong>Toyota RAV4</strong>
+                </li>
+            </ol>
+        </div>
+    </nav>
+
+
+    <!-- VDP CONTENT -->
+    <div class="vdp-content">
+
+        <!-- HEADER -->
+        <div class="vdp-header">
+            <div class="vdp-header__title">
+                <h1>Toyota RAV4</h1>
+                <strong>2.5Hybrid,Executive,4X4,CZ</strong>
+
+                <div class="vdp-header__title__tags">
+                    
+                    
+                    
+                    
+                                            <span class="tag tag--secondary tag--full">Záruka</span>
+                                    </div>
+
+                <div class="vdp-header__title__actions">
+                                                            
+                    <button type="button" share-link
+                            class="btn btn--circle btn--white btn--sm"
+                            aria-label="Sdílet">
+                        <i class="w-icon-share2" aria-hidden="true"></i>
+                    </button>
+
+                                            <a href="/nabidka-pdf/446147/toyota-rav4-25hybridexecutive4x4cz"
+                           class="btn btn--circle btn--white btn--sm"
+                           data-baseurl="/nabidka-pdf/446147/toyota-rav4-25hybridexecutive4x4cz"
+                           data-print data-connector="?"
+                            data-brochure                           aria-label="Tisk">
+                            <i class="w-icon-printer" aria-hidden="true"></i>
+                        </a>
+                                    </div>
+            </div>
+
+            <div class="vdp-header__info">
+								<span>Prodejce
+					<strong>Emil Frey ojeté vozy</strong>
+				</span>
+				                <span>Číslo nabídky:
+					<strong>446147</strong>
+				</span>
+            </div>
+        </div>
+
+
+        <!-- MAIN -->
+        <div class="vdp-main">
+
+            
+                            <div class="vdp-gallery" component="gallery-window" role="region"
+                     aria-label="Galerie fotografií vozidla">
+                                            <button class="btn btn--circle btn--white btn--shadow btn--sm" type="button" gallery="prev"
+                                aria-label="Předchozí snímek">
+                            <i class="w-icon-chevron-left" aria-hidden="true"></i>
+                        </button>
+                    
+                    <div class="vdp-gallery__preview" active-element="1" role="group" aria-label="Zobrazení fotografie vozidla" tabindex="0">
+                        <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e21cfe80.jpg"
+                             alt="Fotografie 1 z 45">
+                    </div>
+
+                                            <button class="btn btn--circle btn--white btn--shadow btn--sm" type="button" gallery="next"
+                                aria-label="Další snímek">
+                            <i class="w-icon-chevron-right" aria-hidden="true"></i>
+                        </button>
+                                    </div>
+
+                                    <ul class="vdp-thumbs" component="gallery-items" role="tablist"
+                        aria-label="Náhledy fotografií">
+                        <li aria-selected="true" role="tab" gallery="1" tabindex="0">
+                            <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e21cfe80.jpg"
+                                 data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e21cfe80.jpg"
+                                 alt="Fotografie 1 z 45">
+                        </li>
+
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="2">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e21ec155.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e21ec155.jpg"
+                                     alt="Fotografie 2 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="3">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e22109e3.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e22109e3.jpg"
+                                     alt="Fotografie 3 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="4">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e22292d2.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e22292d2.jpg"
+                                     alt="Fotografie 4 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="5">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e22413aa.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e22413aa.jpg"
+                                     alt="Fotografie 5 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="6">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e2258f91.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e2258f91.jpg"
+                                     alt="Fotografie 6 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="7">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e22710b0.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e22710b0.jpg"
+                                     alt="Fotografie 7 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="8">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e228b8fc.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e228b8fc.jpg"
+                                     alt="Fotografie 8 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="9">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e22a4d99.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e22a4d99.jpg"
+                                     alt="Fotografie 9 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="10">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e22c01df.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e22c01df.jpg"
+                                     alt="Fotografie 10 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="11">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e22de322.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e22de322.jpg"
+                                     alt="Fotografie 11 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="12">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e2307c59.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e2307c59.jpg"
+                                     alt="Fotografie 12 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="13">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e2325ebb.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e2325ebb.jpg"
+                                     alt="Fotografie 13 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="14">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e2340f9c.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e2340f9c.jpg"
+                                     alt="Fotografie 14 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="15">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e235f278.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e235f278.jpg"
+                                     alt="Fotografie 15 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="16">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e2379426.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e2379426.jpg"
+                                     alt="Fotografie 16 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="17">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e2390cac.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e2390cac.jpg"
+                                     alt="Fotografie 17 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="18">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e23abbbd.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e23abbbd.jpg"
+                                     alt="Fotografie 18 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="19">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e23d02a9.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e23d02a9.jpg"
+                                     alt="Fotografie 19 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="20">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e23eaa0d.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e23eaa0d.jpg"
+                                     alt="Fotografie 20 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="21">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e2411bb6.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e2411bb6.jpg"
+                                     alt="Fotografie 21 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="22">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e2435959.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e2435959.jpg"
+                                     alt="Fotografie 22 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="23">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e24575f1.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e24575f1.jpg"
+                                     alt="Fotografie 23 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="24">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e24750db.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e24750db.jpg"
+                                     alt="Fotografie 24 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="25">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e2491661.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e2491661.jpg"
+                                     alt="Fotografie 25 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="26">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e24ad6fb.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e24ad6fb.jpg"
+                                     alt="Fotografie 26 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="27">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e24ca41b.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e24ca41b.jpg"
+                                     alt="Fotografie 27 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="28">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e24e8806.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e24e8806.jpg"
+                                     alt="Fotografie 28 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="29">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e250e99a.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e250e99a.jpg"
+                                     alt="Fotografie 29 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="30">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e2529d50.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e2529d50.jpg"
+                                     alt="Fotografie 30 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="31">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e254582a.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e254582a.jpg"
+                                     alt="Fotografie 31 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="32">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e2560c0e.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e2560c0e.jpg"
+                                     alt="Fotografie 32 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="33">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e257e040.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e257e040.jpg"
+                                     alt="Fotografie 33 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="34">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e2597fd0.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e2597fd0.jpg"
+                                     alt="Fotografie 34 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="35">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e25aeabb.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e25aeabb.jpg"
+                                     alt="Fotografie 35 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="36">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e25c3980.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e25c3980.jpg"
+                                     alt="Fotografie 36 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="37">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e25ddfee.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e25ddfee.jpg"
+                                     alt="Fotografie 37 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="38">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e2605ab0.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e2605ab0.jpg"
+                                     alt="Fotografie 38 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="39">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e261bc41.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e261bc41.jpg"
+                                     alt="Fotografie 39 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="40">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e2634b63.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e2634b63.jpg"
+                                     alt="Fotografie 40 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="41">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e26543eb.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e26543eb.jpg"
+                                     alt="Fotografie 41 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="42">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e266f642.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e266f642.jpg"
+                                     alt="Fotografie 42 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="43">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e268855b.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e268855b.jpg"
+                                     alt="Fotografie 43 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="44">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e26a2f4d.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e26a2f4d.jpg"
+                                     alt="Fotografie 44 z 45">
+                            </li>
+                                                    <li aria-selected="false" role="tab" tabindex="-1"
+                                gallery="45">
+                                <img src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e26b9815.jpg"
+                                     data-img-src="https://panel.pewneauto.pl/media/UsedCar/446147/6afb1e26b9815.jpg"
+                                     alt="Fotografie 45 z 45">
+                            </li>
+                                            </ul>
+                            
+            <div class="vdp-aside">
+                                    <div class="vdp-aside__contact">
+                        <div class="box-contact">
+                            <div class="consultant-data">
+                                <img src="https://panel.pewneauto.pl/media/thumbnails/3c/3c72b19b5d7408d2c3bd3fec569ec61c__1977372.jpg"
+                                     alt="Fotografie poradce: Info linka Ojeté vozy .">
+                                <p>
+                                    <small>Kontakt</small>
+                                    <strong>Info linka Ojeté vozy .</strong>
+                                    <span>Call centrum</span>
+                                </p>
+                            </div>
+                            <ul class="contact-data">
+                                                                    <li>
+                                        <i class="w-icon-telephone"></i>
+                                        <p>
+                                            <button type="button" gae="offer-supervisor-phone"
+                                                    data-href="/api/phone-number?phoneObjType=2&amp;phoneObjId=835&amp;statType=UsedCar&amp;statId=446147"
+                                                    class="styled-link"
+                                                    aria-label="Zobrazit číslo"
+                                            >Zobrazit číslo</button>
+                                        </p>
+                                    </li>
+                                                                                                    <li>
+                                        <i class="w-icon-at-sign"></i>
+                                        <p>
+                                            <a href="mailto: kontakt@example.cz">kontakt@example.cz</a>
+                                        </p>
+                                    </li>
+                                                            </ul>
+                        </div>
+                        <button class="btn btn--secondary btn--sm btn--full" target-dialog="test-drive"
+                                gae="test-drive">
+                            <span>Rezervovat předváděcí jízdu</span>
+                        </button>
+                    </div>
+                
+                
+                <div class="vdp-aside__price">
+
+                    
+                                                                                                                                        <p class="retail-price">
+                                                        <strong>879 900</strong>
+                            <small>Kč<br>
+                            </small>
+                        </p>
+                                            
+                                                                                                                        <p class="installment-price">
+                                <small>splátka<br>již od</small>
+                                <strong>13 261</strong>
+                                <small>Kč/měs.
+                                    <br>brutto</small>
+                            </p>
+                                            
+                                    </div>
+
+                <div class="vdp-aside__actions">
+                    <a href="/ocenit-vozidlo?offer_id=446147" target="_self" aria-label="" rel="" class="btn btn--primary btn--sm btn--full" >
+            <span>Nechte auto na protiúčet</span>
+    </a>
+                </div>
+            </div>
+        </div>
+
+        
+        <!-- TECH -->
+        <section class="vdp-tech">
+            <h2>Technické údaje</h2>
+
+            <ul itemscope itemtype="https://schema.org/Vehicle">
+                <li>
+                    <span>Rok výroby</span>
+                    <strong itemprop="productionDate">2022</strong>
+                </li>
+                <li>
+                    <span>Datum první registrace</span>
+                    <strong itemprop="dateVehicleFirstRegistration">
+                        01-02-2023
+                    </strong>
+                </li>
+                <li>
+                    <span>Najeto</span>
+                    <strong itemprop="mileageFromOdometer">31 924
+                        km</strong>
+                </li>
+                <li>
+                    <span>Typ karoserie</span>
+                    <strong itemprop="bodyType">SUV</strong>
+                </li>
+                                    <li>
+                        <span>Objem motoru</span>
+                        <strong itemprop="engineDisplacement">2487 cm³</strong>
+                    </li>
+                                <li>
+                    <span>Výkon</span>
+                    <strong itemprop="horsepower">178
+                        K</strong>
+                </li>
+                <li>
+                    <span>Typ paliva</span>
+                    <strong itemprop="fuelType">Benzín</strong>
+                </li>
+                <li>
+                    <span>Převodovka</span>
+                    <strong itemprop="vehicleTransmission">Automatická</strong>
+                </li>
+                <li>
+                    <span>Barva karoserie</span>
+                    <strong itemprop="color"></strong>
+                </li>
+                                <li>
+                    <span>Čalounění</span>
+                    <strong itemprop="vehicleInteriorType">-</strong>
+                </li>
+                <li>
+                    <span>Počet dveří/míst</span>
+                    <strong itemprop="numberOfDoors">5</strong>/
+                    <strong itemprop="numberOfSeats">5</strong>
+                </li>
+                <li>
+                    <span>Registrační číslo</span>
+                    <strong itemprop="licensePlate">-</strong>
+                </li>
+                <li>
+                    <span>VIN</span>
+                    <strong itemprop="vehicleIdentificationNumber">JTMD63FV10D077831</strong>
+                </li>
+                <li>
+                    <span>Země původu</span>
+                    <strong itemprop="countryOfAssembly">Česko</strong>
+                </li>
+                                                                                                                                                                                                                                                                    <li>
+                        <span>Regenerativní brzdění</span>
+                        <strong>Ne</strong>
+                    </li>
+                                            </ul>
+        </section>
+
+                    <!-- DESCRIPTION -->
+            <div class="vdp-description">
+                <div class="vdp-description__content" component="trim"
+                     data-label-expand="Zobrazit celý popis"
+                     data-label-collapse="Sbalit">
+                    <div trim="200px">
+                        <div class="vdp-description__text">Prohlídku vozu si prosím dohodněte na telefonním čísle 800 000 000 anebo použijte poptávkový formulář u inzerátu. Děkujeme za pochopení.<br />
+VYKUPUJEME VOZIDLA VŠECH ZNAČEK – ZVÝHODNĚNÝ PROTIÚČET<br />
+Jsme autorizovaný dealer s 25letou tradicí těchto značek Toyota<br />Subaru<br />Suzuki a Kia. Emil Frey ČR se těší na Vaši návštěvu. Veškeré zobrazené informace mají pouze informativní charakter a nejsou nabídkou ve smyslu ustanovení §1732 odst. 2 zákona č. 89/2012 Sb.<br />občanského zákoníku.<br />
+Žádáme Vás o osobní kontrolu poskytnutých údajů a vybavení vozidla před nákupem<br />protože i s naší maximální pečlivostí můžeme při odeslání inzerátu udělat chyby.</div>
+                    </div>
+                </div>
+            </div>
+        
+                    <!-- EQ -->
+            <section class="vdp-eq">
+    <h2>Výbava</h2>
+
+    <div class="vdp-eq__accordion" component="accordion">
+                    <section>
+                <h3>
+                    <button type="button" aria-expanded="true" aria-controls="panel-secure">
+                        Bezpečnost
+                    </button>
+                </h3>
+                <div id="panel-secure" role="region" aria-hidden="false">
+                    <ul class="styled-list styled-list--check">
+                                                    <li>ABS</li>
+                                                    <li>Protiprokluzový systém kol (ASR)</li>
+                                                    <li>Stabilizace podvozku (ESP)</li>
+                                                    <li>Isofix</li>
+                                                    <li>Senzor tlaku v pneumatikách</li>
+                                            </ul>
+                </div>
+            </section>
+                    <section>
+                <h3>
+                    <button type="button" aria-expanded="false" aria-controls="panel-secure">
+                        Komfort
+                    </button>
+                </h3>
+                <div id="panel-secure" role="region" aria-hidden="true">
+                    <ul class="styled-list styled-list--check">
+                                                    <li>Bluetooth + Handsfree</li>
+                                                    <li>Centrální zamykání</li>
+                                                    <li>USB</li>
+                                                    <li>Tažné zařízení</li>
+                                                    <li>Imobilizér</li>
+                                                    <li>Dvouzónová klimatizace</li>
+                                                    <li>Palubní počítač</li>
+                                                    <li>Vyhřívaná zrcátka</li>
+                                                    <li>Adaptivní tempomat</li>
+                                                    <li>Multifunkční volant</li>
+                                                    <li>Vyhřívaný volant</li>
+                                                    <li>El. sklopná zrcátka</li>
+                                                    <li>Dělená zadní sedadla</li>
+                                            </ul>
+                </div>
+            </section>
+                    <section>
+                <h3>
+                    <button type="button" aria-expanded="false" aria-controls="panel-secure">
+                        Ostatní
+                    </button>
+                </h3>
+                <div id="panel-secure" role="region" aria-hidden="true">
+                    <ul class="styled-list styled-list--check">
+                                                    <li>Sledování únavy řidiče</li>
+                                                    <li>Bezklíčové startování</li>
+                                                    <li>Bezklíčové odemykání</li>
+                                                    <li>autorádio</li>
+                                                    <li>centrál dálkový</li>
+                                                    <li>deaktivace airbagu spolujezdce</li>
+                                                    <li>el. okna</li>
+                                                    <li>el. zrcátka</li>
+                                                    <li>senzor stěračů</li>
+                                                    <li>senzor světel</li>
+                                                    <li>vyhřívaná sedadla</li>
+                                                    <li>zadní světla LED</li>
+                                                    <li>el. přední okna</li>
+                                                    <li>přední světla LED</li>
+                                                    <li>výškově nastavitelná sedadla</li>
+                                                    <li>bezdrátová nabíječka mobilních telefonů</li>
+                                                    <li>el. víko zavazadlového prostoru</li>
+                                                    <li>vyhřívané přední sklo</li>
+                                                    <li>EDS</li>
+                                                    <li>senzor opotřebení brzdových destiček</li>
+                                                    <li>360° monitorovací systém (AVM)</li>
+                                                    <li>aut. zabrždění v kopci</li>
+                                                    <li>odvětrávaná sedadla</li>
+                                                    <li>automaticky zatmavovací zrcátka</li>
+                                                    <li>regulace rychlosti při jízdě ze svahu</li>
+                                                    <li>aut. aktivace výstražných světlometů</li>
+                                                    <li>el. seřiditelná sedadla</li>
+                                                    <li>hlídání mrtvého úhlu</li>
+                                                    <li>denní svícení</li>
+                                                    <li>hlídání jízdního pruhu</li>
+                                                    <li>mlhovky</li>
+                                                    <li>alu kola</li>
+                                            </ul>
+                </div>
+            </section>
+            </div>
+</section>
+        
+        <!-- ADVANTAGES -->
+<section class="vdp-advantages">
+    <div class="vdp-advantages__list">
+                <a class="vdp-advantages__box" href="/benefity" target="_self" aria-label="" rel="" data-testid="advantage-guarantee">
+        <strong>Záruka</strong>
+        <i class="w-icon-medal-empty" aria-hidden="true"></i>
+    </a>
+                <a class="vdp-advantages__box" href="/benefity" target="_self" aria-label="" rel="" data-testid="advantage-quality">
+        <strong>Ověřený technický stav</strong>
+        <i class="w-icon-medal-empty" aria-hidden="true"></i>
+    </a>
+                <a class="vdp-advantages__box" href="/benefity" target="_self" aria-label="" rel="" data-testid="advantage-about-program">
+        <strong>Zdokumentovaná historie a nájezd</strong>
+        <i class="w-icon-medal-empty" aria-hidden="true"></i>
+    </a>
+                <a class="vdp-advantages__box" href="/financovani" target="_self" gae="financing-advantage-button" aria-label="" rel="" data-testid="advantage-financing">
+        <strong>Financování</strong>
+        <i class="w-icon-medal-empty" aria-hidden="true"></i>
+    </a>
+        </div>
+</section>
+
+                    <!-- FINANCE -->
+<section class="vdp-finance">
+    <h2>Financování</h2>
+
+        
+    <div class="vdp-finance__wrapper">
+        <div class="finance-calc" component="finance-calc" currency="Kč">
+
+            <!-- TABS -->
+            <div class="finance-calc__kind">
+                <h3 id="finance-kind-label">Typ financování</h3>
+            
+                <ul class="finance-calc__tabs" role="radiogroup" aria-labelledby="finance-kind-label">
+                                    <li class="finance-calc__tabs__tab" role="presentation">
+                        <label for="finance_cz3">Online kalkulačka</label>
+                        <input type="radio" name="financeType" id="finance_cz3" value="cz3" checked
+                            period="48"
+                            data-last-installment="">
+                    </li>
+                                </ul>
+            </div>
+
+
+             <!-- PERIOD -->
+            <div class="finance-calc__period">
+                <h3 id="finance-period-label">Období</h3>
+            
+                <ul class="finance-calc__tabs" role="radiogroup" aria-labelledby="finance-period-label" period-sufix="měs.">
+                    
+                </ul>
+            </div>
+
+
+            <!-- HEADER -->
+            <div class="finance-calc__header">
+
+                <span class="finance-calc__header__apr tag tag--secondary" aria-hidden="false">RPSN <strong>11,5%</strong></span>
+
+                <div class="finance-calc__header__value">
+                    <div class="finance-calc__header__value__box">
+                        <h3>Měsíční splátka</h3>
+                        <p finance-price="installment">
+                            <strong></strong>
+                            <small></small>
+                        </p>
+                        <b class="finance-calc__header__value__note"></b>
+                    </div>
+                    <div class="finance-calc__header__value__box">
+                        <h3>Vlastní akontace</h3>
+                        <p finance-price="ownPayment">
+                            <strong></strong>
+                            <small></small>
+                        </p>
+                    </div>
+                </div>
+                
+            </div>
+
+
+            <!-- FORM -->
+            <div class="finance-calc__form">
+
+                <div class="finance-calc__form__group">
+                    <p>Vlastní akontace</p>
+                    <div class="finance-calc__form__range" component="range" range-type="ownPayment" range-step-count="8" role="radiogroup" aria-label="Vlastní akontace">
+
+                    </div>
+                </div>
+
+                <div class="finance-calc__form__group">
+                    <p>Měsíční splátka</p>
+                    <div class="finance-calc__form__range" component="range" range-type="installmentValue" range-step-count="3" role="radiogroup" aria-label="Měsíční splátka">
+
+                    </div>
+                </div>
+
+                <div class="finance-calc__form__group finance-calc__form__group--balloon" finance-balloon hidden>
+                    <p>Poslední splátka</p>
+                    <div class="finance-calc__form__balloon">
+                        <span finance-balloon-value></span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<script nonce="ayQSfYIsdgyXYttngZ2KPA==">
+    var financeValuesJson = "{\"cz3\":{\"36\":{\"customPayment\":{\"start\":[351960],\"range\":{\"min\":0,\"14%\":87990,\"28%\":175980,\"42%\":263970,\"56%\":351960,\"70%\":439950,\"84%\":527940,\"max\":615930},\"percents\":{\"0\":\"0%\",\"87990\":\"10%\",\"175980\":\"20%\",\"263970\":\"30%\",\"351960\":\"40%\",\"439950\":\"50%\",\"527940\":\"60%\",\"615930\":\"70%\"},\"depends\":{\"min\":28182,\"14%\":25364,\"28%\":22546,\"42%\":19728,\"56%\":16910,\"70%\":14091,\"84%\":11273,\"max\":8455}},\"installment\":{\"start\":[16910],\"range\":{\"min\":8455,\"14%\":11273,\"28%\":14091,\"42%\":16910,\"56%\":19728,\"70%\":22546,\"84%\":25364,\"max\":28182},\"depends\":{\"min\":615930,\"14%\":527940,\"28%\":439950,\"42%\":351960,\"56%\":263970,\"70%\":175980,\"84%\":87990,\"max\":0},\"lastInstallment\":\"- (%)\",\"installmentTax\":\"<br>K\\u010d\\\/m\\u011bs\\u00edc\",\"apr\":null}},\"48\":{\"customPayment\":{\"start\":[351960],\"range\":{\"min\":0,\"14%\":87990,\"28%\":175980,\"42%\":263970,\"56%\":351960,\"70%\":439950,\"84%\":527940,\"max\":615930},\"percents\":{\"0\":\"0%\",\"87990\":\"10%\",\"175980\":\"20%\",\"263970\":\"30%\",\"351960\":\"40%\",\"439950\":\"50%\",\"527940\":\"60%\",\"615930\":\"70%\"},\"depends\":{\"min\":22102,\"14%\":19892,\"28%\":17682,\"42%\":15472,\"56%\":13261,\"70%\":11051,\"84%\":8841,\"max\":6631}},\"installment\":{\"start\":[13261],\"range\":{\"min\":6631,\"14%\":8841,\"28%\":11051,\"42%\":13261,\"56%\":15472,\"70%\":17682,\"84%\":19892,\"max\":22102},\"depends\":{\"min\":615930,\"14%\":527940,\"28%\":439950,\"42%\":351960,\"56%\":263970,\"70%\":175980,\"84%\":87990,\"max\":0},\"lastInstallment\":\"- (%)\",\"installmentTax\":\"<br>K\\u010d\\\/m\\u011bs\\u00edc\",\"apr\":null}},\"60\":{\"customPayment\":{\"start\":[351960],\"range\":{\"min\":0,\"14%\":87990,\"28%\":175980,\"42%\":263970,\"56%\":351960,\"70%\":439950,\"84%\":527940,\"max\":615930},\"percents\":{\"0\":\"0%\",\"87990\":\"10%\",\"175980\":\"20%\",\"263970\":\"30%\",\"351960\":\"40%\",\"439950\":\"50%\",\"527940\":\"60%\",\"615930\":\"70%\"},\"depends\":{\"min\":18476,\"14%\":16628,\"28%\":14781,\"42%\":12933,\"56%\":11086,\"70%\":9238,\"84%\":7391,\"max\":5543}},\"installment\":{\"start\":[11086],\"range\":{\"min\":5543,\"14%\":7391,\"28%\":9238,\"42%\":11086,\"56%\":12933,\"70%\":14781,\"84%\":16628,\"max\":18476},\"depends\":{\"min\":615930,\"14%\":527940,\"28%\":439950,\"42%\":351960,\"56%\":263970,\"70%\":175980,\"84%\":87990,\"max\":0},\"lastInstallment\":\"- (%)\",\"installmentTax\":\"<br>K\\u010d\\\/m\\u011bs\\u00edc\",\"apr\":null}},\"72\":{\"customPayment\":{\"start\":[351960],\"range\":{\"min\":0,\"14%\":87990,\"28%\":175980,\"42%\":263970,\"56%\":351960,\"70%\":439950,\"84%\":527940,\"max\":615930},\"percents\":{\"0\":\"0%\",\"87990\":\"10%\",\"175980\":\"20%\",\"263970\":\"30%\",\"351960\":\"40%\",\"439950\":\"50%\",\"527940\":\"60%\",\"615930\":\"70%\"},\"depends\":{\"min\":16076,\"14%\":14468,\"28%\":12861,\"42%\":11253,\"56%\":9646,\"70%\":8038,\"84%\":6431,\"max\":4823}},\"installment\":{\"start\":[9646],\"range\":{\"min\":4823,\"14%\":6431,\"28%\":8038,\"42%\":9646,\"56%\":11253,\"70%\":12861,\"84%\":14468,\"max\":16076},\"depends\":{\"min\":615930,\"14%\":527940,\"28%\":439950,\"42%\":351960,\"56%\":263970,\"70%\":175980,\"84%\":87990,\"max\":0},\"lastInstallment\":\"- (%)\",\"installmentTax\":\"<br>K\\u010d\\\/m\\u011bs\\u00edc\",\"apr\":null}},\"84\":{\"customPayment\":{\"start\":[351960],\"range\":{\"min\":0,\"14%\":87990,\"28%\":175980,\"42%\":263970,\"56%\":351960,\"70%\":439950,\"84%\":527940,\"max\":615930},\"percents\":{\"0\":\"0%\",\"87990\":\"10%\",\"175980\":\"20%\",\"263970\":\"30%\",\"351960\":\"40%\",\"439950\":\"50%\",\"527940\":\"60%\",\"615930\":\"70%\"},\"depends\":{\"min\":14377,\"14%\":12939,\"28%\":11502,\"42%\":10064,\"56%\":8626,\"70%\":7189,\"84%\":5751,\"max\":4313}},\"installment\":{\"start\":[8626],\"range\":{\"min\":4313,\"14%\":5751,\"28%\":7189,\"42%\":8626,\"56%\":10064,\"70%\":11502,\"84%\":12939,\"max\":14377},\"depends\":{\"min\":615930,\"14%\":527940,\"28%\":439950,\"42%\":351960,\"56%\":263970,\"70%\":175980,\"84%\":87990,\"max\":0},\"lastInstallment\":\"- (%)\",\"installmentTax\":\"<br>K\\u010d\\\/m\\u011bs\\u00edc\",\"apr\":null}}}}";
+</script>
+        
+        
+        
+        <!-- ACCESSORIES -->
+        
+<section class="vdp-accessories">
+    <header class="vdp-accessories__header">
+        <p class="vdp-accessories__kicker">Příslušenství</p>
+        <h2>Vyberte si originální příslušenství Toyota</h2>
+        <p class="vdp-accessories__subtitle">Vzniklo pro vaše každodenní potřeby — vyberte příslušenství, které se k vašemu vozu hodí nejlépe.</p>
+    </header>
+
+            <img src="/assets/toyota-pl/images/shop-toyota-aPWEJag.jpg" class="vdp-accessories__empty-img" alt=""
+             role="presentation">
+    
+            <div class="vdp-accessories__cta">
+            <div class="vdp-accessories__cta-col">
+            <h3>Potřebujete pomoc s výběrem?</h3>
+            <p>Náš poradce vám pomůže vybrat sadu příslušenství, která se k vašemu vozu hodí nejlépe.</p>
+            <button class="btn btn--primary btn--lg" type="button" target-dialog="accessory-contact"
+                    gae="accessory-contact">
+                <span>Zeptejte se na příslušenství</span>
+                <i class="w-icon-phone-bubble" aria-hidden="true"></i>
+            </button>
+        </div>
+    
+            <div class="vdp-accessories__cta-col">
+            <h3>Kompletní nabídka příslušenství</h3>
+            <p>Poznejte veškeré originální příslušenství Toyota a vyberte si to své.</p>
+            <div class="vdp-accessories__cta-link">
+                <a href="/nabidka-prislusenstvi-pdf/30/katalog-prislusenstvi-toyota-rav4.pdf" target="_blank" aria-label="" rel="noopener noreferrer" class="btn btn--xs" >
+            <span>Stáhnout katalog</span>
+            <i class="w-icon-download2" aria-hidden="true"></i>
+    </a>
+            </div>
+        </div>
+    </div>
+    </section>
+
+
+<dialog size="md" id="accessory-info" aria-modal="true">
+    <div class="dialog__content">
+        <button class="btn btn--link" close-dialog 
+            title="Zavřít"
+            aria-label="Zavřít okno dialogové">
+                <i class="w-icon-cross2" aria-hidden="true"></i>
+        </button>
+        <div class="accessory-modal-content">
+            <aside>
+                <picture>
+                    <img template="imageUrl" src="" alt="">
+                </picture>
+                <div class="accessory-modal-content__info">
+                    <div class="accessory-modal-content__info__title">
+                        <h3 template="name"></h3>
+                        <small>Katalogové číslo (PNC): <span template="pnc"></span></small>
+                    </div>
+                    <div class="accessory-modal-content__info__price">
+                        <span>Cena s DPH</span>
+                        <strong template="grossPrice"></strong>
+                    </div>
+                </div>
+            </aside>
+            <article template="description"></article>
+        </div>
+    </div>
+</dialog>
+
+                    <!-- DEALER CONSULTANT -->
+            <section class="vdp-consultant" aria-labelledby="consultants-heading">
+                <h2 id="consultants-heading">Seznam dostupných konzultantů</h2>
+
+                <ul class="vdp-consultant__wrapper" role="list">
+                                            <li class="vdp-consultant__box" aria-labelledby="seller-1-name">
+                            <div class="box-contact">
+                                <div class="consultant-data">
+                                    <img src="https://panel.pewneauto.pl/media/thumbnails/3c/3c72b19b5d7408d2c3bd3fec569ec61c__1977372.jpg" alt="Fotografie poradce: Info linka Ojeté vozy .">
+                                    <p>
+                                        <strong id="seller-1-name">Info linka Ojeté vozy .</strong>
+                                        <span>Call centrum</span>
+                                    </p>
+                                </div>
+                                <ul class="contact-data" role="list">
+                                                                            <li>
+                                            <i class="w-icon-telephone" aria-hidden="true"></i>
+                                            <p>
+                                                <button type="button" gae="offer-dealer-phone" data-href="/api/phone-number?phoneObjType=2&amp;phoneObjId=835&amp;statType=UsedCar&amp;statId=446147"
+                                                        class="styled-link"
+                                                        aria-label="Zobrazit číslo"
+                                                >Zobrazit číslo</button>
+                                            </p>
+                                        </li>
+                                                                                                                <li>
+                                            <i class="w-icon-at-sign" aria-hidden="true"></i>
+                                            <p>
+                                                <a href="mailto:kontakt@example.cz" aria-label="Odeslat e-mail na Info linka Ojeté vozy .">kontakt@example.cz</a>
+                                            </p>
+                                        </li>
+                                                                    </ul>
+                            </div>
+                        </li>
+                                    </ul>
+            </section>
+        
+        <!-- DEALER -->
+                    <section class="vdp-dealer" aria-labelledby="dealerInfo-heading">
+    <h2 id="dealerInfo-heading">Informace o prodejci</h2>
+
+    <div class="vdp-dealer__wrapper">
+        <div class="vdp-dealer__contact">
+            <img src="https://panel.pewneauto.pl/media/thumbnails/47/472703483d925ecff744c961c1707453__7367921.jpeg" alt="Fotografie prodejce: Emil Frey ojeté vozy">
+
+            <div class="vdp-dealer__contact__data">
+                <address>
+                    <strong>Emil Frey ojeté vozy</strong>
+                    <span>Skorkovská 1759</span>
+                    <span>198 00 Praha 9 - Kyje</span>
+                </address>
+                <ul class="contact-data" role="list">
+                                            <li>
+                            <i class="w-icon-screen" aria-hidden="true"></i>
+                            <p>
+                                <a href="http://www.emilfrey.cz" target="_blank" aria-label="Strona internetowa dealera (otworzy się w nowej karcie)" rel="noopener noreferrer" class="styled-link" >
+            <span>www.emilfrey.cz</span>
+    </a>
+                            </p>
+                        </li>
+                                                                <li>
+                            <i class="w-icon-telephone" aria-hidden="true"></i>
+                            <p>
+                                <button type="button" gae="offer-dealer-phone" data-href="/api/phone-number?phoneObjType=2&amp;phoneObjId=835&amp;statType=UsedCar&amp;statId=446147" class="styled-link">Zobrazit číslo</button>
+                            </p>
+                        </li>
+                                        <li>
+                        <i class="w-icon-at-sign" aria-hidden="true"></i>
+                        <p>
+                                                            <a href="mailto:kontakt@example.cz" aria-label="Odeslat e-mail na kontakt@example.cz">kontakt@example.cz</a>
+                                                    </p>
+                    </li>
+                    <li>
+                        <i class="w-icon-clock3" aria-hidden="true"></i>
+                        <p>
+                            <span>
+                                                                    Pondělí - 08:30-18:00<br>
+                                                                    Úterý - 08:30-18:00<br>
+                                                                    Středa - 08:30-18:00<br>
+                                                                    Čtvrtek - 08:30-18:00<br>
+                                                                    Pátek - 08:30-18:00<br>
+                                                                    Sobota - Zavřeno<br>
+                                                                    Neděle - Zavřeno<br>
+                                                            </span>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+
+            <a href="https://proverenevozy.toyota.cz/dealer/FRC" 
+                target="_self"                class="btn btn--primary btn--xs" gae="vdp-dealer-offer"
+            >
+                <span>Zobrazit nabídku prodejce</span>
+                <i class="w-icon-magnifier" aria-hidden="true"></i>
+            </a>
+        </div>
+        <div class="vdp-dealer__map">
+                    <a href="https://www.google.com/maps/search/?api=1&query=EMIL+FREY+ČR+s.r.o.,+budova+B+Praha+9+-+Kyje+Skorkovská+1759" target="_blank" aria-label="" rel="noopener noreferrer">
+                <img alt="Informace o dealerovi – mapa" src="https://panel.pewneauto.pl/media/thumbnails/71/71db54c272dc587ba2bdf303a261eb45__7524315.png">
+            </a>
+                </div>
+    </div>
+</section>
+        
+            <!-- SIMILAR OFFERS -->
+    <section class="vdp-similar" aria-labelledby="similar-offers-heading">
+        <h2 id="similar-offers-heading">Podobné inzeráty</h2>
+
+        <div class="vdp-similar__list" data-testid="similar-offers-list">
+                            <div class="o-bx" aria-label="Toyota RAV4: nabídka s ID 446146" offer-id="446146">
+    <div class="o-bx__gallery">
+        <a href="/nabidka/toyota-rav4/446146" aria-label="Zobrazit detail vozidla: Toyota RAV4" gae="srp-offer" data-ga-label="446146_toyota-rav4">
+            <img src="https://panel.pewneauto.pl/media/thumbnails/c9/c944e890cd527a4b3ac9ce5a0f69db31__11068820.jpg"
+            alt="Fotografie vozidla Toyota RAV4">
+        </a>
+            </div>
+    <div class="o-bx__title">        
+        <a href="/nabidka/toyota-rav4/446146" aria-label="Toyota RAV4 - Zobrazit detail vozidla" tabindex="-1" gae="srp-offer" data-ga-label="446146_toyota-rav4"><strong>Toyota RAV4</strong></a>
+        <span>2.5Hybrid,4X4,Executive,CZ,1M</span>
+
+                    <div class="o-bx__tags">
+                
+                
+                
+                            </div>
+            </div>
+    <div class="o-bx__info">
+        <b>EMIL FREY ČR s.r.o., budova B</b>
+        <ul>
+            <li><span>2020</span></li>
+            <li><span>77 749 km</span></li>            <li><strong class="color-hybrid">Hybrid</strong></li>
+                            <li><span>2 487 cm<sup>3</sup></span></li>
+                    </ul>
+    </div>
+    <div class="o-bx__price">
+
+                                                                                    <p class="retail-price">
+                                            <small></small>
+                                        <strong>739 900 Kč</strong>
+                </p>
+                            
+                            <p class="installment-price">
+                    <small>brutto/měs.</small>
+                    <strong>11 152 Kč</strong>
+                </p>
+                    
+
+        
+    </div>
+</div>
+                            <div class="o-bx" aria-label="Toyota RAV4: nabídka s ID 445538" offer-id="445538">
+    <div class="o-bx__gallery">
+        <a href="/nabidka/toyota-rav4/445538" aria-label="Zobrazit detail vozidla: Toyota RAV4" gae="srp-offer" data-ga-label="445538_toyota-rav4">
+            <img src="https://panel.pewneauto.pl/media/thumbnails/73/7321d71513ded210ccca3bc6351944ac__11051964.jpg"
+            alt="Fotografie vozidla Toyota RAV4">
+        </a>
+            </div>
+    <div class="o-bx__title">        
+        <a href="/nabidka/toyota-rav4/445538" aria-label="Toyota RAV4 - Zobrazit detail vozidla" tabindex="-1" gae="srp-offer" data-ga-label="445538_toyota-rav4"><strong>Toyota RAV4</strong></a>
+        <span>2.5Hybrid,131KW,4X4,CZ,1Maj</span>
+
+                    <div class="o-bx__tags">
+                
+                
+                                    <span class="tag tag--primary">DPH</span>
+                
+                            </div>
+            </div>
+    <div class="o-bx__info">
+        <b>EMIL FREY ČR s.r.o., budova B</b>
+        <ul>
+            <li><span>2022</span></li>
+            <li><span>115 278 km</span></li>            <li><strong class="color-hybrid">Hybrid</strong></li>
+                            <li><span>2 487 cm<sup>3</sup></span></li>
+                    </ul>
+    </div>
+    <div class="o-bx__price">
+
+                                                                                    <p class="retail-price">
+                                            <small>s DPH</small>
+                                        <strong>699 900 Kč</strong>
+                </p>
+                            
+                            <p class="installment-price">
+                    <small>brutto/měs.</small>
+                    <strong>10 549 Kč</strong>
+                </p>
+                    
+
+        
+    </div>
+</div>
+                            <div class="o-bx" aria-label="Toyota RAV4: nabídka s ID 445346" offer-id="445346">
+    <div class="o-bx__gallery">
+        <a href="/nabidka/toyota-rav4/445346" aria-label="Zobrazit detail vozidla: Toyota RAV4" gae="srp-offer" data-ga-label="445346_toyota-rav4">
+            <img src="https://panel.pewneauto.pl/media/thumbnails/1c/1cf1b17106f0d92f84cda2eb66ccd129__11041604.jpg"
+            alt="Fotografie vozidla Toyota RAV4">
+        </a>
+            </div>
+    <div class="o-bx__title">        
+        <a href="/nabidka/toyota-rav4/445346" aria-label="Toyota RAV4 - Zobrazit detail vozidla" tabindex="-1" gae="srp-offer" data-ga-label="445346_toyota-rav4"><strong>Toyota RAV4</strong></a>
+        <span>2.5Hybrid,Comfort,4X4,CZ,1Maj</span>
+
+                    <div class="o-bx__tags">
+                
+                
+                                    <span class="tag tag--primary">DPH</span>
+                
+                            </div>
+            </div>
+    <div class="o-bx__info">
+        <b>EMIL FREY ČR s.r.o., budova B</b>
+        <ul>
+            <li><span>2022</span></li>
+            <li><span>103 248 km</span></li>            <li><strong class="color-hybrid">Hybrid</strong></li>
+                            <li><span>2 487 cm<sup>3</sup></span></li>
+                    </ul>
+    </div>
+    <div class="o-bx__price">
+
+                                                                                    <p class="retail-price">
+                                            <small>s DPH</small>
+                                        <strong>749 900 Kč</strong>
+                </p>
+                            
+                            <p class="installment-price">
+                    <small>brutto/měs.</small>
+                    <strong>11 302 Kč</strong>
+                </p>
+                    
+
+        
+    </div>
+</div>
+                            <div class="o-bx" aria-label="Toyota RAV4: nabídka s ID 445319" offer-id="445319">
+    <div class="o-bx__gallery">
+        <a href="/nabidka/toyota-rav4/445319" aria-label="Zobrazit detail vozidla: Toyota RAV4" gae="srp-offer" data-ga-label="445319_toyota-rav4">
+            <img src="https://panel.pewneauto.pl/media/thumbnails/9f/9fd6f501d5483341260338705495a2b4__11040674.jpg"
+            alt="Fotografie vozidla Toyota RAV4">
+        </a>
+            </div>
+    <div class="o-bx__title">        
+        <a href="/nabidka/toyota-rav4/445319" aria-label="Toyota RAV4 - Zobrazit detail vozidla" tabindex="-1" gae="srp-offer" data-ga-label="445319_toyota-rav4"><strong>Toyota RAV4</strong></a>
+        <span>2.5Hybrid,4X4,GR SPORT,CZ,1Maj</span>
+
+                    <div class="o-bx__tags">
+                
+                
+                                    <span class="tag tag--primary">DPH</span>
+                
+                            </div>
+            </div>
+    <div class="o-bx__info">
+        <b>EMIL FREY ČR s.r.o., budova B</b>
+        <ul>
+            <li><span>2024</span></li>
+            <li><span>89 095 km</span></li>            <li><strong class="color-hybrid">Hybrid</strong></li>
+                            <li><span>2 487 cm<sup>3</sup></span></li>
+                    </ul>
+    </div>
+    <div class="o-bx__price">
+
+                                                                                    <p class="retail-price">
+                                            <small>s DPH</small>
+                                        <strong>959 900 Kč</strong>
+                </p>
+                            
+                            <p class="installment-price">
+                    <small>brutto/měs.</small>
+                    <strong>14 467 Kč</strong>
+                </p>
+                    
+
+        
+    </div>
+</div>
+                            <div class="o-bx" aria-label="Toyota RAV4: nabídka s ID 440172" offer-id="440172">
+    <div class="o-bx__gallery">
+        <a href="/nabidka/toyota-rav4/440172" aria-label="Zobrazit detail vozidla: Toyota RAV4" gae="srp-offer" data-ga-label="440172_toyota-rav4">
+            <img src="https://panel.pewneauto.pl/media/thumbnails/96/966bb43ff539237bda4be9e083e91a4e__11061569.jpg"
+            alt="Fotografie vozidla Toyota RAV4">
+        </a>
+            </div>
+    <div class="o-bx__title">        
+        <a href="/nabidka/toyota-rav4/440172" aria-label="Toyota RAV4 - Zobrazit detail vozidla" tabindex="-1" gae="srp-offer" data-ga-label="440172_toyota-rav4"><strong>Toyota RAV4</strong></a>
+        <span>2.5Hybrid,Comfort,4X4,CZ</span>
+
+                    <div class="o-bx__tags">
+                
+                
+                                    <span class="tag tag--primary">DPH</span>
+                
+                            </div>
+            </div>
+    <div class="o-bx__info">
+        <b>EMIL FREY ČR s.r.o., budova B</b>
+        <ul>
+            <li><span>2022</span></li>
+            <li><span>45 685 km</span></li>            <li><strong class="color-hybrid">Hybrid</strong></li>
+                            <li><span>2 487 cm<sup>3</sup></span></li>
+                    </ul>
+    </div>
+    <div class="o-bx__price">
+
+                                                                                    <p class="retail-price">
+                                            <small>s DPH</small>
+                                        <strong>759 900 Kč</strong>
+                </p>
+                            
+                            <p class="installment-price">
+                    <small>brutto/měs.</small>
+                    <strong>11 453 Kč</strong>
+                </p>
+                    
+
+        
+    </div>
+</div>
+                            <div class="o-bx" aria-label="Toyota RAV4: nabídka s ID 438812" offer-id="438812">
+    <div class="o-bx__gallery">
+        <a href="/nabidka/toyota-rav4/438812" aria-label="Zobrazit detail vozidla: Toyota RAV4" gae="srp-offer" data-ga-label="438812_toyota-rav4">
+            <img src="https://panel.pewneauto.pl/media/thumbnails/b9/b9b8f1778e2eb99e699c65d065956bfa__10836850.jpg"
+            alt="Fotografie vozidla Toyota RAV4">
+        </a>
+            </div>
+    <div class="o-bx__title">        
+        <a href="/nabidka/toyota-rav4/438812" aria-label="Toyota RAV4 - Zobrazit detail vozidla" tabindex="-1" gae="srp-offer" data-ga-label="438812_toyota-rav4"><strong>Toyota RAV4</strong></a>
+        <span>2.5HEV,ComfortStyle,4X4,CZ,1M</span>
+
+                    <div class="o-bx__tags">
+                
+                
+                                    <span class="tag tag--primary">DPH</span>
+                
+                            </div>
+            </div>
+    <div class="o-bx__info">
+        <b>EMIL FREY ČR s.r.o., budova B</b>
+        <ul>
+            <li><span>2023</span></li>
+            <li><span>51 015 km</span></li>            <li><strong class="color-hybrid">Hybrid</strong></li>
+                            <li><span>2 487 cm<sup>3</sup></span></li>
+                    </ul>
+    </div>
+    <div class="o-bx__price">
+
+                                                                                    <p class="retail-price">
+                                            <small>s DPH</small>
+                                        <strong>899 900 Kč</strong>
+                </p>
+                            
+                            <p class="installment-price">
+                    <small>brutto/měs.</small>
+                    <strong>13 563 Kč</strong>
+                </p>
+                    
+
+        
+    </div>
+</div>
+                    </div>
+    </section>
+
+        <article class="disclaimer">
+                            <p>Nabídka nezahrnuje pojištění. Poskytovatelem financování je Toyota Financial Services Czech s.r.o.  Tato reprezentativní nabídka není nabídkou k uzavření smlouvy dle § 1732 zák .č. 89/2012 Sb.,  občanského zákoníku. Konkrétní nabídku vám poskytne autorizovaný prodejce Toyota.</p>
+                                    </article>
+
+    </div>
+    <!-- end VDP CONTENT -->
+
+        <dialog size="sm" id="accessory-contact" aria-modal="true">
+        <div class="dialog__wrapper">
+            <div class="dialog__header">
+                <h3 id="dialog_accessory-contact__title">Kontakt k příslušenství</h3>
+                <strong>Kontaktujte našeho poradce a dozvědět se více.</strong>
+
+                <button class="btn btn--link" close-dialog
+                    title="Zavřít"
+                    aria-label="Zavřít okno dialogové">
+                        <i class="w-icon-cross2" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="dialog__content">
+                <div class="box-contact">
+                    <div class="consultant-data">
+                        <img src="https://panel.pewneauto.pl/media/thumbnails/3c/3c72b19b5d7408d2c3bd3fec569ec61c__1977372.jpg"
+                             alt="Fotografie poradce: Info linka Ojeté vozy .">
+                        <p>
+                            <small>Kontakt</small>
+                            <strong>Info linka Ojeté vozy .</strong>
+                            <span>Call centrum</span>
+                        </p>
+                    </div>
+                    <div class="contact__row">
+                        <ul class="contact-data">
+                                                            <li>
+                                    <i class="w-icon-telephone" aria-hidden="true"></i>
+                                    <p role="presentation">
+                                        <button type="button" gae="accessories-contact-phone"
+                                                data-href="/api/phone-number?phoneObjType=2&amp;phoneObjId=835&amp;statType=UsedCar&amp;statId=446147"
+                                                class="styled-link">Zobrazit číslo</button>
+                                    </p>
+                                </li>
+                            
+                                                            <li>
+                                    <i class="w-icon-at-sign" aria-hidden="true"></i>
+                                    <p role="presentation">
+                                        <a gae="accessories-contact-email"
+                                           href="mailto:kontakt@example.cz">kontakt@example.cz</a>
+                                    </p>
+                                </li>
+                                                    </ul>
+                        <div class="contact-socials">
+                                                                                                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </dialog>
+    
+    <dialog side="right" size="sm" id="test-drive" aria-modal="true"
+            aria-labelledby="test-drive-title">
+
+        <form method="get" validate="testDriveValidate" valuate="testDriveValuate" class="dialog__wrapper" data-offer-id="446147">
+<div class="dialog__header">
+    <h3 id="test-drive-title">Rezervovat předváděcí jízdu</h3>
+    <strong>Vyplňte níže uvedený formulář.</strong>
+
+    <button class="btn btn--link" close-dialog 
+        title="Zavřít"
+        aria-label="Zavřít">
+            <i class="w-icon-cross2" aria-hidden="true"></i>
+    </button>
+</div>
+<div class="dialog__content">
+    <div class="dialog__test-drive-form">
+                <div class="form-group hnpt w-6/6 md:w-3/6"><label for="email">E-mailová adresa</label><input type="email" id="email" name="email" placeholder="" class="form-control" autocomplete="off" /></div>
+
+        
+                    <div class="form-group w-6/6 md:w-3/6"><label for="name">Jméno</label><input type="text" id="name" name="name" placeholder="" data-suggested-values="[]" class="form-control" validate="validate" required="required" autocomplete="given-name" /></div>
+
+            <div class="form-group w-6/6 md:w-3/6"><label for="surname">Příjmení</label><input type="text" id="surname" name="surname" placeholder="" data-suggested-values="[]" class="form-control" validate="validate" required="required" autocomplete="family-name" /></div>
+        
+        <div class="form-group w-6/6 md:w-3/6"><label for="phone">Telefon</label><input type="text" id="phone" name="phone" placeholder="" data-suggested-values="[]" class="form-control" validate="validate" required="required" autocomplete="tel" /></div>
+
+        <div class="form-group w-6/6 md:w-3/6"><label for="mail">E-mail</label><input type="email" id="mail" name="mail" placeholder="" class="form-control" validate="validate" required="required" autocomplete="email" /></div>
+
+                    <div class="form-group w-6/6"><label for="term">Termín</label><input type="text" id="term" name="term" placeholder="" data-suggested-values="[]" class="form-control" validate="validate" aria-describedby="term_help" /><div id="term_help" class="help-text help-text"><i class="w-icon-clock3"></i> Zadejte prosím vhodný čas pro kontakt, např.: "mezi 10:00 a 11:00".</div></div>
+        
+                                    
+            <div class="w-6/6">
+        <p class="info-note">
+            <small>
+                Chraňte svá data: deaktivujte konektivitu ve svém voze před jeho prodejem pomocí krátkého návodu. <br><br>
+                <a href="https://pdf.sites.toyota.cz/prirucka_pro_prodej_a_vraceni_vozidla.pdf" class="btn btn--secondary btn--wide btn--xs" target="_blank" title="Návod zde" rel="noopener noreferrer">
+                    <span>Návod zde</span>
+                </a>
+            </small>
+        </p>
+    </div>
+
+    <div class="w-6/6">
+        <label class="form-checkbox">
+            <div class="checkbox">
+                <input type="checkbox" id="rules" name="rules"
+                       value="1" validate data-testid="checkbox-rules">
+                <svg viewBox="0 0 22 22" aria-hidden="true" focusable="false" >
+                    <path fill="none" stroke="currentColor" d="M5.5,11.3L9,14.8L20.2,3.3c-0.5-1-1.5-1.8-2.7-1.8h-13 c-1.7,0-3,1.3-3,3v13c0,1.7,1.3,3,3,3h13c1.7,0,3-1.3,3-3v-13 c0-0.4-0.1-0.8-0.3-1.2"/>
+                </svg>
+            </div>
+            <p>
+                <strong>Souhlasím s <a href="/provozni-podminky" target="_blank" class="styled-link" rel="noopener noreferrer">pravidly stránek Toyota.</a></strong>
+            </p>
+        </label>
+    </div>
+
+    <div class="w-6/6">
+        <label class="form-checkbox">
+            <div class="checkbox">
+                <input type="checkbox" id="rules2" name="rules2"
+                       value="1" validate data-testid="checkbox-rules2">
+                <svg viewBox="0 0 22 22" aria-hidden="true" focusable="false" >
+                    <path fill="none" stroke="currentColor" d="M5.5,11.3L9,14.8L20.2,3.3c-0.5-1-1.5-1.8-2.7-1.8h-13 c-1.7,0-3,1.3-3,3v13c0,1.7,1.3,3,3,3h13c1.7,0,3-1.3,3-3v-13 c0-0.4-0.1-0.8-0.3-1.2"/>
+                </svg>
+            </div>
+            <p>
+                <strong>Souhlasím se <a href="/nase-podminky-ochrany-soukromi" target="_blank" class="styled-link" rel="noopener noreferrer">zásadami ochrany osobních údajů.</a></strong>
+            </p>
+        </label>
+    </div>
+    </div>
+</div>
+<div class="dialog__footer">
+    <button type="submit" class="btn btn--primary btn--sm btn--wide">
+        <span>Přihlásit se</span>
+        <i class="w-icon-chevron-right" aria-hidden="true"></i>
+    </button>
+</div>
+</form>
+
+    </dialog>
+
+    <dialog size="md" id="confirmation" aria-modal="true"
+            aria-labelledby="confirmation-title" aria-describedby="confirmation-description">
+        <div class="dialog__content">
+            <button class="btn btn--link" close-dialog 
+                title="Zavřít" 
+                aria-label="Zavřít okno dialogové">
+                    <i class="w-icon-cross2" aria-hidden="true"></i>
+            </button>
+            <div class="confirmation">
+                <i class="w-icon-envelope" aria-hidden="true"></i>
+                <p>
+                    <strong template="title" id="confirmation-title"></strong>
+                    <span template="description" id="confirmation-description"></span>
+                </p>
+            </div>
+        </div>
+    </dialog>
+    </div>
+
+            <!-- STATIONS MODAL -->
+            <!-- COOKIE -->
+    <dialog size="sm" id="cookieModal" aria-modal="true">
+    <div class="dialog__content">
+        <button class="btn btn--link" close-dialog 
+            title="Zavřít"
+            aria-label="Zavřít okno dialogové"
+            data-testid="cookie-modal-close">
+                <i class="w-icon-cross2" aria-hidden="true"></i>
+        </button>
+    
+        <p class="h3">Respektujeme vaše soukromí</p>
+        <p>Soubory cookies nám umožňují zajistit stabilní a správné fungování webu a zobrazovat nabídky lépe přizpůsobené vašim potřebám. Pokud souhlasíte s používáním cookies, klikněte na „Přijímám“. Pokud se chcete dozvědět více o tom, jak zpracováváme vaše údaje, a změnit individuální nastavení ochrany soukromí, klikněte na „chci změnit nastavení“.</p>
+    </div>
+    <div class="dialog__footer">
+        <button class="btn btn--primary btn--full btn--sm" close-dialog save-cookie="all">Přijímám</button>
+        <a href="/soubory-cookie#settings" class="btn btn--link btn--full btn--sm">Chci změnit nastavení</a>
+    </div>
+</dialog>
+    <!-- FOOTER -->
+    <footer class="site__footer">
+    <div class="container">
+
+        <nav class="site__footer__menu" aria-label="Patička – rychlé menu">
+                                                <div class="site__footer__menu__group">
+                        <strong>Zkratky</strong>
+                        <ul>
+                                                            <li><a href="/prislusenstvi" target="_self" aria-label="" rel="" data-testid="footer-accessories" >
+            <span>Příslušenství</span>
+    </a>
+</li>
+                                                            <li><a href="/financovani" target="_self" aria-label="" rel="" data-testid="footer-financing" >
+            <span>Financování</span>
+    </a>
+</li>
+                                                            <li><a href="/benefity" target="_self" aria-label="" rel="" data-testid="footer-about-program" >
+            <span>Benefity</span>
+    </a>
+</li>
+                                                            <li><a href="/servis" target="_self" aria-label="" rel="" data-testid="footer-service" >
+            <span>Servis</span>
+    </a>
+</li>
+                                                    </ul>
+                    </div>
+                                                                <div class="site__footer__menu__group">
+                        <strong>Podmínky použití</strong>
+                        <ul>
+                                                            <li><a href="/provozni-podminky" target="_self" aria-label="" rel="" data-testid="footer-policy" >
+            <span>Provozní podmínky</span>
+    </a>
+</li>
+                                                            <li><a href="/soubory-cookie" target="_self" aria-label="" rel="" data-testid="footer-cookies" >
+            <span>Soubory cookie</span>
+    </a>
+</li>
+                                                            <li><a href="/nase-podminky-ochrany-soukromi" target="_self" aria-label="" rel="" >
+            <span>Naše podmínky ochrany soukromí</span>
+    </a>
+</li>
+                                                    </ul>
+                    </div>
+                                                                <div class="site__footer__menu__group">
+                        <strong>Ojetá auta</strong>
+                        <ul>
+                                                            <li><a href="/nabidky/brand/toyota/model/corolla" target="_self" aria-label="" rel="" >
+            <span>Toyota Corolla</span>
+    </a>
+</li>
+                                                            <li><a href="/nabidky/brand/toyota/model/c-hr" target="_self" aria-label="" rel="" >
+            <span>Toyota C-HR</span>
+    </a>
+</li>
+                                                            <li><a href="/nabidky/brand/toyota/model/proace-verso" target="_self" aria-label="" rel="" >
+            <span>Toyota PROACE VERSO</span>
+    </a>
+</li>
+                                                            <li><a href="/nabidky/brand/toyota/model/yaris" target="_self" aria-label="" rel="" >
+            <span>Toyota Yaris</span>
+    </a>
+</li>
+                                                            <li><a href="/nabidky/brand/toyota/model/rav4" target="_self" aria-label="" rel="" >
+            <span>Toyota RAV4</span>
+    </a>
+</li>
+                                                            <li><a href="/nabidky/brand/toyota/model/yaris-cross" target="_self" aria-label="" rel="" data-testid="footer-model-5" >
+            <span>Toyota Yaris Cross</span>
+    </a>
+</li>
+                                                    </ul>
+                    </div>
+                                                                <div class="site__footer__menu__group">
+                        <strong>Jiné značky</strong>
+                        <ul>
+                                                            <li><a href="/nabidky/brand/lexus" target="_self" aria-label="" rel="" >
+            <span>Lexus</span>
+    </a>
+</li>
+                                                            <li><a href="/nabidky/brand/skoda" target="_self" aria-label="" rel="" >
+            <span>Škoda</span>
+    </a>
+</li>
+                                                            <li><a href="/nabidky/brand/hyundai" target="_self" aria-label="" rel="" >
+            <span>Hyundai</span>
+    </a>
+</li>
+                                                            <li><a href="/nabidky/brand/kia" target="_self" aria-label="" rel="" >
+            <span>Kia</span>
+    </a>
+</li>
+                                                            <li><a href="/nabidky/brand/volkswagen" target="_self" aria-label="" rel="" >
+            <span>Volkswagen</span>
+    </a>
+</li>
+                                                            <li><a href="/nabidky/brand/citroen" target="_self" aria-label="" rel="" data-testid="footer-brand-5" >
+            <span>Citroën</span>
+    </a>
+</li>
+                                                    </ul>
+                    </div>
+                                    </nav>
+
+        <div class="site__footer__copyrights">
+            <img src="/assets/toyota-pl/images/site-logo_dark-mini--fTE6Ex.avif" alt="">
+            <span>Copyright © Toyota Central Europe s.r.o.</span>
+
+            <button class="site__footer__copyrights__button"
+                    type="button"
+                    aria-label="Posunout nahoru"
+                    target-scroll="top"
+                    data-testid="footer-scroll-top">
+                <i class="w-icon-chevron-up" aria-hidden="true"></i>
+            </button>
+        </div>
+
+    </div>
+</footer>
+        <!--/email_off-->
+            
+            
+                    </body>
+</html>

@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /admin/*
+Disallow: /*?do=
+
+Sitemap: https://www.inzeruj.cz/sitemap.xml

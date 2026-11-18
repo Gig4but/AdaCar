@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: *rezervacni-formular*
+Disallow: *financovani-formular*
+Disallow: *get-spec-pdf*
+Disallow: *dotaz-formular*
+
+Sitemap: https://www.mototechna.cz/sitemap.xml

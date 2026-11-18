@@ -1,0 +1,26 @@
+User-agent: *
+Disallow: /garage/
+Disallow: /car/
+Disallow: /connect/
+Disallow: /payload-preview/
+Disallow: /modal-preview/
+Disallow: /admin-tools/
+Disallow: /landingpage/
+
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: PerplexityBot
+User-agent: Google-Extended
+Allow: /
+Disallow: /garage/
+Disallow: /car/
+Disallow: /connect/
+Disallow: /payload-preview/
+Disallow: /modal-preview/
+Disallow: /admin-tools/
+Disallow: /landingpage/
+
+Sitemap: https://www.aaaauto.cz/sitemap.xml

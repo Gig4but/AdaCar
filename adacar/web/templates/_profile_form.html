@@ -1,0 +1,26 @@
+{# Home and the trip to a seller; shared by the wizard and Settings. #}
+{% set p = settings.profile %}
+<label>{{ t("wizard.home") }}
+  <input name="home_address" value="{{ p.home_address }}" autocomplete="off" list="home-list"
+         aria-describedby="home-hint" hx-get="/commute/places" hx-trigger="input changed delay:250ms"
+         hx-target="#home-list" hx-select="unset" hx-swap="innerHTML" hx-sync="this:replace">
+  <datalist id="home-list"></datalist>
+  <small id="home-hint">{{ t("wizard.home.hint") }}</small>
+</label>
+
+<fieldset>
+  <legend>{{ t("wizard.mode") }}</legend>
+  {% for m in modes %}
+    <label><input type="radio" name="travel_mode" value="{{ m }}" {% if p.travel_mode == m %}checked{% endif %}> {{ t("mode." ~ m) }}</label>
+  {% endfor %}
+</fieldset>
+
+<label>{{ t("wizard.max_minutes") }}: <output id="max-out">{% if p.max_minutes %}{{ p.max_minutes }} {{ t("minutes") }}{% else %}{{ t("commute.no_limit") }}{% endif %}</output>
+  <input type="range" name="max_minutes" min="0" max="120" step="5" value="{{ p.max_minutes }}"
+         oninput="document.getElementById('max-out').value = +this.value ? this.value + ' {{ t('minutes') }}' : '{{ t('commute.no_limit') }}'">
+</label>
+
+<label>{{ t("wizard.depart") }}
+  <input type="time" name="depart_time" value="{{ p.depart_time }}" aria-describedby="depart-hint">
+  <small id="depart-hint">{{ t("wizard.depart.hint") }}</small>
+</label>

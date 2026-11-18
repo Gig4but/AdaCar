@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+{% block title %}{{ t(title) }} – AdaCar{% endblock %}
+{% block content %}
+<article class="wizard">
+  <a href="/settings" class="back">{{ icon("back") }}{{ t("settings.title") }}</a>
+  <h2>{{ t(title) }}</h2>
+  {% if saved %}<p class="ok" role="status">{{ t("settings.saved") }}</p>{% endif %}
+
+  {% if section == "appearance" %}
+    <form method="post" action="/settings/appearance">
+      {% include "_appearance_form.html" %}
+    </form>
+    <p class="muted small">{{ t("settings.instant") }}</p>
+
+  {% elif section == "profile" %}
+    <form method="post" action="/settings/profile">
+      {% include "_profile_form.html" %}
+      <button type="submit">{{ t("settings.save") }}</button>
+    </form>
+
+  {% elif section == "cars" %}
+    <form method="post" action="/settings/cars">
+      {% include "_cars_form.html" %}
+      <button type="submit">{{ t("settings.save") }}</button>
+    </form>
+
+  {% elif section == "map" %}
+    {% if settings.routing_download %}
+      {% include "_routing_status.html" %}
+      <form method="post" action="/settings/map/update">
+        <button type="submit" class="secondary outline" {% if routing.step %}disabled{% endif %}>{{ t("routing.update_now") }}</button>
+      </form>
+    {% endif %}
+    <form method="post" action="/settings/map">
+      {% include "_map_form.html" %}
+      <button type="submit" class="{{ '' if settings.routing_download else 'secondary outline' }}">{{ t("settings.save") }}</button>
+    </form>
+    <p class="muted small">{{ t("commute.attribution") }}</p>
+
+  {% elif section == "automation" %}
+    {% if settings.automation.enabled %}
+      <p class="small">
+        {% if paused_until %}{{ t("status.paused", when=paused_until | datetime) }}
+        {% elif next_check %}{{ t("status.next", when=next_check | datetime) }}{% endif %}
+      </p>
+      <form method="post" action="/settings/{{ 'resume' if paused_until else 'pause' }}">
+        <button type="submit" class="secondary outline">{{ t("auto.resume") if paused_until else t("auto.pause") }}</button>
+      </form>
+    {% endif %}
+    <form method="post" action="/settings/automation">
+      {% include "_automation_form.html" %}
+      <button type="submit">{{ t("auto.save") }}</button>
+    </form>
+
+  {% elif section == "updates" %}
+    <p>{{ t("update.version", version=version) }}</p>
+    {% include "_update_status.html" %}
+    <form method="post" action="/settings/updates">
+      {% include "_update_form.html" %}
+      <button type="submit">{{ t("settings.save") }}</button>
+    </form>
+  {% endif %}
+</article>
+{% endblock %}

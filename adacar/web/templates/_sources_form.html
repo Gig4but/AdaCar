@@ -1,0 +1,24 @@
+{% from "_icons.html" import icon %}
+{# Source switches; shared by the wizard and the Sources page. #}
+{% if consent_missing %}<p class="error" role="alert">{{ t("sources.consent_missing", source=consent_missing) }}</p>{% endif %}
+{% for kind in ("portal", "classifieds") %}
+{% set listed = sources | selectattr("kind", "equalto", kind) | rejectattr("consent") | list %}
+{% if listed %}
+<fieldset>
+  <legend>{{ t("sources.kind." ~ kind) }}</legend>
+  {% if kind == "classifieds" %}<small class="muted">{{ t("sources.classifieds.hint") }}</small>{% endif %}
+  {% for s in listed %}
+    <label><input type="checkbox" role="switch" name="source_{{ s.id }}" {% if s.on %}checked{% endif %}> {{ s.label }}</label>
+  {% endfor %}
+</fieldset>
+{% endif %}
+{% endfor %}
+
+{% for s in sources if s.consent %}
+  <article class="risk">
+    <label><input type="checkbox" role="switch" name="source_{{ s.id }}" {% if s.on %}checked{% endif %}>
+      <strong>{{ s.label }}</strong> <small class="muted">({{ t("sources.off_default") }})</small></label>
+    <p>{{ icon("alert", "bad") }} {{ t("sources." ~ s.id ~ ".warning") }}</p>
+    <label class="small"><input type="checkbox" name="consent_{{ s.id }}" {% if s.consented %}checked{% endif %}> {{ t("sources.consent") }}</label>
+  </article>
+{% endfor %}

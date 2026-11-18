@@ -1,0 +1,45 @@
+{# A car with its whole text, in the search page's dialog (static/car.js) or as a page. #}
+<header>
+  {% if dialog %}<button type="button" aria-label="{{ t('car.close') }}" rel="prev" onclick="this.closest('dialog').close()"></button>{% endif %}
+  <h3>{{ car.title }}</h3>
+  <p class="meta">
+    <span class="price">{{ price(car) }}</span>
+    {% if car.vat_deductible %} <small class="muted">({{ t("car.vat") }})</small>{% endif %}
+    {% if car.place_text %} · {{ car.place_text }}{% endif %}
+  </p>
+</header>
+{% if car.images %}
+  <p class="photos">{% for img in car.images[:12] %}<a href="{{ img.url | safe_url }}" target="_blank" rel="noopener"><img src="{{ img.url | safe_url }}" alt="{{ t('car.photo') }}" loading="lazy" referrerpolicy="no-referrer"></a>{% endfor %}</p>
+{% endif %}
+{% set engine = [("%.1f l" | format(car.engine_cc / 1000)) if car.engine_cc else "", (car.power_kw ~ " kW") if car.power_kw else ""] | select | join(", ") %}
+{% set history = [t("car.first_owner") if car.first_owner else "", t("car.service_book") if car.service_book else "", t("car.crashed") if car.crashed else (t("car.not_crashed") if car.crashed == false else "")] | select | join(", ") %}
+{% set rows = [
+  ("car.year", car.year or ""),
+  ("car.mileage", (car.mileage_km | number) ~ " km" if car.mileage_km is not none else ""),
+  ("car.engine", engine),
+  ("car.fuel", label("fuels", car.fuel)),
+  ("car.gearbox", label("gearboxes", car.gearbox)),
+  ("car.body", label("bodies", car.body)),
+  ("car.drive", label("drives", car.drive)),
+  ("car.condition", label("conditions", car.condition)),
+  ("car.color", car.color or ""),
+  ("car.doors_seats", [car.doors, car.seats] | select | join(" / ")),
+  ("car.origin", car.origin_country or ""),
+  ("car.history", history),
+  ("car.vin", car.vin or ""),
+  ("car.seller", ([label("seller_kinds", car.seller_kind), car.seller_name] | select | join(" ")) if car.seller_kind or car.seller_name else ""),
+] %}
+<table class="specs">
+  <caption class="muted small">{{ t("car.specs") }}</caption>
+  {% for key, value in rows if value %}<tr><th scope="row">{{ t(key) }}</th><td>{{ value }}</td></tr>{% endfor %}
+</table>
+{% if car.equipment %}
+  <details><summary>{{ t("car.equipment") }} ({{ car.equipment | length }})</summary>
+    <p class="tags">{% for item in car.equipment %}<span class="tag">{{ item }}</span>{% endfor %}</p>
+  </details>
+{% endif %}
+{% if car.description %}<div class="full-text">{{ car.description }}</div>
+{% else %}<p class="muted">{{ t("car.no_text") }}</p>{% endif %}
+<footer class="car-links">
+  {% include "_car_links.html" %}
+</footer>

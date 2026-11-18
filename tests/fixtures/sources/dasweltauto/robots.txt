@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /my-weltauto
+Disallow: /Gebrauchtwagen/
+Disallow: /gebrauchtwagen/
+Disallow: /api/result-list/*.pdf
+Disallow: *ngxNavigationURL*
+Disallow: /*?*subjects*
+Sitemap: https://www.dasweltauto.cz/sitemap/

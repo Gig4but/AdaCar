@@ -1,0 +1,13 @@
+User-agent: *
+Disallow: /admin/
+Disallow: */?*
+Disallow: *_*_*_*_*_*
+Disallow: *vozu/modely_*
+Disallow: *nove/modely_*
+Disallow: *ojete/modely_*
+Disallow: *predvadeci/modely_*
+Disallow: *vozidel/modely_*
+Disallow: *motocyklu/modely_*
+
+
+Sitemap: https://www.autojarov.cz/sitemap.xml

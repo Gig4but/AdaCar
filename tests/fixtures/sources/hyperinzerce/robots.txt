@@ -1,0 +1,34 @@
+
+
+
+User-Agent: *
+Disallow: /Error
+Disallow: /profil
+Disallow: /moje-zpravy
+Disallow: /oblibene-inzeraty
+Disallow: /osobni-udaje
+Disallow: /zmena-hesla
+Disallow: /*/technicka-podpora/?id_inzeratu=
+
+Sitemap: https://autobazar.hyperinzerce.cz/sitemap.xml
+
+User-agent: Yandex
+Crawl-delay: 2 # specifies a 2 second timeout
+
+# Specific bots which can't crawl site.
+User-agent: MJ12bot
+User-agent: Sogou Spider
+User-agent: DomainCrawler/3.0
+User-agent: Linguee Bot
+User-agent: SemrushBot
+User-agent: SemrushBot-SA
+User-agent: SemrushBot-BA
+User-agent: SemrushBot-SI
+User-agent: SemrushBot-SWA
+User-agent: SemrushBot-CT
+User-agent: SemrushBot-BM
+User-agent: SplitSignalBot
+Disallow: /
+
+# /robots.txt file for production environment
+

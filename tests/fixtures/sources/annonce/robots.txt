@@ -1,0 +1,30 @@
+User-agent: *
+Crawl-delay: 20
+Sitemap: https://www.annonce.cz/EXTERNAL/sitemap/sitemap.xml
+Sitemap: https://www.annonce.cz/EXTERNAL/sitemap/image.xml
+Disallow: /jsp/
+Disallow: /images/
+Disallow: /jnp/
+Disallow: /uzivatel/
+Disallow: /captcha/
+Disallow: /poslat-emailem/
+Disallow: /sprava-inzeratu/
+Disallow: /nahlasit-inzerat/
+Disallow: /rychle-odpovedet/
+Disallow: /servlet/qrcode/
+Disallow: /nabidnout-cenu/
+Disallow: /*2345-vote.html
+Disallow: /third-party/mojeid/index.txt
+Disallow: /vlozit-inzerat/platba/
+Disallow: /platba/
+Disallow: /*18-addWatchdog.*
+Disallow: /inzerat/*-upsell.html*
+
+User-Agent: MJ12bot
+ Disallow:
+
+User-agent: SeznamBot
+Disallow: /*\?utm
+
+User-agent: Seznam-Extended
+Disallow: /

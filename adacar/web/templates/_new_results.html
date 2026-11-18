@@ -1,0 +1,17 @@
+{% include "_live.html" %}
+{% for id in gone %}<div id="car-{{ id }}" hx-swap-oob="delete"></div>{% endfor %}
+{% if cars %}
+  <div hx-swap-oob="{{ where }}">
+  {% with arrived = true %}
+  {% for car in cars %}
+    {% include "_car.html" %}
+  {% endfor %}
+  {% endwith %}
+  </div>
+{% endif %}
+{% if add_more %}
+  <div hx-swap-oob="beforeend:#car-list">{% include "_more.html" %}</div>
+{% endif %}
+{% if cars or gone %}
+  <p id="found-count" class="muted small" hx-swap-oob="true">{{ t("search.found", n=total) }}</p>
+{% endif %}

@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<title>Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - Pardubice | Bazoš.cz</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Inzerát č. 226486892: Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH, Cena: 229 800 Kč, Lokalita: Pardubice. Popis: Servisní historie v autorizovaném."><meta property="og:image" content="https://www.bazos.cz/img/1/892/226486892.jpg?t=1794910421"><meta property="og:title" content="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - Pardubice">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Bazos.cz">
+<meta property="og:description" content="Inzerát č. 226486892: Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH, Cena: 229 800 Kč, Lokalita: Pardubice. Popis: Servisní historie v autorizovaném.">
+<link rel="canonical" href="https://auto.bazos.cz/inzerat/226486892/skoda-fabia-3-combi-10-tsi-70-kw-ambition-cz-dph.php"><meta property="fb:admins" content="1055875657">
+<meta name="ROBOTS" content="max-image-preview:large">
+<link rel="preload" as="image" href="https://www.bazos.cz/img/1/892/226486892.jpg?t=1794910421"><link rel="stylesheet" href="https://www.bazos.cz/bazos70s.css" type="text/css"><link rel="preload" as="image" href="https://www.bazos.cz/obrazky/bazos.svg">
+<link rel="stylesheet" href="https://www.bazos.cz/bazosprint.css" type="text/css" media="print">
+<link rel="icon" href="https://www.bazos.cz/favicon.svg" type="image/svg+xml">
+<link rel="icon" HREF="https://www.bazos.cz/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="https://www.bazos.cz/apple-touch-icon.png">
+<script async src="https://fundingchoicesmessages.google.com/i/pub-3645948300403337?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+<script>
+var xhr = new XMLHttpRequest();
+var naseptavac_value = '';
+function naseptavac(value) {
+  if (value=='')  {
+  	naseptavac_value = '';
+  	document.getElementById('vysledek').innerHTML='';
+  	}
+else {
+	if (naseptavac_value == value) {
+		return false;
+	}
+	naseptavac_value = value;
+	setTimeout(function () {
+		if (naseptavac_value != value) {
+			return false;
+		}
+		xhr.onreadystatechange = function() {
+ 		 if (this.readyState == 4 && naseptavac_value == value){
+				document.getElementById('vysledek').innerHTML = this.responseText;
+			}
+ 		 };
+		xhr.open("POST", '/suggest.php');
+		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		xhr.send('rubnas=AU&catnas=93&qnas='+encodeURIComponent(naseptavac_value));
+	}, 250);
+}
+}
+
+var naseptavacpsc_value = '';
+function naseptavacpsc(value) {
+  if (value=='')  {
+  	naseptavacpsc_value = '';
+  	document.getElementById('vysledekpsc').innerHTML='<table cellpadding=\"3\" cellspacing=\"0\" class=\"tablenaspsc\"><tr><td class=\"act\" onclick=\"getLocation();\"><b>Inzeráty v okolí</b></td></tr></table>';
+  	}
+else {
+	if (naseptavacpsc_value == value) {
+		return false;
+	}
+	naseptavacpsc_value = value;
+	setTimeout(function () {
+		if (naseptavacpsc_value != value) {
+			return false;
+		}
+		xhr.onreadystatechange = function() {
+ 		 if (this.readyState == 4 && naseptavacpsc_value == value){
+				document.getElementById('vysledekpsc').innerHTML = this.responseText;
+			}
+ 		 };
+		xhr.open("POST", '/suggestpsc.php');
+		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		xhr.send('qnaspsc='+encodeURIComponent(naseptavacpsc_value));
+	}, 250);
+}
+}
+
+function getLocation() {
+if (navigator.geolocation) {navigator.geolocation.getCurrentPosition(showPosition);}
+else {document.getElementById('hlokalita').value = '';}
+}
+function showPosition(position) {
+		xhr.onreadystatechange = function() {
+ 		 if (this.readyState == 4){
+				document.getElementById('hlokalita').value = this.responseText;
+				document.forms['formt'].submit();
+			}
+ 		 };
+		xhr.open("POST", '/zip.php');
+		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		xhr.send('latitude='+encodeURIComponent(position.coords.latitude)+'&longitude='+encodeURIComponent(position.coords.longitude));
+}
+
+function favouriteadd(value,params,obradresa) {
+xhr.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200){
+				document.getElementById('favour').innerHTML = this.responseText;
+				document.getElementById('obrfavour').src = obradresa;
+			}
+  };
+xhr.open("POST", value);
+xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+xhr.send(params);
+}
+
+function odeslatrequest(value,params,overvalue) {
+xhr.onreadystatechange = function() {
+  if (this.readyState == 4){
+				document.getElementById(overvalue).innerHTML = this.responseText;
+			}
+  };
+xhr.open("POST", value);
+xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+xhr.send(params);
+}
+function odeslatakci(postaction,value1,value2,value3) {
+document.getElementById('postaction').value = postaction;
+document.getElementById("postv1").value = value1;
+document.getElementById("postv2").value = value2;
+document.getElementById("postv3").value = value3;
+document.formaction.submit();
+}
+</script>
+<script src="https://www.bazos.cz/flickity2.js"></script></head>
+
+<body>
+
+
+<div class="sirka">
+<div class="listalogor">
+<div class="listalogol"><a href="https://www.bazos.cz/" title="Bazos.cz - Inzerce, bazar"><img src="https://www.bazos.cz/obrazky/bazos.svg" width="199" height="34" alt="Bazos.cz - Inzerce, inzeráty"></a></div>
+<div class="listalogom"><b>... bazar pro každého</b></div>
+<div class="listalogop"><a href="https://www.bazos.cz/oblibene.php"><b>Oblíbené inzeráty</b></a> <a href="https://www.bazos.cz/moje-inzeraty.php"><b>Moje inzeráty</b></a> <a href="/pridat-inzerat.php"><b><span class=pridati>Přidat inzerát</span></b></a></div>
+</div>
+<form name="formt" id="formt" method=get action=/>
+<div class="listah">
+<div class="rubriky">
+<b>
+Co: <span class=vysokoli><span id="vysledek"></span><input type="search" onkeyup="naseptavac(this.value);" id=hledat name=hledat size="17" maxlength="256" value="" autocomplete="off" title="Co? Vyhledávaný výraz"></span>
+
+<select name="rubriky" onchange='this.form.submit();' title="Vyber rubriku">
+<option value="www">Všechny rubriky</option>
+<option value="auto" selected>Auto</option><option value="deti">Děti</option><option value="dum">Dům a zahrada</option><option value="elektro">Elektro</option><option value="foto">Foto</option><option value="hudba">Hudba</option><option value="knihy">Knihy</option><option value="mobil">Mobily</option><option value="motorky">Motorky</option><option value="nabytek">Nábytek</option><option value="obleceni">Oblečení</option><option value="pc">PC</option><option value="prace">Práce</option><option value="reality">Reality</option><option value="sluzby">Služby</option><option value="sport">Sport</option><option value="stroje">Stroje</option><option value="vstupenky">Vstupenky</option><option value="zvirata">Zvířata</option><option value="ostatni">Ostatní</option></select>
+
+Lokalita: <span class=vysokolipsc><span id="vysledekpsc"></span><input type="search" name="hlokalita" id="hlokalita" onkeyup="naseptavacpsc(this.value);" onclick="naseptavacpsc(this.value);" value="" size="4" maxlength="25" autocomplete="off" title="Kde? PSČ (místo)" style="-webkit-appearance: none;"></span>
+Okolí: <input name="humkreis" title="Okolí v km" value="25" size="3" style="width: 25px;"> km
+Cena od: <input name=cenaod title="Cena od Kč" maxlength="12" size="5" value=""> - do: <input name=cenado title="Cena do Kč" maxlength="12" size="5" value=""> Kč <input type="submit" name="Submit" value="Hledat">
+<input type="hidden" name="order" id="order"><input type="hidden" name="crp" id="crp"><input type="hidden" id="kitx" name="kitx" value="ano"></b>
+</div>
+</div>
+</form>
+<div class="drobky"><a href="https://www.bazos.cz/" title="Inzerce Bazoš">Hlavní stránka</a>  > <a href="https://auto.bazos.cz/">Auto</a> > <a href="https://auto.bazos.cz/skoda/">Škoda</a> > <b>Inzerát č. 226486892</b></div>
+<br>
+
+
+<div class="flexmain"><div class="menuleft"><div class="nadpismenu">Osobní auta</div>
+<div class="barvalmenu">
+<div class="barvaleva">
+<a href="/alfa/" >Alfa Romeo</a>
+<a href="/audi/" >Audi</a>
+<a href="/bmw/" >BMW</a>
+<a href="/citroen/" >Citroën</a>
+<a href="/dacia/" >Dacia</a>
+<a href="/fiat/" >Fiat</a>
+<a href="/ford/" >Ford</a>
+<a href="/honda/" >Honda</a>
+<a href="/hyundai/" >Hyundai</a>
+<a href="/chevrolet/" >Chevrolet</a>
+<a href="/kia/" >Kia</a>
+<a href="/mazda/" >Mazda</a>
+<a href="/mercedes/" >Mercedes-Benz</a>
+<a href="/mitsubishi/" >Mitsubishi</a>
+<a href="/nissan/" >Nissan</a>
+<a href="/opel/" >Opel</a>
+<a href="/peugeot/" >Peugeot</a>
+<a href="/renault/" >Renault</a>
+<a href="/seat/" >Seat</a>
+<a href="/suzuki/" >Suzuki</a>
+<a href="/skoda/"  id=zvyraznenikat>Škoda</a>
+<a href="/toyota/" >Toyota</a>
+<a href="/volkswagen/" >Volkswagen</a>
+<a href="/volvo/" >Volvo</a>
+<a href="/ostatni/" >Ostatní značky</a>
+<br>
+<a href="https://elektro.bazos.cz/autoradia/">Autorádia</a>
+<a href="https://pc.bazos.cz/gps/">GPS navigace</a>
+<a href="/havarovana/" >Havarovaná auta</a>
+<a href="/nahradnidily/" >Náhradní díly</a>
+<a href="/pneumatiky/" >Pneumatiky, kola</a>
+<a href="/prislusenstvi/" >Příslušenství</a>
+<a href="/tuning/" >Tuning</a>
+<a href="/veterani/" >Veteráni</a>
+</div></div>
+
+<br>
+<div class="nadpismenu">Užitková vozidla</div>
+<div class="barvalmenu">
+<div class="barvaleva">
+<a href="/autobusy/" >Autobusy</a>
+<a href="/dodavka/" >Dodávky</a>
+<a href="/mikrobus/" >Mikrobusy</a>
+<a href="/karavany/" >Karavany, obytná auta</a>
+<a href="/nakladni/" >Nákladní auta</a>
+<a href="/pickup/" >Pick-up</a>
+<a href="/voziky/" >Vozíky, přívěsy</a>
+<a href="https://stroje.bazos.cz/">Stroje</a>
+<a href="/ostatniuzitkova/" >Ostatní</a>
+<br>
+<a href="/havarovanauzitkova/" >Havarovaná</a>
+<a href="/nahradnidilyuzitkova/" >Náhradní díly</a>
+</div>
+</div>
+<br>
+
+<div class="nadpismenu">Moto</div>
+<div class="barvalmenu">
+<div class="barvaleva">
+<a href="https://motorky.bazos.cz/">Motorky, Skútry</a>
+</div></div>
+
+<br><div class="mobilskryt" style="text-align: center;">
+<a style="font-size: 13px;text-decoration: none;color:#000000;" href="https://www.jasminka.cz/kniha/jiri-novak-josef-a-zentrich-herbar-lecivych-rostlin-komplet-1-7dil.html" target="_blank" rel=”nofollow”><b>Knihkupectví Jasmínka</b><br>
+<span style="font-size: 13px;text-decoration: none;color:#ff6600;">
+<span style="color:#000000;">Jiří Novák, Josef A. Zentrich:</span> Herbář léčivých rostlin - komplet 1.-7.díl<br><img src="https://www.jasminka.cz/images/v/herbarcv.jpg" width="100" alt="Knihkupectví Jasmínka" title="Knihkupectví Jasmínka" style="border: 1px solid Black;margin: 4px;">
+<br>
+<img src="https://www.bazos.cz/kosik.svg" alt="Jasminka" height="22" style="border: 0px;"> koupit</span></a></div>
+
+</div><div class="maincontent">
+
+
+<div class="listainzerat inzeratyflex">
+<div class="inzeratydetnadpis"><H1 class=nadpisdetail>Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH</H1><span class=velikost10> - <span title="TOP 21x Platí do 29.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span></div>
+<div class="inzeratydetdel"><span onclick="odeslatakci('edit','226486892','auto');return false;" class="paction">Smazat/ Upravit/ Topovat</span></div>
+</div><br><div class="fliobal"><div class="carousel"><div class="carousel-cell"><img class="carousel-cell-image" data-flickity-lazyload="https://www.bazos.cz/img/1/892/226486892.jpg?t=1794910421" src="https://www.bazos.cz/img/1/892/226486892.jpg?t=1794910421" width="1067" height="600" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH"></div><div class="carousel-cell"><img class="carousel-cell-image" data-flickity-lazyload="https://www.bazos.cz/img/2/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 2"></div><div class="carousel-cell"><img class="carousel-cell-image" data-flickity-lazyload="https://www.bazos.cz/img/3/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 3"></div><div class="carousel-cell"><img class="carousel-cell-image" data-flickity-lazyload="https://www.bazos.cz/img/4/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 4"></div><div class="carousel-cell"><img class="carousel-cell-image" data-flickity-lazyload="https://www.bazos.cz/img/5/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 5"></div><div class="carousel-cell"><img class="carousel-cell-image" data-flickity-lazyload="https://www.bazos.cz/img/6/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 6"></div><div class="carousel-cell"><img class="carousel-cell-image" data-flickity-lazyload="https://www.bazos.cz/img/7/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 7"></div><div class="carousel-cell"><img class="carousel-cell-image" data-flickity-lazyload="https://www.bazos.cz/img/8/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 8"></div><div class="carousel-cell"><img class="carousel-cell-image" data-flickity-lazyload="https://www.bazos.cz/img/9/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 9"></div><div class="carousel-cell"><img class="carousel-cell-image" data-flickity-lazyload="https://www.bazos.cz/img/10/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 10"></div><div class="carousel-cell"><img class="carousel-cell-image" data-flickity-lazyload="https://www.bazos.cz/img/11/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 11"></div><div class="carousel-cell"><img class="carousel-cell-image" data-flickity-lazyload="https://www.bazos.cz/img/12/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 12"></div><div class="carousel-cell"><img class="carousel-cell-image" data-flickity-lazyload="https://www.bazos.cz/img/13/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 13"></div><div class="carousel-cell"><img class="carousel-cell-image" data-flickity-lazyload="https://www.bazos.cz/img/14/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 14"></div><div class="carousel-cell"><img class="carousel-cell-image" data-flickity-lazyload="https://www.bazos.cz/img/15/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 15"></div><div class="carousel-cell"><img class="carousel-cell-image" data-flickity-lazyload="https://www.bazos.cz/img/16/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 16"></div><div class="carousel-cell"><img class="carousel-cell-image" data-flickity-lazyload="https://www.bazos.cz/img/17/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 17"></div><div class="carousel-cell"><img class="carousel-cell-image" data-flickity-lazyload="https://www.bazos.cz/img/18/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 18"></div><div class="carousel-cell"><img class="carousel-cell-image" data-flickity-lazyload="https://www.bazos.cz/img/19/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 19"></div><div class="carousel-cell"><img class="carousel-cell-image" data-flickity-lazyload="https://www.bazos.cz/img/20/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 20"></div></div><div class="flinavigace" id="nahledy1"><img onmouseover="flkty.select(0, false, true );" src="https://www.bazos.cz/img/1t/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 1" class="obrazekflithumb"><br><img onmouseover="flkty.select(1, false, true );" src="https://www.bazos.cz/img/2t/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 2" class="obrazekflithumb"><br><img onmouseover="flkty.select(2, false, true );" src="https://www.bazos.cz/img/3t/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 3" class="obrazekflithumb"><br><img onmouseover="flkty.select(3, false, true );" src="https://www.bazos.cz/img/4t/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 4" class="obrazekflithumb"><br><img onmouseover="flkty.select(4, false, true );" src="https://www.bazos.cz/img/5t/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 5" class="obrazekflithumb"><br><div style="margin-left:5px;"><img src="https://www.bazos.cz/obrazky/next.svg" alt="Další" height="20" onclick="nahledy()"></div></div><div class="flinavigace" id="nahledy3" style="display: none;"><img onmouseover="flkty.select(10, false, true );" src="https://www.bazos.cz/img/11t/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 11" class="obrazekflithumb"><br><img onmouseover="flkty.select(11, false, true );" src="https://www.bazos.cz/img/12t/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 12" class="obrazekflithumb"><br><img onmouseover="flkty.select(12, false, true );" src="https://www.bazos.cz/img/13t/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 13" class="obrazekflithumb"><br><img onmouseover="flkty.select(13, false, true );" src="https://www.bazos.cz/img/14t/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 14" class="obrazekflithumb"><br><img onmouseover="flkty.select(14, false, true );" src="https://www.bazos.cz/img/15t/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 15" class="obrazekflithumb"><br><div style="margin-left:5px;"><img src="https://www.bazos.cz/obrazky/next.svg" alt="Další" height="20" onclick="nahledy()"></div></div><div class="flinavigace" id="nahledy2"><img onmouseover="flkty.select(5, false, true );" src="https://www.bazos.cz/img/6t/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 6" class="obrazekflithumb"><br><img onmouseover="flkty.select(6, false, true );" src="https://www.bazos.cz/img/7t/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 7" class="obrazekflithumb"><br><img onmouseover="flkty.select(7, false, true );" src="https://www.bazos.cz/img/8t/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 8" class="obrazekflithumb"><br><img onmouseover="flkty.select(8, false, true );" src="https://www.bazos.cz/img/9t/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 9" class="obrazekflithumb"><br><img onmouseover="flkty.select(9, false, true );" src="https://www.bazos.cz/img/10t/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 10" class="obrazekflithumb"><br></div><div class="flinavigace" id="nahledy4" style="display: none;"><img onmouseover="flkty.select(15, false, true );" src="https://www.bazos.cz/img/16t/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 16" class="obrazekflithumb"><br><img onmouseover="flkty.select(16, false, true );" src="https://www.bazos.cz/img/17t/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 17" class="obrazekflithumb"><br><img onmouseover="flkty.select(17, false, true );" src="https://www.bazos.cz/img/18t/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 18" class="obrazekflithumb"><br><img onmouseover="flkty.select(18, false, true );" src="https://www.bazos.cz/img/19t/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 19" class="obrazekflithumb"><br><img onmouseover="flkty.select(19, false, true );" src="https://www.bazos.cz/img/20t/892/226486892.jpg?t=1794910421" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH - 20" class="obrazekflithumb"><br></div></div><script>var flkty = new Flickity( '.carousel', {fullscreen: true,lazyLoad: 1,wrapAround: true,adaptiveHeight: true});</script>
+<div class=popisdetail>Servisní historie v autorizovaném servisu. K vozu ZDARMA v ceně auta záruka jako na nový. ZDARMA doprava auta k Vám domů po celé ČR. Možnost prohlídky auta Vaším mechanikem. Auto je po prvním majiteli. Možnost výhodného pojištění a financování vozu. K vozidlu protokol CEBIA. Vozidlo vyčištěno a dezinfikováno ozónem. Auto bylo prověřeno a odzkoušeno.<br>
+<br>
+Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition <br>
+<br>
+Rok výroby: 2022<br>
+Stav tachometru: 112 931 km<br>
+Objem motoru: 999 ccm<br>
+Výkon: 70 kw<br>
+Převodovka: manuální<br>
+Palivo: benzín<br>
+Barva: bílá<br>
+Země původu: ČR<br>
+STK do: 8/2028<br>
+SERVISNÍ KNÍŽKA<br>
+<br>
+Možný odpočet DPH<br>
+<br>
+Výbava:<br>
+<br>
+6 airbagu, manuální klimatizace, ABS, Elektronická uzávěrka diferenciálu (EDS), ESP, Protiprokluzový systém kol (ASR), Tempomat, Parkovací senzory zadní, Dálkové centrální zamykání, Deaktivace airbagu spolujezdce, El. ovládání oken, El. ovládání zrcátek, Malý kožený paket, Nastavitelný volant, Posilovač řízení, Senzor tlaku v pneumatikách, Venkovní teploměr, Vyhřívaná zrcátka, Autorádio, Bluetooth, Digitální příjem rádia (DAB), Dotykové ovládání palubního počítače, Mobilní připojení, Palubní počítač, USB, Vstup paměťové karty, Dělená zadní sedadla, Isofix, Podélný posuv sedadel, Výškově nastavitelná sedadla, LED denní svícení, Mlhovky, Denní svícení, Litá kola, Plnohodnotné rezervní kolo, Střešní nosič, Tónovaná skla, Zadní stěrač, Start/Stop systém<br>
+<br>
+Nabízíme Vám dovoz vozidla k Vám domů po celé České republice ZDARMA.<br>
+<br>
+Garantujeme stav najetých kilometrů.<br>
+<br>
+2 klíče, STK.</div><br>
+<table width="100%" cellpadding="5" cellspacing="0">
+<tr><td width="35%" valign=top class=listadvlevo>
+<table width="*" cellpadding="0" cellspacing="1">
+<tr><td height="22px" width="25%">Jméno:<br><br></td><td colspan=2><b><span onclick="odeslatakci('rating','19088325','19091364','Prodejce');return false;" class="paction">Auta BO</span></b><br><br></td></tr>
+<tr id="overlaytel"><td height="22px" width="25%">Telefon:<br><br></td><td colspan=2><span class=teldetail onclick="odeslatrequest('/ad-phone.php','idi=226486892&idphone=19091364','overlaytel');"><span style="white-space: nowrap;">775... zobraz číslo</span></span><br><br></td></tr>
+<tr><td height="22px" width="25%">Lokalita:</td><td width="9%"><img src="https://www.bazos.cz/obrazky/map.svg" alt="Mapa" height="17"></td><td><a href="https://www.google.com/maps/place/50.018550,15.855331/@50.018550,15.855331,12z/data=!4m2!3m1!1s0x0:0x0" title="Přibližná lokalita" rel="nofollow">530 02</a> <a href="https://auto.bazos.cz/inzeraty/pardubice-2/53002/">Pardubice</a></td></tr>
+<tr><td height="22px" width="25%"><br>Vidělo:</td><td colspan=2><br>195 lidí</td></tr>
+<tr><td height="22px" width="25%"><br>Cena:</td><td colspan=2><br><b><span translate="no">  229 800 Kč</span></b></td></tr>
+</table>
+</td>
+
+<td width="*" valign=top class=listadvpravo>
+
+<table cellpadding="0" cellspacing="1">
+<tr><td height="22px"><img src="https://www.bazos.cz/obrazky/user.svg" alt="Uživatel" height="17"></td><td><form name="formaction" method="post" style="display: inline;"><input type="hidden" id="postaction" name="postaction" value=""><input type="hidden" id="postv1" name="postv1" value=""><input type="hidden" id="postv2" name="postv2" value=""><input type="hidden" id="postv3" name="postv3" value=""></form>
+<span onclick="odeslatakci('rating','19088325','19091364','Prodejce');return false;" class="paction">Všechny inzeráty a hodnocení uživatele</span></td></tr>
+<tr><td height="22px"><img id="obrfavour" src="https://www.bazos.cz/obrazky/favourite.svg" alt="Oblíbené" height="18"></td><td><span id="favour"><a href="https://www.bazos.cz/oblibene.php" rel="nofollow">Přidat do oblíbených</a></span></td></tr>
+<tr><td height="22px"><img src="https://www.bazos.cz/obrazky/spam.svg" alt="Spam" height="17"></td><td><span onclick="odeslatakci('spam','226486892');return false;" class="paction">Označit špatný inzerát</span></td></tr>
+<tr><td height="22px"><img src="https://www.bazos.cz/obrazky/miscat.svg" alt="Chybná kategorie" height="17"></td><td><span onclick="odeslatakci('category','226486892');return false;" class="paction">Označit chybnou kategorii inzerátu</span></td></tr>
+<tr><td height="22px"><img src="https://www.bazos.cz/obrazky/print.svg" alt="Tisk" height="17"></td><td><a href="#" onclick="window.print()">Vytisknout inzerát</a></td></tr>
+<tr><td height="22px"><a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fauto.bazos.cz%2Finzerat%2F226486892%2Fskoda-fabia-3-combi-10-tsi-70-kw-ambition-cz-dph.php" target="_blank" rel="nofollow"><img src="https://www.bazos.cz/obrazky/facebook.svg" alt="Facebook" height="22"></a></td><td><a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fauto.bazos.cz%2Finzerat%2F226486892%2Fskoda-fabia-3-combi-10-tsi-70-kw-ambition-cz-dph.php" target="_blank" rel="nofollow">Sdílejte na Facebooku</a></td></tr>
+<tr><td height="22px"><img src="https://www.bazos.cz/obrazky/mail.svg" alt="Mail" height="17"></td><td><span onclick="odeslatakci('recommend','226486892');return false;" class="paction">Doporučit kamarádovi</span></td></tr>
+<tr><td height="22px"><img src="https://www.bazos.cz/obrazky/similar.svg" alt="Podobné" height="17"></td><td><a href="https://auto.bazos.cz/inzeraty/%C5%A1koda-fabia/">Vyhledat podobné inzeráty</a></td></tr>
+</table>
+
+</td></tr>
+</table>
+<br>
+
+<script>
+function nahledy() {
+  var na1 = document.getElementById("nahledy1");
+  var na2 = document.getElementById("nahledy2");
+  var na3 = document.getElementById("nahledy3");
+  var na4 = document.getElementById("nahledy4");
+  if (na1.style.display === "none") {
+    na1.style.display = "block";
+    na2.style.display = "block";
+    na3.style.display = "none";
+    na4.style.display = "none";
+  } else {
+    na1.style.display = "none";
+    na2.style.display = "none";
+    na3.style.display = "block";
+    na4.style.display = "block";
+  }
+}
+</script>
+
+
+<div class="kontaktniformular"><div class="oranzovy" id="overlaymail"><b>Kontaktovat inzerenta emailem</b><br><br>
+Kontaktovat emailem může pouze ověřený uživatel.<br>
+<br>
+Vaše telefonní číslo <span class="ztop">*</span><br>
+<input type="text" name="teloverit2" id="teloverit2" maxlength="30" autocomplete="off" onkeydown="if (event.keyCode == 13) odeslatrequest('/ad-mail.php','idi=226486892&teloverit='+encodeURIComponent(document.getElementById('teloverit2').value),'overlaymail');">
+<br><br>
+<button type="button" id="mailbutton" onclick="odeslatrequest('/ad-mail.php','idi=226486892&teloverit='+encodeURIComponent(document.getElementById('teloverit2').value),'overlaymail');">Odeslat</button>
+</div></div>
+
+
+<br>
+
+<div class="podobne">
+<div id="container_one"></div><br><br><div class="listainzerat"><span onclick="odeslatakci('rating','19088325','19091364','Prodejce');return false;" class="paction">Další inzeráty uživatele</span></div>
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://auto.bazos.cz/inzerat/226446829/skoda-octavia-4-combi-20tdi-110kw-style-dsg-cz-dph.php"><img src="https://www.bazos.cz/img/1t/829/226446829.jpg" class="obrazek" alt="Škoda Octavia 4 combi, 2.0TDI 110kW Style+ DSG CZ DPH" width="170" height="128"></a>
+<span class=nadpis><a href="https://auto.bazos.cz/inzerat/226446829/skoda-octavia-4-combi-20tdi-110kw-style-dsg-cz-dph.php">Škoda Octavia 4 combi, 2.0TDI 110kW Style+ DSG CZ DPH</a></span><span class=velikost10> - [14.11. 2026]</span><br>
+<div class=popis>Žádný díl není lakovaný. Servisní historie v autorizovaném servisu. K vozu ZDARMA v ceně auta záruka jako na nový. ZDARMA doprava auta k Vám domů po celé ČR. Možnost prohlídky auta Vaším mechanikem. Auto je po prvním majiteli. Možnost výhodného pojiš ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  514 900 Kč</span></b></div>
+<div class="inzeratylok">Pardubice<br>530 02</div>
+<div class="inzeratyview">112 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226446829');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226446829');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19088325','19091364','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226446829','auto');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://auto.bazos.cz/inzerat/226355155/skoda-octavia-4-combi-15tsi-110-kw-cz-dph.php"><img src="https://www.bazos.cz/img/1t/155/226355155.jpg?t=1794910468" class="obrazek" alt="Škoda Octavia 4 combi, 1.5TSI 110 kW, CZ, DPH" width="170" height="128"></a>
+<span class=nadpis><a href="https://auto.bazos.cz/inzerat/226355155/skoda-octavia-4-combi-15tsi-110-kw-cz-dph.php">Škoda Octavia 4 combi, 1.5TSI 110 kW, CZ, DPH</a></span><span class=velikost10> - <span title="TOP 21x Platí do 29.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>Žádný díl není lakovaný. Druhá sada pneumatik na plechových discích. Plná servisní historie. K vozu ZDARMA v ceně auta záruka jako na nový. ZDARMA doprava auta k Vám domů po celé ČR. Možnost prohlídky auta Vaším mechanikem. Auto je po prvním majiteli ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  409 900 Kč</span></b></div>
+<div class="inzeratylok">Pardubice<br>530 02</div>
+<div class="inzeratyview">303 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226355155');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226355155');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19088325','19091364','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226355155','auto');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+<br><br>
+<div class="listainzerat">Podobné inzeráty</div>
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://auto.bazos.cz/inzerat/226562579/skoda-fabia-iii-joy-12-tsi-81kw-rv-2015.php"><img src="https://www.bazos.cz/img/1t/579/226562579.jpg?t=1794917252" class="obrazek" alt="Skoda Fabia III Joy 1,2 Tsi 81kw r.v. 2015" width="170" height="128"></a>
+<span class=nadpis><a href="https://auto.bazos.cz/inzerat/226562579/skoda-fabia-iii-joy-12-tsi-81kw-rv-2015.php">Skoda Fabia III Joy 1,2 Tsi 81kw r.v. 2015</a></span><span class=velikost10> - [17.11. 2026]</span><br>
+<div class=popis>Prodám Škoda Fabia 3 model Joy
+Motor 1.2 TSi, 81kw / 110k jedná se už o motor s rozvodovým řemenem - 6.ti rychlostní převodovka
+Do provozu 01/2015
+Najeto 139 tis. km
+
+Multifunkční volant
+Tempomat
+Automatické Led denní svícení
+DAB radio
+Autom ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  209 999 Kč</span></b></div>
+<div class="inzeratylok">Děčín<br>405 02</div>
+<div class="inzeratyview">28 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226562579');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226562579');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19022082','19005078','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226562579','auto');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://auto.bazos.cz/inzerat/226561781/skoda-fabia-comiii-10-tsi70kw-ambition.php"><img src="https://www.bazos.cz/img/1t/781/226561781.jpg" class="obrazek" alt="Škoda Fabia Com.III 1.0 TSi/70kW - Ambition" width="170" height="128"></a>
+<span class=nadpis><a href="https://auto.bazos.cz/inzerat/226561781/skoda-fabia-comiii-10-tsi70kw-ambition.php">Škoda Fabia Com.III 1.0 TSi/70kW - Ambition</a></span><span class=velikost10> - [17.11. 2026]</span><br>
+<div class=popis>Technické údaje:
+
+Provoz od: 11/2023
+Karosérie kombi
+5 dv.
+Barva: bílá
+Obsah motoru: 999 ccm
+Druh paliva: benzin
+Platnost STK do: 11/2027
+Stav tachometru: 38 520 km
+Výkon motoru: 70 kW (95 PS)
+VIN: TMBJP6NJ9PZ016028
+
+Cena:
+314 900 Kč vč ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  314 900 Kč</span></b></div>
+<div class="inzeratylok">Bruntál<br>792 01</div>
+<div class="inzeratyview">25 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226561781');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226561781');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19002557','19009233','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226561781','auto');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://auto.bazos.cz/inzerat/226561629/skoda-fabia-2-ii-12tsi63kwmonte-carloservis1maj.php"><img src="https://www.bazos.cz/img/1t/629/226561629.jpg" class="obrazek" alt="Škoda Fabia 2. II. 1.2TSi//63kW//MONTE CARLO//SERVIS//1.MAJ/" width="170" height="128"></a>
+<span class=nadpis><a href="https://auto.bazos.cz/inzerat/226561629/skoda-fabia-2-ii-12tsi63kwmonte-carloservis1maj.php">Škoda Fabia 2. II. 1.2TSi//63kW//MONTE CARLO//SERVIS//1.MAJ/</a></span><span class=velikost10> - [17.11. 2026]</span><br>
+<div class=popis>R.V. 3/2012, NAJETO --257650KM-- SERVISNÍ KNÍŽKA.
+
+-----------------------------------------------------------------------
+1.MAJITELKA, VELMI PĚKNÝ STAV, GARÁŽOVANÉ, ORIGINÁL LIMITOVANÁ EDICE "MONTE CARLO", KRÁSNÁ BAREVNÁ KOMBINACE, TEĎ PROVEDENÝ  ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  127 000 Kč</span></b></div>
+<div class="inzeratylok">Prostějov<br>796 01</div>
+<div class="inzeratyview">27 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226561629');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226561629');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','0','19002944','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226561629','auto');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://auto.bazos.cz/inzerat/226560481/skoda-fabia-10tsi-116ps-aut-led-nav-dab-al-pdc-dph-625.php"><img src="https://www.bazos.cz/img/1t/481/226560481.jpg" class="obrazek" alt="Škoda Fabia 1.0TSi 116PS AUT LED NAV DAB AL PDC DPH 6/25" width="170" height="128"></a>
+<span class=nadpis><a href="https://auto.bazos.cz/inzerat/226560481/skoda-fabia-10tsi-116ps-aut-led-nav-dab-al-pdc-dph-625.php">Škoda Fabia 1.0TSi 116PS AUT LED NAV DAB AL PDC DPH 6/25</a></span><span class=velikost10> - [17.11. 2026]</span><br>
+<div class=popis>Škoda Fabia 1.0 TSi
+DSG- 7 st.Dvojspojkový Automat
+85 kW / 116 PS
+6/2025
+Tacho: 17.978 Km
+Graphit šedá Metalíza
+Euro 6
+
+Navigace AppConnect přes chytrý telefon
+AppConnect je kabelový i bezdrátový.
+AL 15" - Rotare Aero, černá
+DAB+ 6 repro
+ ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  429 990 Kč</span></b></div>
+<div class="inzeratylok">Praha 8<br>180 00</div>
+<div class="inzeratyview">41 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226560481');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226560481');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19144569','19153149','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226560481','auto');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://auto.bazos.cz/inzerat/226560284/skoda-fabia-4.php"><img src="https://www.bazos.cz/img/1t/284/226560284.jpg?t=1794914436" class="obrazek" alt="Škoda Fabia 4" width="170" height="128"></a>
+<span class=nadpis><a href="https://auto.bazos.cz/inzerat/226560284/skoda-fabia-4.php">Škoda Fabia 4</a></span><span class=velikost10> - [17.11. 2026]</span><br>
+<div class=popis>Prodám 
+Škoda Fabia IV
+R.v. 01/2022
+1.0 MPI 59kw
+Nájezd 51.xxxkm
+STK 05.2028
+Barva oranžová metalíza
+
+Výbava
+Full led světlomety, parkovací senzory v vzadu, přední radar nouzového brzdění, asistent jízdních pruhů, elektrony 16”, elektricky vyhřívané  ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  305 000 Kč</span></b></div>
+<div class="inzeratylok">Vsetín<br>756 61</div>
+<div class="inzeratyview">50 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226560284');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226560284');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19092829','19096326','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226560284','auto');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://auto.bazos.cz/inzerat/226559860/skoda-fabia-combi-2022.php"><img src="https://www.bazos.cz/img/1t/860/226559860.jpg?t=1794914109" class="obrazek" alt="Škoda Fabia 3 Combi 2022" width="170" height="128"></a>
+<span class=nadpis><a href="https://auto.bazos.cz/inzerat/226559860/skoda-fabia-combi-2022.php">Škoda Fabia 3 Combi 2022</a></span><span class=velikost10> - [17.11. 2026]</span><br>
+<div class=popis>Prodám
+Škodu Fabií 3 combi
+R.v. 2022
+Nájezd 80.xxx km
+Motor 1.0 TSI 70kw
+Převodovka manuál
+Cena 210.000,-
+
+Výbava 
+LED denní svícení , elektrony 15”, front assist přední radar, dotykový entertaiment displej s rádiem, bluetooth, handsfree, tempomat, d ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  210 000 Kč</span></b></div>
+<div class="inzeratylok">Vsetín<br>756 61</div>
+<div class="inzeratyview">45 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226559860');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226559860');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19092829','19096326','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226559860','auto');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://auto.bazos.cz/inzerat/226559571/skoda-fabia-3-12-tsi-81kw-dsg-style-led-vyhrevy-top-stav.php"><img src="https://www.bazos.cz/img/1t/571/226559571.jpg" class="obrazek" alt="ŠKODA FABIA 3 1.2 TSI 81KW DSG STYLE LED VÝHŘEVY TOP STAV" width="170" height="128"></a>
+<span class=nadpis><a href="https://auto.bazos.cz/inzerat/226559571/skoda-fabia-3-12-tsi-81kw-dsg-style-led-vyhrevy-top-stav.php">ŠKODA FABIA 3 1.2 TSI 81KW DSG STYLE LED VÝHŘEVY TOP STAV</a></span><span class=velikost10> - [17.11. 2026]</span><br>
+<div class=popis>►►► Škoda Fabia III 1.2 Tsi 81 kw DSG STYLE + LED SVĚTLA + TEMPOMAT + MULTIFUNKČNÍ VOLANT + PARKOVACÍ SENZORY + VYHŘÍVANÉ SEDADLA + 15“ ALU KOLA + TAŽNÉ ZAŘÍZENÍ
+
+Výbava
+Led světlomety, digitální automatická klimatizace, 4x el.okna, vyhřívaná seda ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  234 900 Kč</span></b></div>
+<div class="inzeratylok">Opava<br>747 05</div>
+<div class="inzeratyview">36 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226559571');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226559571');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19101466','19130983','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226559571','auto');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://auto.bazos.cz/inzerat/226556426/skoda-fabia-12tsi-63kw-monte-carlo-rs-full-led.php"><img src="https://www.bazos.cz/img/1t/426/226556426.jpg?t=1794910472" class="obrazek" alt="Škoda Fabia 1.2TSi 63kW MONTE CARLO RS FULL LED" width="170" height="128"></a>
+<span class=nadpis><a href="https://auto.bazos.cz/inzerat/226556426/skoda-fabia-12tsi-63kw-monte-carlo-rs-full-led.php">Škoda Fabia 1.2TSi 63kW MONTE CARLO RS FULL LED</a></span><span class=velikost10> - <span title="TOP 4x Platí do 9.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>Škoda Fabia 1.2TSi 63kW, rok 2014/5měsíc FACELIFT, červená , MONTE CARLO, bohatá výbava, velký maxidot, aut.klima, sport.sedadla, manuál, audio, černý strop, alu kola, a mnoho více z výbavy.
+Najeto 198.000km, jasný původ.
+Nové zimní pneu
+Nové led  ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  158 900 Kč</span></b></div>
+<div class="inzeratylok">Brno<br>628 00</div>
+<div class="inzeratyview">76 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226556426');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226556426');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','0','19624337','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226556426','auto');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://auto.bazos.cz/inzerat/226556348/skoda-fabia-10-70kw.php"><img src="https://www.bazos.cz/img/1t/348/226556348.jpg?t=1794910588" class="obrazek" alt="Škoda Fabia 1.0, 70kw" width="170" height="128"></a>
+<span class=nadpis><a href="https://auto.bazos.cz/inzerat/226556348/skoda-fabia-10-70kw.php">Škoda Fabia 1.0, 70kw</a></span><span class=velikost10> - <span title="TOP 2x Platí do 30.11. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>Škoda Fabia 1.0, 70kw
+
+Auto má najeto 32 000 km, aktuálně po pravidelném servisu 30 000 km, auto bylo kupováno v programu Škoda Plus, záruka platná do 100 000 najetých km.
+Auto v Top stavu, auto je nebourané.
+K autu jsou přidám druhou sadu zimníc ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  389 900 Kč</span></b></div>
+<div class="inzeratylok">Ostrava<br>711 00</div>
+<div class="inzeratyview">47 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226556348');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226556348');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','21863198','22127155','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226556348','auto');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="https://auto.bazos.cz/inzerat/226555701/skoda-fabia-14-16v-style-edition-1majitel.php"><img src="https://www.bazos.cz/img/1t/701/226555701.jpg" class="obrazek" alt="ŠKODA FABIA 1.4 16V STYLE EDITION 1MAJITEL" width="170" height="128"></a>
+<span class=nadpis><a href="https://auto.bazos.cz/inzerat/226555701/skoda-fabia-14-16v-style-edition-1majitel.php">ŠKODA FABIA 1.4 16V STYLE EDITION 1MAJITEL</a></span><span class=velikost10> - [17.11. 2026]</span><br>
+<div class=popis>REG.6/2009
+NEHAVAROVANÝ VŮZ 
+PREMIOVÁ VÝBAVA.
+SPOLEHLIVÝ MOTOR  1.4  63KW
+
+
+ GARANCE PŮVODU I POČTU UJETÝCH KILOMETRŮ! VÝBORNÝ TECHNICKÝ I OPTICKÝ STAV! SERVISNÍ HISTORIE.1MAJITEL!
+
+výbava: manuální převodovka, 5 rychlostních stupňů, 8x airba ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  129 000 Kč</span></b></div>
+<div class="inzeratylok">Přerov<br>750 02</div>
+<div class="inzeratyview">42 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226555701');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226555701');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19001166','19498527','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226555701','auto');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+
+</div>
+
+
+</div></div><br>
+
+&copy;2026 Bazoš -  <b>Inzerce, Bazar Škoda</b><br>
+<a href="https://www.bazos.cz/napoveda.php">Nápověda</a>, <a href="https://www.bazos.cz/dotazy.php">Dotazy</a>, <a href="https://www.bazos.cz/hodnoceni.php">Hodnocení</a>, <a href="https://www.bazos.cz/kontakt.php">Kontakt</a>, <a href="https://www.bazos.cz/reklama.php">Reklama</a>, <a href="https://www.bazos.cz/podminky.php">Podmínky</a>, <a href="https://www.bazos.cz/ochrana-udaju.php">Ochrana údajů</a>, <a href="https://www.bazos.cz/rss.php?rub=au&cat=93">RSS</a>, <form name="formvkm" id="formvkm" method="post" style="display: inline;"><input type="hidden" name="vkm" value="m"><input type="submit" class="vkm" value="Mobilní verze"></form><br>
+
+Inzeráty Auto celkem: <b>435717</b>, za 24 hodin: <b>23670</b><br><br>
+<a href="https://www.bazos.cz/mapa-kategorie.php">Mapa kategorií</a>, <a href="https://auto.bazos.cz/mapa-search.php">Nejvyhledávanější výrazy</a>
+<br>
+Země: <a href="https://auto.bazos.cz">Česká republika</a>, <a href="https://auto.bazos.sk">Slovensko</a>, <a href="https://auto.bazos.pl">Polsko</a>, <a href="https://auto.bazos.at">Rakousko</a>
+<br>
+<br>
+</div>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZW1QTHKBB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NZW1QTHKBB');
+</script>
+
+</body>
+</html>

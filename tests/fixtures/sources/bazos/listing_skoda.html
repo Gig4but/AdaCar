@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<title>Škoda bazar - Auto | Bazoš.cz</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Kategorie Škoda bazar. Vybírejte z 31 348 inzerátů. Prodej snadno a rychle na Bazoši. Přes půl milionů uživatelů za den."><meta property="og:title" content="Škoda bazar - Auto">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Bazos.cz">
+<meta property="og:description" content="Kategorie Škoda bazar. Vybírejte z 31 348 inzerátů. Prodej snadno a rychle na Bazoši. Přes půl milionů uživatelů za den.">
+<link rel="canonical" href="https://auto.bazos.cz/skoda/"><meta property="fb:admins" content="1055875657">
+<link rel="stylesheet" href="https://www.bazos.cz/bazos70s.css" type="text/css"><link rel="preload" as="image" href="https://www.bazos.cz/obrazky/bazos.svg">
+<link rel="stylesheet" href="https://www.bazos.cz/bazosprint.css" type="text/css" media="print">
+<link rel="icon" href="https://www.bazos.cz/favicon.svg" type="image/svg+xml">
+<link rel="icon" HREF="https://www.bazos.cz/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="https://www.bazos.cz/apple-touch-icon.png">
+<script async src="https://fundingchoicesmessages.google.com/i/pub-3645948300403337?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "z7swtl3rz0");
+    clarity('set', 'pp', '40');
+</script><script async="async" src="https://www.google.com/adsense/search/ads.js"></script>
+<script type="text/javascript" charset="utf-8">
+(function(g,o){g[o]=g[o]||function(){(g[o]['q']=g[o]['q']||[]).push(
+  arguments)},g[o]['t']=1*new Date})(window,'_googCsa');
+</script><script>
+var xhr = new XMLHttpRequest();
+var naseptavac_value = '';
+function naseptavac(value) {
+  if (value=='')  {
+  	naseptavac_value = '';
+  	document.getElementById('vysledek').innerHTML='';
+  	}
+else {
+	if (naseptavac_value == value) {
+		return false;
+	}
+	naseptavac_value = value;
+	setTimeout(function () {
+		if (naseptavac_value != value) {
+			return false;
+		}
+		xhr.onreadystatechange = function() {
+ 		 if (this.readyState == 4 && naseptavac_value == value){
+				document.getElementById('vysledek').innerHTML = this.responseText;
+			}
+ 		 };
+		xhr.open("POST", '/suggest.php');
+		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		xhr.send('rubnas=AU&catnas=93&qnas='+encodeURIComponent(naseptavac_value));
+	}, 250);
+}
+}
+
+var naseptavacpsc_value = '';
+function naseptavacpsc(value) {
+  if (value=='')  {
+  	naseptavacpsc_value = '';
+  	document.getElementById('vysledekpsc').innerHTML='<table cellpadding=\"3\" cellspacing=\"0\" class=\"tablenaspsc\"><tr><td class=\"act\" onclick=\"getLocation();\"><b>Inzeráty v okolí</b></td></tr></table>';
+  	}
+else {
+	if (naseptavacpsc_value == value) {
+		return false;
+	}
+	naseptavacpsc_value = value;
+	setTimeout(function () {
+		if (naseptavacpsc_value != value) {
+			return false;
+		}
+		xhr.onreadystatechange = function() {
+ 		 if (this.readyState == 4 && naseptavacpsc_value == value){
+				document.getElementById('vysledekpsc').innerHTML = this.responseText;
+			}
+ 		 };
+		xhr.open("POST", '/suggestpsc.php');
+		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		xhr.send('qnaspsc='+encodeURIComponent(naseptavacpsc_value));
+	}, 250);
+}
+}
+
+function getLocation() {
+if (navigator.geolocation) {navigator.geolocation.getCurrentPosition(showPosition);}
+else {document.getElementById('hlokalita').value = '';}
+}
+function showPosition(position) {
+		xhr.onreadystatechange = function() {
+ 		 if (this.readyState == 4){
+				document.getElementById('hlokalita').value = this.responseText;
+				document.forms['formt'].submit();
+			}
+ 		 };
+		xhr.open("POST", '/zip.php');
+		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		xhr.send('latitude='+encodeURIComponent(position.coords.latitude)+'&longitude='+encodeURIComponent(position.coords.longitude));
+}
+
+var agent_value = '';
+function agentclick() {
+  if (document.getElementById('agentmail').value=='')  {
+  	document.getElementById("agentmail").focus();
+    return false;
+  	}
+else {
+agent_value = document.getElementById('agentmail').value;
+xhr.onreadystatechange = function() {
+  if (this.readyState == 4){
+				document.getElementById('overlay').innerHTML = this.responseText;
+			}
+  };
+xhr.open("POST", '/agent.php');
+xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+xhr.send('hledat=&rubrikav=AU&hlokalita=&humkreis=&cenaod=&cenado=&cat=93&typ=&agentmail='+encodeURIComponent(agent_value));
+}
+}
+
+function odeslatrequest(value,params) {
+xhr.onreadystatechange = function() {
+  if (this.readyState == 4){
+				document.getElementById('overlay').innerHTML = this.responseText;
+			}
+  };
+xhr.open("POST", value);
+xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+xhr.send(params);
+}
+function overlay() {
+	el = document.getElementById("overlay");
+	el.style.display = (el.style.display == "inline") ? "none" : "inline";
+}
+function odeslatakci(postaction,value1,value2,value3) {
+document.getElementById('postaction').value = postaction;
+document.getElementById("postv1").value = value1;
+document.getElementById("postv2").value = value2;
+document.getElementById("postv3").value = value3;
+document.formaction.submit();
+}
+</script>
+</head>
+
+<body>
+
+
+<div class="sirka">
+<div class="listalogor">
+<div class="listalogol"><a href="https://www.bazos.cz/" title="Bazos.cz - Inzerce, bazar"><img src="https://www.bazos.cz/obrazky/bazos.svg" width="199" height="34" alt="Bazos.cz - Inzerce, inzeráty"></a></div>
+<div class="listalogom"><b>... bazar pro každého</b></div>
+<div class="listalogop"><a href="https://www.bazos.cz/oblibene.php"><b>Oblíbené inzeráty</b></a> <a href="https://www.bazos.cz/moje-inzeraty.php"><b>Moje inzeráty</b></a> <a href="/pridat-inzerat.php"><b><span class=pridati>Přidat inzerát</span></b></a></div>
+</div>
+<form name="formt" id="formt" method=get >
+<div class="listah">
+<div class="rubriky">
+<b>
+Co: <span class=vysokoli><span id="vysledek"></span><input type="search" onkeyup="naseptavac(this.value);" id=hledat name=hledat size="17" maxlength="256" value="" autocomplete="off" title="Co? Vyhledávaný výraz"></span>
+
+<select name="rubriky" onchange='this.form.submit();' title="Vyber rubriku">
+<option value="www">Všechny rubriky</option>
+<option value="auto" selected>Auto</option><option value="deti">Děti</option><option value="dum">Dům a zahrada</option><option value="elektro">Elektro</option><option value="foto">Foto</option><option value="hudba">Hudba</option><option value="knihy">Knihy</option><option value="mobil">Mobily</option><option value="motorky">Motorky</option><option value="nabytek">Nábytek</option><option value="obleceni">Oblečení</option><option value="pc">PC</option><option value="prace">Práce</option><option value="reality">Reality</option><option value="sluzby">Služby</option><option value="sport">Sport</option><option value="stroje">Stroje</option><option value="vstupenky">Vstupenky</option><option value="zvirata">Zvířata</option><option value="ostatni">Ostatní</option></select>
+
+Lokalita: <span class=vysokolipsc><span id="vysledekpsc"></span><input type="search" name="hlokalita" id="hlokalita" onkeyup="naseptavacpsc(this.value);" onclick="naseptavacpsc(this.value);" value="" size="4" maxlength="25" autocomplete="off" title="Kde? PSČ (místo)" style="-webkit-appearance: none;"></span>
+Okolí: <input name="humkreis" title="Okolí v km" value="25" size="3" style="width: 25px;"> km
+Cena od: <input name=cenaod title="Cena od Kč" maxlength="12" size="5" value=""> - do: <input name=cenado title="Cena do Kč" maxlength="12" size="5" value=""> Kč <input type="submit" name="Submit" value="Hledat">
+<input type="hidden" name="order" id="order"><input type="hidden" name="crp" id="crp"><input type="hidden" id="kitx" name="kitx" value="ano"></b>
+</div>
+</div>
+</form>
+<div class="drobky"><a href="https://www.bazos.cz/" title="Inzerce Bazoš">Hlavní stránka</a>  > <a href="https://auto.bazos.cz">Auto</a> > <h1 class="nadpiskategorie">Škoda</h1></div>
+<br>
+
+
+<div class="flexmain"><div class="menuleft"><div class="nadpismenu">Osobní auta</div>
+<div class="barvalmenu">
+<div class="barvaleva">
+<a href="/alfa/" >Alfa Romeo</a>
+<a href="/audi/" >Audi</a>
+<a href="/bmw/" >BMW</a>
+<a href="/citroen/" >Citroën</a>
+<a href="/dacia/" >Dacia</a>
+<a href="/fiat/" >Fiat</a>
+<a href="/ford/" >Ford</a>
+<a href="/honda/" >Honda</a>
+<a href="/hyundai/" >Hyundai</a>
+<a href="/chevrolet/" >Chevrolet</a>
+<a href="/kia/" >Kia</a>
+<a href="/mazda/" >Mazda</a>
+<a href="/mercedes/" >Mercedes-Benz</a>
+<a href="/mitsubishi/" >Mitsubishi</a>
+<a href="/nissan/" >Nissan</a>
+<a href="/opel/" >Opel</a>
+<a href="/peugeot/" >Peugeot</a>
+<a href="/renault/" >Renault</a>
+<a href="/seat/" >Seat</a>
+<a href="/suzuki/" >Suzuki</a>
+<a href="/skoda/"  id=zvyraznenikat>Škoda</a>
+<a href="/toyota/" >Toyota</a>
+<a href="/volkswagen/" >Volkswagen</a>
+<a href="/volvo/" >Volvo</a>
+<a href="/ostatni/" >Ostatní značky</a>
+<br>
+<a href="https://elektro.bazos.cz/autoradia/">Autorádia</a>
+<a href="https://pc.bazos.cz/gps/">GPS navigace</a>
+<a href="/havarovana/" >Havarovaná auta</a>
+<a href="/nahradnidily/" >Náhradní díly</a>
+<a href="/pneumatiky/" >Pneumatiky, kola</a>
+<a href="/prislusenstvi/" >Příslušenství</a>
+<a href="/tuning/" >Tuning</a>
+<a href="/veterani/" >Veteráni</a>
+</div></div>
+
+<br>
+<div class="nadpismenu">Užitková vozidla</div>
+<div class="barvalmenu">
+<div class="barvaleva">
+<a href="/autobusy/" >Autobusy</a>
+<a href="/dodavka/" >Dodávky</a>
+<a href="/mikrobus/" >Mikrobusy</a>
+<a href="/karavany/" >Karavany, obytná auta</a>
+<a href="/nakladni/" >Nákladní auta</a>
+<a href="/pickup/" >Pick-up</a>
+<a href="/voziky/" >Vozíky, přívěsy</a>
+<a href="https://stroje.bazos.cz/">Stroje</a>
+<a href="/ostatniuzitkova/" >Ostatní</a>
+<br>
+<a href="/havarovanauzitkova/" >Havarovaná</a>
+<a href="/nahradnidilyuzitkova/" >Náhradní díly</a>
+</div>
+</div>
+<br>
+
+<div class="nadpismenu">Moto</div>
+<div class="barvalmenu">
+<div class="barvaleva">
+<a href="https://motorky.bazos.cz/">Motorky, Skútry</a>
+</div></div>
+
+<br><div class="mobilskryt" style="text-align: center;">
+<a style="font-size: 13px;text-decoration: none;color:#000000;" href="https://www.jasminka.cz/kniha/jiri-novak-josef-a-zentrich-herbar-lecivych-rostlin-komplet-1-7dil.html" target="_blank" rel=”nofollow”><b>Knihkupectví Jasmínka</b><br>
+<span style="font-size: 13px;text-decoration: none;color:#ff6600;">
+<span style="color:#000000;">Jiří Novák, Josef A. Zentrich:</span> Herbář léčivých rostlin - komplet 1.-7.díl<br><img src="https://www.jasminka.cz/images/v/herbarcv.jpg" width="100" alt="Knihkupectví Jasmínka" title="Knihkupectví Jasmínka" style="border: 1px solid Black;margin: 4px;">
+<br>
+<img src="https://www.bazos.cz/kosik.svg" alt="Jasminka" height="22" style="border: 0px;"> koupit</span></a></div>
+
+</div><div class="maincontent">
+
+
+<div class="listainzerat inzeratyflex">
+<div class="inzeratynadpis"><img src="https://www.bazos.cz/obrazky/list.gif" width="18" height="16" alt="List inzerátů" class=gallerylista> <form name="formgal" id="formgal" method="post" style="display: inline;"><input type="hidden" name="gal" value="g"><input type="image" alt="Submit" src="https://www.bazos.cz/obrazky/gallery.gif" width="18" height="16" class="gallerylist inputgal"></form> Zobrazeno 1-40 inzerátů z 31 348</div>
+<div class="inzeratycena"><b><span onclick="document.getElementById('order').value=1;document.forms['formt'].submit();" class="paction">Cena</span></b></div>
+<div class="inzeratylok">Lokalita</div>
+<div class="inzeratyview"><span onclick="document.getElementById('order').value=3;document.forms['formt'].submit();" class="paction">Zobrazeno</span></div>
+</div><form name="formaction" method="post" style="display: inline;"><input type="hidden" id="postaction" name="postaction" value=""><input type="hidden" id="postv1" name="postv1" value=""><input type="hidden" id="postv2" name="postv2" value=""><input type="hidden" id="postv3" name="postv3" value=""></form><button type="button" onclick="odeslatrequest('/agent.php','teloverit=');overlay();">Nové inzeráty e-mailem</button>
+	<div id="overlay">
+     <div></div>
+</div>
+
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226557088/octavia-20-tdi-110kw-2022-style-metrix-acc.php"><img src="https://www.bazos.cz/img/1t/088/226557088.jpg?t=1794912832" class="obrazek" alt="Octavia 2.0 Tdi 110kw 2020 FULL-LED  Navigace Serviska" width="170" height="128"></a>
+<h2 class=nadpis><a href="/inzerat/226557088/octavia-20-tdi-110kw-2022-style-metrix-acc.php">Octavia 2.0 Tdi 110kw 2020 FULL-LED  Navigace Serviska</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 29.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>ŠkodA Octavia Combi 2.0 TDI 110 kW  s  manuální převodovkou .
+Po 1. majiteli, se servisní knížkou.  
+
+!!NEHAVAROVANÉ!!
+
+Rok výroby: 2020
+Najeto: 183 xxx km
+Motor: 2.0 TDI, 110 kW,
+Palivo: nafta
+Převodovka: manuální
+Karoserie: Combi
+Barva:  ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  309 900 Kč</span></b></div>
+<div class="inzeratylok">Zlín<br>760 01</div>
+<div class="inzeratyview">183 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226557088');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226557088');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19046816','19031569','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226557088');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226556516/superb-20-tdi-dsg-2022-jen-95-tkm-matrix-360tazne.php"><img src="https://www.bazos.cz/img/1t/516/226556516.jpg?t=1794910560" class="obrazek" alt="Superb 2.0 TDI DSG 2022, jen 95 tkm, Matrix, 360°,Tažne" width="170" height="128"></a>
+<h2 class=nadpis><a href="/inzerat/226556516/superb-20-tdi-dsg-2022-jen-95-tkm-matrix-360tazne.php">Superb 2.0 TDI DSG 2022, jen 95 tkm, Matrix, 360°,Tažne</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 29.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>🔥 TOP NABÍDKA – Škoda Superb Combi Style 2.0 TDI 110 kW (150 k), 7st. DSG 🔥 
+
+Hledáte Superb s nízkým nájezdem, plnou výbavou a doloženou historií? Tady ho máte. Jen 95 000 km, ověřeno nezávislou prohlídkou TÜV SÜD – žádné překvapení, žádné riziko. ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  412 500 Kč</span></b></div>
+<div class="inzeratylok">Praha 9<br>199 00</div>
+<div class="inzeratyview">207 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226556516');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226556516');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19180063','19194986','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226556516');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226355155/skoda-octavia-4-combi-15tsi-110-kw-cz-dph.php"><img src="https://www.bazos.cz/img/1t/155/226355155.jpg?t=1794910468" class="obrazek" alt="Škoda Octavia 4 combi, 1.5TSI 110 kW, CZ, DPH" width="170" height="128"></a>
+<h2 class=nadpis><a href="/inzerat/226355155/skoda-octavia-4-combi-15tsi-110-kw-cz-dph.php">Škoda Octavia 4 combi, 1.5TSI 110 kW, CZ, DPH</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 29.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>Žádný díl není lakovaný. Druhá sada pneumatik na plechových discích. Plná servisní historie. K vozu ZDARMA v ceně auta záruka jako na nový. ZDARMA doprava auta k Vám domů po celé ČR. Možnost prohlídky auta Vaším mechanikem. Auto je po prvním majiteli ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  409 900 Kč</span></b></div>
+<div class="inzeratylok">Pardubice<br>530 02</div>
+<div class="inzeratyview">292 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226355155');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226355155');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19088325','19091364','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226355155');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226486892/skoda-fabia-3-combi-10-tsi-70-kw-ambition-cz-dph.php"><img src="https://www.bazos.cz/img/1t/892/226486892.jpg?t=1794910421" class="obrazek" alt="Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH" width="170" height="128"></a>
+<h2 class=nadpis><a href="/inzerat/226486892/skoda-fabia-3-combi-10-tsi-70-kw-ambition-cz-dph.php">Škoda Fabia 3 combi, 1.0 TSI 70 kW Ambition CZ DPH</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 29.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>Servisní historie v autorizovaném servisu. K vozu ZDARMA v ceně auta záruka jako na nový. ZDARMA doprava auta k Vám domů po celé ČR. Možnost prohlídky auta Vaším mechanikem. Auto je po prvním majiteli. Možnost výhodného pojištění a financování vozu.  ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  229 800 Kč</span></b></div>
+<div class="inzeratylok">Pardubice<br>530 02</div>
+<div class="inzeratyview">187 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226486892');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226486892');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19088325','19091364','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226486892');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226188363/skoda-superb-2-combi-14-tsi-92-kw-2011-163tiskm.php"><img src="https://www.bazos.cz/img/1t/363/226188363.jpg?t=1794907081" class="obrazek" alt="ŠKODA SUPERB 2 COMBI 1.4 TSI 92 kW 2011 164tis.KM" width="170" height="128"></a>
+<h2 class=nadpis><a href="/inzerat/226188363/skoda-superb-2-combi-14-tsi-92-kw-2011-163tiskm.php">ŠKODA SUPERB 2 COMBI 1.4 TSI 92 kW 2011 164tis.KM</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 29.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>Nabízím zachovalý Superb II Combi s benzínovým motorem 1.4 TSI o výkonu 92 kW, rok výroby 2011, s nájezdem 164 000 km. S manuální převodovkou 6 kvalt.
+Aktuálně po servis a inspekci= nový olej a filtry, nová STK na 2 roky, druhá sada zimních kol k di ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  164 000 Kč</span></b></div>
+<div class="inzeratylok">Teplice<br>417 61</div>
+<div class="inzeratyview">442 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226188363');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226188363');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19001970','19010453','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226188363');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226534172/skoda-octavia-iv-15tsi-g-tec-96kw-style-dsg-koupcr2022.php"><img src="https://www.bazos.cz/img/1t/172/226534172.jpg?t=1794902819" class="obrazek" alt="ŠKODA OCTAVIA IV 1,5TSi G-TEC 96kW STYLE DSG Koup.ČR,2022@" width="170" height="128"></a>
+<h2 class=nadpis><a href="/inzerat/226534172/skoda-octavia-iv-15tsi-g-tec-96kw-style-dsg-koupcr2022.php">ŠKODA OCTAVIA IV 1,5TSi G-TEC 96kW STYLE DSG Koup.ČR,2022@</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 29.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>XXX POZOR NEJEDNÁ SE O DOVOZ ZE ZAHRANIČÍ!xxx- nehrozí riziko stočeného tachometru a právních vad jako u dovozu!
+
+Prodám i na splátky-Škoda Octavia 4 1.5TSi G-TEC STYLE CNG DSG Koup.ČR,1.majitel,Servisní kniha
+
+Pro podnikatele a firmy odpočet DPH ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  359 900 Kč</span></b></div>
+<div class="inzeratylok">Olomouc<br>772 00</div>
+<div class="inzeratyview">274 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226534172');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226534172');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19000687','19141064','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226534172');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226544823/skoda-kodiaq-tour.php"><img src="https://www.bazos.cz/img/1t/823/226544823.jpg?t=1794898381" class="obrazek" alt="Škoda Kodiaq Tour" width="170" height="128"></a>
+<h2 class=nadpis><a href="/inzerat/226544823/skoda-kodiaq-tour.php">Škoda Kodiaq Tour</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 29.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>ŠKODA KODIAQ 2.0 TDI 150 k DSG TOUR – BOHATÁ VÝBAVA, 19" DISKY+Zimní.
+
+Prodám Škoda Kodiaq ve výbavě TOUR s naftovým motorem 2.0 TDI o výkonu 110 kW (150 koní) a 7-stupňovou automatickou převodovkou DSG.
+
+Vůz kombinuje komfort, bezpečnost, prosto ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  640 000 Kč</span></b></div>
+<div class="inzeratylok">Břeclav<br>690 02</div>
+<div class="inzeratyview">373 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226544823');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226544823');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19138959','19151509','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226544823');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226534722/skoda-karoq-15tsi-110kw-dsg-sportlinetaznecantonacc2021.php"><img src="https://www.bazos.cz/img/1t/722/226534722.jpg?t=1794859413" class="obrazek" alt="Škoda Karoq 1.5TSI 110kw DSG SPORTLINE,Tažné,Canton,ACC,2021" width="170" height="128"></a>
+<h2 class=nadpis><a href="/inzerat/226534722/skoda-karoq-15tsi-110kw-dsg-sportlinetaznecantonacc2021.php">Škoda Karoq 1.5TSI 110kw DSG SPORTLINE,Tažné,Canton,ACC,2021</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 28.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>Nabízím Škoda Karoq 1.5TSI 110kw DSG Sportline.Datum první registrace 1/2021,najeto 130 600km,po 1.majiteli
+
+▶️Nehavarované,nelakované
+
+ČERNÁ METALÍZA
+
+VELMI ZACHOVALÝ STAV
+
+Perfektní technický i optický stav.Vypadá na poloviční nájezd kilome ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  449 000 Kč</span></b></div>
+<div class="inzeratylok">Rychnov nad Kněžnou<br>516 01</div>
+<div class="inzeratyview">684 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226534722');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226534722');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19129451','19137807','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226534722');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226532896/skoda-fabia-kombi-10-tsi-2022-aut-klima-navi-zaruka.php"><img src="https://www.bazos.cz/img/1t/896/226532896.jpg?t=1794856092" class="obrazek" alt="Škoda Fabia kombi 1.0 TSi, 2022, aut. klima, navi, ZÁRUKA" width="170" height="128"></a>
+<h2 class=nadpis><a href="/inzerat/226532896/skoda-fabia-kombi-10-tsi-2022-aut-klima-navi-zaruka.php">Škoda Fabia kombi 1.0 TSi, 2022, aut. klima, navi, ZÁRUKA</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 28.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>* bezproblémový motor 1.0 TSi * výbava Business * navigace * automatická klima * odpočet DPH *
+
+Škoda Fabia combi 1.0 TSi 70 kW
+
+v provozu od 9/2022
+najeto 190 000 km
+benzín
+výkon 70 kW
+STK 6/2028
+
+* možnost sjednání prodloužené záruky kryj ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  219 900 Kč</span></b></div>
+<div class="inzeratylok">Přerov<br>750 02</div>
+<div class="inzeratyview">597 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226532896');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226532896');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19022564','19000852','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226532896');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226521521/skoda-octavia-3-facelift-combi-14-tsi-110-kw.php"><img src="https://www.bazos.cz/img/1t/521/226521521.jpg?t=1794848012" class="obrazek" alt="Škoda Octavia 3 Facelift Combi 1.4 TSI 110 kW" width="170" height="128"></a>
+<h2 class=nadpis><a href="/inzerat/226521521/skoda-octavia-3-facelift-combi-14-tsi-110-kw.php">Škoda Octavia 3 Facelift Combi 1.4 TSI 110 kW</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 28.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>◼︎ Škoda Octavia 3 Facelift Combi 1.4 TSI 110 kW | EA211
+07/2018 (Německo) | 202 918 km | Benzín | STK 11/2028
+VIN: TMBJC7NEXJ0285123 | Stříbrná metalíza "Brilliant"
+
+◼︎ VÝBAVA
+- SmartLink
+- Climatronic 2 zónový
+- Přední a zadní parkovací senz ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  269 000 Kč</span></b></div>
+<div class="inzeratylok">Ostrava<br>719 00</div>
+<div class="inzeratyview">602 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226521521');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226521521');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19146306','19157071','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226521521');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226526755/skoda-superb-iii-20tdi-140kw-dsg-lk-virtual-full.php"><img src="https://www.bazos.cz/img/1t/755/226526755.jpg?t=1794846467" class="obrazek" alt="ŠKODA SUPERB III 2.0TDI 140kW DSG • L&amp;K • VIRTUAL • FULL" width="170" height="128"></a>
+<h2 class=nadpis><a href="/inzerat/226526755/skoda-superb-iii-20tdi-140kw-dsg-lk-virtual-full.php">ŠKODA SUPERB III 2.0TDI 140kW DSG • L&amp;K • VIRTUAL • FULL</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 28.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>Nabízíme k prodeji krásný Superb 3 facelift ve výbavě Laurin & Klement se silným naftovým motorem o výkonu 140kW a automatickou převodovkou 7° DSG.
+
+▶ Motorizace: 2.0 TDI 140 kW / 190 PS
+▶ Převodovka: Automatická 7° DSG - DQ381 - MOKRÉ SPOJKY
+▶ V ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  479 990 Kč</span></b></div>
+<div class="inzeratylok">Kutná Hora<br>284 01</div>
+<div class="inzeratyview">1008 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226526755');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226526755');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19119036','19157549','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226526755');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226526093/skoda-octavia-iv-20tdi-110kw-scout-4x4-dsg-koupcr2022.php"><img src="https://www.bazos.cz/img/1t/093/226526093.jpg?t=1794846112" class="obrazek" alt="ŠKODA OCTAVIA IV 2.0TDi 110kW SCOUT 4x4 DSG Koup.ČR,2022" width="170" height="128"></a>
+<h2 class=nadpis><a href="/inzerat/226526093/skoda-octavia-iv-20tdi-110kw-scout-4x4-dsg-koupcr2022.php">ŠKODA OCTAVIA IV 2.0TDi 110kW SCOUT 4x4 DSG Koup.ČR,2022</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 28.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>XXX POZOR NEJEDNÁ SE O DOVOZ ZE ZAHRANIČÍ!xxx- nehrozí riziko stočeného tachometru a právních vad jako u dovozu!
+
+Prodám i na splátky-ŠKODA OCTAVIA IV 2.0TDi 110kW SCOUT 4x4 Koup.ČR,1.maj.,DPH,Servisní kniha
+
+Pro podnikatele a firmy odpočet DPH!! ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  479 900 Kč</span></b></div>
+<div class="inzeratylok">Olomouc<br>772 00</div>
+<div class="inzeratyview">685 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226526093');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226526093');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19000687','19141064','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226526093');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226517206/skoda-octavia-iii-rs-20-tdi-135kw-dsg-xenon-navi-kuze-tazne.php"><img src="https://www.bazos.cz/img/1t/206/226517206.jpg?t=1794833195" class="obrazek" alt="Škoda Octavia III RS 2.0 TDi 135KW DSG XENON NAVI KŮŽE TAŽNÉ" width="170" height="128"></a>
+<h2 class=nadpis><a href="/inzerat/226517206/skoda-octavia-iii-rs-20-tdi-135kw-dsg-xenon-navi-kuze-tazne.php">Škoda Octavia III RS 2.0 TDi 135KW DSG XENON NAVI KŮŽE TAŽNÉ</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 28.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>Škoda Octavia III RS 2.0 TDi 135KW DSG XENON NAVI KŮŽE TAŽNÉ NOVÉ ROZVODY
+
+TECHNICKÉ ÚDAJE:
+► MOTORIZACE: 2.0 TDI 135 kW (184 PS)
+► PŘEVODOVKA: Automatická DSG (6stupňová)
+► PRVNÍ REGISTRACE: 06/2014
+► NAJETO: 172 255 km (Garantováno)
+► VIN: T ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  265 000 Kč</span></b></div>
+<div class="inzeratylok">Zlín<br>760 01</div>
+<div class="inzeratyview">703 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226517206');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226517206');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19055175','19025468','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226517206');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226517236/skoda-octavia-4-20-tdi-110kw-dsg-led-alcantara-dph-acc.php"><img src="https://www.bazos.cz/img/1t/236/226517236.jpg?t=1794832973" class="obrazek" alt="Škoda Octavia 4 2.0 TDi 110KW DSG LED ALCANTARA DPH ACC" width="170" height="128"></a>
+<h2 class=nadpis><a href="/inzerat/226517236/skoda-octavia-4-20-tdi-110kw-dsg-led-alcantara-dph-acc.php">Škoda Octavia 4 2.0 TDi 110KW DSG LED ALCANTARA DPH ACC</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 28.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>ŠKODA OCTAVIA IV COMBI 2.0 TDI 110KW, 2020, AUTOMAT, ALCANTARA, SIDE ASSIST, DPH
+
+TECHNICKÉ ÚDAJE:
+► MOTORIZACE: 2.0 TDI 110 kW (150 PS)
+► PŘEVODOVKA: Automatická DSG (7 stupňová)
+► PRVNÍ REGISTRACE: 10/2020 (Modelový rok 2021)
+► NAJETO: 165 58 ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  385 000 Kč</span></b></div>
+<div class="inzeratylok">Zlín<br>760 01</div>
+<div class="inzeratyview">651 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226517236');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226517236');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19055175','19025468','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226517236');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226513736/skoda-superb-fl-20-tdi-110-kw-matrix-cockpit-2023-85tkm.php"><img src="https://www.bazos.cz/img/1t/736/226513736.jpg?t=1794910649" class="obrazek" alt="ŠKODA SUPERB FL 2.0 TDI 110 KW MATRIX COCKPIT 2023 85tkm" width="170" height="128"></a>
+<h2 class=nadpis><a href="/inzerat/226513736/skoda-superb-fl-20-tdi-110-kw-matrix-cockpit-2023-85tkm.php">ŠKODA SUPERB FL 2.0 TDI 110 KW MATRIX COCKPIT 2023 85tkm</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 28.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>provoz: 04/2023
+Najeto: 85000 km
+Barva: stříbrná METZALÍZA
+Převodovka: 7-ti stupňová automatická
+
+k vozu dostanete sadu zimních alu kol
+
+VÝBAVA:
+-Matrix světlomety s adaptivními blinkry
+-ambientní osvětlení interiéru
+-KAMERA
+-lité kola
+-e ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  499 990 Kč</span></b></div>
+<div class="inzeratylok">Nový Jičín<br>741 01</div>
+<div class="inzeratyview">528 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226513736');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226513736');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19158993','19007235','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226513736');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226513622/skoda-enyaq-sportline-80-150kw-tazne-m2023.php"><img src="https://www.bazos.cz/img/1t/622/226513622.jpg?t=1794910597" class="obrazek" alt="ŠKODA ENYAQ SPORTLINE 80 150KW TAŽNÉ m2023" width="170" height="128"></a>
+<h2 class=nadpis><a href="/inzerat/226513622/skoda-enyaq-sportline-80-150kw-tazne-m2023.php">ŠKODA ENYAQ SPORTLINE 80 150KW TAŽNÉ m2023</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 28.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>Digitální servisní plán k dispozici.
+CEBIA BEZ NEHOD
+Krásný nebouraný vůz, vypadá jako nový...
+
+SOH 93,9% s certifikátem Aviloo
+rozbalancování článků 9mV
+
+uvedení do provozu : 09/2022
+Najeto: 121000
+Barva: černá metalíza
+
+VÝBAVA:
+-MATRIX  ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  689 990 Kč</span></b></div>
+<div class="inzeratylok">Nový Jičín<br>741 01</div>
+<div class="inzeratyview">827 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226513622');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226513622');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19158993','19007235','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226513622');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226512757/skoda-superb-3-14tsi-iv-style-dsg-acc-dcc-hybridtazne2022.php"><img src="https://www.bazos.cz/img/1t/757/226512757.jpg?t=1794827158" class="obrazek" alt="ŠKODA SUPERB 3 1,4TSi iV STYLE DSG ACC DCC HYBRID,TAŽNÉ,2022" width="170" height="128"></a>
+<h2 class=nadpis><a href="/inzerat/226512757/skoda-superb-3-14tsi-iv-style-dsg-acc-dcc-hybridtazne2022.php">ŠKODA SUPERB 3 1,4TSi iV STYLE DSG ACC DCC HYBRID,TAŽNÉ,2022</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 28.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>XXX POZOR NEJEDNÁ SE O DOVOZ ZE ZAHRANIČÍ!xxx- nehrozí riziko stočeného tachometru a právních vad jako u dovozu!
+
+Prodám i na splátky-ŠKODA SIUPERB 3 1.4TSi 160kw iV Dsg Koup.ČR,1.maj.,DPH,Servisní kniha
+
+Pro podnikatele a firmy odpočet DPH!!!
+ ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  519 900 Kč</span></b></div>
+<div class="inzeratylok">Olomouc<br>772 00</div>
+<div class="inzeratyview">592 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226512757');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226512757');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19000687','19141064','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226512757');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226062159/skoda-kodiaq-20tdi-4x4-7m-exclusive-selection.php"><img src="https://www.bazos.cz/img/1t/159/226062159.jpg?t=1794826255" class="obrazek" alt="ŠKODA KODIAQ II 2.0TDi EXCLUSIVE SELECTION (L&amp;K)" width="170" height="128"></a>
+<h2 class=nadpis><a href="/inzerat/226062159/skoda-kodiaq-20tdi-4x4-7m-exclusive-selection.php">ŠKODA KODIAQ II 2.0TDi EXCLUSIVE SELECTION (L&amp;K)</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 28.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>Prodám Škodu Kodiaq II Exclusive Selection v luxusní výbavě, dříve Laurin & Klement. Odpočet DPH! Cena bez DPH 867.000Kč. Najeto 23000km. 2.0TDi motor o výkonu 142kW (193 koní), pohon všech kol (4x4), Aplikace Škoda connect (zapnutí nezávislého topen ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no"> 1 049 000 Kč</span></b></div>
+<div class="inzeratylok">Jihlava<br>588 45</div>
+<div class="inzeratyview">1190 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226062159');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226062159');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19291174','19319266','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226062159');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226388681/skoda-octavia-combi-iv-20tdi-style-eltazne2023cr.php"><img src="https://www.bazos.cz/img/1t/681/226388681.jpg?t=1794818597" class="obrazek" alt="Škoda Octavia combi IV 2.0TDI STYLE+ / EL.TAŽNÉ,2023,ČR/" width="170" height="128"></a>
+<h2 class=nadpis><a href="/inzerat/226388681/skoda-octavia-combi-iv-20tdi-style-eltazne2023cr.php">Škoda Octavia combi IV 2.0TDI STYLE+ / EL.TAŽNÉ,2023,ČR/</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 28.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>ŠKODA OCTAVIA COMBI 2.0TDI STYLE+,
+
+VOZIDLO V PĚKNÉM STAVU PO 1.MAJITELI S PRAVIDELNOU SERVISNÍ HISTORIÍ. V PŘÍPADĚ VAŠEHO ZÁJMU VOLEJTE 600000000.
+
+První registrace: 06/2023
+Rok výroby: 2023
+STK: 08/2027
+Stav tachometru: 139 000 km
+Palivo: N ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  345 900 Kč</span></b></div>
+<div class="inzeratylok">Bruntál<br>792 01</div>
+<div class="inzeratyview">510 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226388681');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226388681');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19005086','19007190','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226388681');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226467935/skoda-kodiaq-20-tdi-147kw-4x4-dsg-7-mist-tazne-zaruka.php"><img src="https://www.bazos.cz/img/1t/935/226467935.jpg?t=1794809437" class="obrazek" alt="Škoda Kodiaq 2.0 TDI 147kW 4x4 DSG 7-míst Tažné - Záruka" width="170" height="128"></a>
+<h2 class=nadpis><a href="/inzerat/226467935/skoda-kodiaq-20-tdi-147kw-4x4-dsg-7-mist-tazne-zaruka.php">Škoda Kodiaq 2.0 TDI 147kW 4x4 DSG 7-míst Tažné - Záruka</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 28.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>Škoda Kodiaq Style 2.0 TDI 147kW 4x4 DSG / 7-míst / Tažné zařízení / Panorama / Matrix-Beam LED / 19" alu TRIGLAV letní + zimní sada na 18" Alu + Rezerva
+
+- Najeto 121 772 km.
+- Jezdí od 2/2023.
+- VIN: TMBLN7NSXP8029731.
+- Cena: 727 000 Kč. DPH  ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  727 000 Kč</span></b></div>
+<div class="inzeratylok">Praha 10<br>101 00</div>
+<div class="inzeratyview">587 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226467935');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226467935');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19055983','19002139','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226467935');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+<div id="container_one" class="container"></div>
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226468479/skoda-superb-3-combi-20tdi-147kw-dsg-panorama-zaruka.php"><img src="https://www.bazos.cz/img/1t/479/226468479.jpg?t=1794809358" class="obrazek" alt="Škoda Superb 3 Combi 2.0TDI 147kW DSG Panorama - Záruka" width="170" height="128" loading="lazy"></a>
+<h2 class=nadpis><a href="/inzerat/226468479/skoda-superb-3-combi-20tdi-147kw-dsg-panorama-zaruka.php">Škoda Superb 3 Combi 2.0TDI 147kW DSG Panorama - Záruka</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 28.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>Škoda Superb 3 Combi Style 2.0 TDI 147kW DSG / Panorama / Matrix LED / Virtual Cockpit / ACC / 18" Alu Antares
+
+- Najeto 168 043 km.
+- Jezdí od 1/2024.
+- VIN: TMBJR7NP3R7034947.
+- Cena: 499 000 Kč. DPH si odečtete.
+- Ověřeno autorizovaným servi ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  499 000 Kč</span></b></div>
+<div class="inzeratylok">Praha 10<br>101 00</div>
+<div class="inzeratyview">389 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226468479');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226468479');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19055983','19002139','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226468479');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226483070/skoda-octavia-4-combi-rs-20tsi180kwdsgwebastokuze2023.php"><img src="https://www.bazos.cz/img/1t/070/226483070.jpg?t=1794781390" class="obrazek" alt="Škoda Octavia 4 combi RS 2.0TSi,180kW,DSG,Webasto,kůže,2023" width="170" height="128" loading="lazy"></a>
+<h2 class=nadpis><a href="/inzerat/226483070/skoda-octavia-4-combi-rs-20tsi180kwdsgwebastokuze2023.php">Škoda Octavia 4 combi RS 2.0TSi,180kW,DSG,Webasto,kůže,2023</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 27.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>Prodám Škoda Octavia 4 combi RS 2.0 TSi (benzín) o výkonu 180 kW, ve výbavě RS Challenge, v kombinaci se 7 stupňovou automatickou převodovkou DSG, Full LED Matrixovými světlomety, vyhřívaným volantem, virtuálním kokpitem, adaptivním tempomatem, masáž ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  625 000 Kč</span></b></div>
+<div class="inzeratylok">Praha 9<br>193 00</div>
+<div class="inzeratyview">682 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226483070');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226483070');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19126920','19020821','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226483070');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226482932/skoda-enyaq-80iv-x82kwh4x4195kwsportlinetaznetepelko.php"><img src="https://www.bazos.cz/img/1t/932/226482932.jpg?t=1794781340" class="obrazek" alt="Škoda Enyaq 80iV X,82kWh,4x4,195kW,Sportline,tažné,Tepelko" width="170" height="128" loading="lazy"></a>
+<h2 class=nadpis><a href="/inzerat/226482932/skoda-enyaq-80iv-x82kwh4x4195kwsportlinetaznetepelko.php">Škoda Enyaq 80iV X,82kWh,4x4,195kW,Sportline,tažné,Tepelko</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 27.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>Prodám Škoda Enyaq 80iV 4x4 o výkonu 82kWh (195 kW), ve výbavě Sportline, s pohonem 4x4, v kombinaci s automatickou převodovkou, Full LED Matrixovými automatickými světlomety, adaptivním tempomatem, el. tažným zařízením, panoramatickou střechou, dvoj ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  865 000 Kč</span></b></div>
+<div class="inzeratylok">Praha 9<br>193 00</div>
+<div class="inzeratyview">546 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226482932');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226482932');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19126920','19020821','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226482932');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226482759/skoda-enyaq-80iv-82kwh150kwled1majaccnezavisla-klima.php"><img src="https://www.bazos.cz/img/1t/759/226482759.jpg?t=1794781290" class="obrazek" alt="Škoda Enyaq 80iV 82kWH,150kW,LED,1.maj,ACC,Nezávislá klima" width="170" height="128" loading="lazy"></a>
+<h2 class=nadpis><a href="/inzerat/226482759/skoda-enyaq-80iv-82kwh150kwled1majaccnezavisla-klima.php">Škoda Enyaq 80iV 82kWH,150kW,LED,1.maj,ACC,Nezávislá klima</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 27.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>Prodám Škoda Enyaq 80iV o výkonu 82kWh (150 kW), ve výbavě Loft, v kombinaci s automatickou převodovkou, Full LED Matrixovými automatickými světlomety, adaptivním tempomatem, vyhřívanými sedadly, dvojitými skly, všemi asistenty, nezávislou ventilací  ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  639 000 Kč</span></b></div>
+<div class="inzeratylok">Praha 9<br>193 00</div>
+<div class="inzeratyview">506 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226482759');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226482759');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19126920','19020821','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226482759');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226482649/skoda-octavia-4-combi-rs-20tdi147kwdsgtaznepanoramadph.php"><img src="https://www.bazos.cz/img/1t/649/226482649.jpg?t=1794781243" class="obrazek" alt="Škoda Octavia 4 combi RS 2.0TDi,147kW,DSG,Tažné,Panorama,DPH" width="170" height="128" loading="lazy"></a>
+<h2 class=nadpis><a href="/inzerat/226482649/skoda-octavia-4-combi-rs-20tdi147kwdsgtaznepanoramadph.php">Škoda Octavia 4 combi RS 2.0TDi,147kW,DSG,Tažné,Panorama,DPH</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 27.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>Prodám Škoda Octavia 4 combi RS 2.0 TDi (nafta) o výkonu 147 kW, ve výbavě RS, v kombinaci se 7 stupňovou automatickou převodovkou DSG, el. tažným zařízením, Full LED Matrixovými světlomety, virtuálním kokpitem, adaptivním tempomatem, vyhřívanými spo ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  610 000 Kč</span></b></div>
+<div class="inzeratylok">Praha 9<br>193 00</div>
+<div class="inzeratyview">490 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226482649');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226482649');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19126920','19020821','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226482649');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226482504/skoda-superb-iii-combi-20-tdi147kwdsg4x4sportlinewebas.php"><img src="https://www.bazos.cz/img/1t/504/226482504.jpg?t=1794781187" class="obrazek" alt="Škoda Superb III combi 2.0 TDi,147kW,DSG,4x4,Sportline,Webas" width="170" height="128" loading="lazy"></a>
+<h2 class=nadpis><a href="/inzerat/226482504/skoda-superb-iii-combi-20-tdi147kwdsg4x4sportlinewebas.php">Škoda Superb III combi 2.0 TDi,147kW,DSG,4x4,Sportline,Webas</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 27.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>Prodám Škoda Superb III combi 2.0 TDi (nafta) o výkonu 147 kW, DSG, 4x4, ve výbavě Sportline, v kombinaci se 7 stupňovou automatickou převodovkou DSG, Full LED Matrixovými automatickými světlomety, adaptivním tempomatem, nezávislým topením Webasto, v ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  710 000 Kč</span></b></div>
+<div class="inzeratylok">Praha 9<br>193 00</div>
+<div class="inzeratyview">449 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226482504');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226482504');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19126920','19020821','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226482504');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226482338/skoda-kodiaq-20tsi140kwdsg4x4ledtazne7mistdphkuze.php"><img src="https://www.bazos.cz/img/1t/338/226482338.jpg?t=1794781148" class="obrazek" alt="Škoda Kodiaq 2.0TSi,140kW,DSG,4x4,LED,Tažné,7míst,DPH,Kůže" width="170" height="128" loading="lazy"></a>
+<h2 class=nadpis><a href="/inzerat/226482338/skoda-kodiaq-20tsi140kwdsg4x4ledtazne7mistdphkuze.php">Škoda Kodiaq 2.0TSi,140kW,DSG,4x4,LED,Tažné,7míst,DPH,Kůže</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 27.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>Prodám Škoda Kodiaq 2.0 TSi, 4x4 (benzín) o výkonu 140 kW, ve výbavě Style Plus, v kombinaci se 7 stupňovou automatickou převodovkou DSG, pohonem 4x4, Full LED Matrixovými automatickými světlomety, adaptivním tempomatem, vyhřívaným volantem, vyhřívan ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  715 000 Kč</span></b></div>
+<div class="inzeratylok">Praha 9<br>193 00</div>
+<div class="inzeratyview">513 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226482338');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226482338');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19126920','19020821','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226482338');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226482186/skoda-kodiaq-20tdi110kwdsg4x4sportlinewebastotaznekuz.php"><img src="https://www.bazos.cz/img/1t/186/226482186.jpg?t=1794781113" class="obrazek" alt="Škoda Kodiaq 2.0TDi,110kW,DSG,4x4,Sportline,Webasto,TažnéKůž" width="170" height="128" loading="lazy"></a>
+<h2 class=nadpis><a href="/inzerat/226482186/skoda-kodiaq-20tdi110kwdsg4x4sportlinewebastotaznekuz.php">Škoda Kodiaq 2.0TDi,110kW,DSG,4x4,Sportline,Webasto,TažnéKůž</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 27.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>Prodám Škoda Kodiaq 2.0 TDi, 4x4 (nafta) o výkonu 110 kW, ve výbavě Sportline, v kombinaci se 7 stupňovou automatickou převodovkou DSG, pohonem 4x4, Full LED Matrixovými automatickými světlomety, adaptivním tempomatem, dvojitými skly, virtuálním kokp ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  799 000 Kč</span></b></div>
+<div class="inzeratylok">Praha 9<br>193 00</div>
+<div class="inzeratyview">499 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226482186');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226482186');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19126920','19020821','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226482186');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226481970/skoda-kodiaq-20tsi140kwdsg4x4tour1maj2022dph77tkm.php"><img src="https://www.bazos.cz/img/1t/970/226481970.jpg?t=1794781057" class="obrazek" alt="Škoda Kodiaq 2.0TSi,140kW,DSG,4x4,Tour,1.maj,2022,DPH,77TKM" width="170" height="128" loading="lazy"></a>
+<h2 class=nadpis><a href="/inzerat/226481970/skoda-kodiaq-20tsi140kwdsg4x4tour1maj2022dph77tkm.php">Škoda Kodiaq 2.0TSi,140kW,DSG,4x4,Tour,1.maj,2022,DPH,77TKM</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 27.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>Prodám Škoda Kodiaq 2.0 TSi, 4x4 (benzín) o výkonu 140 kW, ve výbavě Tour, v kombinaci se 7 stupňovou automatickou převodovkou DSG, pohonem 4x4, Full LED Matrixovými automatickými světlomety, adaptivním tempomatem, vyhřívaným volantem, vyhřívanými se ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  715 000 Kč</span></b></div>
+<div class="inzeratylok">Praha 9<br>193 00</div>
+<div class="inzeratyview">457 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226481970');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226481970');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19126920','19020821','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226481970');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226481610/skoda-superb-iii-combi-20tdi140kwdsg4x4scoutledtazne.php"><img src="https://www.bazos.cz/img/1t/610/226481610.jpg?t=1794781017" class="obrazek" alt="Škoda Superb III combi 2.0TDi,140kW,DSG,4x4,Scout,LED,tažné" width="170" height="128" loading="lazy"></a>
+<h2 class=nadpis><a href="/inzerat/226481610/skoda-superb-iii-combi-20tdi140kwdsg4x4scoutledtazne.php">Škoda Superb III combi 2.0TDi,140kW,DSG,4x4,Scout,LED,tažné</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 27.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>Prodám Škoda Superb III combi 2.0 TDi (nafta) o výkonu 140 kW, DSG, 4x4, ve výbavě Scout, v kombinaci se 7 stupňovou automatickou převodovkou DSG, Full LED Matrixovými automatickými světlomety, adaptivním tempomatem, automatickým přídavným topením We ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  665 000 Kč</span></b></div>
+<div class="inzeratylok">Praha 9<br>193 00</div>
+<div class="inzeratyview">442 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226481610');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226481610');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19126920','19020821','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226481610');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226481251/skoda-octavia-4-combi-20tdi110kwdsgledaccdccstyleplus.php"><img src="https://www.bazos.cz/img/1t/251/226481251.jpg?t=1794780973" class="obrazek" alt="Škoda Octavia 4 combi 2.0TDi,110kW,DSG,LED,ACC,DCC,StylePlus" width="170" height="128" loading="lazy"></a>
+<h2 class=nadpis><a href="/inzerat/226481251/skoda-octavia-4-combi-20tdi110kwdsgledaccdccstyleplus.php">Škoda Octavia 4 combi 2.0TDi,110kW,DSG,LED,ACC,DCC,StylePlus</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 27.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>Prodám Škoda Octavia combi 4 2.0 TDi (nafta) o výkonu 110 kW, DSG, ve výbavě Style Plus, v kombinaci se 7 stupňovou automatickou převodovkou DSG, adaptivním tempomatem, Full LED Matrixovými světlomety, virtuálním kokpitem, el. kufrem a automatickým p ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  449 000 Kč</span></b></div>
+<div class="inzeratylok">Praha 9<br>193 00</div>
+<div class="inzeratyview">412 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226481251');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226481251');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19126920','19020821','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226481251');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226480963/skoda-superb-iii-sedan-20-tsi162kwdsgsportlinetazneacc.php"><img src="https://www.bazos.cz/img/1t/963/226480963.jpg?t=1794780932" class="obrazek" alt="Škoda Superb III sedan 2.0 TSi,162kW,DSG,Sportline,tažné,ACC" width="170" height="128" loading="lazy"></a>
+<h2 class=nadpis><a href="/inzerat/226480963/skoda-superb-iii-sedan-20-tsi162kwdsgsportlinetazneacc.php">Škoda Superb III sedan 2.0 TSi,162kW,DSG,Sportline,tažné,ACC</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 27.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>Prodám Škoda Superb III sedan 2.0 TSi (benzín) o výkonu 162kW, ve výbavě Sportline, v kombinaci s 6 stupňovou automatickou převodovkou DSG, Bi-Xenonovými automatickými světlomety, adaptivním tempomatem, vyhřívanými sedadly, el. tažným zařízením, pano ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  499 000 Kč</span></b></div>
+<div class="inzeratylok">Praha 9<br>193 00</div>
+<div class="inzeratyview">547 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226480963');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226480963');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19126920','19020821','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226480963');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226480729/skoda-octavia-iii-combi-16-tdi81-kwdsgsportpaketxenony.php"><img src="https://www.bazos.cz/img/1t/729/226480729.jpg?t=1794780868" class="obrazek" alt="Škoda Octavia III combi 1.6 TDi,81 kW,DSG,Sportpaket,Xenony" width="170" height="128" loading="lazy"></a>
+<h2 class=nadpis><a href="/inzerat/226480729/skoda-octavia-iii-combi-16-tdi81-kwdsgsportpaketxenony.php">Škoda Octavia III combi 1.6 TDi,81 kW,DSG,Sportpaket,Xenony</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 27.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>Prodám Škoda Octavia III combi 1.6 TDi (nafta) o výkonu 81 kW, DSG, ve výbavě Sportpaket, v kombinaci s 6 stupňovou automatickou převodovkou DSG, Bi-Xenonovými automatickými světlomety, tempomatem, vyhřívaným čelním oknem, sportovními sedadly, automa ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  210 000 Kč</span></b></div>
+<div class="inzeratylok">Praha 9<br>193 00</div>
+<div class="inzeratyview">520 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226480729');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226480729');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19126920','19020821','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226480729');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226480569/skoda-octavia-i-combi-tour-19tdi74kwmanual1majitel2009.php"><img src="https://www.bazos.cz/img/1t/569/226480569.jpg?t=1794780773" class="obrazek" alt="Škoda Octavia I combi TOUR 1.9TDi,74kW,manual,1.majitel,2009" width="170" height="128" loading="lazy"></a>
+<h2 class=nadpis><a href="/inzerat/226480569/skoda-octavia-i-combi-tour-19tdi74kwmanual1majitel2009.php">Škoda Octavia I combi TOUR 1.9TDi,74kW,manual,1.majitel,2009</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 27.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>Prodám Škoda Octavia I combi Tour 1.9 TDi (nafta) o výkonu 74 kW, ve výbavě Elegance, v kombinaci s 5 stupňovou manuální převodovkou, el. nastavitelnými zrcátky, klimatizací.
+
+Vůz je po 1.majiteli!
+
+Vozidlo od oficiálního dealera vozů Škoda!
+
+V ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  135 000 Kč</span></b></div>
+<div class="inzeratylok">Praha 9<br>193 00</div>
+<div class="inzeratyview">711 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226480569');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226480569');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19126920','19020821','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226480569');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226483769/skoda-octavia-4-combi-15tsi-110kw-style-plus.php"><img src="https://www.bazos.cz/img/1t/769/226483769.jpg?t=1794771558" class="obrazek" alt="Škoda Octavia 4 Combi 1.5TSI 110kW Style PLUS" width="170" height="128" loading="lazy"></a>
+<h2 class=nadpis><a href="/inzerat/226483769/skoda-octavia-4-combi-15tsi-110kw-style-plus.php">Škoda Octavia 4 Combi 1.5TSI 110kW Style PLUS</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 27.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>Škoda OCTAVIA IV bohatá výbava Style s paketem PLUS, 1.5 TSI 110 kW, 6MT, MATRIX LED
+
++ pravidelný značkový servis Škoda, servisní kniha elektronická
++ zakoupeno nové v ČR
+
++ 1.5 TSI 110 kW (benzín)
++ manuální převodovka
++ v provozu 2021
++ na ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  419 000 Kč</span></b></div>
+<div class="inzeratylok">Ostrava<br>700 30</div>
+<div class="inzeratyview">891 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226483769');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226483769');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19039084','19062849','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226483769');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226482743/skoda-superb-3-sportline-dsg-15-tsi-110-kw-2022-cr.php"><img src="https://www.bazos.cz/img/1t/743/226482743.jpg?t=1794770090" class="obrazek" alt="Škoda Superb 3 Sportline DSG 1.5 TSI 110 kW, 2022, ČR" width="170" height="128" loading="lazy"></a>
+<h2 class=nadpis><a href="/inzerat/226482743/skoda-superb-3-sportline-dsg-15-tsi-110-kw-2022-cr.php">Škoda Superb 3 Sportline DSG 1.5 TSI 110 kW, 2022, ČR</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 27.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>Škoda SUPERB Sportline 1.5 TSI 110 kW, automat DSG, barva černá metalická. 2022.
+
++ pravidelný značkový servis Škoda, servisní kniha elektronická
++ aktuálně provedena výměna oleje a inspekce dle servisního plánu
++ zakoupeno nové v ČR
+
++ 1.5 TSI ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  559 000 Kč</span></b></div>
+<div class="inzeratylok">Ostrava<br>700 30</div>
+<div class="inzeratyview">1080 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226482743');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226482743');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19039084','19062849','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226482743');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226390468/skoda-octavia-iii-combi-14-tsi-110-kw-2016-115-659-km.php"><img src="https://www.bazos.cz/img/1t/468/226390468.jpg?t=1794768543" class="obrazek" alt="Škoda Octavia III Combi 1.4 TSI 110 kW – 2016 – 115 659 km" width="170" height="128" loading="lazy"></a>
+<h2 class=nadpis><a href="/inzerat/226390468/skoda-octavia-iii-combi-14-tsi-110-kw-2016-115-659-km.php">Škoda Octavia III Combi 1.4 TSI 110 kW – 2016 – 115 659 km</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 27.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>Nabízím k prodeji Škodu Octavia III Combi s výbavou JOY a úsporným a výkonným benzínovým motorem 1.4 TSI 110 kW (150 koní).
+
+Jedná se o model z roku 2016 v elegantní stříbrné metalíze Silber Metallic s nájezdem pouhých 115 659 km.
+
+🔧 Základní inf ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  169 000 Kč</span></b></div>
+<div class="inzeratylok">Brno venkov<br>664 64</div>
+<div class="inzeratyview">1479 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226390468');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226390468');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19548524','19399415','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226390468');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226481241/skoda-octavia-combi-iii-14tsi-110kw-2018-tazne.php"><img src="https://www.bazos.cz/img/1t/241/226481241.jpg?t=1794767981" class="obrazek" alt="ŠKODA OCTAVIA COMBI III 1.4TSI 110KW 2018, TAŽNÉ" width="170" height="128" loading="lazy"></a>
+<h2 class=nadpis><a href="/inzerat/226481241/skoda-octavia-combi-iii-14tsi-110kw-2018-tazne.php">ŠKODA OCTAVIA COMBI III 1.4TSI 110KW 2018, TAŽNÉ</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 27.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>Rok výroby: 02/2018
+Stav tachometru: 158.630 km
+Země původu: Německo
+Palivo: benzín
+Karoserie: kombi
+Výkon: 110kW
+Převodovka: manuální
+Barva: černá metalíza
+
+Nabízím k prodeji Škoda Octavia Combi 3 s motorizací 1.4 TSi o výkonu 110 kW (rozvo ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  288 900 Kč</span></b></div>
+<div class="inzeratylok">Ostrava<br>739 32</div>
+<div class="inzeratyview">894 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226481241');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226481241');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19097921','19097719','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226481241');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226110077/skoda-fabia-12-tsi-combi-modra-rs-metaliza-alu-kola.php"><img src="https://www.bazos.cz/img/1t/077/226110077.jpg?t=1794767832" class="obrazek" alt="ŠKODA FABIA 1.2 TSi COMBI MODRÁ RS METALÍZA ALU KOLA" width="170" height="128" loading="lazy"></a>
+<h2 class=nadpis><a href="/inzerat/226110077/skoda-fabia-12-tsi-combi-modra-rs-metaliza-alu-kola.php">ŠKODA FABIA 1.2 TSi COMBI MODRÁ RS METALÍZA ALU KOLA</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 27.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>ŠKODA FABIA 1.2 TSi COMBI MODRÁ RS METALÍZA ALU KOLA
+
+Prohlídky vozidel pouze po předchozí telefonické dohodě.Uvedené ceny jsou akční, info o akcích u prodejce, info o splátkách platné pro podnikatele a živnostníky -Stačí složit JEN 2.800 Kč nebo V ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  129 800 Kč</span></b></div>
+<div class="inzeratylok">Bruntál<br>792 01</div>
+<div class="inzeratyview">735 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226110077');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226110077');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19000209','19009550','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226110077');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+
+<div class="inzeraty inzeratyflex">
+<div class="inzeratynadpis"><a href="/inzerat/226469023/skoda-octavia-iv-20tdi-85kw-style-led-matrixkamera83tkm.php"><img src="https://www.bazos.cz/img/1t/023/226469023.jpg?t=1794752093" class="obrazek" alt="ŠKODA OCTAVIA IV 2,0TDi 85kW STYLE LED matrix,KAMERA,83tkm" width="170" height="128" loading="lazy"></a>
+<h2 class=nadpis><a href="/inzerat/226469023/skoda-octavia-iv-20tdi-85kw-style-led-matrixkamera83tkm.php">ŠKODA OCTAVIA IV 2,0TDi 85kW STYLE LED matrix,KAMERA,83tkm</a></h2><span class=velikost10> - <span title="TOP 21x Platí do 27.12. 2026" class="ztop">TOP</span> - [17.11. 2026]</span><br>
+<div class=popis>XXX POZOR NEJEDNÁ SE O DOVOZ ZE ZAHRANIČÍ!xxx- nehrozí riziko stočeného tachometru a právních vad jako u dovozu!
+
+Prodám i na splátky-ŠKODA OCTAVIA 4 combi 2,0TDI 85kW STYLE Koup.ČR,1.maj.,DPH,Servisní kniha
+
+Pro podnikatele a firmy odpočet DPH!! ...</div><br><br>
+</div>
+<div class="inzeratycena"><b><span translate="no">  399 900 Kč</span></b></div>
+<div class="inzeratylok">Olomouc<br>772 00</div>
+<div class="inzeratyview">676 x</div>
+<div class="inzeratyakce">
+<span onclick="odeslatakci('spam','226469023');return false;" class="akce paction">Označit špatný inzerát</span> <span onclick="odeslatakci('category','226469023');return false;" class="akce paction">Chybnou kategorii</span> <span onclick="odeslatakci('rating','19000687','19141064','Prodejce');return false;" class="akce paction">Ohodnotit uživatele</span> <span onclick="odeslatakci('edit','226469023');return false;" class="akce paction">Smazat/Upravit/Topovat</span>
+</div>
+</div>
+<div id="container_two" class="container"></div>
+<script type="text/javascript" charset="utf-8">
+var pageOptions = {
+  'pubId': 'pub-3645948300403337',
+  'query' : "Škoda",
+  "channel": "9153444560",  'linkTarget' : '_blank',
+  'personalizedAds' : false,
+  'adsafe': 'medium',
+  'ivt': false,
+'styleId' : '6171314811',  'hl': 'cs'
+};
+
+var adblock1 = {
+  'container': 'container_one',
+  'width': 'auto',
+  'maxTop' : 2
+};
+
+var adblock2 = {
+  'container': 'container_two',
+  'width': 'auto',
+  'number' : 2
+};
+
+_googCsa('ads', pageOptions, adblock1, adblock2);</script>
+
+<br><div class="strankovani">Stránka: <b><span class=cisla>1</span></b> <a href="/skoda/40/">2</a> <a href="/skoda/80/">3</a> <a href="/skoda/120/">4</a> <a href="/skoda/160/">5</a> <a href="/skoda/200/">6</a> <a href="/skoda/240/">7</a> <a href="/skoda/280/">8</a> <a href="/skoda/40/"><b>Další</b></a></div><br><br><br>
+
+
+</div></div><br>
+
+&copy;2026 Bazoš -  <b>Inzerce, Bazar Škoda</b><br>
+<a href="https://www.bazos.cz/napoveda.php">Nápověda</a>, <a href="https://www.bazos.cz/dotazy.php">Dotazy</a>, <a href="https://www.bazos.cz/hodnoceni.php">Hodnocení</a>, <a href="https://www.bazos.cz/kontakt.php">Kontakt</a>, <a href="https://www.bazos.cz/reklama.php">Reklama</a>, <a href="https://www.bazos.cz/podminky.php">Podmínky</a>, <a href="https://www.bazos.cz/ochrana-udaju.php">Ochrana údajů</a>, <a href="https://www.bazos.cz/rss.php?rub=au&cat=93">RSS</a>, <form name="formvkm" id="formvkm" method="post" style="display: inline;"><input type="hidden" name="vkm" value="m"><input type="submit" class="vkm" value="Mobilní verze"></form><br>
+
+Inzeráty Auto celkem: <b>435717</b>, za 24 hodin: <b>23670</b><br><br>
+<a href="https://www.bazos.cz/mapa-kategorie.php">Mapa kategorií</a>, <a href="https://auto.bazos.cz/mapa-search.php">Nejvyhledávanější výrazy</a>
+<br>
+Země: <a href="https://auto.bazos.cz">Česká republika</a>, <a href="https://auto.bazos.sk">Slovensko</a>, <a href="https://auto.bazos.pl">Polsko</a>, <a href="https://auto.bazos.at">Rakousko</a>
+<br>
+<br>
+</div>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NZW1QTHKBB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-NZW1QTHKBB');
+</script>
+
+</body>
+</html>

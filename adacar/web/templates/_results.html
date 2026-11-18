@@ -1,0 +1,36 @@
+{% from "_icons.html" import icon %}
+{% if offset == 0 %}
+<div class="list-head">
+  {% if result.total %}
+    <p id="found-count" class="muted small">{{ t("search.found", n=result.total) }}</p>
+  {% else %}
+    <p id="found-count" class="muted">{{ t("search.empty_filtered") if f.is_filtered() else t("search.empty") }}</p>
+  {% endif %}
+  <div class="list-actions">
+    {% if result.total %}
+      {# The name goes as a form field: a header cannot carry "š". #}
+      <button type="button" class="secondary outline list-action" data-prompt="{{ t('saved.prompt') }}"
+              onclick="const name = prompt(this.dataset.prompt); if (name !== null) htmx.ajax('POST', '/saved', {source: this, target: '#saved', values: {saved_name: name}})">{{ icon("bookmark") }}{{ t("saved.save") }}</button>
+    {% endif %}
+  </div>
+  {% include "_hidden.html" %}
+</div>
+  {% if request.headers.get("HX-Request") %}
+    {# Refresh the filter counts after new results, without waiting for them. #}
+    <div id="facets-refresh" hx-swap-oob="true" hx-get="/facets?{{ qs }}" hx-trigger="load"
+         hx-target="#facets" hx-swap="innerHTML" hx-sync="#facets:replace"></div>
+    {% with oob_state = true %}{% include "_commute_state.html" %}{% endwith %}
+    <div id="origin" hidden data-at="{{ f.origin or '' }}" data-from="{{ f.origin_label }}" hx-swap-oob="true"></div>
+  {% endif %}
+  {% if since is defined and since is not none %}{% include "_live.html" %}{% endif %}
+<div id="car-list">
+{% endif %}
+{% for car in result.cars %}
+  {% with row = loop.index0 %}{% include "_car.html" %}{% endwith %}
+{% endfor %}
+{% if offset + result.cars | length < result.total %}
+  {% include "_more.html" %}
+{% endif %}
+{% if offset == 0 %}
+</div>
+{% endif %}

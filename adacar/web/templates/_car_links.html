@@ -1,0 +1,7 @@
+{# A car's ads, each with a link to the original ad and its price when it differs. #}
+{% from "_icons.html" import icon %}
+{% for ad in car.ads if ad.status == "active" or car.status != "active" %}
+  {% if ad.url %}<a href="{{ ad.url | safe_url }}" target="_blank" rel="noopener" title="{{ t('car.open') }}" aria-label="{{ t('car.open') }}: {{ ad.source_id | source_label }}">{{ ad.source_id | source_label }}{{ icon("external", "icon-sm") }}</a>
+  {%- else %}<span class="muted">{{ ad.source_id | source_label }}</span>{% endif %}
+  {% if ad.price and car.price and ad.price != car.price %}<small class="muted">{{ t("car.price_differs", price=(ad.price | number) ~ " Kč") }}</small>{% endif %}
+{% endfor %}

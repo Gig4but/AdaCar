@@ -1,0 +1,160 @@
+"""User settings stored as JSON. Secrets (keys, logins) never go here — see secrets.py."""
+
+import json
+import logging
+import os
+import sys
+import tempfile
+import threading
+import time
+from datetime import datetime
+from pathlib import Path
+from typing import Literal
+
+from pydantic import BaseModel, Field, PrivateAttr, ValidationError
+
+from adacar import paths
+
+Language = Literal["cs", "en"]
+IntervalHours = Literal[6, 12, 24, 48]
+TravelMode = Literal["any", "car", "transit", "walk", "bike"]
+# "auto": decided by the hardware (PLAN §3.2.1); "whole": all of Czechia; "home": ~150 km
+# around home (less RAM and disk).
+RoutingArea = Literal["auto", "whole", "home"]
+TIME_OF_DAY = r"([01]\d|2[0-3]):[0-5]\d"  # "09:00": when the trip to a car starts
+# "system" follows Windows light/dark; the rest are fixed colour schemes (web/static/app.css).
+Theme = Literal["system", "light", "dark", "ocean", "forest", "sunset", "plum", "midnight"]
+
+log = logging.getLogger(__name__)
+
+
+class AutomationSettings(BaseModel):
+    enabled: bool = False  # automatic checks are off until the user switches them on
+    interval_hours: IntervalHours = 12
+    paused_until: datetime | None = None  # UTC; no automatic checks until then
+    start_with_windows: bool = True
+    notifications: bool = True
+
+    def paused(self, now: datetime) -> bool:
+        return self.paused_until is not None and self.paused_until > now
+
+
+class Profile(BaseModel):
+    """Wizard steps 2 and 3: how far the user would go to see a car, and which cars. Drives
+    the regions read, the travel-time filter and the list's default filters."""
+
+    home_address: str = ""
+    travel_mode: TravelMode = "any"
+    max_minutes: int = Field(default=0, ge=0, le=180)  # 0 = no limit
+    depart_time: str = Field(default="09:00", pattern=f"^{TIME_OF_DAY}$")  # on weekdays
+    makes: list[str] = Field(default_factory=list)  # make codes; empty = every make
+    max_price: int | None = Field(default=None, ge=10_000, le=50_000_000)  # CZK
+
+
+class UpdateSettings(BaseModel):
+    """Wizard step "Automatické hledání" and Settings → Aktualizace."""
+
+    auto: bool = False  # check daily; a new version is installed at the next start
+
+
+class Settings(BaseModel):
+    language: Language = "cs"
+    theme: Theme = "system"
+    wizard_completed: bool = False
+    profile: Profile = Field(default_factory=Profile)
+    automation: AutomationSettings = Field(default_factory=AutomationSettings)
+    updates: UpdateSettings = Field(default_factory=UpdateSettings)
+    routing_area: RoutingArea = "auto"
+    # The map and timetables are downloaded only once the user asks (wizard or Settings →
+    # Mapy); until imported, travel times and routes are off.
+    routing_download: bool = False
+    # Source id -> on/off as the user chose; sources not listed use their default.
+    sources: dict[str, bool] = Field(default_factory=dict)
+
+    _path: Path | None = PrivateAttr(default=None)
+
+    @classmethod
+    def load(cls, path: Path | None = None) -> "Settings":
+        path = path or paths.config_file()
+        settings = cls()
+        if not path.exists():
+            settings.language = system_language()
+        else:
+            try:
+                settings = cls.model_validate_json(path.read_text(encoding="utf-8"))
+            except (ValidationError, UnicodeDecodeError) as exc:
+                backup = path.with_name(path.name + ".broken")
+                path.replace(backup)
+                settings = _valid_part(backup.read_bytes())  # one bad field keeps the rest
+                log.warning("Invalid settings moved to %s, invalid ones reset: %s", backup, exc)
+        settings._path = path
+        return settings
+
+    def save(self, path: Path | None = None) -> None:
+        path = path or self._path or paths.config_file()
+        with _save_lock:  # web handlers save concurrently
+            fd, tmp = tempfile.mkstemp(prefix=path.name + ".", suffix=".tmp", dir=path.parent)
+            try:
+                with os.fdopen(fd, "w", encoding="utf-8") as file:
+                    file.write(self.model_dump_json(indent=2))
+                _replace(Path(tmp), path)
+            finally:
+                Path(tmp).unlink(missing_ok=True)  # only left if writing failed
+        self._path = path
+
+
+_save_lock = threading.Lock()
+
+
+def system_language() -> Language:
+    """The first start's language: Czech for Czech and Slovak Windows, otherwise English."""
+    if sys.platform != "win32":
+        return "cs"
+    import ctypes
+
+    primary = ctypes.windll.kernel32.GetUserDefaultUILanguage() & 0x3FF
+    return "cs" if primary in (0x05, 0x1B) else "en"  # LANG_CZECH, LANG_SLOVAK
+
+
+def _replace(source: Path, target: Path, attempts: int = 20) -> None:
+    """os.replace, retried briefly: on Windows it fails while another program (an antivirus,
+    a reader) has the target open."""
+    for attempt in range(attempts):
+        try:
+            source.replace(target)
+            return
+        except PermissionError:
+            if attempt == attempts - 1:
+                raise
+            time.sleep(0.05)
+
+
+def _valid_part(raw: bytes) -> Settings:
+    """The settings in `raw` with each invalid value dropped, so it gets its default."""
+    try:
+        data = json.loads(raw)
+    except ValueError:  # not JSON or not text
+        return Settings()
+    while isinstance(data, dict):
+        try:
+            return Settings.model_validate(data)
+        except ValidationError as exc:
+            dropped = [_drop(data, error["loc"]) for error in exc.errors()]
+            if not any(dropped):
+                break
+    return Settings()
+
+
+def _drop(data: dict, loc: tuple) -> bool:
+    """Removes the invalid value at `loc` from `data`. Only dict keys are removed: an invalid
+    list item drops the whole list. False if there was nothing to remove."""
+    container, key = data, loc[0]
+    for part in loc[1:]:
+        value = container.get(key)
+        if not isinstance(value, dict) or part not in value:
+            break
+        container, key = value, part
+    if key not in container:
+        return False
+    del container[key]
+    return True

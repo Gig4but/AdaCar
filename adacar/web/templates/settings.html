@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+{% block title %}{{ t("settings.title") }} – AdaCar{% endblock %}
+{% block content %}
+<article class="wizard">
+  <h2>{{ t("settings.title") }}</h2>
+
+  <p class="rerun">
+    <a href="/wizard/welcome" hx-boost="false" role="button" class="secondary outline">{{ icon("wizard") }}{{ t("settings.wizard") }}</a>
+    <small class="muted">{{ t("settings.wizard.hint") }}</small>
+  </p>
+
+  {# In the order of the wizard steps. #}
+  <ul class="catalog">
+    {% for c in catalog %}
+      <li><a href="{{ c.href }}">{{ icon(c.icon) }}<span><strong>{{ t(c.title) }}</strong>
+        <small>{{ c.summary }}</small></span>{{ icon("chevron") }}</a></li>
+    {% endfor %}
+  </ul>
+
+  <section>
+    <h3>{{ t("settings.data") }}</h3>
+    <p class="small">{{ t("settings.data_dir") }}: <code>{{ data_dir }}</code>
+      {{ t("settings.log_dir") }}: <code>{{ log_dir }}</code></p>
+  </section>
+
+  <p class="rerun">
+    <a href="/licenses" role="button" class="secondary outline">{{ icon("license") }}{{ t("licenses.open") }}</a>
+    <small class="muted">{{ t("licenses.hint") }}</small>
+  </p>
+</article>
+{% endblock %}

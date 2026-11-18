@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+{% block title %}{{ t("wizard.title") }} – AdaCar{% endblock %}
+{% block content %}
+<article class="wizard">
+  <header>
+    <small class="muted">{{ t("wizard.step", n=step_no, total=step_total) }}</small>
+    <progress value="{{ step_no }}" max="{{ step_total }}"></progress>
+  </header>
+
+  {% if step == "welcome" %}
+    <h2>{{ t("wizard.welcome") }}</h2>
+    <p>{{ t("wizard.welcome.text") }}</p>
+    <form>{% include "_appearance_form.html" %}</form>
+    <div class="wizard-nav"><a href="/wizard/profile" role="button">{{ t("wizard.next") }}</a></div>
+
+  {% elif step == "profile" %}
+    <h2>{{ t("wizard.profile") }}</h2>
+    <form method="post" action="/wizard/profile">
+      {% include "_profile_form.html" %}
+      <div class="wizard-nav">
+        <a href="/wizard/welcome" class="secondary">{{ icon("back") }}{{ t("wizard.back") }}</a>
+        <button type="submit">{{ t("wizard.next") }}</button>
+      </div>
+    </form>
+
+  {% elif step == "cars" %}
+    <h2>{{ t("wizard.cars") }}</h2>
+    <p>{{ t("wizard.cars.text") }}</p>
+    <form method="post" action="/wizard/cars">
+      {% include "_cars_form.html" %}
+      <div class="wizard-nav">
+        <a href="/wizard/profile" class="secondary">{{ icon("back") }}{{ t("wizard.back") }}</a>
+        <button type="submit">{{ t("wizard.next") }}</button>
+      </div>
+    </form>
+
+  {% elif step == "sources" %}
+    <h2>{{ t("wizard.sources") }}</h2>
+    <p>{{ t("sources.text") }} {{ t("wizard.later") }}</p>
+    <form method="post" action="/wizard/sources">
+      {% include "_sources_form.html" %}
+      <div class="wizard-nav">
+        <a href="/wizard/cars" class="secondary">{{ icon("back") }}{{ t("wizard.back") }}</a>
+        <button type="submit">{{ t("wizard.next") }}</button>
+      </div>
+    </form>
+
+  {% elif step == "automation" %}
+    <h2>{{ t("auto.title") }}</h2>
+    <form method="post" action="/wizard/automation">
+      {% include "_automation_form.html" %}
+      {% include "_update_form.html" %}
+      <div class="wizard-nav">
+        <a href="/wizard/sources" class="secondary">{{ icon("back") }}{{ t("wizard.back") }}</a>
+        <button type="submit">{{ t("wizard.next") }}</button>
+      </div>
+    </form>
+
+  {% elif step == "map" %}
+    <h2>{{ t("routing.title") }}</h2>
+    {% if settings.routing_download %}{% include "_routing_status.html" %}{% endif %}
+    <form method="post" action="/wizard/map">
+      {% include "_map_form.html" %}
+      <div class="wizard-nav">
+        <a href="/wizard/automation" class="secondary">{{ icon("back") }}{{ t("wizard.back") }}</a>
+        <button type="submit" class="{{ '' if settings.routing_download else 'secondary' }}">{{ t("wizard.next") if settings.routing_download else t("wizard.skip") }}</button>
+      </div>
+    </form>
+
+  {% elif step == "done" %}
+    <h2>{{ t("wizard.done") }}</h2>
+    <p>{{ t("wizard.done.text") }}</p>
+    <p class="muted">{% if settings.automation.enabled %}{{ t("wizard.auto_on", h=settings.automation.interval_hours) }}{% else %}{{ t("wizard.auto_off") }}{% endif %}</p>
+    <form method="post" action="/wizard/done">
+      <div class="wizard-nav">
+        <a href="/wizard/map" class="secondary">{{ icon("back") }}{{ t("wizard.back") }}</a>
+        <button type="submit" class="start">{{ t("wizard.start") }}</button>
+      </div>
+    </form>
+  {% endif %}
+</article>
+{% endblock %}

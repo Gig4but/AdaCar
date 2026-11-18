@@ -1,0 +1,49 @@
+{# Language and colour scheme; shared by the wizard and Settings. Inside a form: saved as
+   soon as picked. #}
+<div hx-post="/settings/appearance" hx-trigger="change" hx-swap="none">
+<fieldset>
+  <legend>{{ t("wizard.language") }}</legend>
+  <label><input type="radio" name="language" value="cs" {% if lang == "cs" %}checked{% endif %}> Čeština</label>
+  <label><input type="radio" name="language" value="en" {% if lang == "en" %}checked{% endif %}> English</label>
+</fieldset>
+<fieldset>
+  <legend>{{ t("wizard.theme") }}</legend>
+  <div class="themes">
+    {% for id, base in themes.items() %}
+      <label>
+        <input type="radio" name="theme" value="{{ id }}" data-base="{{ base or '' }}"
+               {% if settings.theme == id %}checked{% endif %}>
+        <span class="swatch"{% if base %} data-theme="{{ base }}"{% endif %} data-scheme="{{ id }}" aria-hidden="true">Aa<i></i></span>
+        {{ t("theme." ~ id) }}
+      </label>
+    {% endfor %}
+  </div>
+</fieldset>
+</div>
+<script>
+  // Shows the chosen scheme at once.
+  for (const input of document.querySelectorAll("input[name=theme]")) {
+    input.addEventListener("change", async () => {
+      const root = document.documentElement;
+      const apply = () => {
+        if (input.dataset.base) root.dataset.theme = input.dataset.base;
+        else delete root.dataset.theme;
+        root.dataset.scheme = input.value;
+      };
+      // The new colours spread from the picked swatch as a widening circle (app.css: aw-scheme).
+      const swatch = input.closest("label").querySelector(".swatch").getBoundingClientRect();
+      const x = swatch.left + swatch.width / 2;
+      const y = swatch.top + swatch.height / 2;
+      const reach = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+      root.style.setProperty("--aw-x", `${x}px`);
+      root.style.setProperty("--aw-y", `${y}px`);
+      root.style.setProperty("--aw-r", `${reach}px`);
+      if (document.startViewTransition) {
+        await document.startViewTransition({ update: apply, types: ["scheme"] }).finished;
+      } else {
+        apply();
+      }
+      if (window.adacarPaintFrame) window.adacarPaintFrame();
+    });
+  }
+</script>

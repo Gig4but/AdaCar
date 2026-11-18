@@ -1,0 +1,38 @@
+User-agent: *
+Allow: /
+Disallow: /applications
+Disallow: /cz
+Disallow: /own
+Disallow: /ds/
+Disallow: /basic
+Disallow: /basic/
+Disallow: /download
+Disallow: /download/
+Disallow: /sk/magazin
+Disallow: /de/magazin
+Disallow: /pl/magazin
+Disallow: /en/magazin
+Disallow: /www/global/bannery.php
+Disallow: /www/include/bannery/presmeruj_klik.php
+Disallow: /forum/vlozeni_prispevku
+Disallow: /muj_tipcars/prihlaseni
+Disallow: /Car/report
+Disallow: *honeypot/
+Disallow: /data/moduly/virtualni_adresa/virtualni_adresa.php*
+Disallow: *vrat_pocet_inzeratu*
+Disallow: /data/
+Disallow: /muj-tipcars/
+Disallow: /_extras/
+Disallow: /_measurement/
+Disallow: /*/api/
+
+Sitemap: https://www.tipcars.com/sitemap.xml
+Sitemap: https://www.tipcars.com/sitemaps/magazine-news.xml
+Sitemap: https://www.tipcars.com/sitemaps/magazine-articles-1.xml
+Sitemap: https://www.tipcars.com/sitemaps/magazine-articles-2.xml
+
+User-agent: ia_archiver
+Disallow: /
+
+User-agent: Seznam-Extended
+Disallow: /

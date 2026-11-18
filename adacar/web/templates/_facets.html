@@ -1,0 +1,71 @@
+{# Filter panel. Counts come from facets; each group ignores its own selection. #}
+{% macro group(name, title, options, selected, vocab_name=None) %}
+  {% set counts = dict(facets.get(name, [])) %}
+  <details {% if selected %}open{% endif %}>
+    <summary>{{ title }}{% if selected %} <span class="badge">{{ selected | length }}</span>{% endif %}</summary>
+    {# Always sent, so no ticked box means "any", not the profile's default. #}
+    <input type="hidden" name="{{ name }}" value="">
+    {% for code in options %}
+      {% set n = counts.get(code, 0) %}
+      <label class="facet{% if not n and code not in selected %} empty{% endif %}">
+        <input type="checkbox" name="{{ name }}" value="{{ code }}" {% if code in selected %}checked{% endif %}>
+        <span>{{ label(vocab_name, code) if vocab_name else code }}</span>
+        <small>{{ n }}</small>
+      </label>
+    {% endfor %}
+  </details>
+{% endmacro %}
+{% macro range(title, low_name, low, high_name, high, step) %}
+  <fieldset class="range">
+    <legend>{{ title }}</legend>
+    {% if low_name %}<input type="number" name="{{ low_name }}" value="{{ low or '' }}" min="0" step="{{ step }}" placeholder="{{ t('filters.from') }}" aria-label="{{ title }} {{ t('filters.from') }}">{% endif %}
+    {% if high_name %}<input type="number" name="{{ high_name }}" value="{{ high or '' }}" min="0" step="{{ step }}" placeholder="{{ t('filters.to') }}" aria-label="{{ title }} {{ t('filters.to') }}">{% endif %}
+  </fieldset>
+{% endmacro %}
+
+<div class="filters-head">
+  <strong>{{ t("filters.title") }}</strong>
+  <a href="/?make=&price_max=" class="secondary small">{{ t("filters.reset") }}</a>
+</div>
+
+<input type="hidden" name="photo" value="0">
+<label class="facet"><input type="checkbox" name="photo" value="1" {% if f.with_photo %}checked{% endif %}> <span>{{ t("filters.with_photo") }}</span></label>
+{{ range(t("filters.price"), "price_min", f.price_min, "price_max", f.price_max, 10000) }}
+<label class="facet"><input type="checkbox" name="with_price" value="1" {% if f.with_price %}checked{% endif %}> <span>{{ t("filters.with_price") }}</span></label>
+{{ range(t("filters.year"), "year_min", f.year_min, "year_max", f.year_max, 1) }}
+{{ range(t("filters.km_max"), None, None, "km_max", f.km_max, 10000) }}
+{{ range(t("filters.power_min"), "power_min", f.power_min, None, None, 5) }}
+
+<label>{{ t("filters.posted") }}
+  <select name="posted_days">
+    <option value="">{{ t("filters.any") }}</option>
+    {% for d in posted_days %}
+      <option value="{{ d }}" {% if f.posted_days == d %}selected{% endif %}>{{ t("filters.day1") if d == 1 else t("filters.days", n=d) }}</option>
+    {% endfor %}
+  </select>
+</label>
+
+{% set by_count = facets.get("make", []) | map(attribute=0) | list %}
+{{ group("make", t("filters.make"), by_count + (f.make | reject("in", by_count) | list) + (all_makes | reject("in", by_count + f.make) | list), f.make, "makes") }}
+{% for name in ("fuel", "gearbox", "body", "drive", "seller_kind") %}
+  {% set vocab_name = facet_vocab[name] %}
+  {{ group(name, t("filters." ~ name), vocab[vocab_name] | list, f[name], vocab_name) }}
+{% endfor %}
+{{ group("kraj", t("filters.kraj"), facets.get("kraj", []) | map(attribute=0) | list + (f.kraj | reject("in", facets.get("kraj", []) | map(attribute=0) | list) | list), f.kraj) }}
+
+{# Sources are all on; unticking one sends it as source_off (the hidden field next to it).
+   Those with cars first, then the ones that found none yet. #}
+{% set source_counts = dict(facets.get("sources", [])) %}
+{% set source_ids = facets.get("sources", []) | map(attribute=0) | list %}
+<details open>
+  <summary>{{ t("filters.sources") }}{% if f.sources_off %} <span class="badge">−{{ f.sources_off | length }}</span>{% endif %}</summary>
+  {% for code in source_ids + ((sources_on + f.sources_off) | reject("in", source_ids) | unique | list) %}
+    {% set on = code not in f.sources_off %}
+    <label class="facet{% if not source_counts.get(code) %} empty{% endif %}">
+      <input type="checkbox" {% if on %}checked{% endif %} onchange="this.nextElementSibling.disabled = this.checked">
+      <input type="hidden" name="source_off" value="{{ code }}" {% if on %}disabled{% endif %}>
+      <span>{{ code | source_label }}</span>
+      <small>{{ source_counts.get(code, 0) }}</small>
+    </label>
+  {% endfor %}
+</details>
