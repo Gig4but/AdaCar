@@ -36,6 +36,13 @@
 {{ range(t("filters.km_max"), None, None, "km_max", f.km_max, 10000) }}
 {{ range(t("filters.power_min"), "power_min", f.power_min, None, None, 5) }}
 
+<fieldset class="facet-checks">
+  <legend class="small muted">{{ t("filters.checks") }}</legend>
+  {% for name in ("no_warnings", "verified_dealer", "with_vin") %}
+    <label class="facet"><input type="checkbox" name="{{ name }}" value="1" {% if f[name] %}checked{% endif %}> <span>{{ t("filters." ~ name) }}</span></label>
+  {% endfor %}
+</fieldset>
+
 <label>{{ t("filters.posted") }}
   <select name="posted_days">
     <option value="">{{ t("filters.any") }}</option>

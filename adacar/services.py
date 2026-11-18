@@ -14,6 +14,8 @@ from starlette.datastructures import QueryParams
 
 from adacar import paths
 from adacar.ai.services import AiServices, make_ai_services
+from adacar.checks import official
+from adacar.checks.service import CheckService
 from adacar.config import Settings
 from adacar.db.models import Car
 from adacar.db.session import db_file, make_engine, make_sessionmaker, migrate
@@ -47,6 +49,7 @@ class Services:
     places: SharedPlaces
     resources: ResourceManager
     ai: AiServices
+    checks: CheckService
     runner: ScrapeRunner
     scheduler: Scheduler
     motis: MotisServer
@@ -80,6 +83,7 @@ class Services:
                 self.ai.enricher.start()  # warning signs; the AI finishes what was left
             except Exception:
                 log.exception("AI start-up failed")
+            self.checks.start()
             self.set_automation()  # the Run value follows the app if it moved
         self.scheduler.start()
         self.routing.start()
@@ -89,6 +93,7 @@ class Services:
         self.updates.stop()
         self.scheduler.stop()  # first: it could start a new search meanwhile
         self.runner.stop()
+        self.checks.stop()
         self.routing.stop()
         self.motis.close()
         self.ai.shutdown()
@@ -104,7 +109,7 @@ def build(
     ai_factory=None,
     resources: ResourceManager | None = None,
     autostart_sync: Callable[[bool], object] | None = None,  # the Run value added or removed
-    refreshes: tuple[Refresh, ...] = (),
+    refreshes: tuple[Refresh, ...] | None = None,  # None: the official lists (checks)
     routing_updates: bool = True,  # False in tests: no map data downloads
 ) -> Services:
     settings = settings or Settings.load()
@@ -126,6 +131,13 @@ def build(
     ai: AiServices = (ai_factory or make_ai_services)(
         settings, sessions, data_dir, resources, profile_cars
     )
+
+    # --- Vehicle and seller checks (PLAN §4.5): their warnings go through the rules pass ---
+    lists_dir = cache_dir / "checks"
+    checks = CheckService(sessions, lists_dir, lambda: settings.checks, keys, profile_cars)
+    checks.on_changed = ai.enricher.start
+    if refreshes is None:
+        refreshes = official.refreshes(lists_dir)
 
     # --- Travel times to the cars (PLAN §4.6) ---
     vendor = paths.vendor_dir()
@@ -164,6 +176,10 @@ def build(
     routing.on_ready = travel.routing_ready
 
     # --- Searching ---
+    def after_run() -> None:
+        ai.enricher.start()
+        checks.wake()
+
     def stop_enricher() -> None:
         """Before the cars are deleted: an answer being read would update a deleted car."""
         ai.enricher.stop()
@@ -174,7 +190,7 @@ def build(
         cache_dir,
         profile=lambda: settings.profile,
         source_choices=lambda: settings.sources,
-        hooks=RunHooks(before_clear=stop_enricher, after_run=ai.enricher.start),
+        hooks=RunHooks(before_clear=stop_enricher, after_run=after_run),
         kept_sources=(MANUAL,),
     )
     scheduler = Scheduler(settings, runner, sessions, refreshes, prepare=travel.prepare)
@@ -188,6 +204,7 @@ def build(
         places=places,
         resources=resources,
         ai=ai,
+        checks=checks,
         runner=runner,
         scheduler=scheduler,
         motis=motis,

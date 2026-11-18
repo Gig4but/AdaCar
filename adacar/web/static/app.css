@@ -254,6 +254,25 @@ fieldset.range input { flex: 1; min-width: 6rem; margin: 0; }
 .warnings { display: flex; gap: var(--aw-space-2); align-items: flex-start; margin: 0 0 var(--aw-space-2);
   font-size: var(--aw-text-sm); color: var(--pico-del-color); }
 .warnings svg { flex: none; width: 16px; height: 16px; margin-top: .15rem; }
+/* Checks of a car and its dealer (PLAN §4.5), in the car's detail. */
+.check-box { border-top: 1px solid var(--pico-muted-border-color); padding-top: var(--aw-space-3);
+  margin-bottom: var(--aw-space-3); }
+.check-box h4 { display: flex; gap: var(--aw-space-2); align-items: center; margin-bottom: var(--aw-space-1); }
+.check-list { padding-left: 0; margin-bottom: var(--aw-space-2); font-size: var(--aw-text-sm); }
+.check-list li { list-style: none; display: flex; gap: var(--aw-space-2); align-items: baseline; }
+.check-list li > .icon { align-self: center; flex: none; width: 16px; height: 16px; }
+.check-list li.muted > .icon { color: var(--pico-muted-color); }
+.check-box button.link { color: var(--pico-primary); }
+.check-candidates { padding-left: 0; }
+.check-candidates li { list-style: none; margin-bottom: var(--aw-space-2); }
+.check-candidates form { display: flex; flex-wrap: wrap; gap: var(--aw-space-1) var(--aw-space-2);
+  align-items: baseline; margin: 0; }
+.check-candidates button, .check-fix-form button { margin: 0; padding: .2rem .7rem; width: auto; }
+.check-fix-form { display: flex; gap: var(--aw-space-2); align-items: center; margin: var(--aw-space-1) 0; }
+.check-fix-form input { margin: 0; max-width: 10rem; }
+.check-score { display: inline-flex; align-items: center; gap: .2em; font-size: 1.2rem; font-weight: 700; }
+.check-score .icon { color: var(--aw-accent); }
+.facet-checks { margin-bottom: var(--aw-space-2); }
 /* Found by the last search: a corner in the accent colour. */
 .car .new-mark { position: absolute; top: 0; left: 0; width: 1.1rem; height: 1.1rem;
                  border-top-left-radius: calc(var(--aw-radius) - 1px); pointer-events: none;

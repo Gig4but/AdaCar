@@ -9,7 +9,7 @@
     {% if car.place_text %} · {{ car.place_text }}{% endif %}
   </p>
 </header>
-{% if car.warnings %}<p class="warnings">{{ icon("alert") }}<span>{{ t("warn.title") }}: {% for w in car.warnings %}{{ t("warn." ~ w) }}{% if not loop.last %}, {% endif %}{% endfor %}</span></p>{% endif %}
+{% if car.all_warnings %}<p class="warnings">{{ icon("alert") }}<span>{{ t("warn.title") }}: {% for w in car.all_warnings %}{{ t("warn." ~ w) }}{% if not loop.last %}, {% endif %}{% endfor %}</span></p>{% endif %}
 {% if car.images %}
   <p class="photos">{% for img in car.photos[:12] %}<a href="{{ img.url | safe_url }}" target="_blank" rel="noopener"><img src="{{ img.url | safe_url }}" alt="{{ t('car.photo') }}" loading="lazy" referrerpolicy="no-referrer"></a>{% endfor %}</p>
 {% endif %}
@@ -42,6 +42,17 @@
   <caption class="muted small">{{ t("car.specs") }}</caption>
   {% for key, value in rows if value %}<tr><th scope="row">{{ t(key) }}</th><td>{{ value }}{% if key in marked %} <span class="ai-mark" title="{{ t('ai.filled') }}" aria-label="{{ t('ai.filled') }}">{{ icon("ai") }}</span>{% endif %}</td></tr>{% endfor %}
 </table>
+{# The checks (PLAN §4.5), loaded after the car: the registers may take a few seconds. #}
+<section id="vehicle-check" class="check-box" hx-get="/cars/{{ car.id }}/checks" hx-trigger="load">
+  <h4>{{ icon("check") }}{{ t("checks.vehicle") }}</h4>
+  <p class="muted small" aria-busy="true">{{ t("checks.loading") }}</p>
+</section>
+{% if car.dealer_id %}
+<section id="dealer-card" class="check-box" hx-get="/dealers/{{ car.dealer_id }}" hx-trigger="load">
+  <h4>{{ icon("building") }}{{ car.seller_name }}</h4>
+  <p class="muted small" aria-busy="true">{{ t("checks.loading") }}</p>
+</section>
+{% endif %}
 {% if car.equipment %}
   <details><summary>{{ t("car.equipment") }} ({{ car.equipment | length }})</summary>
     <p class="tags">{% for item in car.equipment %}<span class="tag">{{ item }}</span>{% endfor %}</p>

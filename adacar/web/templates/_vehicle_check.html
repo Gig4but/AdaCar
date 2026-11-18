@@ -1,0 +1,56 @@
+{# A car's checks by its VIN (PLAN §4.5), inside the car's detail. #}
+{% from "_icons.html" import icon %}
+<h4>{{ icon("check") }}{{ t("checks.vehicle") }}</h4>
+{% if not code %}
+  <p class="small">{{ t("checks.no_vin") }}</p>
+{% else %}
+  <ul class="check-list">
+    {# The VIN itself: maker and model year, offline #}
+    {% if "vin_make" in codes %}
+      <li class="bad">{{ icon("alert") }}<span>{{ t("checks.vin_make", makes=vin_makes) }}</span></li>
+    {% elif decoded.makes %}
+      <li class="ok">{{ icon("check") }}<span>{{ t("checks.vin_make_ok", makes=vin_makes) }}</span></li>
+    {% endif %}
+    {% if "vin_year" in codes %}
+      <li class="bad">{{ icon("alert") }}<span>{{ t("checks.vin_year", year=decoded.model_year) }}</span></li>
+    {% elif decoded.model_year %}
+      <li class="ok">{{ icon("check") }}<span>{{ t("checks.vin_year_ok", year=decoded.model_year) }}</span></li>
+    {% endif %}
+
+    {# The register's record #}
+    {% if reg %}
+      {% for c in ("reg_seized", "reg_status", "reg_make", "reg_year", "reg_power", "reg_imported", "reg_owners") if c in codes %}
+        <li class="bad">{{ icon("alert") }}<span>{{ t("checks." ~ c, status=reg.status | lower, make=reg.make, kw=reg.power_kw, first=reg.first_registration | date if reg.first_registration else "", imported=imported | date if imported else "", owners=reg.owners) }}</span></li>
+      {% endfor %}
+      {% if reg.first_registration %}
+        <li class="muted">{{ icon("info") }}<span>{{ t("checks.first_registration", date=reg.first_registration | date) }}{% if imported %}; {{ t("checks.imported", date=imported | date) }}{% elif reg.first_registration_cz %}; {{ t("checks.new_here") }}{% endif %}</span></li>
+      {% endif %}
+      {% if reg.owners is not none %}<li class="muted">{{ icon("info") }}<span>{{ t("checks.owners", owners=reg.owners, operators=reg.operators or 0) }}</span></li>{% endif %}
+      {% if reg.make or reg.model %}<li class="muted">{{ icon("info") }}<span>{{ t("checks.on_record") }} {{ [reg.make, reg.model] | select | join(" ") }}{% if reg.power_kw %}, {{ reg.power_kw }} kW{% endif %}{% if reg.fuel %}, {{ reg.fuel | lower }}{% endif %}{% if reg.color %}, {{ reg.color | lower }}{% endif %}</span></li>{% endif %}
+      {% if reg.stk_until %}<li class="muted">{{ icon("info") }}<span>{{ t("checks.stk_until", date=reg.stk_until | date) }}</span></li>{% endif %}
+      {% if reg.status and "reg_status" not in codes %}<li class="muted">{{ icon("info") }}<span>{{ t("checks.status", status=reg.status | lower) }}</span></li>{% endif %}
+    {% elif record and record.register_status == "not_found" %}
+      <li class="muted">{{ icon("info") }}<span>{{ t("checks.not_registered") }}</span></li>
+    {% endif %}
+
+    {# The km the app saw in this VIN's ads #}
+    {% set seen = record.km_seen if record else [] %}
+    {% if "km_rollback" in codes %}
+      <li class="bad">{{ icon("alert") }}<span>{{ t("checks.km_rollback") }}</span></li>
+    {% endif %}
+    {% if seen | length > 1 %}
+      <li class="muted">{{ icon("info") }}<span>{{ t("checks.km_seen") }} {% for r in seen %}{{ r.km | number }} km ({{ r.on | date }}){% if not loop.last %} → {% endif %}{% endfor %}</span></li>
+    {% endif %}
+  </ul>
+
+  {% if failed and has_key and not bad_key %}<p class="small warning">{{ t("checks.offline") }}</p>{% endif %}
+  {% if bad_key %}<p class="small warning">{{ t("checks.register.bad_key") }} <a href="/checks">{{ t("checks.title") }}</a></p>
+  {% elif not has_key %}<p class="small muted">{{ t("checks.register_key") }} <a href="/checks">{{ t("checks.title") }}</a></p>
+  {% else %}<p class="small muted">{% if record and record.register_at %}{{ t("checks.read_at", date=record.register_at | date) }} {% endif %}
+    <button type="button" class="link small" hx-get="/cars/{{ car.id }}/checks?refresh=1" hx-target="#vehicle-check">{{ t("checks.again") }}</button></p>
+  {% endif %}
+
+  <p class="small">VIN <code>{{ code }}</code> · {{ t("checks.by_hand") }}
+    {% for k, url in links.items() %}<a href="{{ url }}" target="_blank" rel="noopener">{{ t("checks.link." ~ k) }}{{ icon("external", "icon-sm") }}</a>{% if not loop.last %} · {% endif %}{% endfor %}</p>
+  <p class="small muted">{{ t("checks.claims_note") }}</p>
+{% endif %}

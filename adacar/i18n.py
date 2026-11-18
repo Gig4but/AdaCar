@@ -797,6 +797,278 @@ TEXTS: dict[str, dict[str, str]] = {
         "cs": "AI: možná nejde o prodej auta",
         "en": "AI: possibly not a car for sale",
     },
+    # Vehicle and seller checks (PLAN §4.5, checks/).
+    "warn.vin_make": {"cs": "VIN patří jiné značce", "en": "the VIN belongs to another make"},
+    "warn.vin_year": {
+        "cs": "VIN ukazuje jiný modelový rok",
+        "en": "the VIN shows another model year",
+    },
+    "warn.km_rollback": {
+        "cs": "dříve inzerováno s vyšším stavem km",
+        "en": "advertised before with a higher mileage",
+    },
+    "warn.reg_seized": {
+        "cs": "registr: zadržený doklad nebo SPZ",
+        "en": "register: papers or plates seized",
+    },
+    "warn.reg_status": {"cs": "registr: auto není v provozu", "en": "register: car not in use"},
+    "warn.reg_make": {"cs": "registr: jiná značka", "en": "register: another make"},
+    "warn.reg_year": {
+        "cs": "registr: první registrace dříve, než uvádí inzerát",
+        "en": "register: first registered earlier than the ad says",
+    },
+    "warn.reg_power": {"cs": "registr: jiný výkon motoru", "en": "register: another engine power"},
+    "warn.reg_imported": {
+        "cs": "registr: dovezeno, inzerát píše koupeno v ČR",
+        "en": "register: imported, the ad says bought in Czechia",
+    },
+    "warn.reg_owners": {
+        "cs": "registr: více majitelů, inzerát píše 1. majitel",
+        "en": "register: more owners, the ad says first owner",
+    },
+    "warn.dealer_not_found": {
+        "cs": "prodejce: IČO není v registru",
+        "en": "dealer: IČO not in the register",
+    },
+    "warn.dealer_ended": {"cs": "prodejce: firma zanikla", "en": "dealer: company dissolved"},
+    "warn.dealer_insolvency": {"cs": "prodejce: insolvence", "en": "dealer: insolvency"},
+    "warn.dealer_vat": {
+        "cs": "prodejce: nespolehlivý plátce DPH",
+        "en": "dealer: unreliable VAT payer",
+    },
+    "checks.title": {"cs": "Prověrky", "en": "Checks"},
+    "checks.text": {
+        "cs": "AdaCar ověřuje auta podle VIN a prodejce podle obchodního rejstříku. Údaje "
+        "z registru vozidel (první registrace, dovoz, počet majitelů, výkon) poskytuje "
+        "ministerstvo dopravy jen s vlastním bezplatným klíčem: zaregistrujte se jménem "
+        "a e-mailem a klíč sem vložte. Hodnocení prodejců z Google Map potřebuje klíč "
+        "Google (1 000 dotazů měsíčně zdarma, AdaCar se zastaví dřív).",
+        "en": "AdaCar checks cars by their VIN and dealers in the company register. The "
+        "vehicle register's data (first registration, import, owners, power) is given by the "
+        "Ministry of Transport only with your own free key: sign up with a name and e-mail "
+        "and paste the key here. Dealers' ratings from Google Maps need a Google key (1,000 "
+        "free requests a month; AdaCar stops before that).",
+    },
+    "checks.auto": {"cs": "Prověřovat na pozadí", "en": "Check in the background"},
+    "checks.auto.hint": {
+        "cs": "Auta z vašeho výběru a jejich prodejci se prověří po každém hledání. Vypnuto: "
+        "až po otevření auta.",
+        "en": "Cars matching your choice and their dealers are checked after each search. "
+        "Off: only when a car is opened.",
+    },
+    "checks.auto_on": {"cs": "na pozadí", "en": "in the background"},
+    "checks.auto_off": {"cs": "po otevření auta", "en": "when a car is opened"},
+    "checks.no_keys": {"cs": "bez klíčů", "en": "no keys"},
+    "checks.key.register": {"cs": "Klíč k registru vozidel", "en": "Vehicle register key"},
+    "checks.key.register.hint": {
+        "cs": "Nejvýše 25 dotazů za minutu; dotazuje se jen na auta, která vás zajímají.",
+        "en": "At most 25 requests a minute; only cars you are interested in are asked.",
+    },
+    "checks.key.google": {"cs": "Klíč Google Places", "en": "Google Places key"},
+    "checks.key.google.hint": {
+        "cs": "Tento měsíc použito {used} z {free} bezplatných dotazů.",
+        "en": "Used {used} of {free} free requests this month.",
+    },
+    "checks.key.get": {"cs": "Jak získat klíč", "en": "How to get a key"},
+    "checks.key.saved": {"cs": "uložen (…{end})", "en": "saved (…{end})"},
+    "checks.key.remove": {"cs": "Smazat klíč", "en": "Delete the key"},
+    "checks.key_invalid": {
+        "cs": "Tohle nevypadá jako klíč, nic se neuložilo.",
+        "en": "That does not look like a key; nothing was saved.",
+    },
+    "checks.counts": {
+        "cs": "Zatím aut s VIN: {vins}, z registru: {read}; prodejců: {dealers}, s IČO: "
+        "{resolved}.",
+        "en": "So far: {vins} cars with a VIN, {read} from the register; {dealers} dealers, "
+        "{resolved} with an IČO.",
+    },
+    "checks.sources": {
+        "cs": "Zdroje: registr silničních vozidel (dataovozidlech.cz), ARES, insolvenční "
+        "rejstřík, registr plátců DPH. Stav tachometru z STK a pátrání po kradených autech "
+        "chrání CAPTCHA: u auta jsou odkazy, kde si je ověříte sami.",
+        "en": "Sources: the vehicle register (dataovozidlech.cz), ARES, the insolvency "
+        "register, the VAT register. Inspection mileage and stolen cars are behind a CAPTCHA: "
+        "each car links to where you check them yourself.",
+    },
+    "checks.register.bad_key": {
+        "cs": "Registr vozidel klíč odmítl.",
+        "en": "The vehicle register refused the key.",
+    },
+    "checks.vehicle": {"cs": "Prověrka auta", "en": "Car check"},
+    "checks.loading": {"cs": "Ověřuji…", "en": "Checking…"},
+    "checks.no_vin": {
+        "cs": "Inzerát neuvádí VIN. Požádejte o něj prodejce: bez něj nejde ověřit historii "
+        "ani registr.",
+        "en": "The ad gives no VIN. Ask the seller for it: without it neither the history nor "
+        "the register can be checked.",
+    },
+    "checks.vin_make": {
+        "cs": "VIN patří značce {makes}, inzerát uvádí jinou",
+        "en": "The VIN belongs to {makes}; the ad says another make",
+    },
+    "checks.vin_make_ok": {"cs": "VIN odpovídá značce {makes}", "en": "The VIN fits {makes}"},
+    "checks.vin_year": {
+        "cs": "VIN ukazuje modelový rok {year}, nesedí s rokem v inzerátu",
+        "en": "The VIN shows model year {year}, which does not fit the ad's year",
+    },
+    "checks.vin_year_ok": {
+        "cs": "VIN: modelový rok {year}",
+        "en": "VIN: model year {year}",
+    },
+    "checks.reg_seized": {
+        "cs": "Registr: technický průkaz nebo SPZ jsou zadržené",
+        "en": "Register: the papers or plates are seized",
+    },
+    "checks.reg_status": {
+        "cs": "Registr: stav vozidla „{status}“",
+        "en": "Register: the car's status is “{status}”",
+    },
+    "checks.reg_make": {
+        "cs": "Registr: značka {make}, inzerát uvádí jinou",
+        "en": "Register: make {make}; the ad says another",
+    },
+    "checks.reg_year": {
+        "cs": "Registr: první registrace {first}, inzerát uvádí novější rok",
+        "en": "Register: first registered {first}; the ad gives a later year",
+    },
+    "checks.reg_power": {
+        "cs": "Registr: výkon {kw} kW, inzerát uvádí jiný",
+        "en": "Register: {kw} kW; the ad says otherwise",
+    },
+    "checks.reg_imported": {
+        "cs": "Registr: v ČR až od {imported}, inzerát píše koupeno v ČR",
+        "en": "Register: in Czechia only since {imported}; the ad says bought in Czechia",
+    },
+    "checks.reg_owners": {
+        "cs": "Registr: počet majitelů {owners}, inzerát píše 1. majitel",
+        "en": "Register: {owners} owners; the ad says first owner",
+    },
+    "checks.first_registration": {
+        "cs": "První registrace {date}",
+        "en": "First registered {date}",
+    },
+    "checks.imported": {
+        "cs": "dovezeno, v ČR od {date}",
+        "en": "imported, in Czechia since {date}",
+    },
+    "checks.new_here": {"cs": "od nového v ČR", "en": "in Czechia from new"},
+    "checks.owners": {
+        "cs": "V registru {owners}× majitel, {operators}× provozovatel",
+        "en": "On record: {owners} owners, {operators} operators",
+    },
+    "checks.on_record": {"cs": "V registru:", "en": "On record:"},
+    "checks.stk_until": {"cs": "STK platí do {date}", "en": "Inspection valid until {date}"},
+    "checks.status": {"cs": "Stav: {status}", "en": "Status: {status}"},
+    "checks.not_registered": {
+        "cs": "Registr vozidel toto VIN nezná (auto v ČR ještě nebylo registrováno?).",
+        "en": "The vehicle register does not know this VIN (not registered in Czechia yet?).",
+    },
+    "checks.km_rollback": {
+        "cs": "Toto VIN bylo dříve inzerováno s vyšším stavem km",
+        "en": "This VIN was advertised before with a higher mileage",
+    },
+    "checks.km_seen": {"cs": "Stav km v inzerátech:", "en": "Mileage in the ads:"},
+    "checks.offline": {
+        "cs": "Registry teď nejsou dostupné, zkusím to později.",
+        "en": "The registers cannot be reached now; I will try later.",
+    },
+    "checks.register_key": {
+        "cs": "Údaje z registru vozidel uvidíte s bezplatným klíčem:",
+        "en": "With a free key you will see the vehicle register's data:",
+    },
+    "checks.read_at": {"cs": "Registr ověřen {date}.", "en": "Register checked {date}."},
+    "checks.again": {"cs": "Ověřit znovu", "en": "Check again"},
+    "checks.by_hand": {"cs": "ověřte sami:", "en": "check yourself:"},
+    "checks.link.km": {"cs": "stav km z STK", "en": "inspection mileage"},
+    "checks.link.stolen": {"cs": "pátrání po vozidlech", "en": "stolen cars"},
+    "checks.link.register": {"cs": "registr vozidel", "en": "vehicle register"},
+    "checks.claims_note": {
+        "cs": "Servisní knížku, výměny oleje ani nehody žádný bezplatný registr neeviduje: "
+        "v inzerátu jde o tvrzení prodejce.",
+        "en": "No free register has the service book, oil changes or accidents: in the ad "
+        "they are the seller's claims.",
+    },
+    "dealer.cars": {"cs": "v nabídce aut: {n}", "en": "{n} cars on offer"},
+    "dealer.match.pending": {
+        "cs": "Firmu za prodejcem ještě hledám.",
+        "en": "Still looking up the company.",
+    },
+    "dealer.match.uncertain": {
+        "cs": "Není jisté, která firma to je. Vyberte ji:",
+        "en": "It is not certain which company this is. Pick it:",
+    },
+    "dealer.match.none": {
+        "cs": "Firmu tohoto jména obchodní rejstřík nezná.",
+        "en": "The company register knows no company of this name.",
+    },
+    "dealer.match.user": {"cs": "vybráno vámi", "en": "picked by you"},
+    "dealer.this_one": {"cs": "Tahle", "en": "This one"},
+    "dealer.ended_short": {"cs": "zaniklá", "en": "dissolved"},
+    "dealer.not_checked": {"cs": "Firma zatím nebyla ověřena.", "en": "Not checked yet."},
+    "dealer.not_in_ares": {
+        "cs": "IČO v obchodním rejstříku (ARES) není.",
+        "en": "The IČO is not in the company register (ARES).",
+    },
+    "dealer.ended": {"cs": "Firma zanikla {date}", "en": "Dissolved on {date}"},
+    "dealer.founded": {"cs": "Firma existuje od {date}", "en": "In business since {date}"},
+    "dealer.insolvency": {"cs": "Insolvenční řízení", "en": "Insolvency proceedings"},
+    "dealer.since": {"cs": "od", "en": "since"},
+    "dealer.isir.pending": {"cs": "nevyřízené", "en": "pending"},
+    "dealer.isir.moratorium": {"cs": "moratorium", "en": "moratorium"},
+    "dealer.isir.bankrupt": {"cs": "úpadek", "en": "bankrupt"},
+    "dealer.isir.konkurs": {"cs": "konkurs", "en": "bankruptcy"},
+    "dealer.isir.debt_relief": {"cs": "oddlužení", "en": "debt relief"},
+    "dealer.isir.reorganization": {"cs": "reorganizace", "en": "reorganisation"},
+    "dealer.isir.ended": {"cs": "skončené", "en": "ended"},
+    "dealer.isir.cancelled": {"cs": "zrušené", "en": "cancelled"},
+    "dealer.isir.error": {"cs": "zapsáno omylem", "en": "entered in error"},
+    "dealer.no_insolvency": {"cs": "Bez insolvence", "en": "No insolvency"},
+    "dealer.vat_unreliable": {
+        "cs": "Nespolehlivý plátce DPH od {date}",
+        "en": "Unreliable VAT payer since {date}",
+    },
+    "dealer.vat_ok": {"cs": "Spolehlivý plátce DPH", "en": "Reliable VAT payer"},
+    "dealer.seat": {"cs": "Sídlo:", "en": "Seat:"},
+    "dealer.checked": {"cs": "Ověřeno {date}", "en": "Checked {date}"},
+    "dealer.wrong": {"cs": "Jiná firma? Zadejte IČO", "en": "Another company? Enter its IČO"},
+    "dealer.give_ico": {"cs": "Znáte IČO prodejce?", "en": "Do you know the dealer's IČO?"},
+    "dealer.fix": {"cs": "Použít", "en": "Use"},
+    "dealer.bad_ico": {
+        "cs": "Firma s tímto IČO v rejstříku není.",
+        "en": "No company with this IČO in the register.",
+    },
+    "dealer.google": {"cs": "Google Maps, {n} hodnocení", "en": "Google Maps, {n} ratings"},
+    "dealer.reviews": {"cs": "Recenze ({n})", "en": "Reviews ({n})"},
+    "dealer.google_key": {
+        "cs": "Hodnocení z Google Map uvidíte s klíčem Google:",
+        "en": "With a Google key you will see ratings from Google Maps:",
+    },
+    "dealer.no_google": {
+        "cs": "Na Google Mapách bez hodnocení.",
+        "en": "No ratings on Google Maps.",
+    },
+    "dealer.link.google": {"cs": "Google Maps", "en": "Google Maps"},
+    "dealer.link.mapy": {"cs": "Mapy.com", "en": "Mapy.com"},
+    "dealer.link.firmy": {"cs": "Firmy.cz", "en": "Firmy.cz"},
+    "dealer.link.ares": {"cs": "ARES", "en": "ARES"},
+    "dealer.link.justice": {"cs": "Obchodní rejstřík", "en": "Business register"},
+    "dealer.link.isir": {"cs": "Insolvenční rejstřík", "en": "Insolvency register"},
+    "filters.checks": {"cs": "Prověrky", "en": "Checks"},
+    "filters.no_warnings": {"cs": "Bez varování", "en": "No warnings"},
+    "filters.verified_dealer": {"cs": "Prověřený prodejce", "en": "Checked dealer"},
+    "filters.with_vin": {"cs": "Uvedené VIN", "en": "VIN given"},
+    "dealer.match.person": {
+        "cs": "Prodejce je fyzická osoba (OSVČ): AdaCar o osobách údaje nevyhledává.",
+        "en": "The dealer is a person in business: AdaCar does not look up persons.",
+    },
+    "dealer.match.error": {
+        "cs": "Obchodní rejstřík toto jméno nepřijal; zkusím to za měsíc.",
+        "en": "The company register did not accept this name; I will try in a month.",
+    },
+    "dealer.person": {
+        "cs": "Toto IČO patří fyzické osobě: AdaCar o osobách údaje neukládá.",
+        "en": "This IČO belongs to a person: AdaCar keeps no data on persons.",
+    },
 }
 
 

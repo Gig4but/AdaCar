@@ -1,7 +1,7 @@
 """What every page of the web interface shares: the templates and their helpers, and `Svc`,
 the app's services in a route (`def page(request: Request, svc: Svc)`)."""
 
-from datetime import datetime
+from datetime import date, datetime
 from pathlib import Path
 from typing import Annotated
 from urllib.parse import urlencode
@@ -74,7 +74,13 @@ def _safe_url(url: str | None) -> str:
     return url if url and ok else "#"
 
 
-def _format_date(value: datetime | None) -> str:
+def _format_date(value: date | str | None) -> str:
+    """A date, a time, or an ISO date as stored in JSON ("2026-11-18")."""
+    if isinstance(value, str):
+        try:
+            value = date.fromisoformat(value[:10]) if value else None
+        except ValueError:
+            return value  # not a date after all: shown as it came
     return f"{value.day}. {value.month}. {value.year}" if value else ""
 
 

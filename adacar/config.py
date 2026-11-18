@@ -63,6 +63,14 @@ class AiSettings(BaseModel):
     server_model: str = ""
 
 
+class CheckSettings(BaseModel):
+    """Settings → Prověrky (PLAN §4.5). The keys are in secrets.py."""
+
+    # The registers are asked in the background for the profile's cars; off: only when a
+    # car or dealer is opened.
+    auto: bool = True
+
+
 class UpdateSettings(BaseModel):
     """Wizard step "Automatické hledání" and Settings → Aktualizace."""
 
@@ -76,6 +84,7 @@ class Settings(BaseModel):
     profile: Profile = Field(default_factory=Profile)
     automation: AutomationSettings = Field(default_factory=AutomationSettings)
     ai: AiSettings = Field(default_factory=AiSettings)
+    checks: CheckSettings = Field(default_factory=CheckSettings)
     updates: UpdateSettings = Field(default_factory=UpdateSettings)
     routing_area: RoutingArea = "auto"
     # The map and timetables are downloaded only once the user asks (wizard or Settings →

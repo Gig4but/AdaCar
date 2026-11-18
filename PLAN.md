@@ -11,9 +11,9 @@ Four main modules:
 2. **Web interface**: search and filters (make, price, year, km, fuel, gearbox, body, …), map,
    car detail, and a **trip window**: how long it takes to get to the seller by car / public
    transport, with a travel-time slider that also filters the list.
-3. **Vehicle and seller checks** (planned, M4): mileage history and checks by VIN from
-   official open data, warning signs, and the dealer behind an ad (company register,
-   insolvency, reviews).
+3. **Vehicle and seller checks**: the VIN against the ad and the vehicle register (with
+   the user's free key), the car's mileage history as the app saw it, and the dealer behind
+   an ad (company register, insolvency, VAT reliability, ratings).
 4. **Automation and alerts**: scheduled searches, saved searches with new-match counts and
    notifications; planned: price-drop tracking.
 
@@ -21,7 +21,7 @@ Shared services: a small **local AI model** (reads free-text ads, flags suspicio
 puts the photo of the car from the front first, turns a question in a sentence into filters)
 and a **local routing engine** (MOTIS: travel times, routes, offline map).
 
-Status: **M0–M3 done** (2026-11-18). Next: M4 (vehicle and seller checks). How the code is
+Status: **M0–M4 done** (2026-11-18). Next: M5 (trip to the seller, polished). How the code is
 organized: [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ---
@@ -88,16 +88,16 @@ organized: [ARCHITECTURE.md](ARCHITECTURE.md).
 5. Smaller classifieds: bazar.cz, ojeteauto.cz, hyperinzerce.cz, annonce.cz, inzeruj.cz.
 6. Facebook Marketplace (opt-in).
 
-### 2.4 Vehicle and seller checks (to verify in the M4 spike)
+### 2.4 Vehicle and seller checks (M4 spike, verified 2026-11-18)
 
-| Check | Candidate source | Notes |
+| Check | Source | Found |
 |---|---|---|
-| Mileage history, inspections (STK) | Ministry of Transport open data (registr silničních vozidel, technické prohlídky) on data.gov.cz | by VIN; mileage readings at inspections → rollback flag |
-| First registration, import, owners | same register | origin vs. what the ad says |
-| Stolen vehicles | Policie ČR "pátrání po vozidlech" | by VIN / plate; check terms |
-| Dealer identity | ARES (IČO), ISIR (insolvency), VAT reliability | port of AdaWork `employers/official.py` |
-| Dealer reputation | Google Places (user's key), Firmy.cz | port of AdaWork `employers/google.py` |
-| Paid history reports | Cebia, carVertical | link-out only (sauto shows Cebia's verification flag) |
+| First registration, in Czechia since (import), owners, status, make, kW, seized papers | Ministry of Transport's register API (`api.dataovozidlech.cz/api/vehicletechnicaldata/v2?vin=`) | free key per person (name + e-mail at dataovozidlech.cz/registraceapi), 27 calls a minute; no mileage. The monthly open-data extract has every vehicle but is several GB (750 MB were 1.3 M of its rows): not for a desktop app |
+| Mileage at inspections (STK) | kontrolatachometru.cz | behind a CAPTCHA; the open datasets of inspections have no km → the card links there; the app keeps its own km history of each VIN from the ads |
+| Stolen vehicles | Policie ČR "pátrání po vozidlech" | behind reCAPTCHA, no open data → link-out |
+| Dealer identity | ARES (by name, then IČO), ISIR, VAT reliability (MF list, ~4 500 payers) | no car site gives the dealer's IČO: the name is resolved in ARES (33 of the 40 biggest dealers sure, 2 uncertain to pick from) |
+| Dealer reputation | Google Places (user's key) | ratings; Firmy.cz, Mapy.com as links |
+| Paid history reports | Cebia, carVertical | not used |
 
 ### 2.5 Routing, public transport, maps
 Unchanged from AdaWork (spike 2026-10): **MOTIS** (MIT) bundled for car, public transport,
@@ -165,9 +165,33 @@ geocoding (RÚIAN) → warning signs and AI (`ai/enrich.py`) → checks (M4) →
 saved-search counts and alerts.
 
 ### 4.5 Vehicle and seller checks (M4)
-`checks/` package: VIN-keyed register lookups cached locally, a car card section with mileage
-history and warnings, dealer card (port of AdaWork's employer card). Filters: "no warnings",
-"verified dealer", "mileage history consistent".
+`checks/` package, run by `CheckService` after each search and hourly, and at once for an
+opened car or dealer (not again within an hour of a failed try). Its warnings go to
+`cars.check_warnings`, which the enricher's rules pass merges into `car.warnings`; a dealer's
+warnings show on its cars (`Car.all_warnings`). Filters: "Bez varování", "Prověřený prodejce", "Uvedené VIN".
+
+**VIN against the ad.** Decoded offline (`checks/vin.py`): the maker from the first three
+characters (a WMI table of the common makers) against the ad's make or the make its title
+names (a site may keep the make of an ad its dealer rewrote for another car), and for the VW
+group the model year (10th character) against the ad's year. With the user's register key
+(`checks/register.py`, the profile's cars in the background, any car when opened, again after
+30 days): make, kW and first registration against the ad; imported against "koupeno v ČR" /
+"původ ČR" (negation-aware); 3+ owners against "1. majitel"; seized papers; a car not in use.
+There is no free source for the service book, oil changes or accidents: the card says those
+are the seller's claims.
+
+**Mileage history.** Every km reading of a VIN the app reads is kept (`vehicle_checks`), also
+after its ads are gone; a reading 2 000 km and 5 % below an earlier one is "km_rollback". The
+card links to kontrolatachometru.cz (STK readings), the police search and the register.
+
+**Dealer card** (`checks/dealers.py`, ported from AdaWork's employer card, smaller): dealers'
+cars are linked by the name the ads give (`Dealer.name_key`); the name is resolved in ARES
+(`checks/resolver.py`: variants without the branch's town, without a dash part or the last
+word; a clear winner whose name is the whole name but for towns and generic words, a one-word
+name only in the car trade or in the dealer's town; else candidates for the user to pick, or
+an IČO typed in); then ARES, ISIR when flagged, the VAT list (downloaded daily), Google
+ratings with the user's key (the background at most 25 a day), again after 30 days. Private
+sellers get no card, and a sole trader (a person) is never looked up or stored.
 
 ### 4.6 Trip to the seller (`routing/` + `search/travel.py`)
 Unchanged from AdaWork: travel times from the start point (profile home or typed) to every
@@ -184,8 +208,9 @@ description), `car_ads` (one per source ad: url, price, status, detail read time
 `car_images` (photo URLs), `locations`, `municipalities`, `travel_sets` / `travel_times`,
 `saved_searches`, `sources` (state per source), `runs`, `llm_cache` (the model's answers by
 input). `cars.warnings` (warning signs), `cars.ai_hash` (the version the AI read),
-`car_images.kind` (what the AI saw on a photo). Planned: `price_history` (M6),
-`vehicle_checks`, `dealers` (M4).
+`car_images.kind` (what the AI saw on a photo). `vehicle_checks` (by VIN: km readings, the
+register's record), `dealers` (a name as the ads write it, its company and checks),
+`cars.dealer_id`, `cars.check_warnings`. Planned: `price_history` (M6).
 
 ---
 
@@ -242,8 +267,9 @@ Excellent, or an own OpenAI-compatible server.
 ### 7.2 Main pages
 Search (list / map, filters with counts, travel bar, saved searches, hidden ads, live finds
 while a search runs), car detail (photos, specs, equipment, text, every site's ad and price,
-trip window), Sources, Settings (appearance, where I start from, models and price,
-AI, automation, map, updates, licences), Add an ad.
+trip window, the car's checks and its dealer's card), Sources, Settings (appearance, where I
+start from, models and price, AI, checks with the user's keys, automation, map, updates,
+licences), Add an ad.
 
 ---
 
@@ -299,9 +325,18 @@ hatchback vs liftback.) The enricher on a copy of the real database: rules 1.5 s
 (212 prices far below similar cars), covers of 28 cars from 6 sources in 70 s, 8 classifieds'
 texts in 63 s, no false warnings.
 
-### M4 — Vehicle and seller checks
-Spike §2.4 sources; VIN mileage history and rollback flag; stolen check; dealer card (port
-employer checks: ARES, ISIR, VAT, reviews); filters and card warnings.
+### M4 — Vehicle and seller checks — done (2026-11-18)
+Spike of the §2.4 sources (STK mileage and stolen cars are behind CAPTCHAs: links, and the
+app's own km history instead); VIN decoded against the ad; the register with the user's key
+against the ad and its claims (§4.5); dealer card (ARES by name, ISIR, VAT list, Google);
+Settings → Prověrky; filters and card warnings.
+**Done when:** checks green (421 tests); live: the VAT list (4 497 payers), ISIR, the register
+refusing a wrong key; on a copy of the real database: 5 233 VINs, 6 cars warned (Crafters of
+model year 2022 sold as 2025, an Octavia of 2012 as 2009, a "Ford Transit Connect" with a
+Golf's VIN, …), 8 056 dealer cars linked to 95 dealers, the 40 biggest resolved in 22 s (32
+sure, 4 to pick, e.g. "Porsche České Budějovice", which is not the importer Porsche Česká
+republika; 4 not in ARES under that name, e.g. "Porsche Praha Smíchov"). The VIN check found
+ads a dealer had rewritten for another car while the site kept the old make.
 
 ### M5 — Trip to the seller, polished
 Verify MOTIS import and times in AdaCar; trip window texts for viewings; "visit several cars"
@@ -340,6 +375,8 @@ AI model 1–3 GB (M3).
 - sauto.cz API is internal and may change or close.
 - bazos volume: newest-first walks keep runs short; the first run is long.
 - Dedup false merges: conservative rules (no mileage → no merge).
+- The register API and its key terms may change; without a key the checks still work offline
+  (VIN, km history) and for dealers.
 
 ## 14. Decisions
 1. Fork AdaWork instead of a fresh app (2026-11-17): fastest route; job modules removed and
@@ -352,4 +389,8 @@ AI model 1–3 GB (M3).
 6. The AI's answers are kept only where the ad's own words support them (M3 eval: small models
    guess fuel, body, gearbox and warning signs); a wrong filter value is worse than none.
 7. Mileage against the car's age is not a warning sign (hundreds of honest low-km cars on the
-   real data); rolled-back odometers are M4's, from the STK readings.
+   real data); rolled-back odometers are M4's.
+8. No free source gives STK mileage or stolen cars without a CAPTCHA (M4 spike): the app does
+   not get around it; it keeps its own km history of each VIN and links to those pages.
+9. The vehicle register only with the user's own key (free, personal), asked for the profile's
+   cars and opened ones; never with a shared key or through the website's internal API.

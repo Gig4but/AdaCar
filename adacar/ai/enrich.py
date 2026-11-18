@@ -154,7 +154,7 @@ class Enricher:
                 select(
                     Car.id, Car.title, Car.description, Car.make, Car.model, Car.year,
                     Car.mileage_km, Car.price, Car.price_currency, Car.crashed, Car.condition,
-                    Car.warnings, Car.extra,
+                    Car.warnings, Car.extra, Car.check_warnings,
                 ).where(Car.status == "active", Car.is_offer.is_(True))
             ).all()  # fmt: skip
             prices, kms = _similar_medians(rows)
@@ -165,6 +165,7 @@ class Enricher:
                 if _price_low(r, prices, kms):
                     found.append("price_low")
                 found += (r.extra or {}).get("ai_warnings") or []
+                found += r.check_warnings or []  # checks/service.py
                 warnings = list(dict.fromkeys(found))
                 warned += bool(warnings)
                 if warnings != (r.warnings or []):

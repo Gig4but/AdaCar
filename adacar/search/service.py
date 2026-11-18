@@ -28,7 +28,7 @@ from sqlalchemy.orm import Session, selectinload
 
 from adacar.config import TIME_OF_DAY
 from adacar.core import utcnow
-from adacar.db.models import Car, CarAd, CarImage, Location, SourceState
+from adacar.db.models import Car, CarAd, CarImage, Dealer, Location, SourceState
 from adacar.routing.commute import travel_table, within
 
 # Column weights for bm25: title, make, model, place_text, description.
@@ -41,6 +41,7 @@ TRAVEL_MODES = ("any", "car", "transit", "walk", "bike")
 MAX_TRAVEL = 120  # minutes; the slider's end (routing/commute.py computes this far)
 # Single-value columns the list can be narrowed by, each with counts.
 VALUE_FIELDS = ("make", "fuel", "gearbox", "body", "drive", "seller_kind")
+CHECKS = ("no_warnings", "verified_dealer", "with_vin")  # switches: "1" or missing
 FACETS = (*VALUE_FIELDS, "kraj", "sources")
 RANGES = {  # filter name -> (column, highest accepted value)
     "price_min": ("price", 100_000_000),
@@ -91,6 +92,11 @@ class Filters:
     power_min: int | None = None  # kW
     with_price: bool = False  # hide cars without a price ("dohodou")
     with_photo: bool = True  # hide cars without a photo
+    # The checks (PLAN §4.5): no warning sign on the car or its dealer; a dealer checked in
+    # the registers without a warning; the ad gives a VIN.
+    no_warnings: bool = False
+    verified_dealer: bool = False
+    with_vin: bool = False
     posted_days: int | None = None
     # Travel time (PLAN §4.6): from the start point `origin` ("lat,lon", see geo/home.py) by
     # `travel_mode` ("any" = the fastest), leaving at `depart` on a weekday.
@@ -164,6 +170,9 @@ def filters_from(qp, defaults: dict[str, str] | None = None) -> Filters:
         sources_off=[v for v in qp.getlist("source_off") if v],
         with_price=qp.get("with_price") == "1",
         with_photo="1" in photo if photo else True,
+        no_warnings=qp.get("no_warnings") == "1",
+        verified_dealer=qp.get("verified_dealer") == "1",
+        with_vin=qp.get("with_vin") == "1",
         posted_days=number("posted_days", 3650),
         origin=f"{float(origin[1]):.4f},{float(origin[2]):.4f}" if origin else None,
         origin_label=get("from")[:200] if origin else "",
@@ -186,6 +195,7 @@ def filters_to_query(f: Filters) -> str:
         pairs.append(("with_price", 1))
     if not f.with_photo:
         pairs.append(("photo", 0))
+    pairs += [(name, 1) for name in CHECKS if getattr(f, name)]
     if f.origin:
         pairs += [("from", f.origin_label), ("at", f.origin), ("mode", f.travel_mode),
                   ("max_min", f.travel_max or 0), ("depart", f.depart)]  # fmt: skip
@@ -237,6 +247,21 @@ def _conditions(f: Filters, skip: frozenset[str] = frozenset()) -> list[ColumnEl
         conds.append(exists(select(literal(1)).where(CarImage.car_id == Car.id)))
     if f.posted_days:
         conds.append(Car.posted_at >= utcnow() - timedelta(days=f.posted_days))
+    if f.no_warnings:
+        conds.append(func.json_array_length(Car.warnings) == 0)
+        warned = select(literal(1)).where(
+            Dealer.id == Car.dealer_id, func.json_array_length(Dealer.warnings) > 0
+        )
+        conds.append(~exists(warned))
+    if f.verified_dealer:
+        checked = select(literal(1)).where(
+            Dealer.id == Car.dealer_id,
+            Dealer.checked_at.is_not(None),
+            func.json_array_length(Dealer.warnings) == 0,
+        )
+        conds.append(exists(checked))
+    if f.with_vin:  # 17 characters: not the "0" some sites write for none
+        conds.append(func.length(Car.vin) == 17)
     return conds
 
 

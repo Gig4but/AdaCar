@@ -18,6 +18,7 @@ from adacar.search.service import TRAVEL_MODES
 from adacar.services import Services
 from adacar.web.pages import THEMES, Svc, number, render, status_context
 from adacar.web.routes.ai import ai_summary
+from adacar.web.routes.checks import checks_summary
 
 router = APIRouter()
 
@@ -148,6 +149,7 @@ def catalog(svc: Services) -> list[dict]:
             ),
         ),
         ("/ai", "ai", "ai.title", ai_summary(svc)),
+        ("/checks", "check", "checks.title", checks_summary(svc)),
         (
             "/sources",
             "sources",

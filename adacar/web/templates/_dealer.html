@@ -1,0 +1,89 @@
+{# The dealer behind a car (PLAN §4.5), inside the car's detail: who it is, the official
+   registers, customers' ratings. #}
+{% from "_icons.html" import icon %}
+<h4>{{ icon("building") }}{{ d.name }}</h4>
+<p class="muted small">
+  {% if d.ico %}{{ d.legal_name or d.name }} · IČO {{ d.ico }}{% endif %}
+  {% if cars > 1 %}{% if d.ico %} · {% endif %}{{ t("dealer.cars", n=cars) }}{% endif %}
+</p>
+
+{# --- who it is --- #}
+{% if d.match in ("uncertain", "none", "person", "error") or (d.match == "" and not d.ico) %}
+  <p class="small {{ 'warning' if d.match == 'uncertain' else 'muted' }}">{{ t("dealer.match." ~ (d.match or "pending")) }}</p>
+  {% if d.candidates %}
+    <ul class="check-candidates">
+      {% for c in d.candidates %}
+        <li>
+          <form hx-post="/dealers/{{ d.id }}/correct" hx-target="#dealer-card">
+            <input type="hidden" name="ico" value="{{ c.ico }}">
+            <strong>{{ c.name }}</strong> <span class="muted small">IČO {{ c.ico }}{% if c.address %} · {{ c.address }}{% endif %}{% if not c.active %} · {{ t("dealer.ended_short") }}{% endif %}</span>
+            <button type="submit" class="secondary outline">{{ t("dealer.this_one") }}</button>
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endif %}
+
+{# --- the official registers --- #}
+{% if d.ico %}
+  {% if not d.checked_at %}
+    <p class="muted small">{{ t("dealer.not_checked") }}</p>
+  {% elif "not_found" in d.warnings %}
+    <p class="bad">{{ icon("alert") }} {{ t("dealer.not_in_ares") }}</p>
+  {% else %}
+    <ul class="check-list">
+      {% if d.ended %}
+        <li class="bad">{{ icon("alert") }}<span>{{ t("dealer.ended", date=d.ended | date) }}</span></li>
+      {% elif d.founded %}
+        <li class="ok">{{ icon("check") }}<span>{{ t("dealer.founded", date=d.founded | date) }}</span></li>
+      {% endif %}
+      {% for p in d.insolvency %}
+        <li class="{{ 'bad' if 'insolvency' in d.warnings else 'muted' }}">{{ icon("alert" if "insolvency" in d.warnings else "info") }}<span>{{ t("dealer.insolvency") }}{% if p.state %}{% set k = isir_state(p.state) %}: {{ t("dealer.isir." ~ k) if k else p.state | lower }}{% endif %}{% if p.case %} ({{ p.case }}{% if p.court %}, {{ p.court }}{% endif %}){% endif %}{% if p.since %}, {{ t("dealer.since") }} {{ p.since | date }}{% endif %}
+          {% if p.url and p.url | safe_url != "#" %} <a href="{{ p.url | safe_url }}" target="_blank" rel="noopener">ISIR{{ icon("external", "icon-sm") }}</a>{% endif %}</span></li>
+      {% else %}
+        <li class="ok">{{ icon("check") }}<span>{{ t("dealer.no_insolvency") }}</span></li>
+      {% endfor %}
+      {% if d.vat_unreliable %}
+        <li class="bad">{{ icon("alert") }}<span>{{ t("dealer.vat_unreliable", date=d.vat_unreliable | date) }}</span></li>
+      {% elif d.dic %}
+        <li class="ok">{{ icon("check") }}<span>{{ t("dealer.vat_ok") }}</span></li>
+      {% endif %}
+      {% if d.address %}<li class="muted">{{ icon("info") }}<span>{{ t("dealer.seat") }} {{ d.address }}</span></li>{% endif %}
+    </ul>
+    <p class="muted small">{{ t("dealer.checked", date=d.checked_at | date) }}{% if d.match == "user" %} · {{ t("dealer.match.user") }}{% endif %}</p>
+  {% endif %}
+{% endif %}
+{% if d.ico or d.match in ("none", "uncertain", "error") or problem %}
+  <details class="check-fix" {% if problem %}open{% endif %}>
+    <summary class="small">{{ t("dealer.wrong") if d.ico else t("dealer.give_ico") }}</summary>
+    <form hx-post="/dealers/{{ d.id }}/correct" hx-target="#dealer-card" class="check-fix-form">
+      <input name="ico" inputmode="numeric" pattern="[0-9 ]{6,12}" placeholder="IČO" aria-label="IČO" required
+             {% if problem %}aria-invalid="true"{% endif %}>
+      <button type="submit" class="secondary">{{ t("dealer.fix") }}</button>
+    </form>
+    {% if problem %}<p class="small error">{{ t("dealer." ~ problem) }}</p>{% endif %}
+  </details>
+{% endif %}
+
+{# --- customers: Google --- #}
+{% if d.rating is not none %}
+  <p><span class="check-score">{{ icon("star") }}{{ "%.1f" | format(d.rating) }}</span> {{ t("dealer.google", n=d.rating_count or 0) }}</p>
+  {% if d.reviews %}
+    <details><summary class="small">{{ t("dealer.reviews", n=d.reviews | length) }}</summary>
+      {% for r in d.reviews %}<blockquote class="small"><p>{% if r.rating %}{{ icon("star", "icon-sm") }}{{ r.rating }} {% endif %}{{ r.text }}</p><footer class="muted">{{ r.when }}</footer></blockquote>{% endfor %}
+    </details>
+  {% endif %}
+{% elif not google_key %}
+  <p class="small muted">{{ t("dealer.google_key") }} <a href="/checks">{{ t("checks.title") }}</a></p>
+{% elif d.reviews_at %}
+  <p class="small muted">{{ t("dealer.no_google") }}</p>
+{% endif %}
+
+{% if failed %}<p class="small warning">{{ t("checks.offline") }}</p>{% endif %}
+<p class="small check-links">
+  {% for k in ("google", "mapy", "firmy", "ares", "justice", "isir") if links.get(k) %}
+    <a href="{{ links[k] | safe_url }}" target="_blank" rel="noopener">{{ t("dealer.link." ~ k) }}{{ icon("external", "icon-sm") }}</a>{% if not loop.last %} · {% endif %}
+  {% endfor %}
+  {% if d.ico %} · <button type="button" class="link small" hx-post="/dealers/{{ d.id }}/refresh" hx-target="#dealer-card">{{ t("checks.again") }}</button>{% endif %}
+</p>

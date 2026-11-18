@@ -1,6 +1,6 @@
 """SQLite schema. Changes go through Alembic migrations in db/migrations/versions."""
 
-from datetime import datetime
+from datetime import date, datetime
 from typing import Any, cast
 
 from sqlalchemy import JSON, ForeignKey, Index, String, Table, UniqueConstraint
@@ -135,13 +135,21 @@ class Car(Base):
     hidden_at: Mapped[datetime | None] = mapped_column(index=True)  # hidden from the list
     # Warning signs (ai/enrich.py: rules and the AI), e.g. ["deposit", "price_low"].
     warnings: Mapped[list[str]] = mapped_column(default=list)
+    # The checks' warnings (checks/service.py), merged into `warnings` by the rules pass; a
+    # column of their own, so the checks and the AI never write over each other's.
+    check_warnings: Mapped[list[str]] = mapped_column(default=list)
     ai_hash: Mapped[str | None] = mapped_column(String(64))  # content_hash the AI last read
+    # The dealer behind the ad (checks/dealers.py), by its name; None for private sellers.
+    dealer_id: Mapped[int | None] = mapped_column(
+        ForeignKey("dealers.id", ondelete="SET NULL"), index=True
+    )
 
     location: Mapped[Location | None] = relationship()
     ads: Mapped[list["CarAd"]] = relationship(back_populates="car", cascade="all, delete-orphan")
     images: Mapped[list["CarImage"]] = relationship(
         back_populates="car", cascade="all, delete-orphan", order_by="CarImage.position"
     )
+    dealer: Mapped["Dealer | None"] = relationship(lazy="selectin")  # its warnings on the card
 
     @property
     def photos(self) -> list["CarImage"]:
@@ -149,6 +157,12 @@ class Car(Base):
         saw them (ai/enrich.py); photos it has not looked at keep their place before the
         ones it saw as no car (a dealer's logo, an interior)."""
         return sorted(self.images, key=lambda i: COVER_RANK.get(i.kind or "", 2))
+
+    @property
+    def all_warnings(self) -> list[str]:
+        """The car's warning signs and its dealer's ("dealer_insolvency")."""
+        dealer = self.dealer.warnings if self.dealer else []
+        return [*(self.warnings or []), *(f"dealer_{w}" for w in dealer)]
 
 
 class CarAd(Base):
@@ -239,6 +253,55 @@ class SavedSearch(Base):
     notify: Mapped[bool] = mapped_column(default=True)
     seen_up_to: Mapped[int] = mapped_column(default=0)  # cars after this id are new to the user
     created_at: Mapped[datetime]
+
+
+class VehicleCheck(Base):
+    """What is known of a car by its VIN (checks/vehicle.py), kept when its ads are gone: the
+    km the app saw in its ads, and the vehicle register's record."""
+
+    __tablename__ = "vehicle_checks"
+
+    vin: Mapped[str] = mapped_column(String(17), primary_key=True)
+    km_seen: Mapped[list[dict[str, Any]]] = mapped_column(default=list)  # [{"on", "km"}]
+    register: Mapped[dict[str, Any]] = mapped_column(default=dict)  # checks/register.facts
+    # ok | not_found; None: not asked (no key, or not due yet)
+    register_status: Mapped[str | None] = mapped_column(String(10))
+    register_at: Mapped[datetime | None]
+
+
+class Dealer(Base):
+    """A dealer as the ads name it (one row per name key, checks/names.py), the company
+    behind it and what the official registers and reviews say of it (checks/dealers.py)."""
+
+    __tablename__ = "dealers"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name_key: Mapped[str] = mapped_column(String(200), unique=True)
+    name: Mapped[str]  # as an ad writes it
+    ico: Mapped[str | None] = mapped_column(String(8), index=True)
+    # How the IČO was found: ares | user; uncertain (candidates to pick from) | none
+    # (no company of that name); "" not tried yet.
+    match: Mapped[str] = mapped_column(String(10), default="")
+    candidates: Mapped[list[dict[str, Any]]] = mapped_column(default=list)
+    resolved_at: Mapped[datetime | None]
+    # From ARES, ISIR and the VAT list (checks/official.py):
+    legal_name: Mapped[str | None]
+    legal_form: Mapped[str | None] = mapped_column(String(4))
+    founded: Mapped[date | None]
+    ended: Mapped[date | None]
+    address: Mapped[str | None]
+    dic: Mapped[str | None] = mapped_column(String(14))
+    insolvency: Mapped[list[dict[str, Any]]] = mapped_column(default=list)
+    vat_unreliable: Mapped[str | None] = mapped_column(String(10))  # published since
+    checked_at: Mapped[datetime | None]
+    # Google Maps (with the user's key, checks/google.py):
+    rating: Mapped[float | None]
+    rating_count: Mapped[int | None]
+    maps_url: Mapped[str | None]
+    reviews: Mapped[list[dict[str, Any]]] = mapped_column(default=list)
+    reviews_at: Mapped[datetime | None]
+    # not_found | ended | insolvency | vat
+    warnings: Mapped[list[str]] = mapped_column(default=list)
 
 
 class LlmCache(Base):

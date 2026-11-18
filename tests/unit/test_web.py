@@ -655,6 +655,7 @@ def test_settings_list_the_wizard_steps_in_order(app, client):
         "/settings/profile",
         "/settings/cars",
         "/ai",
+        "/checks",
         "/sources",
         "/settings/automation",
         "/settings/map",
@@ -1099,3 +1100,129 @@ def test_a_huge_picture_is_refused_like_a_broken_one(app, client, monkeypatch):
     monkeypatch.setattr(Image, "MAX_IMAGE_PIXELS", 100)  # a decompression bomb, in small
     r = client.post("/add", files={"picture": ("bomb.png", photo.getvalue(), "image/png")})
     assert r.status_code == 200 and "Soubor není obrázek" in r.text
+
+
+# --- vehicle and seller checks (M4) ---------------------------------------------------------
+
+
+def checked_cars(app, monkeypatch):
+    """Car 1 with a VIN, car 2 from a dealer; the registers are fakes (tests/unit/test_checks)."""
+    from test_checks import OCTAVIA_VIN, RECORD, Sites, ares_record
+
+    from adacar.checks import official, register
+
+    monkeypatch.setattr(register, "GAP", 0)
+    monkeypatch.setattr(official, "ARES_GAP", 0)
+    svc = app.state.services
+    svc.settings.wizard_completed = True
+    cars = fixture_cars(3)
+    cars[0].vin, cars[0].make, cars[0].year = OCTAVIA_VIN, "skoda", 2018
+    cars[1].seller_kind, cars[1].seller_name = "dealer", "Auto Plus s.r.o."
+    store_cars(app, cars)
+    sites = Sites()
+    sites.vins[OCTAVIA_VIN] = RECORD
+    sites.ares["12345678"] = ares_record("12345678", "Auto Plus s.r.o.")
+    svc.checks.client_factory = sites.client
+    svc.checks.dealers.link()
+    return sites
+
+
+def test_a_car_shows_its_vin_checks_and_where_to_check_more(app, client, monkeypatch):
+    from adacar.checks.service import REGISTER_KEY
+
+    sites = checked_cars(app, monkeypatch)
+    detail = client.get("/cars/1").text
+    assert 'hx-get="/cars/1/checks"' in detail and 'hx-get="/dealers/' not in detail
+    section = client.get("/cars/1/checks").text
+    assert "VIN odpovídá značce Škoda" in section and "kontrolatachometru.cz" in section
+    assert "s bezplatným klíčem" in section and not sites.calls  # no key: not asked
+    assert "Inzerát neuvádí VIN" in client.get("/cars/2/checks").text
+    app.state.services.secrets.set(REGISTER_KEY, "k" * 20)
+    section = client.get("/cars/1/checks").text
+    assert "První registrace 21. 3. 2016; dovezeno, v ČR od 2. 6. 2019" in section
+    assert "V registru 3× majitel" in section and len(sites.calls) == 1
+    assert "Registr: první registrace 21. 3. 2016, inzerát uvádí novější rok" in section
+    assert "VIN: modelový rok 2018" in section
+    client.get("/cars/1/checks")  # read: not asked again
+    assert len(sites.calls) == 1
+    client.get("/cars/1/checks?refresh=1")
+    assert len(sites.calls) == 2
+
+
+def test_a_dealers_card_and_the_users_correction(app, client, monkeypatch):
+    from test_checks import ares_record
+
+    sites = checked_cars(app, monkeypatch)
+    detail = client.get("/cars/2").text
+    assert 'hx-get="/dealers/1"' in detail
+    card = client.get("/dealers/1").text
+    assert "IČO 12345678" in card and "Firma existuje od 5. 1. 2010" in card
+    assert "Bez insolvence" in card and "Spolehlivý plátce DPH" in card
+    wrong = client.post("/dealers/1/correct", data={"ico": "11 111 111"}).text
+    assert "Firma s tímto IČO v rejstříku není." in wrong
+    sites.ares["87654321"] = ares_record("87654321", "Jiná firma a.s.")
+    picked = client.post("/dealers/1/correct", data={"ico": "8765 4321"}).text
+    assert "IČO 87654321" in picked and "vybráno vámi" in picked
+    assert client.get("/dealers/99").text == ""
+
+
+def test_an_offline_register_does_not_break_the_card(app, client, monkeypatch):
+    import httpx
+
+    checked_cars(app, monkeypatch)
+
+    def offline(request):
+        raise httpx.ConnectError("offline")
+
+    app.state.services.checks.client_factory = lambda: httpx.Client(
+        transport=httpx.MockTransport(offline)
+    )
+    card = client.get("/dealers/1").text
+    assert "Registry teď nejsou dostupné" in card
+
+
+def test_keys_are_kept_in_the_credential_store(app, client):
+    from adacar.checks.service import GOOGLE_KEY, REGISTER_KEY
+
+    secrets = app.state.services.secrets
+    page = client.get("/checks").text
+    assert "Klíč k registru vozidel" in page and "dataovozidlech.cz/registraceapi" in page
+    r = client.post(
+        "/checks", data={"auto": "on", f"key_{REGISTER_KEY}": "abc def"}, follow_redirects=False
+    )
+    assert r.headers["location"] == f"/checks?invalid={REGISTER_KEY}"
+    assert "nevypadá jako klíč" in client.get(r.headers["location"]).text
+    client.post("/checks", data={f"key_{REGISTER_KEY}": "a1b2c3d4e5f6", f"key_{GOOGLE_KEY}": ""})
+    assert secrets.get(REGISTER_KEY) == "a1b2c3d4e5f6" and secrets.get(GOOGLE_KEY) is None
+    assert app.state.services.settings.checks.auto is False
+    assert "uložen (…e5f6)" in client.get("/checks").text
+    assert "a1b2c3d4e5f6" not in client.get("/checks").text  # never shown again
+    client.post("/checks", data={"auto": "on", f"remove_{REGISTER_KEY}": "on"})
+    assert secrets.get(REGISTER_KEY) is None and app.state.services.settings.checks.auto
+
+
+def listed(page: str) -> list[int]:
+    return [int(i) for i in re.findall(r'id="car-(\d+)"', page)]
+
+
+def test_filters_by_the_checks(app, client, monkeypatch):
+    from adacar.db.models import Dealer
+
+    checked_cars(app, monkeypatch)
+    svc = app.state.services
+    with svc.sessions() as s:
+        s.get(Car, 3).warnings = ["deposit"]
+        s.commit()
+    assert listed(client.get("/?with_vin=1").text) == [1]
+    assert sorted(listed(client.get("/?no_warnings=1").text)) == [1, 2]
+    assert listed(client.get("/?verified_dealer=1").text) == []
+    svc.checks.check_dealer(1)
+    assert listed(client.get("/?verified_dealer=1").text) == [2]
+    with svc.sessions() as s:
+        s.get(Dealer, 1).warnings = ["insolvency"]
+        s.commit()
+    assert listed(client.get("/?no_warnings=1").text) == [1]
+    page = client.get("/").text
+    card = page.split('id="car-2"')[1].split("</article>")[0]
+    assert "Pozor: prodejce: insolvence" in card
+    assert 'name="no_warnings" value="1" checked' in client.get("/facets?no_warnings=1").text

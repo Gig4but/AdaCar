@@ -20,7 +20,7 @@
       {% if car.seller_kind %}{% if car.place_text %} · {% endif %}{{ label("seller_kinds", car.seller_kind) }}{% if car.seller_name %} {{ car.seller_name }}{% endif %}{% endif %}
       {% if car.posted_at %}{% if car.place_text or car.seller_kind %} · {% endif %}<time class="muted" title="{{ t('car.posted') }}">{{ car.posted_at | date }}</time>{% endif %}
     </p>
-    {% if car.warnings %}<p class="warnings">{{ icon("alert") }}<span>{{ t("warn.title") }}: {% for w in car.warnings %}{{ t("warn." ~ w) }}{% if not loop.last %}, {% endif %}{% endfor %}</span></p>{% endif %}
+    {% if car.all_warnings %}<p class="warnings">{{ icon("alert") }}<span>{{ t("warn.title") }}: {% for w in car.all_warnings %}{{ t("warn." ~ w) }}{% if not loop.last %}, {% endif %}{% endfor %}</span></p>{% endif %}
     {% include "_travel.html" %}
     <footer>
       {% include "_car_links.html" %}

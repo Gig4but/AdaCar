@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% from "_icons.html" import icon %}
+{% block title %}{{ t("checks.title") }} – AdaCar{% endblock %}
+{% block content %}
+<article class="wizard">
+  <a href="/settings" class="back">{{ icon("back") }}{{ t("settings.title") }}</a>
+  <h2>{{ t("checks.title") }}</h2>
+  {% if saved %}<p class="ok" role="status">{{ t("settings.saved") }}</p>{% endif %}
+  {% if invalid %}<p class="error" role="alert">{{ t("checks.key_invalid") }}</p>{% endif %}
+  <p>{{ t("checks.text") }}</p>
+  <form method="post" action="/checks">
+    <label><input type="checkbox" role="switch" name="auto" {% if settings.checks.auto %}checked{% endif %}>
+      <strong>{{ t("checks.auto") }}</strong><br><small class="muted">{{ t("checks.auto.hint") }}</small></label>
+    {% for k in keys %}
+      <div class="key-row">
+        <label for="key-{{ k.id }}">{{ t(k.label) }}
+          <a href="{{ k.url }}" target="_blank" rel="noopener" class="small">{{ t("checks.key.get") }}{{ icon("external", "icon-sm") }}</a></label>
+        <input id="key-{{ k.id }}" name="key_{{ k.id }}" autocomplete="off" spellcheck="false"
+               {% if k.end %}placeholder="{{ t('checks.key.saved', end=k.end) }}"{% endif %}>
+        {% if k.end %}<label class="small"><input type="checkbox" name="remove_{{ k.id }}"> {{ t("checks.key.remove") }}</label>{% endif %}
+        <p class="small muted">{{ t(k.label ~ ".hint", used=google_used, free=google_free) }}</p>
+      </div>
+    {% endfor %}
+    <button type="submit">{{ t("settings.save") }}</button>
+  </form>
+  {% if progress.message %}<p class="warning small">{{ t(progress.message) if progress.message.startswith("checks.") else progress.message }}</p>{% endif %}
+  <p class="muted small">{{ t("checks.counts", vins=counts.vins, read=counts.read, dealers=counts.dealers, resolved=counts.resolved) }}</p>
+  <p class="muted small">{{ t("checks.sources") }}</p>
+</article>
+{% endblock %}

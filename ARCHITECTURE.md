@@ -16,7 +16,7 @@ A package imports only from the layers below it; `uv run lint-imports` checks th
 | wiring | `services` | builds every long-lived part once and connects them (the only place that does) |
 | features | `desktop`, `scheduler` | window and tray; automatic searches and alerts |
 | | `scraper` | reading the sources, storing and merging cars |
-| | `ai` | the local model: choice, downloads, `llama-server`; reading ads, photos, questions |
+| | `ai`, `checks` | the local model: choice, downloads, `llama-server`; reading ads, photos, questions · vehicle and seller checks: VIN, register, km history, dealers (ARES, ISIR, VAT, Google) |
 | | `search`, `routing` | queries, filters and facets; travel times (MOTIS) |
 | shared | `geo`, `db`, `normalize` | places; the SQLite schema; text, car vocabulary and free-text rules |
 | base | `core`, `net`, `system`, `config`, `i18n`, `worker`, … | parsed cars, HTTP, this PC, settings |
@@ -32,8 +32,11 @@ A `Car` is one car for sale; each site's ad of it is a `CarAd` (its URL, its pri
 was last seen). The first site to report a car owns its fields; others fill what it lacks
 (`scraper/store.py`). Photos are `CarImage` rows with the site's URL (`kind`: what the AI saw
 on it; `Car.photos` puts the car from the front first). `cars_fts` is the full-text index
-(title, make, model, place, description). `Car.warnings` holds the warning signs and
+(title, make, model, place, description). `Car.warnings` holds the warning signs (the checks
+write theirs to `Car.check_warnings`, which the rules pass merges in) and
 `Car.extra["origin"]` the fields the AI filled in; `llm_cache` keeps the model's answers.
+`vehicle_checks` keeps per VIN the km the app saw and the register's record; a `Dealer` is a
+dealer's name as the ads write it, with the company behind it (`cars.dealer_id`).
 
 ## One request
 
@@ -52,7 +55,10 @@ choosing the template; what two pages share is a function next to them (e.g. `so
    reach of home, the profile's makes and highest price;
 4. every other ad not seen in this run checked; then `RunHooks.after_run`, which starts the
    `Enricher` (`ai/enrich.py`): warning signs by rules, then with the model (when there is
-   one) added pictures, the ads' texts and the cover photos, the profile's cars first.
+   one) added pictures, the ads' texts and the cover photos, the profile's cars first; and
+   wakes `CheckService` (`checks/service.py`): km readings and VIN warnings of every car,
+   dealers linked by name, then (the profile's first) the register and the dealers' checks.
+   Its warnings reach `Car.warnings` through the enricher's rules pass (`on_changed`).
 
 Every source writes through `CarStore`, which merges duplicates (`scraper/dedup.py`: VIN, or
 make + year + district + mileage + model + price) and expires what a source no longer lists. A
@@ -62,7 +68,7 @@ run of a source is a row in `runs`.
 
 | Thread | Owner | Runs | Stops |
 |---|---|---|---|
-| `scheduler`, `routing-data`, `updates` | `Worker` subclasses (`worker.py`) | a round, then rests; `wake()` starts the next now | `stop()` (the app's shutdown) |
+| `scheduler`, `routing-data`, `updates`, `checks` | `Worker` subclasses (`worker.py`) | a round, then rests; `wake()` starts the next now | `stop()` (the app's shutdown) |
 | `scrape` | `ScrapeRunner.start` | one search | `stop()`: each site at its next request |
 | `enrich`, `model-download` | `Enricher.start`, `ModelManager.start_download` | one round after each search; one download | `stop()`; with the app |
 | `llama-idle` | `LlamaServer` | stops the model after 5 idle minutes | with the server |
@@ -84,7 +90,8 @@ with the app.
   `needs_consent = True`, `obey_robots = False`, a `sources.<id>.warning` text. Check it live
   with `uv run python -m adacar probe <id>`.
 - **A filter:** a field on `Filters` and in `filters_from` (`search/service.py`); a value
-  facet goes in `VALUE_FIELDS`, a range in `RANGES`; the panel is `_facets.html`.
+  facet goes in `VALUE_FIELDS`, a range in `RANGES`, a switch in `CHECKS`; the panel is
+  `_facets.html`.
 - **A page:** a route in the area's `web/routes/` module (or a new module in
   `web/routes/__init__.py`), a template, texts in `i18n.py` in both languages (a test checks).
 - **A setting:** a field in `config.py` (pydantic, with a default), its form in the Settings
