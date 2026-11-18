@@ -24,6 +24,7 @@ from adacar.search.service import (
 )
 from adacar.services import Services
 from adacar.web.pages import PAGE_SIZE, POSTED_DAYS, Svc, query_string, render, status_context
+from adacar.web.routes.ai import ai_context
 
 router = APIRouter()
 
@@ -81,6 +82,7 @@ def index(request: Request, svc: Svc) -> Response:
         progress=svc.runner.progress,
         posted_days=POSTED_DAYS,
         view="map" if request.query_params.get("view") == "map" else "list",
+        ai=ai_context(svc),
         **status_context(svc),
     )
 

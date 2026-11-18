@@ -10,9 +10,12 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from sqlalchemy.orm import Session, sessionmaker
+from starlette.datastructures import QueryParams
 
 from adacar import paths
+from adacar.ai.services import AiServices, make_ai_services
 from adacar.config import Settings
+from adacar.db.models import Car
 from adacar.db.session import db_file, make_engine, make_sessionmaker, migrate
 from adacar.desktop import autostart, update
 from adacar.geo import ruian
@@ -23,8 +26,9 @@ from adacar.routing.commute import CommuteService
 from adacar.routing.data import HOME_KM, Area, RoutingData
 from adacar.routing.motis import MotisServer
 from adacar.scheduler import Scheduler
-from adacar.scraper.runner import ScrapeRunner
+from adacar.scraper.runner import RunHooks, ScrapeRunner
 from adacar.scraper.sources import MANUAL
+from adacar.search.service import all_cars
 from adacar.search.travel import TravelFilter, kept_starts
 from adacar.secrets import Secrets, default_secrets
 from adacar.system import hardware
@@ -42,6 +46,7 @@ class Services:
     cache_dir: Path
     places: SharedPlaces
     resources: ResourceManager
+    ai: AiServices
     runner: ScrapeRunner
     scheduler: Scheduler
     motis: MotisServer
@@ -70,6 +75,11 @@ class Services:
 
     def start(self) -> None:
         if self.settings.wizard_completed:
+            try:  # resume an interrupted download, follow hardware changes (Auto)
+                self.ai.manager.start_download()
+                self.ai.enricher.start()  # warning signs; the AI finishes what was left
+            except Exception:
+                log.exception("AI start-up failed")
             self.set_automation()  # the Run value follows the app if it moved
         self.scheduler.start()
         self.routing.start()
@@ -81,6 +91,7 @@ class Services:
         self.runner.stop()
         self.routing.stop()
         self.motis.close()
+        self.ai.shutdown()
 
 
 def build(
@@ -90,6 +101,7 @@ def build(
     data_dir: Path | None = None,
     secrets: Secrets | None = None,
     runner_factory=None,
+    ai_factory=None,
     resources: ResourceManager | None = None,
     autostart_sync: Callable[[bool], object] | None = None,  # the Run value added or removed
     refreshes: tuple[Refresh, ...] = (),
@@ -106,6 +118,15 @@ def build(
     places = SharedPlaces(sessions)
     locator = Locator(places, cache_dir / "ruian" / ruian.FILE_NAME)
 
+    # --- AI (PLAN §6): the profile's cars are read first ---
+    def profile_cars(s: Session) -> set[int] | None:
+        f = travel.filters(QueryParams())  # places found since the last search get times
+        return {r.id for r in all_cars(s, f, [Car.id])} if f.is_filtered() else None
+
+    ai: AiServices = (ai_factory or make_ai_services)(
+        settings, sessions, data_dir, resources, profile_cars
+    )
+
     # --- Travel times to the cars (PLAN §4.6) ---
     vendor = paths.vendor_dir()
     motis = MotisServer(vendor, paths.log_dir() / "motis.log")
@@ -119,6 +140,10 @@ def build(
         home = locator.locate(settings.profile.home_address)
         return Area(HOME_KM, home.lat, home.lon) if home else None
 
+    def free_ram_for_import() -> None:
+        if resources.limits.parallel_heavy == 1:  # 8 GB: the model and the import never overlap
+            ai.manager.server.stop()
+
     routing = RoutingData(
         data_dir / "routing",
         vendor,
@@ -128,6 +153,7 @@ def build(
         allowed=lambda: routing_updates and settings.routing_download,
         heavy=lambda: resources.heavy(Priority.IMPORT),
         busy=resources.busy,
+        before_import=free_ram_for_import,
     )
 
     # `travel` is made below: `keep` is first called by a later computation.
@@ -138,11 +164,17 @@ def build(
     routing.on_ready = travel.routing_ready
 
     # --- Searching ---
+    def stop_enricher() -> None:
+        """Before the cars are deleted: an answer being read would update a deleted car."""
+        ai.enricher.stop()
+        ai.enricher.wait(15)
+
     runner = (runner_factory or ScrapeRunner)(
         sessions,
         cache_dir,
         profile=lambda: settings.profile,
         source_choices=lambda: settings.sources,
+        hooks=RunHooks(before_clear=stop_enricher, after_run=ai.enricher.start),
         kept_sources=(MANUAL,),
     )
     scheduler = Scheduler(settings, runner, sessions, refreshes, prepare=travel.prepare)
@@ -155,6 +187,7 @@ def build(
         cache_dir=cache_dir,
         places=places,
         resources=resources,
+        ai=ai,
         runner=runner,
         scheduler=scheduler,
         motis=motis,

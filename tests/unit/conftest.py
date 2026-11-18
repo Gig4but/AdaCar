@@ -62,3 +62,29 @@ def make_hw(ram_gb=8, gpu=None, vram_gb=0.0, cores=6, disk_gb=100, available_gb=
         gpus=gpus,
         free_disk=int(disk_gb * GIB),
     )
+
+
+def make_ai(tmp_path, settings, sessions, hw=None):
+    """AiServices on temporary folders: nothing is downloaded or started."""
+    from adacar.ai.enrich import Enricher
+    from adacar.ai.manager import ModelManager
+    from adacar.ai.runtime import LlamaServer
+    from adacar.ai.services import AiServices
+
+    hw = hw or make_hw(16, "AMD Radeon(TM) Graphics", 0.5)
+    manager = ModelManager(
+        lambda: settings.ai,
+        tmp_path / "ai-state.json",
+        tmp_path / "models",
+        LlamaServer(tmp_path / "vendor", tmp_path / "llama.log"),
+        probe=lambda: hw,
+    )
+    manager.downloads_started = 0  # type: ignore[attr-defined]
+
+    def start_download():
+        manager.downloads_started += 1  # type: ignore[attr-defined]
+        return True
+
+    manager.start_download = start_download
+    enricher = Enricher(sessions, manager, uploads_dir=tmp_path / "uploads", wait_seconds=0)
+    return AiServices(manager, enricher)

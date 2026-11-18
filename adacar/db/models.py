@@ -133,12 +133,22 @@ class Car(Base):
     # normalize/cars.py). Kept, so they are not read again, but never listed.
     is_offer: Mapped[bool] = mapped_column(default=True, index=True)
     hidden_at: Mapped[datetime | None] = mapped_column(index=True)  # hidden from the list
+    # Warning signs (ai/enrich.py: rules and the AI), e.g. ["deposit", "price_low"].
+    warnings: Mapped[list[str]] = mapped_column(default=list)
+    ai_hash: Mapped[str | None] = mapped_column(String(64))  # content_hash the AI last read
 
     location: Mapped[Location | None] = relationship()
     ads: Mapped[list["CarAd"]] = relationship(back_populates="car", cascade="all, delete-orphan")
     images: Mapped[list["CarImage"]] = relationship(
         back_populates="car", cascade="all, delete-orphan", order_by="CarImage.position"
     )
+
+    @property
+    def photos(self) -> list["CarImage"]:
+        """The photos, the cover first: the car from the front, else from outside, as the AI
+        saw them (ai/enrich.py); photos it has not looked at keep their place before the
+        ones it saw as no car (a dealer's logo, an interior)."""
+        return sorted(self.images, key=lambda i: COVER_RANK.get(i.kind or "", 2))
 
 
 class CarAd(Base):
@@ -167,8 +177,14 @@ class CarAd(Base):
     car: Mapped[Car] = relationship(back_populates="ads")
 
 
+# Photo kinds the AI tells apart (ai/vision.py), best cover first; not looked at (or not
+# downloaded, or added by the user): 2.
+COVER_RANK = {"front": 0, "exterior": 1, "interior": 3, "detail": 3, "other": 3}
+
+
 class CarImage(Base):
-    """A photo of a car, by its URL on the source (shown, not downloaded)."""
+    """A photo of a car, by its URL on the source (shown, not downloaded), or a picture the
+    user added (`url` "/uploads/<file>", kept in the data folder)."""
 
     __tablename__ = "car_images"
     __table_args__ = (UniqueConstraint("car_id", "url"),)
@@ -178,6 +194,10 @@ class CarImage(Base):
     url: Mapped[str]
     position: Mapped[int] = mapped_column(default=0)
     created_at: Mapped[datetime]
+    # What the AI saw (ai/vision.py: front | exterior | interior | detail | other), "failed"
+    # when it could not be downloaded, "upload" for a user's picture.
+    kind: Mapped[str | None] = mapped_column(String(10))
+    text: Mapped[str | None]  # an added picture's text, as the AI read it
 
     car: Mapped[Car] = relationship(back_populates="images")
 
@@ -218,4 +238,17 @@ class SavedSearch(Base):
     query: Mapped[str]  # the search page's query string
     notify: Mapped[bool] = mapped_column(default=True)
     seen_up_to: Mapped[int] = mapped_column(default=0)  # cars after this id are new to the user
+    created_at: Mapped[datetime]
+
+
+class LlmCache(Base):
+    """Model answers by input, so an unchanged ad (or one seen on several portals) is read by
+    the model only once. The key covers the model, the prompt version and the input."""
+
+    __tablename__ = "llm_cache"
+
+    key: Mapped[str] = mapped_column(String(64), primary_key=True)
+    model: Mapped[str] = mapped_column(String(40))
+    prompt_version: Mapped[int]
+    result: Mapped[dict[str, Any]] = mapped_column(default=dict)
     created_at: Mapped[datetime]

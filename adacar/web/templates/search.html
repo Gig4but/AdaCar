@@ -27,6 +27,8 @@
   </div>
 </section>
 
+{% with ask = ai.ask %}{% include "_ask.html" %}{% endwith %}
+
 <form id="search-form" onsubmit="return false"
       hx-get="/results" hx-target="#results" hx-swap="innerHTML transition:true"
       hx-trigger="change[target.name !== 'depart'], change delay:800ms from:input[name=depart], input delay:300ms from:#q, cars-updated from:body">
@@ -74,6 +76,7 @@
       <p aria-busy="true">{{ t("filters.loading") }}</p>
     </aside>
     <div>
+      {% include "_ai_status.html" %}
       <div id="map" aria-label="{{ t('view.map') }}" data-start-here="{{ t('commute.start_here') }}"><p id="map-empty" class="small" hidden>{{ t("map.empty") }}</p></div>
       <div id="results">{% include "_results.html" %}</div>
     </div>

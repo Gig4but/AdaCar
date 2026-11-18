@@ -37,6 +37,22 @@ def parse_price(text: str | None) -> tuple[int, str] | None:
     return _number(m[0]), currency
 
 
+_PRICE_IN_TEXT = re.compile(r"(?<![\d.,])(\d{1,3}(?:[ .]\d{3})+|\d{4,9})\s*(?:kc|czk|,-)")
+
+
+def price_in_text(*texts: str | None) -> int | None:
+    """A pasted ad's price (sources have their own field): the amount after "cena", else the
+    largest one ("splátka 5 000 Kč, 289 000 Kč" -> 289000: instalments, deposits and fees are
+    smaller)."""
+    folded = " ".join(fold(clean_spaces(text or "")) for text in texts)
+    filler = r"(?:(?:je|jen|za|auta?|vozu|vozidla|celkem|pouze|konecna|nova)\W{1,3}){0,3}"
+    labelled = re.search(r"cen[ay]\W{0,3}" + filler + _PRICE_IN_TEXT.pattern, folded)
+    if labelled and _number(labelled[1]) >= MIN_PRICE:
+        return _number(labelled[1])
+    amounts = [_number(m[1]) for m in _PRICE_IN_TEXT.finditer(folded)]
+    return max((a for a in amounts if a >= MIN_PRICE), default=None)
+
+
 def _plausible_year(year: int) -> bool:
     return MIN_YEAR <= year <= date.today().year + 1
 
@@ -153,6 +169,20 @@ def _first(words: tuple[tuple[str, str], ...], *texts: str | None) -> str | None
     return None
 
 
+def _every(words: tuple[tuple[str, str], ...], *texts: str | None) -> set[str]:
+    folded = " ".join(fold(text or "") for text in texts)
+    return {code for code, pattern in words if re.search(rf"(?<![a-z]){pattern}", folded)}
+
+
+def fuels_in_text(*texts: str | None) -> set[str]:
+    """Every fuel the text names ("1.4 TSI LPG" -> petrol and lpg)."""
+    return _every(_FUEL_WORDS, *texts)
+
+
+def bodies_in_text(*texts: str | None) -> set[str]:
+    return _every(_BODY_WORDS, *texts)
+
+
 def fuel_in_text(*texts: str | None) -> str | None:
     return _first(_FUEL_WORDS, *texts)
 
@@ -183,3 +213,48 @@ def not_offer_reason(title: str | None) -> str | None:
     """Why a classifieds ad in a car category is not a car for sale (None: it is one)."""
     folded = fold(clean_spaces(title or ""))
     return next((code for code, pattern in _NOT_OFFER if re.search(pattern, folded)), None)
+
+
+# Warning signs in an ad's own words (PLAN §6); the AI finds them said otherwise too.
+# Words just before ("bez zálohy", "nepožaduji zálohu", "žádná záloha") or just after
+# ("servisní knížka chybí") that say the opposite.
+_NEGATED_BEFORE = re.compile(r"(?:^|\W)(?:bez|zadn\w*|ne[a-z]*)\W+(?:[a-z]+\W+)?$")
+_NEGATED_AFTER = re.compile(r"^\w*\W+(?:[a-z]+\W+)?(?:chybi|neni|nema|nebyl\w*|ztracen\w*)")
+
+
+def said(pattern: str, folded: str) -> bool:
+    """The folded text says it: a match not negated by the words around it."""
+    for m in re.finditer(pattern, folded):
+        before, after = folded[max(0, m.start() - 30) : m.start()], folded[m.end() : m.end() + 30]
+        if not _NEGATED_BEFORE.search(before) and not _NEGATED_AFTER.search(after):
+            return True
+    return False
+
+
+_KM_WORD = r"(?:km|kilometr\w*|tachometr\w*|najet\w*)"
+_NOT_SURE = (
+    r"(?:nelze|nemohu|nemuzu|nedokazu|nemuzeme|neumim) (?:\w+ )?(?:garantovat|zarucit|dolozit"
+    r"|overit)|nezaruc\w*|negarant\w*|neoveren\w*|nedolozen\w*|stocen\w*|bez (?:zaruky|garance)"
+)
+# Phrases of warning signs, checked with `said`, except the mileage one (a negation itself).
+WARNING_WORDS = {
+    "deposit": r"zaloh\w* (?:\w+ )?(?:predem|pred prohlidkou|na ucet|prevodem)"
+    r"|(?:zaslat|poslat|posilat|poslete|zaslete|uhradit|zaplatit) (?:\w+ )?zaloh"
+    r"|platb\w* predem",
+    "abroad": r"(?:jsem|pracuji|bydlim|zijeme|zijem|zdrzuji se|nachazim se) v zahranici"
+    r"|(?:je|stoji|nachazi se) (?:v|ve) (?:nemecku|rakousku|anglii|italii|spanelsku"
+    r"|nizozemsku|belgii|francii|polsku)",
+    "km_unverified": rf"(?:{_NOT_SURE})\W+(?:\w+\W+){{0,4}}?{_KM_WORD}"
+    rf"|{_KM_WORD}\W+(?:\w+\W+){{0,4}}?(?:{_NOT_SURE})",
+}
+
+
+def warning_said(code: str, folded: str) -> bool:
+    pattern = WARNING_WORDS[code]
+    return bool(re.search(pattern, folded)) if code == "km_unverified" else said(pattern, folded)
+
+
+def warnings_in_text(*texts: str | None) -> list[str]:
+    """ "Pošlete zálohu předem, auto je v Německu" -> ["deposit", "abroad"]."""
+    folded = " ".join(fold(clean_spaces(t or "")) for t in texts)
+    return [code for code in WARNING_WORDS if warning_said(code, folded)]

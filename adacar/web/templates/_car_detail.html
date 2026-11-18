@@ -1,4 +1,5 @@
 {# A car with its whole text, in the search page's dialog (static/car.js) or as a page. #}
+{% from "_icons.html" import icon %}
 <header>
   {% if dialog %}<button type="button" aria-label="{{ t('car.close') }}" rel="prev" onclick="this.closest('dialog').close()"></button>{% endif %}
   <h3>{{ car.title }}</h3>
@@ -8,8 +9,9 @@
     {% if car.place_text %} · {{ car.place_text }}{% endif %}
   </p>
 </header>
+{% if car.warnings %}<p class="warnings">{{ icon("alert") }}<span>{{ t("warn.title") }}: {% for w in car.warnings %}{{ t("warn." ~ w) }}{% if not loop.last %}, {% endif %}{% endfor %}</span></p>{% endif %}
 {% if car.images %}
-  <p class="photos">{% for img in car.images[:12] %}<a href="{{ img.url | safe_url }}" target="_blank" rel="noopener"><img src="{{ img.url | safe_url }}" alt="{{ t('car.photo') }}" loading="lazy" referrerpolicy="no-referrer"></a>{% endfor %}</p>
+  <p class="photos">{% for img in car.photos[:12] %}<a href="{{ img.url | safe_url }}" target="_blank" rel="noopener"><img src="{{ img.url | safe_url }}" alt="{{ t('car.photo') }}" loading="lazy" referrerpolicy="no-referrer"></a>{% endfor %}</p>
 {% endif %}
 {% set engine = [("%.1f l" | format(car.engine_cc / 1000)) if car.engine_cc else "", (car.power_kw ~ " kW") if car.power_kw else ""] | select | join(", ") %}
 {% set history = [t("car.first_owner") if car.first_owner else "", t("car.service_book") if car.service_book else "", t("car.crashed") if car.crashed else (t("car.not_crashed") if car.crashed == false else "")] | select | join(", ") %}
@@ -29,9 +31,16 @@
   ("car.vin", car.vin or ""),
   ("car.seller", ([label("seller_kinds", car.seller_kind), car.seller_name] | select | join(" ")) if car.seller_kind or car.seller_name else ""),
 ] %}
+{# Rows with a value the AI read from the ad's text (ai/enrich.py), marked. #}
+{% set origin = car.extra.origin or {} %}
+{% set ai_rows = {"year": "car.year", "mileage_km": "car.mileage", "power_kw": "car.engine", "fuel": "car.fuel",
+  "gearbox": "car.gearbox", "body": "car.body", "vin": "car.vin", "service_book": "car.history",
+  "first_owner": "car.history", "crashed": "car.history"} %}
+{% set marked = [] %}
+{% for field, row in ai_rows.items() if origin.get(field) == "ai" %}{% set _ = marked.append(row) %}{% endfor %}
 <table class="specs">
   <caption class="muted small">{{ t("car.specs") }}</caption>
-  {% for key, value in rows if value %}<tr><th scope="row">{{ t(key) }}</th><td>{{ value }}</td></tr>{% endfor %}
+  {% for key, value in rows if value %}<tr><th scope="row">{{ t(key) }}</th><td>{{ value }}{% if key in marked %} <span class="ai-mark" title="{{ t('ai.filled') }}" aria-label="{{ t('ai.filled') }}">{{ icon("ai") }}</span>{% endif %}</td></tr>{% endfor %}
 </table>
 {% if car.equipment %}
   <details><summary>{{ t("car.equipment") }} ({{ car.equipment | length }})</summary>

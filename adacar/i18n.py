@@ -542,6 +542,261 @@ TEXTS: dict[str, dict[str, str]] = {
     "car.not_crashed": {"cs": "nehavarováno", "en": "not damaged"},
     "car.price_differs": {"cs": "Jinde za {price}", "en": "Elsewhere for {price}"},
     "status.cars": {"cs": "Auta v prodeji: {n}", "en": "Cars for sale: {n}"},
+    # --- AI (PLAN §6) ---
+    "nav.add": {"cs": "Vložit inzerát", "en": "Add an ad"},
+    "add.title": {"cs": "Vložit inzerát", "en": "Add an ad"},
+    "add.heading": {
+        "cs": "Přidejte auto, které jste našli jinde",
+        "en": "Add a car you found elsewhere",
+    },
+    "add.text": {
+        "cs": "Z Facebooku, novin nebo zprávy: vložte text inzerátu, nebo jeho snímek obrazovky."
+        " Umělá inteligence z něj doplní značku, model, rok, najeté km a další údaje.",
+        "en": "From Facebook, a newspaper or a message: paste the ad's text, or add a"
+        " screenshot of it. The AI fills in the make, model, year, mileage and more.",
+    },
+    "add.ad_text": {"cs": "Text inzerátu", "en": "Ad text"},
+    "add.placeholder": {
+        "cs": "Např. Prodám Škoda Octavia combi 2.0 TDI, r. v. 2017, 186 tis. km, 289 000 Kč…",
+        "en": "E.g. Škoda Octavia estate 2.0 TDI, 2017, 186,000 km, 289,000 CZK…",
+    },
+    "add.picture": {"cs": "Snímek obrazovky nebo fotka", "en": "Screenshot or photo"},
+    "add.picture_hint": {
+        "cs": "Text z obrázku přečte AI, když je model stažený.",
+        "en": "The AI reads the text in the picture once a model is downloaded.",
+    },
+    "add.link": {"cs": "Odkaz (nepovinný)", "en": "Link (optional)"},
+    "add.save": {"cs": "Uložit inzerát", "en": "Save the ad"},
+    "add.saved": {
+        "cs": "Uloženo. Chybějící údaje doplní AI na pozadí.",
+        "en": "Saved. The AI fills in missing details in the background.",
+    },
+    "add.another": {"cs": "Vložit další", "en": "Add another"},
+    "add.picture_title": {"cs": "Inzerát z obrázku", "en": "Ad from a picture"},
+    "add.empty": {
+        "cs": "Vložte text inzerátu nebo obrázek.",
+        "en": "Paste the ad text or add a picture.",
+    },
+    "add.too_big": {"cs": "Obrázek je větší než 15 MB.", "en": "The picture is larger than 15 MB."},
+    "add.not_picture": {
+        "cs": "Soubor není obrázek (JPEG, PNG…).",
+        "en": "The file is not a picture (JPEG, PNG…).",
+    },
+    "wizard.ai": {
+        "cs": "Má umělá inteligence číst texty inzerátů?",
+        "en": "Should the AI read the ad texts?",
+    },
+    "ai.title": {"cs": "Umělá inteligence", "en": "Artificial intelligence"},
+    "ai.text": {
+        "cs": "Model umělé inteligence běží jen na vašem počítači, nic se nikam neposílá."
+        " Doplní značku, model, rok, najeté km a další údaje, které inzerát uvádí jen v textu,"
+        " a upozorní na podezřelé inzeráty. Model Výborný navíc dá jako první fotku auta"
+        " zepředu, když inzerát začíná logem nebo interiérem.",
+        "en": "The AI model runs only on your computer; nothing is sent anywhere. It fills in"
+        " the make, model, year, mileage and other details an ad gives only in its text,"
+        " and flags suspicious ads. The Excellent model also puts a photo of the car from the"
+        " front first when an ad opens with a logo or the interior.",
+    },
+    "ai.hardware": {
+        "cs": "Tento počítač: {ram} GB RAM · {gpu} · {disk} GB volného místa",
+        "en": "This computer: {ram} GB RAM · {gpu} · {disk} GB free disk space",
+    },
+    "ai.no_gpu": {"cs": "bez grafické karty", "en": "no graphics card"},
+    "ai.auto": {
+        "cs": "Automaticky – nejlepší pro tento počítač",
+        "en": "Automatic – best for this computer",
+    },
+    "ai.auto.now": {"cs": "teď vybráno: {tier}", "en": "currently: {tier}"},
+    "ai.auto.none": {"cs": "teď: jen pravidla", "en": "currently: rules only"},
+    "ai.tier.simple": {"cs": "Jednoduchý", "en": "Simple"},
+    "ai.tier.good": {"cs": "Dobrý", "en": "Good"},
+    "ai.tier.excellent": {"cs": "Výborný", "en": "Excellent"},
+    "ai.recommended": {"cs": "Doporučeno", "en": "Recommended"},
+    "ai.fit.green": {"cs": "Poběží plynule", "en": "Runs smoothly"},
+    "ai.fit.yellow": {"cs": "Poběží, ale pomaleji", "en": "Works, but slower"},
+    "ai.fit.red": {"cs": "Nedoporučeno", "en": "Not recommended"},
+    "ai.seconds": {"cs": "~{s} s na inzerát", "en": "~{s} s per ad"},
+    "ai.measured": {"cs": "změřeno", "en": "measured"},
+    "ai.downloaded": {"cs": "staženo", "en": "downloaded"},
+    "ai.why.ram": {"cs": "málo paměti", "en": "not enough memory"},
+    "ai.why.ram_tight": {"cs": "paměti je těsně", "en": "memory is tight"},
+    "ai.why.slow": {"cs": "příliš pomalé", "en": "too slow"},
+    "ai.why.slower": {"cs": "pomalejší", "en": "slower"},
+    "ai.why.disk": {"cs": "málo místa na disku", "en": "not enough disk space"},
+    "ai.legend.green": {
+        "cs": "Poběží plynule: do 1 s na inzerát.",
+        "en": "Runs smoothly: up to 1 s per ad.",
+    },
+    "ai.legend.yellow": {
+        "cs": "Poběží, ale pomaleji: 1–4 s na inzerát, přečtení všech inzerátů bude trvat dlouho.",
+        "en": "Works, but slower: 1–4 s per ad; reading all the ads will take a long time.",
+    },
+    "ai.legend.red": {
+        "cs": "Nedoporučeno: přes 4 s na inzerát, nebo málo paměti či místa na disku."
+        " Doporučujeme umělou inteligenci vypnout.",
+        "en": "Not recommended: over 4 s per ad, or not enough memory or disk space."
+        " We recommend turning the AI off.",
+    },
+    "ai.server": {"cs": "Vlastní server", "en": "Own server"},
+    "ai.off": {"cs": "Bez umělé inteligence (jen pravidla)", "en": "No AI (rules only)"},
+    "ai.red_confirm": {
+        "cs": "Tento model je pro váš počítač příliš náročný. Opravdu ho chcete?",
+        "en": "This model is too demanding for your computer. Do you really want it?",
+    },
+    "ai.reason.igpu": {
+        "cs": "{ram} GB RAM, integrovaná grafika → {tier}",
+        "en": "{ram} GB RAM, integrated graphics → {tier}",
+    },
+    "ai.reason.dgpu": {
+        "cs": "{ram} GB RAM, grafická karta s {vram} GB → {tier}",
+        "en": "{ram} GB RAM, graphics card with {vram} GB → {tier}",
+    },
+    "ai.reason.cpu": {
+        "cs": "{ram} GB RAM bez grafické karty → {tier}",
+        "en": "{ram} GB RAM, no graphics card → {tier}",
+    },
+    "ai.reason.none": {
+        "cs": "Žádný model na tomto počítači nepoběží dobře (málo paměti nebo příliš pomalé);"
+        " aplikace použije jen pravidla.",
+        "en": "No model runs well on this computer (not enough memory, or too slow);"
+        " the app uses rules only.",
+    },
+    "ai.download.downloading": {
+        "cs": "Stahuji model {model}: {percent} % ({done} z {total} GB)",
+        "en": "Downloading {model}: {percent} % ({done} of {total} GB)",
+    },
+    "ai.download.benchmark": {
+        "cs": "Měřím rychlost modelu na tomto počítači…",
+        "en": "Measuring the model's speed on this computer…",
+    },
+    "ai.download.failed": {
+        "cs": "Stažení se nepovedlo: {msg}. Zkusím to znovu při příštím spuštění.",
+        "en": "The download failed: {msg}. It will be retried at the next start.",
+    },
+    "ai.ready": {"cs": "Model {model} je připraven.", "en": "Model {model} is ready."},
+    "ai.not_ready": {
+        "cs": "Model zatím není stažený; aplikace používá jen pravidla.",
+        "en": "No model is downloaded yet; the app uses rules only.",
+    },
+    "ai.notice.upgraded": {
+        "cs": "Model byl vylepšen na {model}.",
+        "en": "The model was upgraded to {model}.",
+    },
+    "ai.busy.no_model": {"cs": "model není stažený", "en": "no model downloaded"},
+    "ai.busy.pc_busy": {"cs": "počítač je právě vytížený", "en": "the computer is busy right now"},
+    "ai.busy.memory": {"cs": "málo volné paměti", "en": "not enough free memory"},
+    "ai.enrich.pictures": {
+        "cs": "AI čte vložené obrázky: {done} z {total}",
+        "en": "AI is reading added pictures: {done} of {total}",
+    },
+    "ai.enrich.ai": {
+        "cs": "AI doplňuje údaje: {done} z {total} inzerátů",
+        "en": "AI is filling in details: {done} of {total} ads",
+    },
+    "ai.enrich.covers": {
+        "cs": "AI vybírá fotky aut zepředu: {done} z {total}",
+        "en": "AI is picking front photos of the cars: {done} of {total}",
+    },
+    "ai.enrich.waiting": {
+        "cs": "AI počká ({reason}), pak bude pokračovat",
+        "en": "AI is waiting ({reason}) and will continue",
+    },
+    "ai.enrich.failed": {"cs": "AI se zastavila: {msg}", "en": "The AI stopped: {msg}"},
+    "ai.advanced": {"cs": "Pokročilé", "en": "Advanced"},
+    "ai.model_choice": {"cs": "Konkrétní model", "en": "Specific model"},
+    "ai.server_url": {
+        "cs": "Vlastní server (např. Ollama: http://127.0.0.1:11434)",
+        "en": "Own server (e.g. Ollama: http://127.0.0.1:11434)",
+    },
+    "ai.server_model": {"cs": "Název modelu na serveru", "en": "Model name on the server"},
+    "ai.test": {"cs": "Vyzkoušet spojení", "en": "Test connection"},
+    "ai.test.ok": {
+        "cs": "Server odpovídá. Modely: {models}",
+        "en": "The server answers. Models: {models}",
+    },
+    "ai.test.failed": {"cs": "Server neodpovídá: {msg}", "en": "The server does not answer: {msg}"},
+    "ai.test.bad_url": {
+        "cs": "Adresa musí začínat http:// nebo https://",
+        "en": "The address must start with http:// or https://",
+    },
+    "ai.models": {"cs": "Stažené modely", "en": "Downloaded models"},
+    "ai.models.text": {
+        "cs": "Modely zůstávají na disku i po změně volby, takže se k nim můžete vrátit."
+        " Smazat je můžete jen vy.",
+        "en": "Models stay on disk when the choice changes, so you can go back to them."
+        " Only you can delete them.",
+    },
+    "ai.in_use": {"cs": "používá se", "en": "in use"},
+    "ai.delete": {"cs": "Smazat", "en": "Delete"},
+    "ai.delete_confirm": {
+        "cs": "Smazat tento model z disku? Kdykoli ho můžete stáhnout znovu.",
+        "en": "Delete this model from disk? You can download it again any time.",
+    },
+    "ai.delete_confirm_active": {
+        "cs": "Tento model se právě používá. Smazat ho? AI bude stát, dokud se znovu nestáhne"
+        " (po uložení volby zde nebo při příštím spuštění).",
+        "en": "This model is in use. Delete it? The AI stops until it is downloaded again"
+        " (when a choice is saved here, or at the next start).",
+    },
+    "ai.delete_all": {"cs": "Smazat vše", "en": "Delete all"},
+    "ai.delete_all_confirm": {
+        "cs": "Smazat všechny stažené modely AI? AI bude stát, dokud se znovu nestáhnou"
+        " (po uložení volby zde nebo při příštím spuštění).",
+        "en": "Delete all downloaded AI models? The AI stops until they are downloaded again"
+        " (when a choice is saved here, or at the next start).",
+    },
+    "ai.save": {"cs": "Uložit", "en": "Save"},
+    "ai.saved": {"cs": "Uloženo.", "en": "Saved."},
+    "ai.filled": {
+        "cs": "doplnila AI z textu inzerátu",
+        "en": "filled in by the AI from the ad text",
+    },
+    "settings.ai.none": {"cs": "model zatím nestažen", "en": "no model downloaded yet"},
+    "ask.placeholder": {
+        "cs": "Zeptejte se větou, např. „dieselové kombi do 300 tisíc do hodiny od Kolína“",
+        "en": "Ask in a sentence, e.g. “diesel estate under 300k within an hour of Kolín”",
+    },
+    "ask.button": {"cs": "Zeptat se AI", "en": "Ask AI"},
+    "ask.wait.downloading": {
+        "cs": "Stahuji AI ({percent} %), pak se tu můžete zeptat větou…",
+        "en": "Downloading the AI ({percent} %), then you can ask in a sentence here…",
+    },
+    "ask.wait.benchmark": {
+        "cs": "Zkouším AI na tomto počítači, za chvíli se tu můžete zeptat větou…",
+        "en": "Trying the AI on this computer, you can ask here in a moment…",
+    },
+    "ask.wait.failed": {
+        "cs": "Stažení AI se nepovedlo (Nastavení → AI)",
+        "en": "The AI download failed (Settings → AI)",
+    },
+    "ask.wait.off": {"cs": "AI je vypnutá (Nastavení → AI)", "en": "AI is off (Settings → AI)"},
+    "ask.wait.none": {
+        "cs": "AI zatím není připravená (Nastavení → AI)",
+        "en": "The AI is not ready yet (Settings → AI)",
+    },
+    "ask.failed": {
+        "cs": "Dotaz se nepodařilo zpracovat ({msg}). Zkuste běžné hledání.",
+        "en": "The question could not be processed ({msg}). Try the normal search.",
+    },
+    # Warning signs on a car (Car.warnings, ai/enrich.py).
+    "warn.title": {"cs": "Pozor", "en": "Watch out"},
+    "warn.deposit": {
+        "cs": "prodejce chce zálohu předem",
+        "en": "the seller wants a deposit up front",
+    },
+    "warn.abroad": {"cs": "prodejce je v zahraničí", "en": "the seller is abroad"},
+    "warn.km_unverified": {
+        "cs": "stav km prý nelze zaručit",
+        "en": "the mileage is said to be unverified",
+    },
+    "warn.price_low": {
+        "cs": "cena hluboko pod podobnými auty",
+        "en": "price far below similar cars",
+    },
+    "warn.not_offer": {
+        "cs": "AI: možná nejde o prodej auta",
+        "en": "AI: possibly not a car for sale",
+    },
 }
 
 

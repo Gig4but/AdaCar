@@ -1,0 +1,52 @@
+{% from "_icons.html" import icon %}
+{# Model choice; shared by the wizard and the AI page (PLAN §6.6). #}
+{% macro fit_icon(fit) -%}
+  {{ icon({"green": "check", "yellow": "info", "red": "alert"}[fit], "fit-icon fit-" ~ fit) }}
+{%- endmacro %}
+
+<p class="muted">{{ ai.hardware_line }}</p>
+<fieldset class="ai-choice">
+  <label>
+    <input type="radio" name="choice" value="auto" {% if ai.choice == "auto" %}checked{% endif %}>
+    {{ icon("settings", "fit-icon fit-auto") }}
+    <span><strong>{{ t("ai.auto") }}</strong>
+    <small class="muted">({% if ai.pick %}{{ t("ai.auto.now", tier=t("ai.tier." ~ ai.pick.tier)) }}{% else %}{{ t("ai.auto.none") }}{% endif %})</small></span>
+  </label>
+  {% for o in ai.options %}
+    <label title="{{ t('ai.fit.' ~ o.icon) }}{% for r in o.reasons %} · {{ t(r) }}{% endfor %}">
+      <input type="radio" name="choice" value="{{ o.tier }}" {% if ai.choice == o.tier %}checked{% endif %}
+             {% if o.icon == "red" %}data-confirm="{{ t('ai.red_confirm') }}"{% endif %}>
+      {{ fit_icon(o.icon) }}
+      <span>{{ t("ai.tier." ~ o.tier) }} ({{ o.model }}, {{ o.size }} GB)
+        <small class="muted">— {{ t("ai.fit." ~ o.icon) }}, {{ t("ai.seconds", s=o.seconds) }}{% if o.measured %} ({{ t("ai.measured") }}){% endif %}{% for r in o.reasons %}, {{ t(r) }}{% endfor %}{% if o.downloaded %}, {{ t("ai.downloaded") }}{% endif %}</small>
+        {% if o.recommended %}<span class="badge">{{ t("ai.recommended") }}</span>{% endif %}
+      </span>
+    </label>
+  {% endfor %}
+  {# Shown while an own server is set (Pokročilé on the AI page fills it in as it is typed). #}
+  <label id="ai-server" {% if not ai.server %}hidden{% endif %}>
+    <input type="radio" name="choice" value="server" {% if ai.choice == "server" %}checked{% endif %}>
+    {{ icon("external", "fit-icon fit-auto") }}
+    <span><strong>{{ t("ai.server") }}</strong>
+    <small class="muted">(<span id="ai-server-name">{{ ai.server }}</span>)</small></span>
+  </label>
+  <label>
+    <input type="radio" name="choice" value="off" {% if ai.choice == "off" %}checked{% endif %}>
+    {{ t("ai.off") }}
+  </label>
+</fieldset>
+<ul class="fit-legend muted small">
+  {% for fit in ("green", "yellow", "red") %}
+    <li>{{ fit_icon(fit) }} {{ t("ai.legend." ~ fit) }}</li>
+  {% endfor %}
+</ul>
+<p class="muted small">{{ ai.reason }}</p>
+<script>
+  document.querySelectorAll(".ai-choice input[data-confirm]").forEach(function (input) {
+    input.addEventListener("change", function () {
+      if (input.checked && !window.confirm(input.dataset.confirm)) {
+        document.querySelector('.ai-choice input[value="auto"]').checked = true;
+      }
+    });
+  });
+</script>

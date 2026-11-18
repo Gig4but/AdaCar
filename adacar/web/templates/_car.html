@@ -1,7 +1,7 @@
 {% from "_icons.html" import icon %}
 <article class="car{% if unchecked and car.id in unchecked %} unchecked{% endif %}{% if arrived %} arrived{% endif %}" id="car-{{ car.id }}" data-id="{{ car.id }}"{% if row is defined %} style="--row: {{ row }}"{% endif %}>
   {% if new_after and car.id > new_after %}<span class="new-mark" title="{{ t('car.new') }}"></span>{% endif %}
-  {% set photo = car.images[0].url if car.images else None %}
+  {% set photo = car.photos[0].url if car.images else None %}
   {% if photo %}<a href="/cars/{{ car.id }}" class="car-open car-photo" data-car="{{ car.id }}"><img src="{{ photo | safe_url }}" alt="{{ t('car.photo') }}" loading="lazy" referrerpolicy="no-referrer"></a>{% endif %}
   <div class="car-body">
     <header>
@@ -20,6 +20,7 @@
       {% if car.seller_kind %}{% if car.place_text %} · {% endif %}{{ label("seller_kinds", car.seller_kind) }}{% if car.seller_name %} {{ car.seller_name }}{% endif %}{% endif %}
       {% if car.posted_at %}{% if car.place_text or car.seller_kind %} · {% endif %}<time class="muted" title="{{ t('car.posted') }}">{{ car.posted_at | date }}</time>{% endif %}
     </p>
+    {% if car.warnings %}<p class="warnings">{{ icon("alert") }}<span>{{ t("warn.title") }}: {% for w in car.warnings %}{{ t("warn." ~ w) }}{% if not loop.last %}, {% endif %}{% endfor %}</span></p>{% endif %}
     {% include "_travel.html" %}
     <footer>
       {% include "_car_links.html" %}

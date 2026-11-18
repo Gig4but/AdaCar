@@ -23,6 +23,7 @@
         {# The wizard opens by itself on first start; later from Settings. #}
         {% if settings.wizard_completed %}
         {{ nav_item("/", "search", t("nav.search"), path == "/") }}
+        {{ nav_item("/add", "add", t("nav.add"), path == "/add") }}
         {{ nav_item("/settings", "settings", t("nav.settings"), path == "/settings", "icon-only") }}
         {% endif %}
       </ul>

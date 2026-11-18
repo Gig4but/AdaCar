@@ -2,7 +2,7 @@ import re
 from datetime import UTC, datetime, timedelta
 
 import pytest
-from conftest import make_hw
+from conftest import add_municipalities, make_ai, make_hw
 from fastapi.testclient import TestClient
 from sqlalchemy import select, update
 
@@ -62,6 +62,7 @@ def app(tmp_path):
         db_path=tmp_path / "t.db",
         cache_dir=tmp_path / "cache",
         runner_factory=FakeRunner,
+        ai_factory=lambda st, sessions, data, *_: make_ai(tmp_path, st, sessions),
         resources=ResourceManager(make_hw(16)),
         data_dir=tmp_path / "data",
         secrets=MemorySecrets(),
@@ -143,10 +144,18 @@ def test_first_start_goes_through_wizard(app, client, tmp_path):
     assert 'name="makes" value="skoda"' in page and 'name="max_price"' in page
     form = {"makes": ["skoda", "toyota", "nonsense"], "max_price": "350 000"}
     r = client.post("/wizard/cars", data=form, follow_redirects=False)
+    assert r.headers["location"] == "/wizard/ai"
+    page = client.get("/wizard/ai").text
+    assert "Automaticky – nejlepší pro tento počítač" in page and 'href="/wizard/cars"' in page
+    assert "Tento počítač: 16 GB RAM · AMD Radeon(TM) Graphics" in page
+    # every tier is too slow on this PC: Auto uses rules only, the legend says why
+    assert 'value="auto" checked' in page and "teď: jen pravidla" in page
+    assert "Doporučeno" not in page and "Doporučujeme umělou inteligenci vypnout" in page
+    r = client.post("/wizard/ai", data={"choice": "auto"}, follow_redirects=False)
     assert r.headers["location"] == "/wizard/sources"
-    assert client.get("/wizard/ai", follow_redirects=False).status_code == 303  # no step
+    assert app.state.services.ai.manager.downloads_started == 1  # the model downloads meanwhile
     page = client.get("/wizard/sources").text
-    assert 'href="/wizard/cars"' in page
+    assert 'href="/wizard/ai"' in page
     assert 'name="source_bazos" checked' in page
     assert re.search(r'name="source_sauto"\s*>', page)  # off
     assert "robots.txt" in page  # why sauto.cz is off
@@ -645,6 +654,7 @@ def test_settings_list_the_wizard_steps_in_order(app, client):
         "/settings/appearance",
         "/settings/profile",
         "/settings/cars",
+        "/ai",
         "/sources",
         "/settings/automation",
         "/settings/map",
@@ -655,7 +665,7 @@ def test_settings_list_the_wizard_steps_in_order(app, client):
     for href in pages:
         assert 'href="/settings" class="back' in client.get(href).text
     assert client.get("/settings/nothing", follow_redirects=False).status_code == 303
-    for gone in ("/ai", "/settings/keys", "/settings/employers", "/add"):
+    for gone in ("/settings/keys", "/settings/employers"):
         assert client.get(gone, follow_redirects=False).status_code in (303, 404), gone
 
     profile = app.state.services.settings.profile
@@ -894,3 +904,198 @@ def test_other_sites_cannot_start_work_through_the_app(app, client):
     assert client.get("/", headers=cross).status_code == 403
     assert client.get("/static/app.css", headers=cross).status_code == 200
     assert client.get("/", headers={"Sec-Fetch-Site": "none"}).status_code == 200  # typed in
+
+
+# --- AI (PLAN §6) ---------------------------------------------------------------------------
+
+
+def test_ai_page_saves_the_choice_and_starts_the_download(app, client):
+    app.state.services.settings.wizard_completed = True
+    page = client.get("/ai").text
+    assert "Umělá inteligence" in page and "jen pravidla" in page
+    assert "Jednoduchý (Qwen3.5 0.8B" in page and "Nedoporučeno" in page
+    assert '<label id="ai-server" hidden>' in page  # no own server yet
+    form = {"choice": "simple", "model": "", "server_url": "javascript:alert(1)"}
+    r = client.post("/ai", data=form, follow_redirects=False)
+    assert r.headers["location"] == "/ai?saved=1"
+    ai = app.state.services.settings.ai
+    assert ai.choice == "simple" and ai.server_url == ""  # only http(s) URLs are kept
+    assert app.state.services.ai.manager.downloads_started == 1
+    client.post("/ai", data={"choice": "simple", "model": "qwen3-vl-2b", "server_url": ""})
+    assert app.state.services.settings.ai.choice == "qwen3-vl-2b"  # "Pokročilé" wins
+    assert "Stahuji" not in client.get("/ai/status").text
+    assert "model zatím nestažen" in client.get("/settings").text
+
+    # An own server shows in the list as the selected option; another option turns it off.
+    form = {"choice": "server", "model": "", "server_url": "http://llm.lan", "server_model": "q"}
+    client.post("/ai", data=form)
+    assert ai.server_url == "http://llm.lan" and ai.choice == "qwen3-vl-2b"
+    page = client.get("/ai").text
+    assert '<label id="ai-server" >' in page and 'value="server" checked' in page
+    assert '<span id="ai-server-name">q</span>' in page and 'value="auto" checked' not in page
+    client.post("/ai", data={"choice": "auto", "model": "", "server_url": "http://llm.lan"})
+    assert ai.server_url == "" and ai.choice == "auto"
+
+
+def test_ask_in_a_sentence(app, client, monkeypatch):
+    from contextlib import contextmanager
+
+    from adacar.ai.client import Reply, Timing
+
+    svc = app.state.services
+    svc.settings.wizard_completed = True
+    with svc.sessions() as s:
+        add_municipalities(s)
+    page = client.get("/").text  # no model yet: no box, a line that asks again
+    assert 'name="question"' not in page and 'hx-get="/ask"' in page
+    assert "AI zatím není připravená" in page
+    r = client.post("/ask", data={"question": "kombi u Kolína"})
+    assert "model není stažený" in r.text
+    answer = {
+        "slova": "", "znacka": [], "palivo": ["nafta"], "prevodovka": [], "karoserie": ["kombi"],
+        "prodejce": [], "kraj": [], "cena_od": None, "cena_do": 300000, "rok_od": None,
+        "km_do": None, "vykon_od": None, "odkud": "Kolín", "minut": 60, "dni": None,
+    }  # fmt: skip
+
+    class Answer:
+        def chat(self, messages, schema=None, max_tokens=0, temperature=0):
+            return Reply(answer, Timing(100, 0.1, 30, 1.0, 1.1))
+
+    @contextmanager
+    def session(vision=False, priority=None):
+        yield Answer()
+
+    manager = svc.ai.manager
+    monkeypatch.setattr(manager, "session", session)
+    monkeypatch.setattr(type(manager), "ready", property(lambda self: True))
+    row = client.get("/ask").text  # the disabled box turns on without reloading the page
+    assert 'name="question" maxlength' in row and 'hx-get="/ask"' not in row
+    r = client.post("/ask", data={"question": "dieselové kombi do 300 tisíc do hodiny od Kolína"})
+    target = r.headers["HX-Redirect"]
+    assert "fuel=diesel" in target and "body=combi" in target and "price_max=300000" in target
+    assert "from=Kol%C3%ADn" in target and "at=50.03" in target and "max_min=60" in target
+    answer["odkud"] = "Atlantida"  # a place that is not found: no trip limit
+    target = client.post("/ask", data={"question": "x"}).headers["HX-Redirect"]
+    assert "max_min" not in target and "fuel=diesel" in target
+
+
+def test_downloaded_models_are_listed_and_deleted_on_request(app, client):
+    from test_ai import fake_download
+
+    app.state.services.settings.wizard_completed = True
+    manager = app.state.services.ai.manager
+    fake_download(manager, "qwen3-vl-2b", "qwen3.5-2b")
+    (manager.models_dir / "gemma-4-e2b").mkdir()  # removed from the catalog
+    manager.state.active = "qwen3.5-2b"
+    app.state.services.settings.ai.choice = "good"
+    page = client.get("/ai").text
+    assert "Stažené modely" in page and "používá se" in page and "Smazat vše" in page
+    assert "Qwen3.5 2B" in client.get("/settings").text  # the model in use
+    for model_id in ("qwen3-vl-2b", "qwen3.5-2b", "gemma-4-e2b"):
+        assert f'name="model_id" value="{model_id}"' in page
+    client.post("/ai/delete", data={"model_id": "gemma-4-e2b"})
+    client.post("/ai/delete", data={"model_id": "qwen3.5-2b"})  # in use: deleted too
+    assert manager.downloaded() == {"qwen3-vl-2b"} and manager.stale() == []
+    assert manager.active_model() is None  # the chosen tier is not downloaded
+    client.post("/ai/delete", data={"model_id": "../x"})  # not a model: nothing happens
+    client.post("/ai/delete", data={})  # no model and no "all": nothing either
+    assert len(list(manager.models_dir.iterdir())) == 1
+    client.post("/ai/delete", data={"all": "1"})
+    assert not any(manager.models_dir.iterdir())
+
+
+def test_own_server_test_lists_its_models(client, monkeypatch):
+    from adacar.ai.client import ServerDown
+    from adacar.web.routes import ai as ai_routes
+
+    monkeypatch.setattr(ai_routes, "list_models", lambda url: ["qwen35-2:32k"])
+    page = client.post("/ai/test", data={"server_url": "https://llm.lan"}).text
+    assert '<option value="qwen35-2:32k">' in page
+    assert "musí začínat" in client.post("/ai/test", data={"server_url": "llm.lan"}).text
+
+    def down(url):
+        raise ServerDown("connection refused")
+
+    monkeypatch.setattr(ai_routes, "list_models", down)
+    assert "connection refused" in client.post("/ai/test", data={"server_url": "http://x"}).text
+
+
+def test_an_ad_is_added_by_hand_as_text_or_a_picture(app, client):
+    from io import BytesIO
+
+    from PIL import Image
+
+    svc = app.state.services
+    svc.settings.wizard_completed = True
+    started = []
+    svc.ai.enricher.start = lambda: started.append(True)
+    assert "Vložit inzerát" in client.get("/add").text
+    assert "Vložte text inzerátu nebo obrázek" in client.post("/add", data={"text": " "}).text
+    text = "Prodám Škoda Octavia combi 2.0 TDI\nr.v. 2017, najeto 186 000 km, cena 289 000 Kč"
+    r = client.post("/add", data={"text": text, "link": "javascript:x"})
+    assert "Uloženo" in r.text and "Prodám Škoda Octavia combi 2.0 TDI" in r.text
+    with svc.sessions() as s:
+        car = s.scalars(select(Car).order_by(Car.id.desc())).first()
+        assert (car.make, car.year, car.mileage_km, car.price) == ("skoda", 2017, 186000, 289000)
+        assert [a.source_id for a in car.ads] == ["manual"] and car.ads[0].url is None
+    photo = BytesIO()
+    Image.new("RGB", (3000, 2000), "white").save(photo, format="PNG")
+    r = client.post("/add", files={"picture": ("inzerat.png", photo.getvalue(), "image/png")})
+    assert "Inzerát z obrázku" in r.text and started == [True, True]
+    with svc.sessions() as s:
+        car = s.scalars(select(Car).order_by(Car.id.desc())).first()
+        image = car.images[0]
+        assert image.kind == "upload" and car.extra["title_from_picture"]
+    assert f'src="{image.url}"' in r.text  # the added picture is the car's photo
+    shown = client.get(image.url)
+    assert shown.status_code == 200 and shown.headers["content-type"] == "image/jpeg"
+    with Image.open(BytesIO(shown.content)) as kept:
+        assert max(kept.size) == 1600
+    assert client.get("/uploads/..%2Fconfig.json").status_code in (404, 422)
+    assert client.get("/uploads/" + "0" * 32 + ".jpg").status_code == 404
+    bad = client.post("/add", files={"picture": ("x.png", b"not an image", "image/png")})
+    assert "Soubor není obrázek" in bad.text
+
+
+def test_warning_signs_and_the_ai_marks_are_shown(app, client):
+    svc = app.state.services
+    svc.settings.wizard_completed = True
+    load_fixture_cars(app)
+    with svc.sessions() as s:
+        car = s.get(Car, 1)
+        car.warnings = ["deposit", "price_low"]
+        car.extra = {"origin": {"year": "ai", "fuel": "ai"}}
+        car.images[0].kind = "other"
+        car.images.append(
+            CarImage(url="https://img.example/front.jpg", position=1, kind="front",
+                     created_at=car.updated_at)
+        )  # fmt: skip
+        s.commit()
+    page = client.get("/").text
+    card = page.split('id="car-1"')[1].split("</article>")[0]
+    assert "Pozor: prodejce chce zálohu předem, cena hluboko pod podobnými auty" in card
+    assert 'src="https://img.example/front.jpg"' in card  # the car from the front first
+    detail = client.get("/cars/1").text
+    assert detail.count('title="doplnila AI z textu inzerátu"') == 2  # year and fuel
+    assert detail.index("front.jpg") < detail.index("bazos.cz/img/1/1.jpg")
+
+
+def test_the_ask_row_waits_quietly_when_the_ai_is_off(app, client):
+    app.state.services.settings.wizard_completed = True
+    assert 'hx-get="/ask"' in client.get("/ask").text  # not ready yet: it asks again
+    app.state.services.settings.ai.choice = "off"
+    row = client.get("/ask").text
+    assert "AI je vypnutá" in row and 'hx-get="/ask"' not in row
+
+
+def test_a_huge_picture_is_refused_like_a_broken_one(app, client, monkeypatch):
+    from io import BytesIO
+
+    from PIL import Image
+
+    app.state.services.settings.wizard_completed = True
+    photo = BytesIO()
+    Image.new("1", (400, 400)).save(photo, format="PNG")
+    monkeypatch.setattr(Image, "MAX_IMAGE_PIXELS", 100)  # a decompression bomb, in small
+    r = client.post("/add", files={"picture": ("bomb.png", photo.getvalue(), "image/png")})
+    assert r.status_code == 200 and "Soubor není obrázek" in r.text

@@ -17,11 +17,12 @@ Four main modules:
 4. **Automation and alerts**: scheduled searches, saved searches with new-match counts and
    notifications; planned: price-drop tracking.
 
-Shared services: a small **local AI model** (planned, M3: reads free-text ads, flags
-suspicious ones) and a **local routing engine** (MOTIS: travel times, routes, offline map).
+Shared services: a small **local AI model** (reads free-text ads, flags suspicious ones,
+puts the photo of the car from the front first, turns a question in a sentence into filters)
+and a **local routing engine** (MOTIS: travel times, routes, offline map).
 
-Status: **M0 and M1 done** (2026-11-17). Next: M2 (more sources). How the code is organized:
-[ARCHITECTURE.md](ARCHITECTURE.md).
+Status: **M0–M3 done** (2026-11-18). Next: M4 (vehicle and seller checks). How the code is
+organized: [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ---
 
@@ -113,7 +114,7 @@ links to Mapy.com, IDOS and Google Maps.
 ### 3.1 What the user gets
 Inno Setup installer around a PyInstaller build; pywebview window (Edge WebView2); pystray
 tray icon with optional start with Windows and notifications; MOTIS bundled; MapLibre GL JS
-with tiles served by MOTIS; llama.cpp `llama-server` bundled (used from M3).
+with tiles served by MOTIS; llama.cpp `llama-server` bundled (the AI model).
 
 ### 3.2 Hardware: dynamic adaptation, 8 GB as the minimum
 As in AdaWork: a `HardwareProfile` measured at every start (`system/hardware.py`) decides what
@@ -124,11 +125,11 @@ runs and how big.
 - **Parallel heavy jobs** (`system/resources.py`): one at a time on 8 GB (routing import, AI
   model, browser), more on bigger PCs; heavy work waits while the user is active and free RAM
   is low.
-- **AI model tier** (M3): from RAM, GPU and measured speed.
+- **AI model tier**: from RAM, GPU and measured speed.
 
 #### 3.2.2 Memory budget on 8 GB
 Windows ~3–4 GB, the app ~0.5 GB, MOTIS server 0.5–1.5 GB on demand, MOTIS import only alone,
-AI model 1–2 GB on demand (M3).
+AI model 1–2 GB on demand.
 
 ### 3.3 Inside the app
 Python 3.12, uv, httpx, selectolax, SQLite + SQLAlchemy 2 + Alembic (auto-migrate, backup
@@ -160,7 +161,8 @@ in for the user, personal data deleted 14 days after last seen.
 
 ### 4.4 Pipeline
 listing → leads → (detail) → `ParsedCar` → `CarStore` (dedup, gap filling, per-ad price) →
-geocoding (RÚIAN) → AI (M3) → checks (M4) → travel times → saved-search counts and alerts.
+geocoding (RÚIAN) → warning signs and AI (`ai/enrich.py`) → checks (M4) → travel times →
+saved-search counts and alerts.
 
 ### 4.5 Vehicle and seller checks (M4)
 `checks/` package: VIN-keyed register lookups cached locally, a car card section with mileage
@@ -180,20 +182,43 @@ MOTIS data is imported; route window with deep links; reachable-area overlay on 
 `cars` (one per car; normalized fields, FTS5 `cars_fts` over title, make, model, place,
 description), `car_ads` (one per source ad: url, price, status, detail read time, primary),
 `car_images` (photo URLs), `locations`, `municipalities`, `travel_sets` / `travel_times`,
-`saved_searches`, `sources` (state per source), `runs`. Planned: `price_history` (M6),
-`vehicle_checks`, `dealers` (M4), `llm_cache` (M3).
+`saved_searches`, `sources` (state per source), `runs`, `llm_cache` (the model's answers by
+input). `cars.warnings` (warning signs), `cars.ai_hash` (the version the AI read),
+`car_images.kind` (what the AI saw on a photo). Planned: `price_history` (M6),
+`vehicle_checks`, `dealers` (M4).
 
 ---
 
 ## 6. AI module (M3)
-Port AdaWork's `ai/` runtime, model manager, catalog and downloads unchanged; new prompts:
-- **Extraction** for free-text ads: make, model, year, km, fuel, gearbox, power, body, price
-  terms, VIN when written, "dovoz", "na díly".
-- **Warning signs**: price far below similar cars, "záloha předem", foreign seller asking for
-  a deposit, rolled-back mileage claims.
+AdaWork's `ai/` runtime, model manager, catalog, advisor and downloads, ported unchanged
+(without the job-title embedder); the car work runs in `ai/enrich.py` after each search:
+- **Extraction** (`ai/extract.py`) for ads with a text of 150+ characters that lack fields:
+  make, model, year, km, fuel, gearbox, power, body, VIN, service book, first owner,
+  accident. Only the missing fields are asked; numbers, the make, the model's name and the VIN
+  must be written in the ad (km and kW with their unit); the fuel, body, gearbox and the
+  seller's claims need their words, not negated ("bez servisní knížky"; small models guess
+  them otherwise). Private sellers' ads are also asked whether they sell a
+  car at all (kept only with a buyer's or parts seller's words) and for warning signs.
+- **Warning signs** (`Car.warnings`): by rules on every car for sale (`normalize/cars.py`:
+  "záloha předem", a seller abroad, mileage "not guaranteed", none of them negated; a price
+  below half the median of 6+ cars of the same make, model and year, in CZK, unless the car
+  has more km than they have), and by the AI in other words (kept only with the sign's words
+  in the ad: on real dealers' ads a 2B model flagged "nezaručené km" everywhere). Mileage
+  against the car's age flagged hundreds of honest low-km cars on the real data: rolled-back
+  odometers wait for the STK readings (M4).
 - **Ask in a sentence** ("dieselové kombi do 300 tisíc do hodiny od Kolína") → filters
-  (`search/service.py: filters_to_query`).
-- **Manual add**: paste an ad's text or a screenshot.
+  (`ai/ask.py` → `search/service.py: filters_to_query`), the place (only one the question
+  names) located as a start point. A question shares the loaded model at once.
+- **Manual add** (`/add`): paste an ad's text (read by bazos' rules at once, the price after
+  "cena" or the largest amount; the AI later) or a screenshot (kept in the data folder; the AI
+  writes out its text).
+- **Cover photo**: some ads (dealers especially) open with a logo, banner or interior shot.
+  A model that tells photos apart (`ModelSpec.photos`: Qwen3-VL, the Excellent tier) looks at
+  the first photos (up to 4) of the profile's newest cars, 300 per run, until one shows the car
+  from the front; the photos are downloaded for that only, not kept. `Car.photos` shows that
+  one first, then other outside views. The Qwen3.5 models can not tell them apart (2–4 of 6
+  test photos: a side view, a rear view, a banner all "front"): with them the sites' order
+  stays.
 
 ### 6.6 Model choice
 As in AdaWork: wizard step and Settings → AI; Auto by hardware, tiers Simple / Good /
@@ -208,16 +233,17 @@ Excellent, or an own OpenAI-compatible server.
 2. **Where you start from**: home, how you travel (default: every way, as in AdaWork),
    longest trip, usual departure.
 3. **Models and price**: brands (none = all), highest price.
-4. Sources (those whose robots.txt disallows us are off, with their warning).
-5. Automatic searching and updates (off by default).
-6. Offline map and timetables (downloaded only when asked).
-7. Start: the first search runs, cars appear as each listing page is read.
+4. **Artificial intelligence**: Auto (by hardware), a tier, or off; downloads meanwhile.
+5. Sources (those whose robots.txt disallows us are off, with their warning).
+6. Automatic searching and updates (off by default).
+7. Offline map and timetables (downloaded only when asked).
+8. Start: the first search runs, cars appear as each listing page is read.
 
 ### 7.2 Main pages
 Search (list / map, filters with counts, travel bar, saved searches, hidden ads, live finds
 while a search runs), car detail (photos, specs, equipment, text, every site's ad and price,
 trip window), Sources, Settings (appearance, where I start from, models and price,
-automation, map, updates, licences).
+AI, automation, map, updates, licences), Add an ad.
 
 ---
 
@@ -254,9 +280,24 @@ short (offline, app closed) is read on to its end next time.
 16 ok). Left for later: Škoda Plus (POST), Hyundai Promise, Facebook Marketplace (opt-in),
 sauto incremental runs (newest first per band, `edit_date` → `Lead.modified`).
 
-### M3 — Local AI
-Port `ai/` (runtime, manager, catalog, advisor), car extraction prompt + golden set
-(`tools/make_golden.py` for cars), warning signs, manual add, ask in a sentence.
+### M3 — Local AI — done (2026-11-18)
+`ai/` ported (runtime, manager, catalog, advisor, downloads; wizard step and Settings → AI),
+car extraction with checks, warning signs, manual add, ask in a sentence, cover photo (§6);
+golden set of 60 real ads with the sellers' form fields (`tools/make_golden.py`,
+`adacar eval`).
+**Done when:** checks green (378 tests); `adacar eval` on the golden ads (form fields the
+text may not repeat; answered after the checks / wrong):
+
+| model | make | model | year | kW | fuel | body | s/ad |
+|---|---|---|---|---|---|---|---|
+| Qwen3.5 0.8B (Simple) | 44/0 | 53/1 | 41/1 | 50/0 | 31/2 | 19/2 | 3.7 |
+| Qwen3.5 2B (Good) | 45/0 | 47/0 | 40/0 | 46/0 | 28/1 | 23/3 | 5.7 |
+| Qwen3-VL 4B (Excellent) | 39/0 | 39/0 | 39/0 | 48/0 | 27/1 | 21/3 | 10.3 |
+
+(Core Ultra 7 255U, integrated graphics; most "wrong" are form labels: SUV vs off-road,
+hatchback vs liftback.) The enricher on a copy of the real database: rules 1.5 s for 53k cars
+(212 prices far below similar cars), covers of 28 cars from 6 sources in 70 s, 8 classifieds'
+texts in 63 s, no false warnings.
 
 ### M4 — Vehicle and seller checks
 Spike §2.4 sources; VIN mileage history and rollback flag; stolen check; dealer card (port
@@ -306,4 +347,9 @@ AI model 1–3 GB (M3).
 2. Czechia only; makes and price narrow what is downloaded.
 3. sauto.cz opt-in because of its robots.txt (same pattern as AdaWork's LinkedIn).
 4. bazos.cz read nationwide newest first; the region is a filter, not a crawl limit.
-5. Photos are shown from the sites' URLs, not downloaded.
+5. Photos are shown from the sites' URLs, not downloaded (the cover check downloads the first
+   few and keeps only what it saw).
+6. The AI's answers are kept only where the ad's own words support them (M3 eval: small models
+   guess fuel, body, gearbox and warning signs); a wrong filter value is worse than none.
+7. Mileage against the car's age is not a warning sign (hundreds of honest low-km cars on the
+   real data); rolled-back odometers are M4's, from the STK readings.

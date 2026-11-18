@@ -51,6 +51,18 @@ class Profile(BaseModel):
     max_price: int | None = Field(default=None, ge=10_000, le=50_000_000)  # CZK
 
 
+class AiSettings(BaseModel):
+    """Wizard step "Umělá inteligence" and Settings → AI (PLAN §6.6)."""
+
+    # "auto" (best for this PC, follows hardware changes), a tier ("simple", "good",
+    # "excellent"), a catalog model id (advanced), or "off" (rules only).
+    choice: str = "auto"
+    # Advanced: an OpenAI-compatible server instead of the bundled one, e.g. Ollama
+    # ("http://127.0.0.1:11434") with its model name.
+    server_url: str = ""
+    server_model: str = ""
+
+
 class UpdateSettings(BaseModel):
     """Wizard step "Automatické hledání" and Settings → Aktualizace."""
 
@@ -63,6 +75,7 @@ class Settings(BaseModel):
     wizard_completed: bool = False
     profile: Profile = Field(default_factory=Profile)
     automation: AutomationSettings = Field(default_factory=AutomationSettings)
+    ai: AiSettings = Field(default_factory=AiSettings)
     updates: UpdateSettings = Field(default_factory=UpdateSettings)
     routing_area: RoutingArea = "auto"
     # The map and timetables are downloaded only once the user asks (wizard or Settings →

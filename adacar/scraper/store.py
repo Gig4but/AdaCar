@@ -81,6 +81,27 @@ def car_values(parsed: ParsedCar) -> dict:
     return values | {"is_offer": not parsed.extra.get("not_offer")}
 
 
+def _keep_ai(car: Car | None, values: dict) -> None:
+    """A changed ad keeps the fields the AI read from its text (ai/enrich.py) where the
+    source still says nothing, with their marks and the AI's warning signs; the AI reads the
+    changed ad again."""
+    if car is None:
+        return
+    old = car.extra or {}
+    origin = dict(old.get("origin") or {})
+    for name, how in list(origin.items()):
+        if how != "ai" or name not in values:
+            continue
+        if _empty(values[name]):
+            del values[name]
+        else:
+            del origin[name]  # the source states it now
+    kept = {"origin": origin, "ai_warnings": old.get("ai_warnings")}
+    extra = dict(values.get("extra", old))
+    extra |= {k: v for k, v in kept.items() if v}
+    values["extra"] = extra
+
+
 def _empty(value) -> bool:
     return value is None or value == "" or value == [] or value == {}
 
@@ -359,6 +380,7 @@ class CarStore:
         others = known.car_id in self._shared_cars
         if others:  # keep what other sources filled in
             values = {k: v for k, v in values.items() if not _empty(v)}
+        _keep_ai(self.session.get(Car, known.car_id), values)
         location_id = self._location_id(parsed.location)
         if location_id is not None or not others:
             values["location_id"] = location_id

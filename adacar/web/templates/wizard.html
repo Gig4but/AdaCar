@@ -35,13 +35,24 @@
       </div>
     </form>
 
+  {% elif step == "ai" %}
+    <h2>{{ t("wizard.ai") }}</h2>
+    <p>{{ t("ai.text") }} {{ t("wizard.later") }}</p>
+    <form method="post" action="/wizard/ai">
+      {% include "_ai_form.html" %}
+      <div class="wizard-nav">
+        <a href="/wizard/cars" class="secondary">{{ icon("back") }}{{ t("wizard.back") }}</a>
+        <button type="submit">{{ t("wizard.next") }}</button>
+      </div>
+    </form>
+
   {% elif step == "sources" %}
     <h2>{{ t("wizard.sources") }}</h2>
     <p>{{ t("sources.text") }} {{ t("wizard.later") }}</p>
     <form method="post" action="/wizard/sources">
       {% include "_sources_form.html" %}
       <div class="wizard-nav">
-        <a href="/wizard/cars" class="secondary">{{ icon("back") }}{{ t("wizard.back") }}</a>
+        <a href="/wizard/ai" class="secondary">{{ icon("back") }}{{ t("wizard.back") }}</a>
         <button type="submit">{{ t("wizard.next") }}</button>
       </div>
     </form>

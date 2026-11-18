@@ -1,5 +1,6 @@
 """Entry point: `adacar` opens the app window; `adacar --browser` serves the UI only.
-Developer tool: `adacar probe [source ...]` checks that the portals can still be read."""
+Developer tools: `adacar probe [source ...]` checks that the portals can still be read;
+`adacar eval [model ...]` measures the AI models on the golden set of ads."""
 
 import argparse
 import logging
@@ -20,6 +21,10 @@ from adacar.web.app import create_app
 
 def main(argv: list[str] | None = None) -> int:
     argv = sys.argv[1:] if argv is None else argv
+    if argv[:1] == ["eval"]:  # developer tool: model accuracy and speed (PLAN §6)
+        from adacar.ai.evaluate import main as eval_main
+
+        return eval_main(argv[1:])
     if argv[:1] == ["probe"]:
         from adacar.scraper.probe import main as probe_main
 

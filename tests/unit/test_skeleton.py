@@ -49,7 +49,9 @@ def test_broken_settings_fall_back_to_defaults(tmp_path):
 
 def test_background_server_starts_and_stops(tmp_path, monkeypatch):
     monkeypatch.setenv("HTTP_PROXY", "http://127.0.0.1:9")
-    app = create_app(Settings(), db_path=tmp_path / "t.db", cache_dir=tmp_path / "cache")
+    app = create_app(
+        Settings(), db_path=tmp_path / "t.db", cache_dir=tmp_path / "cache", data_dir=tmp_path
+    )
     server = BackgroundServer(app)
     server.start()
     assert httpx.get(server.url + "health", trust_env=False).json()["status"] == "ok"
@@ -60,7 +62,9 @@ def test_background_server_starts_and_stops(tmp_path, monkeypatch):
 
 @pytest.mark.filterwarnings("ignore::pytest.PytestUnhandledThreadExceptionWarning")
 def test_background_server_fails_fast_when_port_is_taken(tmp_path):
-    app = create_app(Settings(), db_path=tmp_path / "t.db", cache_dir=tmp_path / "cache")
+    app = create_app(
+        Settings(), db_path=tmp_path / "t.db", cache_dir=tmp_path / "cache", data_dir=tmp_path
+    )
     first = BackgroundServer(app)
     first.start()
     try:

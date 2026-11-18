@@ -17,6 +17,7 @@ from adacar.scraper.sources import SWITCHABLE
 from adacar.search.service import TRAVEL_MODES
 from adacar.services import Services
 from adacar.web.pages import THEMES, Svc, number, render, status_context
+from adacar.web.routes.ai import ai_summary
 
 router = APIRouter()
 
@@ -146,6 +147,7 @@ def catalog(svc: Services) -> list[dict]:
                 else tr("settings.cars.any_price"),
             ),
         ),
+        ("/ai", "ai", "ai.title", ai_summary(svc)),
         (
             "/sources",
             "sources",

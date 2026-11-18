@@ -69,7 +69,9 @@ def car_facts(car: Car, lang: str) -> list[str]:
 
 
 def _safe_url(url: str | None) -> str:
-    return url if url and url.lower().startswith(("http://", "https://")) else "#"
+    """A web address, or a picture the user added (routes/add.py)."""
+    ok = url and (url.lower().startswith(("http://", "https://")) or url.startswith("/uploads/"))
+    return url if url and ok else "#"
 
 
 def _format_date(value: datetime | None) -> str:

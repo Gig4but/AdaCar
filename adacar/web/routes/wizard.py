@@ -8,6 +8,7 @@ from adacar.normalize.vocab import MAKES
 from adacar.search.service import TRAVEL_MODES
 from adacar.services import Services
 from adacar.web.pages import THEMES, Svc, render, status_context
+from adacar.web.routes.ai import ai_context, apply_ai_choice
 from adacar.web.routes.settings import (
     apply_automation,
     map_context,
@@ -19,10 +20,12 @@ from adacar.web.routes.sources import apply_source_choices, source_rows
 
 router = APIRouter()
 
-STEPS = ("welcome", "profile", "cars", "sources", "automation", "map", "done")
+STEPS = ("welcome", "profile", "cars", "ai", "sources", "automation", "map", "done")
 
 
 def render_step(request: Request, svc: Services, step: str, **context) -> HTMLResponse:
+    if step == "ai":
+        context.setdefault("ai", ai_context(svc))
     if step == "sources":
         context.setdefault("sources", source_rows(svc))
     if step == "map":
@@ -56,6 +59,13 @@ async def wizard_profile(request: Request, svc: Svc) -> RedirectResponse:
 @router.post("/wizard/cars")
 async def wizard_cars(request: Request, svc: Svc) -> RedirectResponse:
     save_cars(svc, await request.form())
+    return RedirectResponse("/wizard/ai", status_code=303)
+
+
+@router.post("/wizard/ai")
+async def wizard_ai(request: Request, svc: Svc) -> RedirectResponse:
+    apply_ai_choice(svc.settings, await request.form())
+    svc.ai.manager.start_download()  # in the background while the wizard continues
     return RedirectResponse("/wizard/sources", status_code=303)
 
 

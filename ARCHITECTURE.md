@@ -11,12 +11,12 @@ A package imports only from the layers below it; `uv run lint-imports` checks th
 
 | Layer | Packages | What lives there |
 |---|---|---|
-| entry | `cli` | starts the window, the tray or a developer tool (`probe`) |
+| entry | `cli` | starts the window, the tray or a developer tool (`probe`, `eval`) |
 | web | `web` | FastAPI app, one router per area in `web/routes/`, Jinja templates, HTMX |
 | wiring | `services` | builds every long-lived part once and connects them (the only place that does) |
 | features | `desktop`, `scheduler` | window and tray; automatic searches and alerts |
 | | `scraper` | reading the sources, storing and merging cars |
-| | `ai` | model downloads (the AI pipeline returns in M3) |
+| | `ai` | the local model: choice, downloads, `llama-server`; reading ads, photos, questions |
 | | `search`, `routing` | queries, filters and facets; travel times (MOTIS) |
 | shared | `geo`, `db`, `normalize` | places; the SQLite schema; text, car vocabulary and free-text rules |
 | base | `core`, `net`, `system`, `config`, `i18n`, `worker`, … | parsed cars, HTTP, this PC, settings |
@@ -30,8 +30,10 @@ conditions and seller kinds, with their Czech and English labels.
 
 A `Car` is one car for sale; each site's ad of it is a `CarAd` (its URL, its price, when it
 was last seen). The first site to report a car owns its fields; others fill what it lacks
-(`scraper/store.py`). Photos are `CarImage` rows with the site's URL. `cars_fts` is the
-full-text index (title, make, model, place, description).
+(`scraper/store.py`). Photos are `CarImage` rows with the site's URL (`kind`: what the AI saw
+on it; `Car.photos` puts the car from the front first). `cars_fts` is the full-text index
+(title, make, model, place, description). `Car.warnings` holds the warning signs and
+`Car.extra["origin"]` the fields the AI filled in; `llm_cache` keeps the model's answers.
 
 ## One request
 
@@ -48,7 +50,9 @@ choosing the template; what two pages share is a function next to them (e.g. `so
 3. every source switched on (`CrawlSource`, `scraper/crawl.py`) on four parallel slots, one
    host per slot, slow hosts beside them. The query (`geo/scope.py`) carries the regions within
    reach of home, the profile's makes and highest price;
-4. every other ad not seen in this run checked; then `RunHooks.after_run`.
+4. every other ad not seen in this run checked; then `RunHooks.after_run`, which starts the
+   `Enricher` (`ai/enrich.py`): warning signs by rules, then with the model (when there is
+   one) added pictures, the ads' texts and the cover photos, the profile's cars first.
 
 Every source writes through `CarStore`, which merges duplicates (`scraper/dedup.py`: VIN, or
 make + year + district + mileage + model + price) and expires what a source no longer lists. A
@@ -60,12 +64,15 @@ run of a source is a row in `runs`.
 |---|---|---|---|
 | `scheduler`, `routing-data`, `updates` | `Worker` subclasses (`worker.py`) | a round, then rests; `wake()` starts the next now | `stop()` (the app's shutdown) |
 | `scrape` | `ScrapeRunner.start` | one search | `stop()`: each site at its next request |
+| `enrich`, `model-download` | `Enricher.start`, `ModelManager.start_download` | one round after each search; one download | `stop()`; with the app |
+| `llama-idle` | `LlamaServer` | stops the model after 5 idle minutes | with the server |
 | `commute`, `routing-update` | the service that starts them | one job | end with it |
 | `web-server` | `desktop/server.py` | uvicorn | `server.stop()` |
 
-Heavy work (a routing import; from M3 the model) takes a slot of `system/resources.py`, which
-lets one run at a time on 8 GB and more on bigger PCs. MOTIS is a separate process;
-`system/winjob.py` ends it with the app.
+Heavy work (a routing import, the model) takes a slot of `system/resources.py`, which lets one
+run at a time on 8 GB and more on bigger PCs; a question asked in a sentence shares a loaded
+model at once. MOTIS and `llama-server` are separate processes; `system/winjob.py` ends them
+with the app.
 
 ## Adding things
 
@@ -82,6 +89,9 @@ lets one run at a time on 8 GB and more on bigger PCs. MOTIS is a separate proce
   `web/routes/__init__.py`), a template, texts in `i18n.py` in both languages (a test checks).
 - **A setting:** a field in `config.py` (pydantic, with a default), its form in the Settings
   section's route and template.
+- **A model prompt:** a module in `ai/` with its JSON schema (the grammar keeps the answer
+  in shape) and a check of every value against the input; `uv run adacar eval` measures the
+  extraction on the golden ads (`tools/make_golden.py`, `tests/fixtures/eval/`).
 - **A column:** the model in `db/models.py` and a migration (`uv run python
   tools/make_migration.py`); the app migrates on start after copying the database to
   `adacar.db.bak`. A new `ParsedCar` field gets a column of the same name (a test checks).
