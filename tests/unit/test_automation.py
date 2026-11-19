@@ -3,10 +3,10 @@ from datetime import datetime, timedelta
 
 import httpx
 import pytest
-from sqlalchemy import func, select
+from sqlalchemy import func, select, update
 
 from adacar.config import Settings
-from adacar.core import ParsedCar
+from adacar.core import ParsedCar, utcnow
 from adacar.db.models import Car, SavedSearch, SourceState
 from adacar.db.session import make_engine, make_sessionmaker, migrate
 from adacar.net.http import Refresh
@@ -44,16 +44,16 @@ class Runner:
         self.starts.append(self.clock())
         with self.sessions() as s:
             after = s.scalar(select(func.max(Car.id))) or 0
-        self.progress = Progress(running=True, phase="start", after_id=after)
+        self.progress = Progress(running=True, phase="start", after_id=after, started_at=utcnow())
         return True
 
     def finish(self, titles=(), phase="done") -> None:
         with self.sessions() as s:
             store = CarStore(s, "x")
-            for title in titles:
-                store.add(
-                    ParsedCar(external_id=title, title=title, images=["https://img.test/1.jpg"])
-                )
+            for car in titles:
+                if isinstance(car, str):
+                    car = ParsedCar(external_id=car, title=car, images=["https://img.test/1.jpg"])
+                store.add(car)
             store.commit()
         self.progress.running, self.progress.phase = False, phase
 
@@ -294,3 +294,63 @@ def test_a_worker_runs_rounds_until_stopped():
     worker.stop()
     assert worker.rounds == 2 and worker.stopping
     assert worker.sleep(10)  # returns at once: stopping
+
+
+def priced(title: str, price: int) -> ParsedCar:
+    return ParsedCar(external_id=title, title=title, price=price, images=["https://img.test/1"])
+
+
+def test_cheaper_cars_are_notified_those_to_view_first(setup, sessions):
+    settings, clock, runner, scheduler, notes = setup
+    scheduler.set_enabled(True)
+    scheduler.tick()
+    runner.finish([priced("Octavia", 300_000), priced("Fabia", 150_000), priced("Superb", 1)])
+    scheduler.tick()
+    assert notes == [("AdaCar", "Nová auta: 3")]
+    with sessions() as s:
+        s.add(SavedSearch(name="Octavia", query="q=octavia", created_at=T0))
+        s.add(SavedSearch(name="Superb", query="q=superb", created_at=T0))
+        s.execute(update(Car).where(Car.title == "Fabia").values(visit_at=T0))
+        s.commit()
+    clock.forward(hours=12)
+    scheduler.tick()
+    runner.finish(
+        [priced("Octavia", 280_000), priced("Fabia", 140_000), priced("Superb", 2),
+         priced("Octavia Kombi", 200_000)]
+    )  # fmt: skip
+    scheduler.tick()
+    assert notes[-1][1].splitlines() == [
+        "Zlevněné auto na prohlídku: Fabia za 140\xa0000\xa0Kč",
+        "Octavia: nová auta 1, zlevněná 1",
+    ]
+
+    # Cheaper in an earlier check: not news again.
+    clock.forward(hours=12)
+    scheduler.tick()
+    runner.finish([])
+    scheduler.tick()
+    assert len(notes) == 2
+
+    # Many cars to view leave room for the saved searches; a hidden one is not news.
+    cars = [priced(f"Car {i}", 100_000) for i in range(5)]
+    clock.forward(hours=12)
+    scheduler.tick()
+    runner.finish(cars)
+    scheduler.tick()
+    with sessions() as s:
+        for i in range(5):
+            s.execute(
+                update(Car).where(Car.title == f"Car {i}")
+                .values(visit_at=T0 + timedelta(minutes=10 - i), hidden_at=T0 if i == 4 else None)
+            )  # fmt: skip
+        s.commit()
+    clock.forward(hours=12)
+    scheduler.tick()
+    runner.finish([priced(f"Car {i}", 90_000) for i in range(5)] + [priced("Octavia RS", 400_000)])
+    scheduler.tick()
+    assert notes[-1][1].splitlines() == [
+        "Zlevněné auto na prohlídku: Car 3 za 90\xa0000\xa0Kč",  # marked first
+        "Zlevněné auto na prohlídku: Car 2 za 90\xa0000\xa0Kč",
+        "Zlevněné auto na prohlídku: Car 1 za 90\xa0000\xa0Kč",
+        "Octavia: nová auta 1",
+    ]

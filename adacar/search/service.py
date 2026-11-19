@@ -5,7 +5,7 @@ import re
 import time
 from collections.abc import Iterator
 from dataclasses import dataclass, field, replace
-from datetime import timedelta
+from datetime import datetime, timedelta
 from typing import Literal
 from urllib.parse import urlencode
 
@@ -41,7 +41,8 @@ TRAVEL_MODES = ("any", "car", "transit", "walk", "bike")
 MAX_TRAVEL = LONGEST  # minutes; the slider's end (routing/commute.py computes this far)
 # Single-value columns the list can be narrowed by, each with counts.
 VALUE_FIELDS = ("make", "fuel", "gearbox", "body", "drive", "seller_kind")
-CHECKS = ("no_warnings", "verified_dealer", "with_vin")  # switches: "1" or missing
+# Switches: "1" or missing.
+CHECKS = ("no_warnings", "verified_dealer", "with_vin", "cheaper")
 FACETS = (*VALUE_FIELDS, "kraj", "sources")
 RANGES = {  # filter name -> (column, highest accepted value)
     "price_min": ("price", 100_000_000),
@@ -97,6 +98,7 @@ class Filters:
     no_warnings: bool = False
     verified_dealer: bool = False
     with_vin: bool = False
+    cheaper: bool = False  # the price dropped (and is not back up)
     posted_days: int | None = None
     # Travel time (PLAN §4.6): from the start point `origin` ("lat,lon", see geo/home.py) by
     # `travel_mode` ("any" = the fastest), leaving at `depart` on a weekday.
@@ -173,6 +175,7 @@ def filters_from(qp, defaults: dict[str, str] | None = None) -> Filters:
         no_warnings=qp.get("no_warnings") == "1",
         verified_dealer=qp.get("verified_dealer") == "1",
         with_vin=qp.get("with_vin") == "1",
+        cheaper=qp.get("cheaper") == "1",
         posted_days=number("posted_days", 3650),
         origin=f"{float(origin[1]):.4f},{float(origin[2]):.4f}" if origin else None,
         origin_label=get("from")[:200] if origin else "",
@@ -262,6 +265,8 @@ def _conditions(f: Filters, skip: frozenset[str] = frozenset()) -> list[ColumnEl
         conds.append(exists(checked))
     if f.with_vin:  # 17 characters: not the "0" some sites write for none
         conds.append(func.length(Car.vin) == 17)
+    if f.cheaper:
+        conds.append(Car.price_dropped_at.is_not(None))
     return conds
 
 
@@ -490,6 +495,24 @@ def all_cars(session: Session, f: Filters, columns, batch: int = 1000) -> Iterat
     read in batches."""
     stmt = _sorted(session, f).with_only_columns(*columns)
     yield from session.execute(stmt.execution_options(yield_per=batch))
+
+
+def ads_of_all(session: Session, f: Filters) -> dict[int, list[Row]]:
+    """Car id -> its ads (source_id, status, is_primary, url) for every matching car."""
+    ids, _ = _base(f, [Car.id])
+    stmt = select(CarAd.car_id, CarAd.source_id, CarAd.status, CarAd.is_primary, CarAd.url).where(
+        CarAd.car_id.in_(ids)
+    )
+    found: dict[int, list[Row]] = {}
+    for row in session.execute(stmt):
+        found.setdefault(row.car_id, []).append(row)
+    return found
+
+
+def count_cheaper(session: Session, f: Filters, since: datetime) -> int:
+    """Matching cars whose price dropped since `since`."""
+    stmt, _ = _base(f, [func.count()])
+    return session.scalar(stmt.where(Car.price_dropped_at >= since)) or 0
 
 
 def in_list_order(

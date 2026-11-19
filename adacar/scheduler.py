@@ -4,8 +4,8 @@ One background thread looks at the clock every minute:
 - automatic checks (off until the user switches them on) start a search when the interval
   has passed since the last one began, manual searches included; a pause holds them back;
   a check that failed everywhere (e.g. no internet) is tried again after an hour;
-- after an automatic check, the user is told about new matches of the saved searches (or
-  of all cars when none are saved);
+- after an automatic check, the user is told about new and cheaper matches of the saved
+  searches (or about all new cars when none are saved) and cheaper cars marked for a viewing;
 - small official lists are downloaded again when they are due, whether automatic checks
   are on or not (`Refresh`); a failed download is retried after an hour.
 
@@ -22,12 +22,12 @@ from sqlalchemy.orm import Session, sessionmaker
 
 from adacar.config import Settings
 from adacar.core import utcnow
-from adacar.db.models import SavedSearch, SourceState
+from adacar.db.models import Car, SavedSearch, SourceState
 from adacar.i18n import translate
 from adacar.net.http import Refresh, make_client
 from adacar.scraper.runner import Progress, ScrapeRunner
 from adacar.search.saved import filters_of, matches_after
-from adacar.search.service import Filters
+from adacar.search.service import Filters, count_cheaper
 from adacar.worker import Worker
 
 log = logging.getLogger(__name__)
@@ -35,7 +35,12 @@ log = logging.getLogger(__name__)
 LOOK_EVERY = 60.0  # seconds between looks at the clock
 RETRY_AFTER = timedelta(hours=1)
 PAUSE = timedelta(hours=24)  # "Pozastavit" in the tray and Settings
-MAX_LINES = 4  # saved searches named in one notification
+MAX_LINES = 4  # saved searches and cars named in one notification
+
+
+def _price(car: Car) -> str:
+    currency = "Kč" if car.price_currency == "CZK" else car.price_currency
+    return f"{car.price or 0:,}\xa0{currency}".replace(",", "\xa0")
 
 
 class Scheduler(Worker):
@@ -146,20 +151,48 @@ class Scheduler(Worker):
         """What the check found for the user, as notification lines ("" = nothing)."""
         lang = self.settings.language
         lines = []
-        if not p.cleared:  # after a clear every car is "new": not news
-            with self.sessions() as session:
-                saved = list(session.scalars(select(SavedSearch).where(SavedSearch.notify)))
-                if saved:
-                    for s in saved:
-                        f = filters_of(s)
-                        self.prepare(f)
-                        n = matches_after(session, f, p.after_id)
-                        if n:
-                            lines.append(translate(lang, "notify.saved", name=s.name, n=n))
-                    lines = lines[:MAX_LINES]
-                elif n := matches_after(session, Filters(), p.after_id):
-                    lines.append(translate(lang, "notify.new", n=n))
-        return "\n".join(lines)
+        if p.cleared:  # after a clear every car is "new": not news
+            return ""
+        with self.sessions() as session:
+            visits = []  # the cars marked for a viewing come first
+            if p.started_at is not None:
+                marked = session.scalars(
+                    select(Car)
+                    .where(
+                        Car.visit_at.is_not(None),
+                        Car.hidden_at.is_(None),
+                        Car.price_dropped_at >= p.started_at,
+                    )
+                    .order_by(Car.visit_at)
+                )
+                visits = [
+                    translate(lang, "notify.visit_cheaper", title=car.title, price=_price(car))
+                    for car in marked
+                ]
+            saved = list(session.scalars(select(SavedSearch).where(SavedSearch.notify)))
+            for s in saved:
+                f = filters_of(s)
+                self.prepare(f)
+                found = [
+                    translate(lang, key, n=n)
+                    for key, n in (
+                        ("notify.new_part", matches_after(session, f, p.after_id)),
+                        ("notify.cheaper_part", self._cheaper(session, f, p)),
+                    )
+                    if n
+                ]
+                if found:
+                    what = ", ".join(found)
+                    lines.append(translate(lang, "notify.saved", name=s.name, what=what))
+            if not saved and (n := matches_after(session, Filters(), p.after_id)):
+                lines.append(translate(lang, "notify.new", n=n))
+        # Many cheaper cars to view leave room for the saved searches too.
+        visits = visits[: MAX_LINES - min(len(lines), MAX_LINES // 2)]
+        return "\n".join([*visits, *lines][:MAX_LINES])
+
+    @staticmethod
+    def _cheaper(session: Session, f: Filters, p: Progress) -> int:
+        return count_cheaper(session, f, p.started_at) if p.started_at is not None else 0
 
     def _refresh_data(self) -> None:
         due = [r for r in self.refreshes if self._refresh_due(r)]

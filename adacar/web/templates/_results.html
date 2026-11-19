@@ -11,6 +11,10 @@
       {# The name goes as a form field: a header cannot carry "š". #}
       <button type="button" class="secondary outline list-action" data-prompt="{{ t('saved.prompt') }}"
               onclick="const name = prompt(this.dataset.prompt); if (name !== null) htmx.ajax('POST', '/saved', {source: this, target: '#saved', values: {saved_name: name}})">{{ icon("bookmark") }}{{ t("saved.save") }}</button>
+      <span class="with-icon" title="{{ t('export.label') }}">{{ icon("download", "muted") }}
+        <a href="/export.csv?{{ qs }}" download aria-label="{{ t('export.label') }}: CSV">CSV</a>
+        <span aria-hidden="true">·</span>
+        <a href="/export.xlsx?{{ qs }}" download aria-label="{{ t('export.label') }}: Excel">Excel</a></span>
     {% endif %}
   </div>
   {% include "_hidden.html" %}

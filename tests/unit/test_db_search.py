@@ -3,7 +3,7 @@ from datetime import UTC, datetime
 import pytest
 
 from adacar.core import ParsedCar
-from adacar.db.models import Car, CarAd, CarImage
+from adacar.db.models import Car, CarAd, CarImage, PriceHistory
 from adacar.db.session import backup, make_engine, make_sessionmaker, migrate
 from adacar.scraper.store import CarStore
 from adacar.search.service import Filters, fts_query, search_cars, start_batch
@@ -146,3 +146,51 @@ def test_photos_without_a_host_are_not_stored(session):
     store.add(ParsedCar("1", "Octavia", images=photos))
     store.commit()
     assert [i.url for i in session.query(Car).one().images] == ["https://img.test/1.jpg"]
+
+
+def test_price_changes_are_kept_and_a_drop_marks_the_car(session):
+    def offer(price, source="test", currency="CZK"):
+        car = ParsedCar(
+            external_id="1", title="Octavia", price=price, price_currency=currency,
+            images=["https://i.test/1"],
+        )  # fmt: skip
+        CarStore(session, source).add_all([car])
+        session.expire_all()
+        car = session.get_one(Car, 1)
+        changes = session.query(PriceHistory).order_by(PriceHistory.id)
+        return car.price_was, [(c.old_price, c.price) for c in changes]
+
+    cheaper = Filters(cheaper=True)
+    assert offer(300_000) == (None, [])
+    assert offer(280_000) == (300_000, [(300_000, 280_000)])
+    assert search_cars(session, cheaper).total == 1
+    assert session.get_one(Car, 1).price_dropped_at is not None
+    # Up again but below the price before: still cheaper than it was; drops in a row count
+    # from the highest.
+    assert offer(290_000)[0] == 300_000
+    assert offer(260_000) == (300_000, [(300_000, 280_000), (280_000, 290_000), (290_000, 260_000)])
+    # Back up to the old price: no longer cheaper.
+    assert offer(300_000)[0] is None
+    assert offer(280_000)[0] == 300_000
+    assert offer(310_000)[0] is None
+    assert search_cars(session, cheaper).total == 0
+    # No price ("dohodou") is no change to keep.
+    was, changes = offer(None)
+    assert was is None and len(changes) == 6
+
+    # Another site's copy of the car at its own price: the list shows the primary ad's.
+    car = session.get_one(Car, 1)
+    car.ads.append(
+        CarAd(source_id="other", external_id="1", is_primary=False, price=300_000,
+              content_hash="old", first_seen_at=car.first_seen_at,
+              last_seen_at=car.first_seen_at)
+    )  # fmt: skip
+    session.commit()
+    assert len(offer(250_000, source="other")[1]) == 6
+    # The primary ad gives a price again: no change of its own price (it had none), though
+    # the car showed the other site's.
+    assert offer(260_000) == (None, changes)
+    # Another currency is no change to compare, and ends the mark.
+    assert offer(240_000)[0] == 260_000
+    was, changes = offer(240_000, currency="EUR")
+    assert was is None and len(changes) == 7

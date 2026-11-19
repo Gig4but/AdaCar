@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session
 from starlette.concurrency import run_in_threadpool
 
 from adacar.core import utcnow
-from adacar.db.models import Car, table
+from adacar.db.models import Car, PriceHistory, table
 from adacar.normalize.vocab import VOCABULARIES
 from adacar.scraper.check import unchecked
 from adacar.scraper.sources import SWITCHABLE
@@ -260,8 +260,16 @@ def car_detail(request: Request, svc: Svc, car_id: int) -> Response:
         if car is None:
             return Response(status_code=404)
         _ = car.ads, car.images, car.location  # loaded for the template
+        prices = list(
+            s.scalars(
+                select(PriceHistory)
+                .where(PriceHistory.car_id == car_id)
+                .order_by(PriceHistory.changed_at.desc(), PriceHistory.id.desc())
+            )
+        )
     dialog = request.headers.get("HX-Request") and not request.headers.get("HX-Boosted")
-    return render(request, "_car_detail.html" if dialog else "car.html", car=car, dialog=dialog)
+    template = "_car_detail.html" if dialog else "car.html"
+    return render(request, template, car=car, dialog=dialog, prices=prices)
 
 
 @router.post("/scrape", response_class=HTMLResponse)

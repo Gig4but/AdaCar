@@ -136,6 +136,10 @@ class Car(Base):
     hidden_at: Mapped[datetime | None] = mapped_column(index=True)  # hidden from the list
     # Marked for a viewing: the cars of one drive in the best order (routing/tour.py).
     visit_at: Mapped[datetime | None] = mapped_column(index=True)
+    # The price before it dropped (the highest of the drops in a row) and when it dropped;
+    # both None once the price is back up (scraper/store.py, `price_history`).
+    price_was: Mapped[int | None]
+    price_dropped_at: Mapped[datetime | None] = mapped_column(index=True)
     # Warning signs (ai/enrich.py: rules and the AI), e.g. ["deposit", "price_low"].
     warnings: Mapped[list[str]] = mapped_column(default=list)
     # The checks' warnings (checks/service.py), merged into `warnings` by the rules pass; a
@@ -197,6 +201,19 @@ class CarAd(Base):
 # Photo kinds the AI tells apart (ai/vision.py), best cover first; not looked at (or not
 # downloaded, or added by the user): 2.
 COVER_RANK = {"front": 0, "exterior": 1, "interior": 3, "detail": 3, "other": 3}
+
+
+class PriceHistory(Base):
+    """A change of a car's price as the list shows it (its primary ad's), in one currency."""
+
+    __tablename__ = "price_history"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    car_id: Mapped[int] = mapped_column(ForeignKey("cars.id", ondelete="CASCADE"), index=True)
+    old_price: Mapped[int]
+    price: Mapped[int]
+    currency: Mapped[str] = mapped_column(String(3), default="CZK")
+    changed_at: Mapped[datetime]
 
 
 class CarImage(Base):

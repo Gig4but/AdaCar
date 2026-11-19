@@ -1,9 +1,10 @@
-"""Saved searches."""
+"""Saved searches and the export of the matching cars."""
 
+from datetime import datetime
 from urllib.parse import urlencode
 
 from fastapi import APIRouter, Request
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.responses import HTMLResponse, RedirectResponse, Response
 from sqlalchemy import func, select
 from starlette.concurrency import run_in_threadpool
 from starlette.datastructures import QueryParams
@@ -12,8 +13,9 @@ from adacar.core import utcnow
 from adacar.db.models import SavedSearch
 from adacar.i18n import translate
 from adacar.search.saved import MAX_SAVED, newest_car_id, with_new_counts
-from adacar.search.service import filters_from
+from adacar.search.service import ads_of_all, all_cars, filters_from
 from adacar.services import Services
+from adacar.web import export
 from adacar.web.pages import Svc, render
 
 router = APIRouter()
@@ -93,3 +95,24 @@ def delete_saved(request: Request, svc: Svc, saved_id: int) -> HTMLResponse:
             s.delete(saved)
             s.commit()
     return render_saved(request, svc, open_list=True)
+
+
+@router.get("/export.{kind}")
+def export_cars(request: Request, svc: Svc, kind: str) -> Response:
+    """The cars matching the filters, every page of them, as CSV or Excel."""
+    if kind not in ("csv", "xlsx"):
+        return Response(status_code=404)
+    f = svc.travel.filters(request.query_params)
+    lang = svc.settings.language
+    with svc.sessions() as s:
+        cars, ads = all_cars(s, f, export.CAR_COLUMNS), ads_of_all(s, f)
+        rows = list(export.table(cars, ads, lang))
+    data = export.to_csv(rows) if kind == "csv" else export.to_xlsx(rows)
+    media = (
+        "text/csv; charset=utf-8"
+        if kind == "csv"
+        else "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
+    name = f"adacar-{datetime.now():%Y-%m-%d}.{kind}"
+    disposition = f'attachment; filename="{name}"'
+    return Response(data, media_type=media, headers={"Content-Disposition": disposition})

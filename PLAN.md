@@ -15,13 +15,13 @@ Four main modules:
    the user's free key), the car's mileage history as the app saw it, and the dealer behind
    an ad (company register, insolvency, VAT reliability, ratings).
 4. **Automation and alerts**: scheduled searches, saved searches with new-match counts and
-   notifications; planned: price-drop tracking.
+   notifications, price history and price-drop alerts, the list as CSV or Excel.
 
 Shared services: a small **local AI model** (reads free-text ads, flags suspicious ones,
 puts the photo of the car from the front first, turns a question in a sentence into filters)
 and a **local routing engine** (MOTIS: travel times, routes, offline map).
 
-Status: **M0–M5 done** (2026-11-18). Next: M6 (automation and alerts). How the code is
+Status: **M0–M6 done** (2026-11-19). Next: M7 (installer and delivery). How the code is
 organized: [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ---
@@ -223,7 +223,8 @@ input). `cars.warnings` (warning signs), `cars.ai_hash` (the version the AI read
 `car_images.kind` (what the AI saw on a photo). `vehicle_checks` (by VIN: km readings, the
 register's record), `dealers` (a name as the ads write it, its company and checks),
 `cars.dealer_id`, `cars.check_warnings`, `cars.visit_at` (marked for the viewing trip).
-Planned: `price_history` (M6).
+`price_history` (each change of a car's price), `cars.price_was` and `cars.price_dropped_at`
+(the price before it dropped, M6).
 
 ---
 
@@ -283,6 +284,23 @@ while a search runs), car detail (photos, specs, equipment, text, every site's a
 trip window, the car's checks and its dealer's card), Sources, Settings (appearance, where I
 start from, models and price, AI, checks with the user's keys, automation, map, updates,
 licences), Add an ad.
+
+### 7.3 Alerts and export (M6)
+- **Price history.** A change of the price the list shows (the primary ad's own price; other
+  sites' prices are shown beside it, and an ad that becomes primary or a price another site
+  filled in is no change) is kept in `price_history` (the car's detail: "Vývoj ceny").
+  A lower price marks the car "zlevněno z …" (from the highest price of the drops in a row)
+  until the price is back up there; the filter "Jen zlevněná" lists only such cars. No price
+  ("dohodou") or another currency is no change to keep and ends the mark.
+- **Notifications** after an automatic check: the cars marked "Na prohlídku" (not hidden)
+  that got cheaper first, then per saved search that notifies its new and cheaper cars
+  ("Octavia: nová auta 1, zlevněná 2"), or the number of new cars when none is saved; at most
+  4 lines, of which the cars to view leave 2 for the rest.
+- **Export.** "Stáhnout seznam: CSV · Excel" above the list: every car matching the filters
+  in the list's order, with the make, model, year, km, price and the price before a drop,
+  fuel, gearbox, power, body, place, region, the seller (a dealer's name; private sellers'
+  names left out, §12), VIN, date, sites and the link. Numbers are numbers in Excel; CSV
+  with semicolons and a BOM as Excel with Czech settings opens it; text is never a formula.
 
 ---
 
@@ -363,9 +381,13 @@ towns ordered in 5.8 s, again without one of them at once. Found on the real dat
 route to: cars.cz (33 029) names the place only on the ad's page, which the one run so far
 had not read, and autanet (11 804) only the region; the places come as the pages are read.
 
-### M6 — Automation and alerts
-Price history per ad, price-drop marks and notifications, "new for my saved search" alerts
-(exist), export CSV/Excel (port).
+### M6 — Automation and alerts — done (2026-11-19)
+Price history, price-drop marks and notifications, "new for my saved search" alerts (from
+AdaWork), export CSV/Excel (ported, §7.3).
+**Done when:** checks green (437 tests); on a copy of the real database: the upgrade 0.6 s,
+all 53 516 cars exported in 3.5 s (CSV 12 MB, Excel 5.8 MB; openpyxl reads year, km and
+price as numbers). The real cars have no history yet: the sites give only today's price, so
+the drops show from the next searches on.
 
 ### M7 — Installer and delivery
 Build `AdaCar-Setup.exe`; Czech guide `packaging/navod.html` for cars (still AdaWork's);

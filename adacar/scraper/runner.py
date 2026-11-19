@@ -56,6 +56,7 @@ class Progress:
     phase: str = ""
     cleared: bool = False  # this run deleted the cars found before
     after_id: int = 0  # the cars this run stores get higher ids
+    started_at: datetime | None = None  # UTC; cars that got cheaper since are this run's news
     # A run that keeps the cars found before checks their pages (scraper/check.py): those of
     # `checking` sources not seen since `checked_since` are not checked yet.
     checked_since: datetime | None = None
@@ -150,6 +151,7 @@ class ScrapeRunner:
                 running=True,
                 phase="clear" if clear else "start",
                 after_id=after_id,
+                started_at=utcnow(),
                 checked_since=None if clear else utcnow() - RECENT,
             )
             self._stopping.clear()

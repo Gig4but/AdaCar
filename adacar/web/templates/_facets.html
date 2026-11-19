@@ -32,6 +32,7 @@
 <label class="facet"><input type="checkbox" name="photo" value="1" {% if f.with_photo %}checked{% endif %}> <span>{{ t("filters.with_photo") }}</span></label>
 {{ range(t("filters.price"), "price_min", f.price_min, "price_max", f.price_max, 10000) }}
 <label class="facet"><input type="checkbox" name="with_price" value="1" {% if f.with_price %}checked{% endif %}> <span>{{ t("filters.with_price") }}</span></label>
+<label class="facet"><input type="checkbox" name="cheaper" value="1" {% if f.cheaper %}checked{% endif %}> <span>{{ t("filters.cheaper") }}</span></label>
 {{ range(t("filters.year"), "year_min", f.year_min, "year_max", f.year_max, 1) }}
 {{ range(t("filters.km_max"), None, None, "km_max", f.km_max, 10000) }}
 {{ range(t("filters.power_min"), "power_min", f.power_min, None, None, 5) }}

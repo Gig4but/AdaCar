@@ -25,7 +25,7 @@ from sqlalchemy import (
 from sqlalchemy.orm import Session, aliased, object_session
 
 from adacar.core import ParsedCar, ParsedLocation, utcnow
-from adacar.db.models import Car, CarAd, CarImage, Location
+from adacar.db.models import Car, CarAd, CarImage, Location, PriceHistory
 from adacar.scraper.dedup import DedupIndex, Entry
 
 # Copied to the car's columns as they are; the rest goes to the ad's row, the location and
@@ -130,6 +130,7 @@ class _Known:
     digest: str | None
     is_primary: bool
     detail_at: datetime | None
+    price: int | None  # the ad's own last price
 
     @property
     def has_detail(self) -> bool:
@@ -162,9 +163,10 @@ class CarStore:
                 CarAd.content_hash,
                 CarAd.is_primary,
                 CarAd.detail_at,
+                CarAd.price,
             ).where(CarAd.source_id == source_id)
         )
-        self._known = {r[0]: _Known(r[1], r[2], r[3], r[4]) for r in rows}
+        self._known = {r[0]: _Known(*r[1:]) for r in rows}
         shared = select(CarAd.car_id).group_by(CarAd.car_id).having(func.count() > 1)
         self._shared_cars = set(session.scalars(shared))  # cars offered by several sources
         self.dedup = dedup if dedup is not None else DedupIndex.load(session)
@@ -241,7 +243,7 @@ class CarStore:
                     self._create(parsed, digest, detail, now)
                     self.stats.new += 1
             self._known[parsed.external_id] = _Known(
-                -1, digest, match is None, now if detail else None
+                -1, digest, match is None, now if detail else None, parsed.price
             )
             self._added.append(parsed.external_id)
         elif digest == known.digest:
@@ -371,6 +373,7 @@ class CarStore:
             )
             .values(**source_values)
         )
+        old_price, known.price = known.price, parsed.price
         if not known.is_primary:
             car = self.session.get(Car, known.car_id)
             if car is not None:
@@ -380,7 +383,12 @@ class CarStore:
         others = known.car_id in self._shared_cars
         if others:  # keep what other sources filled in
             values = {k: v for k, v in values.items() if not _empty(v)}
-        _keep_ai(self.session.get(Car, known.car_id), values)
+        car = self.session.get(Car, known.car_id)
+        _keep_ai(car, values)
+        if car is not None and "price" in values:
+            values |= self._price_change(
+                car, old_price, values["price"], values["price_currency"], now
+            )
         location_id = self._location_id(parsed.location)
         if location_id is not None or not others:
             values["location_id"] = location_id
@@ -395,6 +403,31 @@ class CarStore:
             car = self.session.get(Car, known.car_id)
             if car is not None:
                 self._add_images(car, parsed.images, {i.url for i in car.images}, now)
+
+    def _price_change(
+        self, car: Car, old: int | None, price: int | None, currency: str, now: datetime
+    ) -> dict:
+        """The primary ad's price changed from `old`: kept in the car's history; a lower one
+        marks the car cheaper (the column values to set). Measured against the ad's own last
+        price, not the car's: that may be another site's (the ad became primary, or another
+        site filled it in), which is no change of this ad's price."""
+        unmarked = {"price_was": None, "price_dropped_at": None}
+        if currency != car.price_currency:
+            return unmarked  # another currency: nothing to compare
+        if price == old:
+            return {}
+        if old is None or price is None:
+            return unmarked
+        self.session.add(
+            PriceHistory(
+                car_id=car.id, old_price=old, price=price, currency=currency, changed_at=now
+            )
+        )
+        if price < old:
+            return {"price_was": max(car.price_was or 0, old), "price_dropped_at": now}
+        if car.price_was is None or price >= car.price_was:
+            return unmarked
+        return {}  # up again, but still below the price before the drops
 
     @staticmethod
     def _add_images(car: Car, urls: list[str], have: set[str], now: datetime) -> None:

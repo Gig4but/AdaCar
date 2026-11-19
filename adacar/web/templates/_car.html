@@ -9,6 +9,7 @@
       <div class="car-side">
         <small class="checking-note muted" aria-busy="true">{{ t("car.unchecked") }}</small>
         <span class="price">{{ price(car) }}</span>
+        {% if car.price_was and car.price is not none and car.price < car.price_was %}<small class="cheaper" title="{{ t('car.cheaper_on', date=car.price_dropped_at | date) }}">{{ t("car.cheaper", price=(car.price_was | number) ~ "\u00a0" ~ ("Kč" if car.price_currency == "CZK" else car.price_currency)) }}</small>{% endif %}
         <button type="button" class="hide secondary outline" hx-post="/cars/{{ car.id }}/hide"
                 hx-target="closest .car" hx-swap="outerHTML swap:160ms" title="{{ t('car.hide_hint') }}">{{ t("car.hide") }}</button>
       </div>

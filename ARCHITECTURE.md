@@ -38,6 +38,9 @@ write theirs to `Car.check_warnings`, which the rules pass merges in) and
 `vehicle_checks` keeps per VIN the km the app saw and the register's record; a `Dealer` is a
 dealer's name as the ads write it, with the company behind it (`cars.dealer_id`).
 `Car.visit_at` marks the cars of the viewing trip (`routing/tour.py`, `web/routes/visits.py`).
+`price_history` keeps each change of a car's price, `Car.price_was` / `price_dropped_at` the
+drop the list marks (`scraper/store.py`); the scheduler announces drops after an automatic
+check, `web/export.py` writes the list as CSV or Excel.
 
 ## One request
 

@@ -5,11 +5,17 @@
   <h3>{{ car.title }}</h3>
   <p class="meta">
     <span class="price">{{ price(car) }}</span>
+    {% if car.price_was and car.price is not none and car.price < car.price_was %}<small class="cheaper" title="{{ t('car.cheaper_on', date=car.price_dropped_at | date) }}">{{ t("car.cheaper", price=(car.price_was | number) ~ "\u00a0" ~ ("Kč" if car.price_currency == "CZK" else car.price_currency)) }}</small>{% endif %}
     {% if car.vat_deductible %} <small class="muted">({{ t("car.vat") }})</small>{% endif %}
     {% if car.place_text %} · {{ car.place_text }}{% endif %}
   </p>
 </header>
 {% if car.all_warnings %}<p class="warnings">{{ icon("alert") }}<span>{{ t("warn.title") }}: {% for w in car.all_warnings %}{{ t("warn." ~ w) }}{% if not loop.last %}, {% endif %}{% endfor %}</span></p>{% endif %}
+{% if prices %}
+  <details class="price-history"><summary>{{ t("car.price_history") }} ({{ prices | length }})</summary>
+    <ul>{% for p in prices %}<li><time>{{ p.changed_at | date }}</time> {{ p.old_price | number }} → {{ p.price | number }}&nbsp;{{ "Kč" if p.currency == "CZK" else p.currency }}</li>{% endfor %}</ul>
+  </details>
+{% endif %}
 {% if car.images %}
   <p class="photos">{% for img in car.photos[:12] %}<a href="{{ img.url | safe_url }}" target="_blank" rel="noopener"><img src="{{ img.url | safe_url }}" alt="{{ t('car.photo') }}" loading="lazy" referrerpolicy="no-referrer"></a>{% endfor %}</p>
 {% endif %}

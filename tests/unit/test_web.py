@@ -1,4 +1,6 @@
+import io
 import re
+import zipfile
 from datetime import UTC, datetime, timedelta
 
 import pytest
@@ -1329,3 +1331,52 @@ def test_a_failing_map_leaves_the_viewing_trip_estimated(app, client, municipali
     client.post(f"/cars/{ids['Octavia Praha']}/visit")
     trip = client.get("/visits", params={"at": "50.0300,15.2000", "from": "Kolín"})
     assert trip.status_code == 200 and "(odhad)" in trip.text and "Octavia Praha" in trip.text
+
+
+def test_a_cheaper_car_is_marked_filtered_and_shows_its_prices(app, client):
+    app.state.services.settings.wizard_completed = True
+    load_fixture_cars(app)
+    cheaper = fixture_cars(1)[0]
+    cheaper.price = 100_000  # was 110 000
+    store_cars(app, [cheaper])
+    page = client.get("/").text
+    assert page.count('class="cheaper"') == 1 and "zlevněno z 110\xa0000\xa0Kč" in page
+    r = client.get("/results", params={"cheaper": "1"}, headers={"HX-Request": "true"})
+    assert r.headers["HX-Push-Url"] == "/?cheaper=1"
+    assert re.findall(r'id="car-(\d+)"', r.text) == ["1"]
+    assert 'name="cheaper" value="1" checked' in client.get("/facets?cheaper=1").text
+    detail = client.get("/cars/1", headers={"HX-Request": "true"}).text
+    assert "Vývoj ceny (1)" in detail and "110\xa0000 → 100\xa0000&nbsp;Kč" in detail
+    assert "Vývoj ceny" not in client.get("/cars/2", headers={"HX-Request": "true"}).text
+
+
+def test_the_listed_cars_download_as_csv_and_excel(app, client):
+    app.state.services.settings.wizard_completed = True
+    load_fixture_cars(app)
+    with app.state.services.sessions() as s:
+        s.execute(update(Car).where(Car.id == 3).values(seller_name="Jan Novák"))  # private
+        s.execute(
+            update(Car)
+            .where(Car.id == 6)
+            .values(seller_kind="dealer", seller_name="Auto Kolín", title="=HYPERLINK(1)")
+        )
+        s.commit()
+    page = client.get("/").text
+    assert 'href="/export.csv?' in page and 'href="/export.xlsx?' in page
+
+    params = {"make": "skoda", "sort": "price"}
+    r = client.get("/export.csv", params=params)
+    assert r.headers["content-disposition"].startswith('attachment; filename="adacar-')
+    lines = r.content.decode("utf-8-sig").splitlines()
+    assert lines[0].startswith("Inzerát;Značka;Model;Rok;Najeto (km);Cena;")
+    assert len(lines) == 11  # the header and the ten Škodas, every page of them
+    first = lines[1].split(";")
+    assert first[:7] == ["Octavia 03", "Škoda", "Octavia", "2013", "30000", "130000", ""]
+    assert first[-1] == "https://auto.bazos.cz/inzerat/3/auto.php" and "Bazoš" in first[-2]
+    assert "Jan Novák" not in r.text and "Autobazar / dealer Auto Kolín" in r.text
+    assert lines[2].startswith("'=HYPERLINK(1);")  # text, never a formula
+
+    book = zipfile.ZipFile(io.BytesIO(client.get("/export.xlsx", params=params).content))
+    sheet = book.read("xl/worksheets/sheet1.xml").decode()
+    assert "<v>130000</v>" in sheet and ">Octavia 03</t>" in sheet
+    assert client.get("/export.pdf").status_code == 404
