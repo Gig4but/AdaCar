@@ -27,8 +27,9 @@
 <body>
 <main>
 <h1>AdaCar – návod</h1>
-<p class="muted">Volná místa z úřadu práce a pracovních portálů na jednom místě, s dobou
-dojíždění a hodnocením zaměstnavatelů. Vše běží na vašem počítači.</p>
+<p class="muted">Ojetá auta z 16 autoportálů, autobazarů a inzertních serverů na jednom místě,
+s dobou cesty k prodejci a prověrkou auta i prodejce. Nalezená auta i umělá inteligence
+zůstávají na vašem počítači.</p>
 
 <h2>1. Instalace</h2>
 <ul>
@@ -43,60 +44,96 @@ dojíždění a hodnocením zaměstnavatelů. Vše běží na vašem počítači
 <b>Další</b>; kroky, které tu nejsou popsané, stačí odkliknout. Vše jde později změnit
 v <b>Nastavení</b> (ozubené kolo vpravo nahoře).</p>
 <ul>
-  <li><b>Odkud dojíždíte a co hledáte</b>: napište adresu nebo obec, odkud budete jezdit, a jak
-    dlouho nejvýš chcete cestovat. Druh práce je nepovinný: prázdné pole znamená všechny obory,
-    nebo napište vlastními slovy, třeba „prodavačka, pokladní“. Nabídky tohoto druhu se stáhnou
-    jako první a druh práce se předvyplní do hledání.</li>
+  <li><b>Odkud vyrážíte</b>: napište adresu nebo obec, odkud pojedete auta obhlédnout, čím
+    pojedete a jak dlouho nejvýš chcete cestovat. Hledá se jen v krajích, kam to stihnete.</li>
+  <li><b>Modely a cena</b>: vyberte značky a nejvyšší cenu. Obojí je nepovinné: nic nevybráno
+    znamená všechna auta. Vybrané značky a cena se předvyplní ve filtrech hledání a můžete
+    je tam kdykoli změnit.</li>
   <li><b>Umělá inteligence</b>: nechte <b>Automaticky</b>. Na pozadí se stáhne model umělé
-    inteligence (1,6–3,4 GB). Z textu inzerátu doplní obor, místo a mzdu.</li>
-  <li><b>Zdroje nabídek</b>: Facebook, Instagram a LinkedIn jsou vypnuté. Zapínejte je, jen pokud
-    rozumíte varování na té stránce.</li>
+    inteligence (1–3 GB). Z textu inzerátu doplní rok, najeté km, výkon a další údaje, které
+    inzerát uvádí jen v popisu, a upozorní na podezřelé inzeráty.</li>
+  <li><b>Kde máme auta hledat</b>: zapnuté jsou všechny zdroje kromě Sauto.cz. Ten zapínejte,
+    jen pokud rozumíte varování na té stránce.</li>
   <li><b>Mapy a jízdní řády</b>: klikněte na <b>Stáhnout mapu</b> (asi 1 GB). Potom se mapa
-    několik minut zpracovává a do té doby jsou časy cesty jen odhad.</li>
-  <li><b>Hotovo</b>: tlačítko <b>Start</b> stáhne nabídky z úřadu práce (asi minuta) a potom
-    z portálů. Portály se čtou pomalu, první hledání trvá desítky minut. Nabídky přibývají
-    průběžně a už během hledání s nimi můžete pracovat.</li>
+    několik minut zpracovává a do té doby jsou časy cesty jen odhad vzdušnou čarou.</li>
+  <li><b>Automatické hledání</b> je ve výchozím stavu vypnuté; o něm víc v části 6.</li>
+  <li>Poslední krok: tlačítko <b>Start</b> začne stahovat auta. Servery se čtou pomalu, aby
+    aplikaci nezablokovaly, takže první hledání trvá desítky minut. Auta přibývají průběžně
+    a už během hledání s nimi můžete pracovat.</li>
 </ul>
 
-<h2>3. Hledání nabídek</h2>
+<h2>3. Hledání aut</h2>
 <ul>
-  <li>Nahoře napište, co hledáte (více možností oddělte čárkou), a vlevo zúžte výsledky
-    filtry: obor, místo, mzda, směny, vzdělání, zaměstnavatel a další. Čísla u filtrů
-    ukazují, kolik nabídek zbude.</li>
-  <li><b>Doba cesty</b>: posuvníkem nastavte, jak dlouho chcete nejvýš cestovat, a zvolte
-    autem, MHD, pěšky nebo na kole. Seznam se hned upraví. Na mapě uvidíte, kam se
-    v tom čase dostanete.</li>
-  <li><b>Jak se tam dostanu</b> u nabídky ukáže trasu, spoje MHD s přestupy a odkazy do Mapy.cz,
-    IDOS a Google Map.</li>
-  <li>Kliknutím na <b>název zaměstnavatele</b> otevřete kartu zaměstnavatele: oficiální kontroly
-    (insolvence, nespolehlivý plátce DPH, povolení agentury práce), hodnocení zaměstnanců
-    z Atmoskopu a shrnutí zmínek z internetu. Shrnutí píše umělá inteligence a každý bod
-    odkazuje na zdroj.</li>
-  <li>Nabídku, která vás nezajímá, skryjte tlačítkem <b>Skrýt</b>. Hledání si můžete uložit;
-    aplikace pak ukazuje, kolik v něm přibylo nových nabídek.</li>
-  <li>Inzerát z papíru nebo ze sociální sítě vložíte přes <b>Vložit inzerát</b>: text nebo
-    fotku.</li>
+  <li>Nahoře napište model, výbavu nebo místo, třeba „octavia kombi“, a vlevo zužte výsledky
+    filtry: značka, cena, rok výroby, najeto, palivo, převodovka, karoserie, výkon, kraj,
+    prodejce a další. Čísla u filtrů ukazují, kolik aut zbude.</li>
+  <li>Když je umělá inteligence stažená, můžete se zeptat i větou, např. „dieselové kombi do
+    300 tisíc do hodiny od Kolína“, a kliknout na <b>Zeptat se AI</b>.</li>
+  <li>Pod hledáním zadejte <b>Odkud pojedete</b>, vyberte, čím pojedete, a posuvníkem
+    <b>do …</b> nastavte nejdelší cestu. Seznam se hned upraví. Dokud se nepřipraví mapa,
+    jsou časy cesty jen odhad.</li>
+  <li>Kliknutím na název auta otevřete podrobnosti: parametry, výbavu, celý popis, odkaz na
+    původní inzerát a <b>Vývoj ceny</b>. Stejné auto inzerované na více serverech se ukáže
+    jen jednou.</li>
+  <li>Auto, které vás nezajímá, skryjte tlačítkem <b>Skrýt</b>. Hledání si můžete uložit
+    tlačítkem <b>Uložit hledání</b>; aplikace pak ukazuje, kolik v něm přibylo nových aut.</li>
+  <li>Seznam si stáhnete do tabulky odkazem <b>CSV</b> nebo <b>Excel</b> nad seznamem:
+    všechna auta podle zvolených filtrů.</li>
+  <li>Inzerát z Facebooku, novin nebo zprávy vložíte přes <b>Vložit inzerát</b>: text nebo
+    snímek obrazovky.</li>
 </ul>
 
-<h2>4. Nové nabídky</h2>
+<h2>4. Prověrka auta a prodejce</h2>
 <ul>
-  <li>Nové nabídky stáhnete tlačítkem <b>Obnovit nabídky</b>: aplikace nejdřív ověří, zda
-    nabídky v seznamu stále platí, a nové přidá nad ně. <b>Obnovit od začátku</b> seznam
-    vymaže a najde všechny nabídky znovu.</li>
+  <li>U auta s VIN aplikace ověří, zda VIN odpovídá značce a roku v inzerátu, a hlídá, jestli
+    stejné VIN nebylo dříve inzerováno s vyšším stavem km. Podezřelá auta mají značku
+    <b>Pozor</b> s důvodem; filtr <b>Bez varování</b> je skryje.</li>
+  <li>Údaje z registru vozidel (první registrace, dovoz, počet majitelů, výkon) uvidíte
+    s bezplatným klíčem: <b>Nastavení → Prověrky → Jak získat klíč</b>.</li>
+  <li>U autobazaru aplikace najde firmu v obchodním rejstříku a ověří, zda nezanikla, není
+    v insolvenci a není nespolehlivým plátcem DPH. Když si není jistá, kterou firmu vybrat,
+    nabídne vám je.</li>
+  <li>Stav km z STK a pátrání po kradených autech jsou chráněné proti robotům: u auta najdete
+    odkazy, kde si je ověříte sami.</li>
+</ul>
+
+<h2>5. Cesta na prohlídku</h2>
+<ul>
+  <li>Když je zadáno, odkud pojedete, ukáže <b>Jak se tam dostanu</b> u auta trasu autem,
+    spoje MHD a vlaků s přestupy pro zvolený den a čas a odkazy do Mapy.com a Google Maps
+    (u MHD i do IDOS). Ukáže i, jak dlouho pojedete zpátky koupeným autem.</li>
+  <li>V tomto okně si auto odložte tlačítkem <b>Na prohlídku</b>. Pod hledáním se pak objeví
+    tlačítko <b>Prohlídky</b> s počtem aut; seřadí je do jedné cesty autem s nejkratší
+    jízdou, tam i zpět.</li>
+</ul>
+
+<h2>6. Nová a zlevněná auta</h2>
+<ul>
+  <li>Nová auta stáhnete tlačítkem <b>Obnovit nabídky</b>: aplikace nejdřív ověří, zda auta
+    v seznamu jsou stále v prodeji, a nová přidá nad ně. <b>Obnovit od začátku</b> seznam
+    vymaže, i skrytá auta, a najde všechna auta znovu.</li>
+  <li>Když prodejce sníží cenu, auto má značku <b>zlevněno z …</b> a filtr <b>Jen
+    zlevněná</b> ukáže jen taková auta.</li>
   <li>Aby aplikace hledala sama, zapněte <b>Automatické hledání</b> v průvodci nebo
-    v Nastavení (každých 6–48 hodin). Po zavření okna pak aplikace běží dál jako ikona vedle
-    hodin a ohlásí nové nabídky.</li>
+    v <b>Nastavení → Automatické hledání</b> (každých 6, 12, 24 nebo 48 hodin). Aplikace se
+    pak spouští se systémem Windows (to jde na stejném místě vypnout) a po zavření okna běží
+    dál jako ikona vpravo dole u hodin. Ohlásí nová auta, zlevněná auta odložená na prohlídku
+    a novinky v uložených hledáních. Bez automatického hledání se aplikace zavřením okna
+    ukončí.</li>
 </ul>
 
-<h2>5. Data a odinstalace</h2>
+<h2>7. Data, aktualizace a odinstalace</h2>
 <ul>
-  <li>Nabídky, modely a mapy jsou ve složce <code>%LOCALAPPDATA%\AdaCar</code> a zabírají
-    6–15 GB.</li>
+  <li>Auta, model umělé inteligence a mapy jsou ve složce <code>%LOCALAPPDATA%\AdaCar</code>
+    a zabírají 2–9 GB.</li>
+  <li>Novou verzi najdete tlačítkem <b>Zkontrolovat aktualizace</b> v <b>Nastavení →
+    Aktualizace</b>. Když tam zapnete automatické aktualizace, aplikace se jednou denně podívá
+    sama a novou verzi nainstaluje při příštím spuštění.</li>
   <li>Odinstalujete ve Windows: <b>Nastavení → Aplikace → Nainstalované aplikace →
-    AdaCar</b>. Na konci se odinstalace zeptá, jestli smazat i stažená data.</li>
+    AdaCar</b> (ve Windows 10: Aplikace a funkce). Na konci se odinstalace zeptá, jestli smazat i stažená data.</li>
 </ul>
 
-<h2>6. Když něco nefunguje</h2>
+<h2>8. Když něco nefunguje</h2>
 <ul>
   <li>Zavřete aplikaci (i ikonu vedle hodin: pravé tlačítko → Ukončit) a spusťte ji znovu.</li>
   <li>Záznam o chybách je v souboru <code>%LOCALAPPDATA%\AdaCar\Logs\adacar.log</code>.

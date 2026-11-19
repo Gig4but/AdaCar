@@ -1,8 +1,8 @@
 """Fetch the license texts that the bundled software does not carry itself into vendor/licenses/
 (the installer copies the folder to licenses/; Settings → Licence shows it):
 - runtime/  Python and the libraries built into it;
-- python/   packages whose wheels lack a text, and libraries bundled in the pyproj, lxml and
-            selectolax wheels (folders named as in licenses/python/, adacar/licenses.py);
+- python/   libraries bundled in the pyproj and selectolax wheels (folders named as in
+            licenses/python/, adacar/licenses.py);
 - web/      htmx, MapLibre GL JS and Pico CSS (adacar/web/static/vendor/).
 The programs' texts come with them: tools/fetch_llama.py, tools/fetch_motis.py.
 
@@ -23,10 +23,9 @@ GITHUB = "https://raw.githubusercontent.com/"
 PYTHON = "{}.{}.{}".format(*sys.version_info[:3])
 # Versions in pyproj's wheel (pyproj.libs), read from the DLLs' version information.
 CURL, LIBJPEG_TURBO, LIBTIFF, ZLIB, XZ = "8_19_0", "3.1.0", "4.7.1", "1.3.1", "5.8.3"
-LEXBOR = "f4cbbcd91359a0ec9499e3ce7e263de629482d61"  # selectolax 1.0.0's lexbor submodule
+LEXBOR = "f4cbbcd91359a0ec9499e3ce7e263de629482d61"  # selectolax 1.0.2's lexbor submodule
 HTMX, MAPLIBRE, PICO = "2.0.11", "5.24.0", "2.1.1"  # the files in adacar/web/static/vendor/
 BZIP2 = "https://sourceware.org/git/?p=bzip2.git;a=blob_plain;f=LICENSE;hb=refs/tags/bzip2-1.0.8"
-LGPL21 = "https://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt"  # lxml's iconv
 
 
 def package(name: str) -> str:
@@ -39,19 +38,12 @@ def sources() -> dict[str, str]:
     zlib = f"{GITHUB}madler/zlib/v{ZLIB}/LICENSE"
     xz = f"{GITHUB}tukaani-project/xz/v{XZ}/"
     lexbor = f"{GITHUB}lexbor/lexbor/{LEXBOR}/"
-    pyproj, lxml, selectolax = package("pyproj"), package("lxml"), package("selectolax")
+    pyproj, selectolax = package("pyproj"), package("selectolax")
     return {
         # OpenSSL, libffi, zlib, expat, mpdecimal and the other code Python incorporates.
         runtime + "incorporated-software.rst": f"{GITHUB}python/cpython/v{PYTHON}/Doc/license.rst",
         runtime + "bzip2-LICENSE": BZIP2,
         runtime + "xz-COPYING": xz + "COPYING",
-        package("tokenizers") + "/LICENSE": (
-            f"{GITHUB}huggingface/tokenizers/v{metadata.version('tokenizers')}/LICENSE"
-        ),
-        package("primp") + "/LICENSE": f"{GITHUB}deedy5/primp/v{metadata.version('primp')}/LICENSE",
-        package("flatbuffers") + "/LICENSE": (
-            f"{GITHUB}google/flatbuffers/v{metadata.version('flatbuffers')}/LICENSE"
-        ),
         pyproj + "/bundled/curl-COPYING": f"{GITHUB}curl/curl/curl-{CURL}/COPYING",
         pyproj + "/bundled/libjpeg-turbo-LICENSE.md": (
             f"{GITHUB}libjpeg-turbo/libjpeg-turbo/{LIBJPEG_TURBO}/LICENSE.md"
@@ -65,8 +57,6 @@ def sources() -> dict[str, str]:
         pyproj + "/bundled/zlib-LICENSE": zlib,
         pyproj + "/bundled/xz-COPYING": xz + "COPYING",
         pyproj + "/bundled/xz-COPYING.0BSD": xz + "COPYING.0BSD",
-        lxml + "/bundled/zlib-LICENSE": zlib,
-        lxml + "/bundled/iconv-LGPL-2.1.txt": LGPL21,
         selectolax + "/bundled/lexbor-LICENSE": lexbor + "LICENSE",
         selectolax + "/bundled/lexbor-NOTICE": lexbor + "NOTICE",
         f"web/htmx-{HTMX}/LICENSE": f"{GITHUB}bigskysoftware/htmx/v{HTMX}/LICENSE",

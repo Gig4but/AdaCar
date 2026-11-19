@@ -24,6 +24,18 @@ powershell -ExecutionPolicy Bypass -File packaging\build.ps1  # dist\AdaCar-Setu
 
 Set `ADACAR_DATA` to another folder to try the app with a fresh database and settings.
 
+## Release
+
+The app updates itself from this repository's latest release (`adacar/desktop/update.py`):
+the asset must be named `AdaCar-Setup.exe`, the tag `v` + `adacar.__version__`.
+
+```powershell
+# raise __version__ in adacar/__init__.py, commit, then:
+git push                # the release tag is made on the pushed commit
+powershell -ExecutionPolicy Bypass -File packaging\build.ps1
+gh release create v1.0.0 dist\AdaCar-Setup.exe --title "AdaCar 1.0.0" --notes "..."
+```
+
 ## License
 
 MIT (`LICENSE`). The bundled programs and libraries keep their own licenses:

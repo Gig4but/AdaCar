@@ -21,8 +21,8 @@ Shared services: a small **local AI model** (reads free-text ads, flags suspicio
 puts the photo of the car from the front first, turns a question in a sentence into filters)
 and a **local routing engine** (MOTIS: travel times, routes, offline map).
 
-Status: **M0–M6 done** (2026-11-19). Next: M7 (installer and delivery). How the code is
-organized: [ARCHITECTURE.md](ARCHITECTURE.md).
+Status: **M0–M7 done** (2026-11-19); the first public release is the owner's step (README).
+How the code is organized: [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ---
 
@@ -389,9 +389,16 @@ all 53 516 cars exported in 3.5 s (CSV 12 MB, Excel 5.8 MB; openpyxl reads year,
 price as numbers). The real cars have no history yet: the sites give only today's price, so
 the drops show from the next searches on.
 
-### M7 — Installer and delivery
-Build `AdaCar-Setup.exe`; Czech guide `packaging/navod.html` for cars (still AdaWork's);
-GitHub repository for updates (`desktop/update.py: REPO`).
+### M7 — Installer and delivery — done (2026-11-19)
+`AdaCar-Setup.exe` built (`packaging/build.ps1`); the Czech guide `packaging/navod.html`
+rewritten for cars; the license texts no longer fetched for AdaWork's packages (lxml,
+tokenizers, primp, flatbuffers); GitHub repository `Gig4but/AdaCar` for updates
+(`desktop/update.py: REPO`), the release steps in the README. Before the source went public,
+personal data in the saved test pages was replaced in every commit: private sellers' names,
+all phone numbers and e-mails (fake ones keep the pages' layout).
+**Done when:** checks green (437 tests); the installer 89 MB (app 326 MB unpacked); the built
+app on an empty data folder starts and serves the wizard, Settings and the licenses. Not
+tried: the installer on a clean Windows (`dist\sandbox.wsb`).
 
 ---
 
@@ -407,8 +414,10 @@ AI model 1–3 GB (M3).
 ## 12. Legal and ethical notes
 - Read only public pages, slowly, identified by the app's User-Agent; obey robots.txt.
 - **sauto.cz** disallows generic crawlers in robots.txt: off by default; the user switches it
-  on after a warning; then 3 s between requests and a pause on the first refusal. Re-evaluate
-  before a public release (ask Seznam.cz for permission or drop the source).
+  on after a warning; then 3 s between requests and a pause on the first refusal. Re-evaluated
+  for the public release (2026-11-19): kept so, opt-in.
+- Saved pages in `tests/fixtures/` carry no real phone numbers, e-mails or private sellers'
+  names: replace them with fake ones when saving new pages.
 - Personal data (seller names, phone numbers) stays on the PC; social posts are deleted 14
   days after last seen.
 - Spojenka timetables: non-commercial use only → the app stays personal and free.
