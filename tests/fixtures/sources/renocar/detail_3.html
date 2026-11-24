@@ -1,0 +1,1109 @@
+<!doctype html>
+<html lang="cs" dir="ltr">
+    
+    <head>
+        <script type="text/javascript">
+            var PATH = "https://www.renocar.cz/"; // path for javascript plugins
+            var LANG = "cz"; // current two-char language string
+            var FORM_HASHES = "{\"servis\":\"servisForm\",\"order\":\"orderForm\",\"car_interest\":\"interestForm\",\"car_interest_bazar\":\"interestBazarForm\"}";
+        </script>
+
+                            <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}	
+</script>
+
+<script type="text/javascript">
+    function getParameterByName(name, url) {
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    if (typeof FORM_HASHES !== "undefined") {
+
+        var pathName = window.location.pathname,
+            hash = window.location.hash,
+            prevHash = localStorage.getItem('hash') ? localStorage.getItem('hash') : '',
+            referrer = typeof document.referrer !== 'undefined' ? document.referrer + prevHash : '',
+            get = window.location.search,
+            getParams = get.slice(1).split("&"),
+            done = false,
+            hashes = JSON.parse(FORM_HASHES),
+            cart = pathName === '/kosik',
+            step = null,
+            prevStepParam = getParameterByName('step', referrer);
+
+
+        localStorage.setItem('hash', '');
+
+        for (var i = 0; i < getParams.length; i++) {
+            var split = getParams[i].split("=");
+
+            if (split[0] === 'done') {
+                done = true;
+            }
+
+            if (cart && split[0] === 'step') {
+                step = parseInt(split[1]);
+            }
+        }
+
+        var absUrl = window.location.href,
+            gaObj = {
+                'pageType': 'Detail vozu',
+                'visitorLoginState': 'visitor',
+                'pageTitle': 'Vůz detail',
+                'pagePath': pathName,
+                'fullPagePath': absUrl.replace(PATH, '/'),
+                'referrerPath': referrer !== '' ? referrer : '',
+                'virtualPagePath': undefined,
+                'virtualPageTitle': undefined
+            };
+
+        for (var property in hashes) {
+            if (hashes.hasOwnProperty(property) && ('#' + hashes[property]) === hash) {
+                if (property === 'servis') {
+                    if (done) {
+                        gaObj['virtualPagePath'] = '/objednavka-servisu';
+                        gaObj['virtualPageTitle'] = 'Objednávka servisu';
+                    }
+                } else if (property === 'order') {
+
+                } else if (property === 'car_interest') {
+                    if (done) {
+                        gaObj['virtualPagePath'] = '/objednavka-skladovky';
+                        gaObj['virtualPageTitle'] = 'Objednávka skladovky';
+                        gaObj['pageType'] = 'Dokončení poptávky';
+                    }
+                } else if (property === 'car_interest_bazar') {
+                    if (done) {
+                        gaObj['virtualPagePath'] = '/objednavka-bazar';
+                        gaObj['virtualPageTitle'] = 'Objednávka bazar';
+                        gaObj['pageType'] = 'Dokončení poptávky';
+                    }
+                }
+
+                break;
+            }
+        }
+
+        if (cart && step !== null) {
+            if (step === 1) {
+                if (prevStepParam !== null) {
+                    if (parseInt(prevStepParam) === 2) {
+                        gaObj['referrerPath'] = PATH + 'kosik/krok-2';
+                    }
+                }
+            } else if (step === 2) {
+                gaObj['virtualPagePath'] = '/kosik/krok-2';
+                gaObj['virtualPageTitle'] = 'Doprava a platba';
+
+                if (prevStepParam !== null) {
+                    if (parseInt(prevStepParam) === 3) {
+                        gaObj['referrerPath'] = PATH + 'kosik/krok-3';
+                    }
+                }
+            } else if (step === 3) {
+                gaObj['virtualPagePath'] = '/kosik/krok-3';
+                gaObj['virtualPageTitle'] = 'Údaje o zákazníkovi';
+
+                if (prevStepParam !== null) {
+                    if (parseInt(prevStepParam) === 2) {
+                        gaObj['referrerPath'] = PATH + 'kosik/krok-2';
+                    }
+                }
+            }
+        }
+
+        if (!cart && prevStepParam !== null) {
+            gaObj['referrerPath'] = PATH + 'kosik/krok-' + prevStepParam;
+        }
+
+        dataLayer.push(gaObj);
+
+        var GA_DATA = JSON.stringify(gaObj);
+    }
+</script>
+
+<!-- Default consent policy for GTM -->
+<script>
+    /* cookie parsing helper */
+    function getCookie(cname) { let name = cname + "="; let decodedCookie = decodeURIComponent(document.cookie); let ca = decodedCookie.split(';'); for(let i = 0; i <ca.length; i++) { let c = ca[i]; while (c.charAt(0) == ' ') { c = c.substring(1); } if (c.indexOf(name) == 0) { return c.substring(name.length, c.length); } } return false; }        
+    /* set consent defaults - everything denied, must run before GTM loads */
+    gtag('consent', 'default', {
+        ad_storage: 'denied',
+        analytics_storage: 'denied',
+        functionality_storage: 'granted',
+        personalization_storage: 'denied',
+        security_storage: 'granted',
+        ad_personalization: 'denied',
+        ad_user_data: 'denied'
+    });
+    /* consent update with the stored choice, still before GTM loads */
+    (function() {
+        let level = [];
+        try {
+            const cc_cookie = getCookie('cc_cookie');
+            if (cc_cookie) {
+                level = JSON.parse(cc_cookie).level || [];
+            }
+        } catch (e) {}
+        const analytics = level.indexOf('analytics') > -1 ? 'granted' : 'denied';
+        const marketing = level.indexOf('marketing') > -1 ? 'granted' : 'denied';
+        gtag('consent', 'update', {
+            ad_storage: marketing,
+            analytics_storage: analytics,
+            functionality_storage: 'granted',
+            personalization_storage: marketing,
+            security_storage: 'granted',
+            ad_personalization: marketing,
+            ad_user_data: marketing
+        });
+    })();
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M5JXVBCG');</script>
+<!-- End Google Tag Manager -->
+
+        
+        <meta charset="utf-8">
+        <title>Vůz detail - Renocar - Váš dealer BMW | Vozy značek BMW a MINI</title>
+        <meta name="description" content="Renocar&#x20;BMW&#x20;Praha&#x20;a&#x20;Brno.&#x20;Autorizovan&#x00FD;&#x20;prodej&#x20;a&#x20;servis&#x20;nov&#x00FD;ch,&#x20;p&#x0159;edv&#x00E1;d&#x011B;c&#x00ED;ch&#x20;a&#x20;ojet&#x00FD;ch&#x20;voz&#x016F;&#x20;BMW&#x20;a&#x20;MINI&#x20;a&#x20;motocykl&#x016F;&#x20;BMW&#x20;Motorrad." />
+        <meta name="keywords" content="BMW&#x20;Praha,&#x20;BMW&#x20;Brno,&#x20;BMW&#x20;vozy,&#x20;BMW&#x20;servis,&#x20;BMW&#x20;auta,&#x20;BMW&#x20;motorky,&#x20;BMW&#x20;motorrad,&#x20;BMW&#x20;prodej,&#x20;koup&#x00ED;m&#x20;BMW,&#x20;renocar,&#x20;renocar&#x20;BMW,&#x20;renocar&#x20;praha,&#x20;renocar&#x20;brno,&#x20;renocar&#x20;motorrad,&#x20;renocar&#x20;MINI,&#x20;MINI&#x20;servis,&#x20;MINI&#x20;vozy,&#x20;MINI&#x20;prodej,&#x20;koup&#x00ED;m&#x20;MINI,&#x20;koup&#x00ED;m&#x20;BMW&#x20;motorku,&#x20;koup&#x00ED;m&#x20;motorku,&#x20;prodej&#x20;motorek,&#x20;prodej&#x20;MINI,&#x20;renocar&#x20;MINI" />
+
+                <meta property="og:title" content="V&#x016F;z&#x20;detail&#x20;-&#x20;Renocar&#x20;-&#x20;V&#x00E1;&#x0161;&#x20;dealer&#x20;BMW&#x20;&#x7C;&#x20;Vozy&#x20;zna&#x010D;ek&#x20;BMW&#x20;a&#x20;MINI" />
+        <meta property="og:description" content="Renocar&#x20;BMW&#x20;Praha&#x20;a&#x20;Brno.&#x20;Autorizovan&#x00FD;&#x20;prodej&#x20;a&#x20;servis&#x20;nov&#x00FD;ch,&#x20;p&#x0159;edv&#x00E1;d&#x011B;c&#x00ED;ch&#x20;a&#x20;ojet&#x00FD;ch&#x20;voz&#x016F;&#x20;BMW&#x20;a&#x20;MINI&#x20;a&#x20;motocykl&#x016F;&#x20;BMW&#x20;Motorrad." />
+
+                    <meta property="og:image" content="https&#x3A;&#x2F;&#x2F;www.renocar.cz&#x2F;&#x2F;media&#x2F;Renocar_positive.png" />
+            <meta property="og:image:width" content="" />
+            <meta property="og:image:height" content="" />
+        
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://www.renocar.cz/vuz-detail?rewritten_brand=bmw&amp;amp;vuz_path=bmw-m850i-xdrive-gran-coupe-39830423" />
+        <meta property="og:site_name" content="V&#x016F;z&#x20;detail&#x20;-&#x20;Renocar&#x20;-&#x20;V&#x00E1;&#x0161;&#x20;dealer&#x20;BMW&#x20;&#x7C;&#x20;Vozy&#x20;zna&#x010D;ek&#x20;BMW&#x20;a&#x20;MINI" />
+        <meta name="robots" content="index,follow" />
+
+                
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+                            <link rel="apple-touch-icon" sizes="180x180" href="/favicons-2023/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicons-2023/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicons-2023/favicon-16x16.png">
+<link rel="manifest" href="/favicons-2023/site.webmanifest">
+<link rel="mask-icon" href="/favicons-2023/safari-pinned-tab.svg" color="#000000">
+<link rel="shortcut icon" href="/favicons-2023/favicon.ico">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-config" content="/favicons-2023/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+        
+        <link rel="stylesheet" type="text/css" media="screen" href="https://www.renocar.cz/css/main.css?v=1.734" />
+        <link rel="stylesheet" type="text/css" media="screen" href="https://www.renocar.cz/css/redesign.css?v=1.734" />
+        <link rel="stylesheet" type="text/css" media="print" href="https://www.renocar.cz/css/print.css?v=1.734" />
+        <link rel="stylesheet" href="/assets/index-CjW5F6H5.css">
+        <script type="text/javascript">
+            var IE6rep = false;         // IE6 yes/no (legacy code)
+            var disableAjaxSetup = true;
+
+            // Picture element HTML shim
+            document.createElement("picture");
+        </script>
+
+                            		    	<script type="text/javascript" src="https://www.renocar.cz/script/vendor/_complete_vendor.js?v=1.743"  ></script>
+
+                    		    	<script type="text/javascript" src="https://www.renocar.cz/script/vendor/cookieconsent.js?v=1.743"  defer ></script>
+
+                    		    	<script type="text/javascript" src="https://www.renocar.cz/script/custom/cookies.js?v=1.743"  defer ></script>
+
+                    		    	<script type="text/javascript" src="https://www.renocar.cz/script/system/jq.triax.js?v=1.743"  ></script>
+
+                    		    	<script type="text/javascript" src="https://www.renocar.cz/script/custom/recaptcha.js?v=1.743"  ></script>
+
+                    		    	<script type="text/javascript" src="https://www.renocar.cz/script/custom/jq.resizer.js?v=1.743"  ></script>
+
+                    		    	<script type="text/javascript" src="https://www.renocar.cz/script/custom/jq.ajax_include.js?v=1.743"  ></script>
+
+                    		    	<script type="text/javascript" src="https://www.renocar.cz/script/custom/jq.waiting-wheel.js?v=1.743"  ></script>
+
+                    		    	<script type="text/javascript" src="https://www.renocar.cz/script/custom/jq.custom.js?v=1.743"  ></script>
+
+                    		    	<script type="text/javascript" src="https://www.renocar.cz/script/custom/jq.overlay-roller.js?v=1.743"  ></script>
+
+                    		    	<script type="text/javascript" src="https://www.renocar.cz/script/custom/popup-form.js?v=1.743"  ></script>
+
+                    		    	<script type="text/javascript" src="https://www.renocar.cz/script/custom/search-bar.js?v=1.743"  ></script>
+
+                    		    	<script type="text/javascript" src="https://www.renocar.cz/script/custom/ga-events.js?v=1.743"  ></script>
+
+                    		    	<script type="text/javascript" src="https://www.renocar.cz/script/custom/popup.js?v=1.743"  ></script>
+
+        
+                            <script type="text/javascript">var RECAPTCHA_SITE_KEY = "6LciG8AtAAAAAJwzfVBXvXGfyYryoX1Pm1Z2B7c3";</script>
+            <script src="https://www.google.com/recaptcha/enterprise.js?render=6LciG8AtAAAAAJwzfVBXvXGfyYryoX1Pm1Z2B7c3" async defer></script>
+        
+        
+
+<!--[if IE]>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://www.renocar.cz/css/adminIE.css" />
+<![endif]-->
+
+<!--[if lte IE 6]>
+	<script type="text/javascript">IE6rep = true; /* legacy code */</script>
+<![endif]-->
+<!--[if lte IE 8]>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://www.renocar.cz/css/ie_fixes.css?v=1.734" />
+			    	<script type="text/javascript" src="https://www.renocar.cz/script/vendor/ie_fixes.js?v=1.743"  ></script>
+
+<![endif]-->
+
+
+                            
+<link rel="stylesheet" type="text/css" media="screen" href="https://www.renocar.cz/css/cookieconsent.css" />
+
+<script type="text/javascript">
+  if (!Array.isArray(window.qbOptions)) {
+    window.qbOptions = []
+  }
+  window.qbOptions.push({"baseUrl":"https://bots.sefbot.cz","use":"QeWyGEN3V1baLRj0/nVWXyEMae1EKk143"});
+
+</script>
+<script src="https://bots.sefbot.net/widget.js?key=pk_510d86caa71542d48009c55f914c7223" async></script>
+        
+        
+        
+                    <script type="text/javascript">
+                window.__FILTER_GLOBAL_DATA__ = {"type":{"00-all":"V\u0161e","01-new":"Nov\u00e9","02-used":"Ojet\u00e9","03-premium-selection":"Premium Selection","04-mini-next":"MINI NEXT","05-motorrad-demo":"Premium Selection"},"series":{"bmw":{"00-all":"V\u0161echny \u0159ady","01-1-series":"\u0158ada 1","02-2-series":"\u0158ada 2","03-3-series":"\u0158ada 3","04-4-series":"\u0158ada 4","05-5-series":"\u0158ada 5","06-6-series":"\u0158ada 6","07-7-series":"\u0158ada 7","08-8-series":"\u0158ada 8","09-x-series":"\u0158ada X","10-m-series":"BMW M","11-i-series":"BMW i","12-z-series":"\u0158ada Z"},"mini":{"00-all":"V\u0161echny \u0159ady","01-mini-3door":"3dve\u0159ov\u00e9","02-mini-5door":"5dve\u0159ov\u00e9","03-mini-cabrio":"Cabrio","04-mini-clubman":"Clubman","05-mini-countryman":"Countryman","06-mini-aceman":"Aceman"},"motorrad":{"00-all":"V\u0161echny \u0159ady","01-bmw-motorrad-sport":"Sport","02-bmw-motorrad-tour":"Tour","03-bmw-motorrad-roadster":"Roadster","04-bmw-motorrad-heritage":"Heritage","05-bmw-motorrad-adventure":"Adventure","06-bmw-motorrad-urban-mobility":"Urban Mobility","07-bmw-motorrad-m":"M"}},"subseries":{"bmw":{"1-series":{"00-all":"V\u0161echny pod\u0159ady","01-series-1-3door":"3dve\u0159ov\u00e9","02-series-1-5door":"5dve\u0159ov\u00e9"},"2-series":{"00-all":"V\u0161echny pod\u0159ady","01-series-2-coupe":"Coup\u00e9","02-series-2-cabrio":"Cabrio","03-series-2-gran-coupe":"Gran Coup\u00e9","04-series-active-tourer":"Active Tourer","05-series-gran-tourer":"Gran Tourer"},"3-series":{"00-all":"V\u0161echny pod\u0159ady","01-series-3-sedan":"Sedan","02-series-3-touring":"Touring","03-series-3-gt":"Gran Turismo","04-series-3-cabrio":"Cabrio"},"4-series":{"00-all":"V\u0161echny pod\u0159ady","01-series-4-coupe":"Coup\u00e9","02-series-4-gran-coupe":"Gran Coup\u00e9","03-series-4-cabrio":"Cabrio"},"5-series":{"00-all":"V\u0161echny pod\u0159ady","01-series-5-sedan":"Sedan","02-series-5-touring":"Touring","03-series-5-gt":"Gran Turismo"},"8-series":{"00-all":"V\u0161echny pod\u0159ady","01-series-8-coupe":"Coup\u00e9","02-series-8-gran-coupe":"Gran Coup\u00e9","03-series-8-cabrio":"Cabrio"},"x-series":{"00-all":"V\u0161echny pod\u0159ady","01-series-x1":"X1","02-series-x2":"X2","03-series-x3":"X3","04-series-x4":"X4","05-series-x5":"X5","06-series-x6":"X6","07-series-x7":"X7","08-series-XM":"XM"},"m-series":{"00-all":"V\u0161echny pod\u0159ady","01-series-m2":"M2","02-series-M3":"M3 Sedan","03-series-M3-touring":"M3 Touring","04-series-m4-coupe":"M4 Coup\u00e9","05-series-m4-cabrio":"M4 Cabrio","06-series-m5":"M5","07-series-m5-touring":"M5 Touring","08-series-m6-coupe":"M6 Coup\u00e9","09-series-m6-cabrio":"M6 Cabrio","10-series-m6-gran-coupe":"M6 Gran Coup\u00e9","11-series-m8-coupe":"M8 Coup\u00e9","12-series-m8-cabrio":"M8 Cabrio","13-series-m8-gran-coupe":"M8 Gran Coup\u00e9","14-series-x3-m":"X3 M","15-series-x4-m":"X4 M","16-series-x5m":"X5 M","17-series-x6m":"X6 M"},"i-series":{"00-all":"V\u0161echny pod\u0159ady","01-series-i3":"i3","02-series-i3-sedan":"i3 Sedan","03-series-i8-coupe":"i8 Coup\u00e9","04-series-i8-roadster":"i8 Roadster","05-series-ix":"iX","06-series-i4":"i4","07-series-i5":"i5","08-series-i7":"i7","09-series-ix1":"iX1","10-series-ix2":"iX2","11-series-ix3":"iX3","12-series-ix5":"iX5"},"7-series":{"00-all":"V\u0161echny pod\u0159ady","01-series-7-sedan":"Sedan"},"6-series":{"00-all":"V\u0161echny pod\u0159ady","01-series-6-gt":"Gran Turismo","02-series-6-gran-coupe":"Gran Coup\u00e9"},"z-series":{"00-all":"V\u0161echny pod\u0159ady","01-series-z4-roadster":"Roadster"}}},"body":{"bmw":{"00-all":"V\u0161echny karoserie","01-bmw-sedan":"Sedan","02-bmw-touring":"Touring\/Kombi","03-cabrio":"Kabriolet\/Roadster","04-coupe":"Kup\u00e9","05-sports-activity-coupe":"SUV\/SAV","06-hatchback":"Hatchback","07-tourer":"MPV\/Tourer"},"mini":{"00-all":"V\u0161echny karoserie","01-cabrio":"Kabriolet\/Roadster","02-hatchback":"Hatchback","03-suv-mini-countryman":"SUV"},"motorrad":[]},"meant":{"00-all":"V\u0161echna ur\u010den\u00ed"},"fuel":{"bmw":{"00-all":"V\u0161echna paliva","01-1":"Benz\u00edn","02-2":"Diesel","05-5":"Hybrid","06-6":"Elektro"},"mini":{"00-all":"V\u0161echna paliva","01-1":"Benz\u00edn","02-2":"Diesel","05-5":"Hybrid","06-6":"Elektro"},"motorrad":{"00-all":"V\u0161echna paliva","01-1":"Benz\u00edn","06-6":"Elektro"}},"defaultPriceMin":{"bmw":499000,"mini":549000,"motorrad":195000},"defaultPriceMax":{"bmw":3670000,"mini":1029000,"motorrad":850000},"defaultMileage":"","tooltips":{"bmw":"<h3>Premium Selection<\/h3>\r\n\r\n<p>24 m\u011bs\u00ed\u010dn\u00ed z\u00e1ruka,&nbsp;360 bodov\u00e1 kontrola vozidla dle standard\u016f BMW, ov\u011b\u0159en\u00e1 historie vozidla.<\/p>","mini":"<h3>MINI NEXT<\/h3>\r\n\r\n<p>24 m\u011bs\u00ed\u010dn\u00ed z\u00e1ruka, 360 bodov\u00e1 kontrola vozidla dle standard\u016f BMW, ov\u011b\u0159en\u00e1 historie vozidla.<\/p>","motorrad":"<h3>Motorrad DEMO<\/h3>\r\n\r\n<p>24 m\u011bs\u00ed\u010dn\u00ed z\u00e1ruka, 360 bodov\u00e1 kontrola vozidla dle standard\u016f BMW, ov\u011b\u0159en\u00e1 historie vozidla.<\/p>"},"defaultRegYearMin":{"all":"2019","bmw":"2019","mini":"2020","motorrad":"2022"},"translations":{"body":"Typ","fuel_type":"Typ motoru","engine_capacity":"Objem","tachometer_state":"Najeto","average_fuel_consumption":"Spot\u0159eba","reg_date":"Registrov\u00e1no","prod_date":"V\u00fdroba","sort_by":"Se\u0159adit podle","sort_price":"Ceny","sort_reg_date":"Data registrace"},"sort":{"default":null,"sorts":["price","reg_date"]},"banners":{"stockCars":{"left":{"image":"banner_moto_3c","width":300,"height":600,"url":"\/motokalendar"},"right":{"image":"banner_moto_4","width":300,"height":600,"url":"\/motopujcovna"}},"models":{"left":{"image":"banner_moto_6c","width":160,"height":600,"url":"\/motokalendar"},"right":{"image":"banner_moto_5","width":160,"height":600,"url":"\/motopujcovna"}}}};
+            </script> 
+        
+            </head>    
+    <body  class="r_common  r_brand_bmw">
+                            <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M5JXVBCG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<script type="text/javascript">
+    if (typeof FORM_HASHES !== "undefined") {
+
+        dataLayer.push({
+            'event': 'ga.page',
+            'eventNonInteraction': true
+        });
+
+        var pushState = history.pushState,
+            pushed = false,
+            gaData = typeof GA_DATA !== 'undefined' ? JSON.parse(GA_DATA) : '';
+
+        let lastHistoryUrl = location.href;
+
+        history.pushState = function () {
+            pushState.apply(history, arguments);
+            
+            // only call this when last state differed
+            if(arguments[2] !== lastHistoryUrl) {
+                setTimeout(function () {
+                    if (!pushed) {
+                        var absUrl = window.location.href,
+                            hash = window.location.hash;
+
+                        if (hash) {
+                            localStorage.setItem('hash', hash);
+                        }
+
+                        gaData['referrerPath'] = PATH + gaData['fullPagePath'].substr(1);
+                        gaData['fullPagePath'] = absUrl.replace(PATH, '/');
+                        gaData['event'] = 'ga.page';
+                        gaData['eventNonInteraction'] = true;
+
+                        dataLayer.push(gaData);
+
+                        setTimeout(function () {
+                            pushed = false;
+                        }, 500);
+                    }
+
+                    pushed = true;
+                }, 500);                
+            }
+
+            // update last history url            
+            lastHistoryUrl = arguments[2];
+        };
+    }
+</script>
+
+        
+        
+                                            
+                <header class="r_header header r_header--solid">	
+  <div class="r_header--overlay"></div>  
+	<div class="wrapper">
+		<div class="header--inner">
+			<div class="r_header--logo-space">
+				<div class="logo">
+					<a href="https://www.renocar.cz/">
+						<img class="r_header--logo-light" src="https://www.renocar.cz/logo_renocar.svg" alt="Renocar"/>
+						<img class="r_header--logo-dark" src="https://www.renocar.cz/logo_renocar_dark.svg" alt="Renocar"/>
+					</a>
+				</div>
+				<div class="r_header--brands">
+											<a href="https://www.renocar.cz/bmw/prehled-bmw" class="r_header--brand brand--bmw brand--active">
+							<img src="/css/redesign/bmw-logo.svg" alt="BMW" class="brand--bmw brand--light"/>
+							<img src="/css/redesign/bmw-logo-dark.svg" alt="BMW" class="brand--bmw brand--dark"/>
+						</a>
+											<a href="https://www.renocar.cz/mini/prehled-mini" class="r_header--brand brand--mini ">
+							<img src="/css/redesign/mini-logo.svg" alt="MINI" class="brand--mini brand--light"/>
+							<img src="/css/redesign/mini-logo-dark.svg" alt="MINI" class="brand--mini brand--dark"/>
+						</a>
+											<a href="https://www.renocar.cz/motorrad/prehled-motorrad" class="r_header--brand brand--motorrad ">
+							<img src="/css/redesign/motorrad-logo.svg" alt="Motorrad" class="brand--motorrad brand--light"/>
+							<img src="/css/redesign/motorrad-logo-dark.svg" alt="Motorrad" class="brand--motorrad brand--dark"/>
+						</a>
+									</div>
+			</div>
+
+			<div class="menu-space">
+									<div class="menu">
+						<ul>
+							<li>
+																	<a href="/bmw/skladove-vozy-bmw" class="hide-on-brands-select-open menu-item">Nové a ojeté vozy</a>
+															</li>
+						</ul>
+					</div>
+													<div class="menu">
+						<ul>
+							<li>
+																	<a href="/bmw/modely-bmw" class="hide-on-brands-select-open menu-item">Modely</a>
+															</li>
+						</ul>
+					</div>
+													<div class="menu">
+						<ul>
+							<li>
+																	<a href="/bmw/servis-bmw" class="menu-item">Servis</a>
+															</li>
+						</ul>
+					</div>
+								<div class="menu">
+							
+	<ul class="menu__list"><li class="menu__item has-subitems"><a href="https://www.renocar.cz/bmw/sluzby-bmw/" class="menu__link " target="_self">Služby</a><div class="menu--subitems"><ul class="wrapper"><li><a href="https://www.renocar.cz/bmw/akcni-nabidky-bmw" class="menu__link " target="_self">Akční nabídky BMW</a></li><li><a href="https://www.renocar.cz/bmw/sluzby-bmw/vykup-vozu" class="menu__link " target="_self">Výkup vozů</a></li><li><a href="https://www.renocar.cz/bmw/sluzby-bmw/bmw-premium-selection" class="menu__link " target="_self">BMW Premium Selection</a></li><li><a href="https://www.renocar.cz/bmw/sluzby-bmw/testovaci-jizda-bmw/" class="menu__link " target="_self">Testovací jízda</a></li><li><a href="https://www.renocar.cz/bmw/sluzby-bmw/financni-sluzby-bmw" class="menu__link " target="_self">Finanční služby</a></li><li><a href="https://www.renocar.cz/bmw/sluzby-bmw/pojisteni-bmw" class="menu__link " target="_self">Pojištění</a></li><li><a href="https://www.renocar.cz/bmw/sluzby-bmw/bmw-m-performance" class="menu__link " target="_self">M Performance</a></li></ul></div></li><li class="menu__item"><a href="https://www.renocar.cz/bmw/kontakty-bmw" class="menu__link " target="_self">Kontakty BMW</a></li></ul>
+				</div>
+				<div class="eshop">
+											<div class="header-search">
+							<button class="button header-search-button" type="button" data-search-trigger>
+								<span>Hledat na webu</span>
+							</button>
+							<a class="r_header--search-icon" href="#" title="Hledat na webu" data-search-trigger>
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="margin-top: 4px" viewbox="0 0 28.273 28.003">
+									<path d="M15.331 3.335a12.1 12.1 0 0 0-8.768 3.2 11.857 11.857 0 0 0-3.228 8.685 11.857 11.857 0 0 0 3.228 8.68 12.1 12.1 0 0 0 8.768 3.2 12.4 12.4 0 0 0 8.219-2.693l7 6.933 1.058-1.048-7-6.933a12.134 12.134 0 0 0 2.719-8.141A11.857 11.857 0 0 0 24.1 6.532a12.1 12.1 0 0 0-8.769-3.197zm-10.5 11.882a10.4 10.4 0 0 1 2.79-7.637 10.612 10.612 0 0 1 7.71-2.763 10.612 10.612 0 0 1 7.71 2.763 10.4 10.4 0 0 1 2.79 7.637 10.4 10.4 0 0 1-2.79 7.637 10.611 10.611 0 0 1-7.71 2.763 10.612 10.612 0 0 1-7.71-2.763 10.4 10.4 0 0 1-2.79-7.637z" transform="translate(-3.335 -3.335)" fill="#151515"/>
+								</svg>
+							</a>
+						</div>
+										<a class="eshop-link" href="https://eshop.renocar.cz/" target="_blank">
+						Fan e-shop
+						<svg style="position:relative;top:4px;margin:0 0 0 5px;" width="16" height="17" viewbox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M8 0.125L6.59 1.535L12.17 7.125H0V9.125H12.17L6.59 14.715L8 16.125L16 8.125L8 0.125Z" fill="#2279FD"/>
+						</svg>
+					</a>
+				</div>
+			</div>
+
+
+			<div class="r_header--mobile-group hide-on-brands-select-open">
+				<div class="header-search-mobile">
+					<a class="r_header--search-icon" href="#" title="Hledat na webu" data-search-trigger>
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="margin-top: 4px" viewbox="0 0 28.273 28.003">
+									<path d="M15.331 3.335a12.1 12.1 0 0 0-8.768 3.2 11.857 11.857 0 0 0-3.228 8.685 11.857 11.857 0 0 0 3.228 8.68 12.1 12.1 0 0 0 8.768 3.2 12.4 12.4 0 0 0 8.219-2.693l7 6.933 1.058-1.048-7-6.933a12.134 12.134 0 0 0 2.719-8.141A11.857 11.857 0 0 0 24.1 6.532a12.1 12.1 0 0 0-8.769-3.197zm-10.5 11.882a10.4 10.4 0 0 1 2.79-7.637 10.612 10.612 0 0 1 7.71-2.763 10.612 10.612 0 0 1 7.71 2.763 10.4 10.4 0 0 1 2.79 7.637 10.4 10.4 0 0 1-2.79 7.637 10.611 10.611 0 0 1-7.71 2.763 10.612 10.612 0 0 1-7.71-2.763 10.4 10.4 0 0 1-2.79-7.637z" transform="translate(-3.335 -3.335)" fill="#151515"/>
+								</svg>
+							</a>
+				</div>
+
+				<div class="r_header--menu-button menu-button">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="r_header--border-bottom-wrapper">
+		<div class="r_header--border-bottom"></div>
+	</div>
+</header>
+
+<div class="search-header" style="display: none">
+	<div class="wrapper">
+		<div class="search-header--inner">
+			<div class="search-header--left">
+				<input type="text" class="search-header--input" placeholder="Zadejte hledaný výraz" data-path="/vysledky-vyhledavani"  data-brand="bmw"/>
+			</div>
+			<div class="search-header--right">
+				<button class="button search-header--button" type="button" data-search-go>
+					<svg xmlns="http://www.w3.org/2000/svg" width="25.639" height="25.569" viewbox="0 0 25.639 25.569">
+						<path d="m80.483 79.577-6.308-6.308a.656.656 0 0 0-.244-.154A10.215 10.215 0 0 0 66.313 56.1a10.21 10.21 0 1 0 6.8 17.831.656.656 0 0 0 .154.244l6.308 6.308a.631.631 0 0 0 .456.186.658.658 0 0 0 .456-.186.646.646 0 0 0-.004-.906zm-14.17-4.342a8.922 8.922 0 1 1 6.314-2.608 8.9 8.9 0 0 1-6.314 2.608z" transform="translate(-55.6 -55.6)" style="fill:#fff;stroke:#fff"/>
+					</svg>
+					<span>Vyhledat</span>
+				</button>
+				<a href="#close" class="search-header--close" data-search-close>
+					<span>Zavřít</span>
+					<svg xmlns="http://www.w3.org/2000/svg" width="16.414" height="16.414" viewbox="0 0 16.414 16.414">
+						<path data-name="Line 8" transform="translate(.708 .708)" style="fill:none;stroke:#000;stroke-width:2px" d="M0 15 15 0"/>
+						<path data-name="Line 9" transform="translate(.708 .708)" style="fill:none;stroke:#000;stroke-width:2px" d="M15 15 0 0"/>
+					</svg>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="search-dropdown--wrapper" style="display: none">
+	<div class="search-dropdown">
+		<div class="search-dropdown--wait" style="display: none">
+			<span>Vyhledávám...</span>
+		</div>
+		<div class="search-dropdown--results">
+			<div class="search-dropdown--results__inner">
+				<h3 class="search-dropdown--results__term">Pro termín:
+					<strong>&bdquo;<span data-term>BMW 7</span>&ldquo;</strong>
+				</h3>
+				<div class="search-dropdown--results__no-results" style="display: none">
+					-
+					nenašli jsme žádný výsledek.
+				</div>
+				<div class="search-dropdown--results__items" style="display: none"></div>
+				<button class="button search-dropdown--results__large-button" type="button" data-search-go>
+					Zobrazit výsledky vyhledávání
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="search-black-overlay"></div>
+
+                        
+        
+                			    	<script type="text/javascript" src="https://www.renocar.cz/script/custom/jq.galerie.js?v=1.743"  ></script>
+
+
+                            <div class="container ">                
+                                	
+                                <div class="page">                    
+                                        	    
+    
+                            
+    
+
+                    	
+                    
+			
+		<script>
+  $(document).ready(function() {
+    const event = 'ViewContent';
+    const params = {
+      content_type: 'product',
+              currency: 'CZK',
+        value: 1900000.00,
+            content_name: 'BMW M850i xDrive Gran Coupe',
+              content_category: 'BMW',
+            
+    };
+    window.renocarPushFbEvent && window.renocarPushFbEvent(event, params)
+  });
+</script>
+
+<div class="stock-car">
+	<div class="stock-car__top">
+		<div class="wrapper">
+			<div class="stock-car__preview">
+				<div class="stock-car__preview--info">
+					<div class="stock-car__info">
+						<div class="stock-car__preview--inner">
+							<a href="https://www.renocar.cz/bmw/skladove-vozy-bmw?state=premium-selection" class="back-link" id="backToFilter">Vybrat jiný skladový vůz</a>
+															<div class="r_premium-badge__wrapper">
+									<div class="r_premium-badge">
+										<span>Premium Selection</span>
+										<div class="webshop-product-detail__tags--help ps-help">
+											<span></span>
+										</div>
+									</div>
+									<div class="stock-cars__premium-selection ps-container">
+										<div class="stock-cars__premium-selection--close ps-close"></div>
+										<div class="stock-cars__premium-selection--inner"><h3>Premium Selection</h3>
+
+<p>24 měsíční záruka,&nbsp;360 bodová kontrola vozidla dle standardů BMW, ověřená historie vozidla.</p></div>
+									</div>
+								</div>
+
+							
+
+							<h1>BMW M850i xDrive Gran Coupe</h1>
+							<div class="r_stock-main-details">
+								<div class="r_stock-main-details--item">
+									<span class="label">Model vozu</span>
+									<span class="value">BMW řady 8 Gran Coupé</span>
+								</div>
+								<div class="r_stock-main-details--item">
+									<span class="label">Krátký VIN</span>
+									<span class="value">CP99024</span>
+								</div>
+								<div class="r_stock-main-details--item">
+									<span class="label">Kód</span>
+									<span class="value">39830423</span>
+								</div>
+																	<div class="r_stock-main-details--item">
+										<span class="label">Stav tachometru</span>
+										<span class="value">25799 km</span>
+									</div>
+																							</div>
+						</div>
+					</div>
+					<div class="r_stock-price r_stock-car-desktop-only">
+						<div class="stock-car__price">
+							<div class="stock-car__preview--inner">
+								<div class="r_stock-price--main">
+									<span class="r_stock-price--label">
+										Akční cena
+									</span>
+									<span class="r_stock-price--value">
+																					2 299 000 Kč
+																			</span>
+								</div>
+
+								<div class="r_stock-price--no-vat">
+																														1 900 000 Kč
+																				bez DPH
+																	</div>
+
+																	<div class="r_stock-price--original">
+										<span class="r_stock-price--original-label">Katalogová cena</span>
+										<div class="r_stock-price--original-flex">
+											<span class="r_stock-price--original-value">4 058 462 Kč</span>
+																							<span class="r_stock-price--original-no-vat">3 354 101 Kč bez DPH</span>
+																					</div>
+									</div>
+															</div>
+						</div>
+						<div class="stock-car__buy">
+							<div class="stock-car__preview--inner">
+								<a href="https://www.renocar.cz/mam-zajem-o-skladovy-vuz-bmw?id=39830423" class="car-interest button_blue">Chci poptat tento vůz</a>
+							</div>
+						</div>
+					</div>
+				</div>
+									<div class="stock-car__preview--gallery">
+												<div class="stock-car__preview--gallery-for ">
+															<div class="stock-car__preview--gallery-item" data-src="https://www.renocar.cz/helios_resources/images/39830423_00_39843432.JPG">
+									<img src="https://www.renocar.cz/helios_resources/images/39830423_00_39843432.JPG"/>
+								</div>
+															<div class="stock-car__preview--gallery-item" data-src="https://www.renocar.cz/helios_resources/images/39830423_01_39843433.JPG">
+									<img src="https://www.renocar.cz/helios_resources/images/39830423_01_39843433.JPG"/>
+								</div>
+															<div class="stock-car__preview--gallery-item" data-src="https://www.renocar.cz/helios_resources/images/39830423_02_39843434.JPG">
+									<img src="https://www.renocar.cz/helios_resources/images/39830423_02_39843434.JPG"/>
+								</div>
+															<div class="stock-car__preview--gallery-item" data-src="https://www.renocar.cz/helios_resources/images/39830423_03_39843435.JPG">
+									<img src="https://www.renocar.cz/helios_resources/images/39830423_03_39843435.JPG"/>
+								</div>
+															<div class="stock-car__preview--gallery-item" data-src="https://www.renocar.cz/helios_resources/images/39830423_04_39843436.JPG">
+									<img src="https://www.renocar.cz/helios_resources/images/39830423_04_39843436.JPG"/>
+								</div>
+															<div class="stock-car__preview--gallery-item" data-src="https://www.renocar.cz/helios_resources/images/39830423_05_39843437.JPG">
+									<img src="https://www.renocar.cz/helios_resources/images/39830423_05_39843437.JPG"/>
+								</div>
+															<div class="stock-car__preview--gallery-item" data-src="https://www.renocar.cz/helios_resources/images/39830423_06_39843438.JPG">
+									<img src="https://www.renocar.cz/helios_resources/images/39830423_06_39843438.JPG"/>
+								</div>
+															<div class="stock-car__preview--gallery-item" data-src="https://www.renocar.cz/helios_resources/images/39830423_07_39843439.JPG">
+									<img src="https://www.renocar.cz/helios_resources/images/39830423_07_39843439.JPG"/>
+								</div>
+															<div class="stock-car__preview--gallery-item" data-src="https://www.renocar.cz/helios_resources/images/39830423_08_39843440.JPG">
+									<img src="https://www.renocar.cz/helios_resources/images/39830423_08_39843440.JPG"/>
+								</div>
+															<div class="stock-car__preview--gallery-item" data-src="https://www.renocar.cz/helios_resources/images/39830423_09_39843441.JPG">
+									<img src="https://www.renocar.cz/helios_resources/images/39830423_09_39843441.JPG"/>
+								</div>
+															<div class="stock-car__preview--gallery-item" data-src="https://www.renocar.cz/helios_resources/images/39830423_10_39843442.JPG">
+									<img src="https://www.renocar.cz/helios_resources/images/39830423_10_39843442.JPG"/>
+								</div>
+															<div class="stock-car__preview--gallery-item" data-src="https://www.renocar.cz/helios_resources/images/39830423_11_39843443.JPG">
+									<img src="https://www.renocar.cz/helios_resources/images/39830423_11_39843443.JPG"/>
+								</div>
+													</div>
+						<div class="stock-car__preview--gallery-nav">
+															<div class="stock-car__preview--gallery-item">
+									<img src="https://www.renocar.cz/helios_resources/images/39830423_00_39843432.JPG"/>
+								</div>
+															<div class="stock-car__preview--gallery-item">
+									<img src="https://www.renocar.cz/helios_resources/images/39830423_01_39843433.JPG"/>
+								</div>
+															<div class="stock-car__preview--gallery-item">
+									<img src="https://www.renocar.cz/helios_resources/images/39830423_02_39843434.JPG"/>
+								</div>
+															<div class="stock-car__preview--gallery-item">
+									<img src="https://www.renocar.cz/helios_resources/images/39830423_03_39843435.JPG"/>
+								</div>
+															<div class="stock-car__preview--gallery-item">
+									<img src="https://www.renocar.cz/helios_resources/images/39830423_04_39843436.JPG"/>
+								</div>
+															<div class="stock-car__preview--gallery-item">
+									<img src="https://www.renocar.cz/helios_resources/images/39830423_05_39843437.JPG"/>
+								</div>
+															<div class="stock-car__preview--gallery-item">
+									<img src="https://www.renocar.cz/helios_resources/images/39830423_06_39843438.JPG"/>
+								</div>
+															<div class="stock-car__preview--gallery-item">
+									<img src="https://www.renocar.cz/helios_resources/images/39830423_07_39843439.JPG"/>
+								</div>
+															<div class="stock-car__preview--gallery-item">
+									<img src="https://www.renocar.cz/helios_resources/images/39830423_08_39843440.JPG"/>
+								</div>
+															<div class="stock-car__preview--gallery-item">
+									<img src="https://www.renocar.cz/helios_resources/images/39830423_09_39843441.JPG"/>
+								</div>
+															<div class="stock-car__preview--gallery-item">
+									<img src="https://www.renocar.cz/helios_resources/images/39830423_10_39843442.JPG"/>
+								</div>
+															<div class="stock-car__preview--gallery-item">
+									<img src="https://www.renocar.cz/helios_resources/images/39830423_11_39843443.JPG"/>
+								</div>
+													</div>
+					</div>
+							</div>
+		</div>
+	</div>
+
+	<div class="r_stock-car-mobile-bar">
+		<div class="r_stock-price r_stock-car-mobile-only">
+			<div class="stock-car__price">
+				<div class="stock-car__preview--inner">
+					<div class="r_stock-price--main">
+						<span class="r_stock-price--label">
+							Akční cena
+						</span>
+						<span class="r_stock-price--value">
+															2 299 000 Kč
+													</span>
+					</div>
+
+					<div class="r_stock-price--no-vat">
+																					1 900 000 Kč
+														bez DPH
+											</div>
+
+											<div class="r_stock-price--original">
+							<span class="r_stock-price--original-label">Katalogová cena</span>
+							<div class="r_stock-price--original-flex">
+								<span class="r_stock-price--original-value">4 058 462 Kč</span>
+																	<span class="r_stock-price--original-no-vat">3 354 101 Kč bez DPH</span>
+															</div>
+						</div>
+									</div>
+			</div>
+			<div class="stock-car__buy">
+				<div class="stock-car__preview--inner">
+					<a href="https://www.renocar.cz/mam-zajem-o-skladovy-vuz-bmw?id=39830423" class="car-interest button_blue">Chci poptat tento vůz</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+			<div class="r_mini_moto_bg">
+			<div class="wrapper">
+				<div class="stock-car__spec">
+
+					<div class="stock-car__inner">
+						<h2>Technické údaje</h2>
+						<div class="r_stock-spec--wrapper">
+															<div class="r_stock-spec--item">
+									<span class="r_stock-spec--label">Základní barva (kód)</span>
+									<span class="r_stock-spec--value">ROSSO CORSA UNI</span>
+								</div>
+															<div class="r_stock-spec--item">
+									<span class="r_stock-spec--label">Metalíza</span>
+									<span class="r_stock-spec--value">Ano</span>
+								</div>
+															<div class="r_stock-spec--item">
+									<span class="r_stock-spec--label">Objem motoru</span>
+									<span class="r_stock-spec--value">4395 ccm</span>
+								</div>
+															<div class="r_stock-spec--item">
+									<span class="r_stock-spec--label">Výkon</span>
+									<span class="r_stock-spec--value">390 kW (530 k)</span>
+								</div>
+															<div class="r_stock-spec--item">
+									<span class="r_stock-spec--label">Počet dveří</span>
+									<span class="r_stock-spec--value">4</span>
+								</div>
+															<div class="r_stock-spec--item">
+									<span class="r_stock-spec--label">Počet osob</span>
+									<span class="r_stock-spec--value">5</span>
+								</div>
+															<div class="r_stock-spec--item">
+									<span class="r_stock-spec--label">Čalounění</span>
+									<span class="r_stock-spec--value">BMW Individual kůže Merino s rozšířeným obsahem &quot;Ivory White/Ivory White&quot;</span>
+								</div>
+													</div>
+											</div>
+				</div>
+			</div>
+		</div>
+	
+
+			<div class="wrapper">
+			<div class="stock-car__attrs">
+				<div class="stock-car__inner r_stock-attrs">
+					<h2>Výbava vozu</h2>
+					<div class="stock-car__attrs--lists">
+																																	<ul >
+																	<li>20&quot; M kola z lehké slitiny Y-spoke 728 M Bicolour,Runflat</li>
+																	<li>ABS PRO</li>
+																	<li>Active Guard</li>
+																	<li>Aktivní ochrana chodců</li>
+																	<li>Aktivní ventilace předních sedadel</li>
+																	<li>alarm</li>
+																	<li>bezdrátové dobíjení telefonu</li>
+																	<li>bezklíčové startování a odemykání</li>
+																	<li>Bezpečnostní šrouby kol</li>
+																	<li>BMW Display Key</li>
+															</ul>
+																											<ul >
+																	<li>BMW Individual čalounění stropu v barvě antracitu</li>
+																	<li>BMW Individual kůže Merino s rozšířeným obsahem &quot;Ivory White/Ivory White&quot;</li>
+																	<li>BMW laserové světlomety</li>
+																	<li>BMW Legal Emergency Call</li>
+																	<li>BMW Live Cockpit Professional</li>
+																	<li>Čelní okno Climate comfort</li>
+																	<li>Česká jazyková verze</li>
+																	<li>ConnectedDrive Services - přístup na Online portál a integrace aplikací</li>
+																	<li>Control K</li>
+																	<li>čtyřzónová klimatizace</li>
+															</ul>
+																											<ul  class=hidden>
+																	<li>DAB tuner (digitální příjem rádia)</li>
+																	<li>Decoding additional functions</li>
+																	<li>Denní svícení vpředu a vzadu aktivní</li>
+																	<li>Dojezdové pneumatiky Runflat</li>
+																	<li>Driving Assistant Professional</li>
+																	<li>el. dovírání dveří</li>
+																	<li>el. nastavitelná zrcátka</li>
+																	<li>El. ovládaná rolovací sluneční clona zadního okna</li>
+																	<li>EU6 RDE II exhaust emissions standard</li>
+																	<li>Chladicí médium</li>
+															</ul>
+																											<ul  class=hidden>
+																	<li>Integrované aktivní řízení včetně natáčení kol zadní nápravy</li>
+																	<li>Interní</li>
+																	<li>M aerodynamický paket</li>
+																	<li>M bezpečnostní pásy</li>
+																	<li>M interior trim finishers Aluminium Trace dark</li>
+																	<li>M Performance paket</li>
+																	<li>M Shadowline černé vysoce lesklé okenní lišty</li>
+																	<li>M Shadowline černé vysoce lesklé okenní lišty s rozšířeným obsahem</li>
+																	<li>M Shadowline zatmavené světlomety</li>
+																	<li>M sportovní brzdy s černými třmeny</li>
+															</ul>
+																											<ul  class=hidden>
+																	<li>M sportovní diferenciál</li>
+																	<li>M sportovní kožený volant</li>
+																	<li>Manuál a servisní knížka v ČJ</li>
+																	<li>Multifunkční sedadla řidiče a spolujezdce</li>
+																	<li>Paket Connected Professional</li>
+																	<li>Paket Heat Comfort, vpředu</li>
+																	<li>Paket M Technology</li>
+																	<li>Parkovací asistent Plus</li>
+																	<li>Protisluneční ochrana oken</li>
+																	<li>Repair Inclusive - 4 roky / 200 000 km</li>
+															</ul>
+																											<ul  class=hidden>
+																	<li>ROSSO CORSA UNI</li>
+																	<li>senzor tlaku v pneumatikách</li>
+																	<li>Service Inclusive - 5 let / 100 000 km</li>
+																	<li>Servisní interval pro výměnu oleje-24 měsíců/30 000 km</li>
+																	<li>Skleněné prvky interiéru &quot;CraftedClarity&quot;</li>
+																	<li>Sluneční clony zadních bočních oken a el. ovládaná sluneční clona zadního okna</li>
+																	<li>Specific Bluetooth/Wi-Fi functions</li>
+																	<li>Tachometr</li>
+																	<li>Teleservices</li>
+																	<li>Výstražný trojúhelník a lékárnička</li>
+															</ul>
+																			<div class="stock-car__attrs--show-more">
+								<a id="moreEquipment">Zobrazit více</a>
+							</div>
+																			<div class="stock-car__desc">
+								<p>BMW Premium Selection záruka 2 roky, odpočet DPH, BMW Individual - lak na přání - Rosso Corsa,BMW Individual kůže Merino,Funkce plynulého dovírání dveří Soft-Close,Paket M Technology,4-zónová automatická klimatizace,Aktivní ventilace předních sedadel,Driving Assistant Professional,BMW laserové světlomety,Parkovací asistent Plus,M Performance paket,Service Inclusive - 5 let / 100 000 km</p>
+							</div>
+											</div>
+				</div>
+			</div>
+		</div>
+	
+
+			<div class="r_moto_bg">
+			<div class="wrapper">
+				<div class="stock-car__financing">
+					<div class="r_stock-financing--columns">
+						<h3>Pořiďte si tento vůz ještě dnes</h3>
+
+<div class="r_stock--fin-col">
+<h4>S výhodným protiúčtem</h4>
+
+<p>Nechte tu svůj starý vůz a odjeďte v novém. S výhodným protiúčtem se nemusíte o nic starat.</p>
+
+<p><a class="button_transparent" href="/bmw/sluzby-bmw/vykup-vozu">O výkupu vozidel BMW</a></p>
+</div>
+
+<div class="r_stock--fin-col">
+<h4>Máte dotazy?</h4>
+
+<p><a class="button_transparent" data-type="contact" href="#" title="Dotaz k vozu" type="form">Kontaktujte nás</a></p>
+
+<p>nebo nám zavolejte</p>
+
+<p><a class="phone-link large" href="tel:+420500000000">500 000 000</a><br />
+Po–Pá 8.00–18.00</p>
+</div>
+					</div>
+					<div class="r_stock-financing--car">
+						<div class="r_stock-financing--car-flex">
+															<img src="https://www.renocar.cz/helios_resources/images/39830423_00_39843432.JPG" alt="BMW M850i xDrive Gran Coupe"/>
+														<h3>BMW M850i xDrive Gran Coupe</h3>
+							<a href="https://www.renocar.cz/mam-zajem-o-skladovy-vuz-bmw?id=39830423" class="car-interest button_blue">Chci poptat tento vůz</a>
+						</div>
+					</div>
+										
+				</div>
+			</div>
+		</div>
+	
+			<div class="stock-car__texts"><h2 class="title-h2">Proč koupit vůz u Renocaru</h2>
+
+<div class="vertical-list" data-bg-color="grey">
+<div class="wrapper">
+<div class="vertical-list__inner">
+<div class="vertical-list__items">
+<div class="vertical-list__item">
+<div class="vertical-list__item--img"><img src="/css/redesign/gear-and-wrench-on-hand-lt.svg" style="height:62px; width:63px" /></div>
+
+<h4 class="vertical-list__item--title">Vlastní servis</h4>
+
+<p>Jsme autorizovaný servis BMW, MINI a Motorrad.</p>
+
+<p><a class="arrow_after" href="/bmw/servis-bmw">Více o servisu</a></p>
+</div>
+
+<div class="vertical-list__item">
+<div class="vertical-list__item--img"><img src="/css/redesign/car-front-double-lt-black.svg" style="height:55px; width:71px" /></div>
+
+<h4 class="vertical-list__item--title">Vozy skladem</h4>
+
+<p>Největší skladová zásoba.<br />
+&nbsp;</p>
+
+<p><a class="arrow_after" href="/bmw/skladove-vozy-bmw">Zobrazit skladové vozy</a></p>
+</div>
+
+<div class="vertical-list__item">
+<div class="vertical-list__item--img"><img src="/css/redesign/banknotes-lt.svg" style="height:50px; width:71px" /></div>
+
+<h4 class="vertical-list__item--title">Financování</h4>
+
+<p>Nové auto i financování vyřešíte pod jednou střechou.</p>
+
+<p><a class="arrow_after" href="/bmw/sluzby-bmw/financni-sluzby-bmw">Více o financování</a></p>
+</div>
+
+<div class="vertical-list__item">
+<div class="vertical-list__item--img"><img src="/css/redesign/services-lt.svg" style="height:63px; width:63px" /></div>
+
+<h4 class="vertical-list__item--title">Nonstop linka</h4>
+
+<p>Pomůžeme i po havárii nebo akutní poruše.</p>
+
+<p><a class="phone-link" href="tel:+420 800 000 000">+420&nbsp;800 000 000</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<p>&nbsp;</p></div>
+	</div>
+
+<script async src="https://www.cinecar.cz/embed/v1.js" data-site="cc_B3HTzfqZfUrmtTBl209aelRd-ONA7edt"></script>
+
+
+
+		
+	
+
+                    <div id="bannerForm" class="banner-form"></div>
+                    <div id="videoPopup" class="video-popup"></div>
+                    <div id="formPopup" class="form-popup" data-service-forms="false"></div>
+                </div>
+            </div>
+        
+                                    <div class="common-footer r-footer">
+	<div class="wrapper">
+		<div class="footer--top">
+			<div class="footer--top-inner">
+				<a href="https://www.renocar.cz/">
+					<img src="https://www.renocar.cz/logo_renocar_dark.svg" alt="Renocar"/>
+				</a>
+				<span>Prodejce vozů BMW, Mini a motocyklů Motorrad</span>
+			</div>
+		</div>
+		<div class="footer--main__inner">
+			<div class="footer--main__column js-mobile-expandable-block">
+				<h4>O Renocaru</h4>
+				<ul>
+	<li><a href="/o-nas">O nás</a></li>
+	<li><a href="/aktuality/">Aktuality</a></li>
+	<li><a href="http://muzeum.renocar.cz/">Muzeum BMW</a></li>
+	<li><a href="/kariera">Kariéra</a></li>
+</ul>
+
+				<hr/>
+				<ul>
+	<li><a href="/obchodni-podminky">Obchodní podmínky</a></li>
+	<li><a href="/pravni-dolozka">Právní doložka</a></li>
+	<li><a href="/gdpr-zasady-ochrany-osobnich-udaju">GDPR - Zásady ochrany osobních údajů</a></li>
+	<li><a href="/vseobecne-podminky-souteze">Všeobecné podmínky soutěže</a></li>
+	<li><a href="/zasady-pouzivani-cookies">Zásady používání cookies</a></li>
+	<li><a aria-haspopup="dialog" aria-label="Nastavení cookies" data-cc="c-settings" href="javascript:void(0);">Nastavení cookies</a></li>
+	<li><a href="/whistleblowing">Whistleblowing</a></li>
+	<li><a href="/321-projekt-erp">Projekt ERP</a></li>
+	<li><a href="/docs_files/renocar-upozorneni-pro-veritele-a-akcionare.pdf?v=rxp2">Odštěpení veteránů, upozornění pro věřitele</a></li>
+</ul>
+			</div>
+			<div class="footer--main__column footer--wide">
+				<h4 class="less-important">Služby pro vaše značky</h4>
+				<div class="footer--main__brands">
+					<div class="footer--main__brand js-mobile-expandable-block js-tablet-expandable-block initially-expanded no-top-border">
+						<h5><a href="/bmw/prehled-bmw">BMW</a></h5>
+
+<ul>
+	<li><a href="/bmw/skladove-vozy-bmw">Skladové vozy</a></li>
+	<li><a href="/bmw/akcni-nabidky-bmw">Akční nabídky</a></li>
+	<li><a href="/bmw/modely-bmw">Modely</a></li>
+	<li><a href="/bmw/servis-bmw">Servis</a></li>
+	<li><a href="/bmw/sluzby-bmw/financni-sluzby-bmw">Finanční služby</a></li>
+	<li><a href="/bmw/sluzby-bmw/pojisteni-bmw">Pojištění BMW</a></li>
+	<li><a href="/bmw/sluzby-bmw/bmw-premium-selection">BMW Premium Selection</a></li>
+	<li><a href="/bmw/sluzby-bmw/vykup-vozu">Výkup vozů</a></li>
+	<li><a href="/bmw/sluzby-bmw/testovaci-jizda-bmw/">Testovací jízdy</a></li>
+	<li><a href="https://eibach.cz/">Eibach</a></li>
+</ul>
+					</div>
+					<div class="footer--main__brand js-mobile-expandable-block js-tablet-expandable-block ">
+						<h5><a href="/mini/prehled-mini">Mini</a></h5>
+
+<ul>
+	<li><a href="/mini/skladove-vozy-mini">Skladové vozy</a></li>
+	<li><a href="/mini/akcni-nabidky-mini">Akční nabídky</a></li>
+	<li><a href="/mini/servis-mini">Servis</a></li>
+	<li><a href="/mini/sluzby-mini/financni-sluzby-mini">Finanční služby</a></li>
+	<li><a href="/mini/sluzby-mini/mini-next">Mini NEXT</a></li>
+	<li><a href="/mini/sluzby-mini/vykup-vozu-mini">Výkup vozů</a></li>
+	<li><a href="/mini/sluzby-mini/testovaci-jizdy-mini">Testovací jízdy</a></li>
+</ul>
+					</div>
+					<div class="footer--main__brand js-mobile-expandable-block js-tablet-expandable-block  ">
+						<h5><a href="/motorrad/prehled-motorrad">Motorrad</a></h5>
+
+<ul>
+	<li><a href="/motorrad/skladove-motocykly-motorrad">Skladové motocykly</a></li>
+	<li><a href="/motorrad/akcni-nabidky-motorrad">Akční nabídky</a></li>
+	<li><a href="/motorrad/modely-motorrad">Modely</a></li>
+	<li><a href="/motorrad/servis-motorrad/sluzby-servis-motorrad/">Servis</a></li>
+	<li><a href="/motorrad/sluzby-motorrad/financni-sluzby-motorrad/">Finanční služby</a></li>
+	<li><a href="/motorrad/sluzby-motorrad/motorrad-premium-selection">Premium Selection</a></li>
+	<li><a href="/motorrad/sluzby-motorrad/vykup-motocyklu">Výkup motocyklů</a></li>
+	<li><a href="/motorrad/sluzby-motorrad/testovaci-jizdy-motorrad">Testovací jízdy</a></li>
+	<li><a href="/motorrad/sluzby-motorrad/motopujcovna">Motopůjčovna</a></li>
+	<li><a href="/motorrad/sluzby-motorrad/motokalendar">Motokalendář</a></li>
+</ul>
+					</div>
+				</div>
+			</div>
+			<div class="footer--main__column js-mobile-expandable-block">
+				<h4>Spojte se s námi</h4>
+				<ul>
+	<li><a href="/kontakty">Kontaktní informace</a></li>
+</ul>
+
+<p><strong>Zavolejte nám:</strong><br />
+<strong>Praha</strong> - <a href="tel:+420200000000">200&nbsp;000&nbsp;000</a><br />
+<strong>Brno</strong> - <a href="tel:+420500000000">500&nbsp;000&nbsp;000</a></p>
+				<ul>
+											<li>
+							<a class="footer--main__workshop-link" href="https://www.renocar.cz/praha-cestlice">
+								<span class="workshop-name">BMW Renocar Praha - Čestlice</span>
+								<span class="workshop-address">Lipová 280, Čestlice, Česko</span>
+							</a>
+						</li>
+											<li>
+							<a class="footer--main__workshop-link" href="https://www.renocar.cz/praha-kongresove-centrum">
+								<span class="workshop-name">BMW Praha - Kongresové centrum</span>
+								<span class="workshop-address">5. května 1640/65, Praha 4, Česko</span>
+							</a>
+						</li>
+											<li>
+							<a class="footer--main__workshop-link" href="https://www.renocar.cz/renocar-bps-praha-cestlice">
+								<span class="workshop-name">Renocar BMW Premium Selection Praha - Čestlice</span>
+								<span class="workshop-address">Obchodní 367, Čestlice, Česko</span>
+							</a>
+						</li>
+											<li>
+							<a class="footer--main__workshop-link" href="https://www.renocar.cz/renocar-bubenec">
+								<span class="workshop-name">BMW Renocar Praha - Bubeneč</span>
+								<span class="workshop-address">Papírenská 411/2, Praha 6, Česko</span>
+							</a>
+						</li>
+											<li>
+							<a class="footer--main__workshop-link" href="https://www.renocar.cz/brno-slatina">
+								<span class="workshop-name">BMW Renocar Brno - Slatina</span>
+								<span class="workshop-address">Řípská 5c, Brno-Slatina, Česko</span>
+							</a>
+						</li>
+											<li>
+							<a class="footer--main__workshop-link" href="https://www.renocar.cz/brno-ceska">
+								<span class="workshop-name">BMW Renocar Brno - Česká</span>
+								<span class="workshop-address">Česká, okres Brno-venkov</span>
+							</a>
+						</li>
+											<li>
+							<a class="footer--main__workshop-link" href="https://www.renocar.cz/renocar-synot">
+								<span class="workshop-name">Renocar Synot - Zlín</span>
+								<span class="workshop-address">Třída Tomáše Bati 400, 763 02 Zlín</span>
+							</a>
+						</li>
+									</ul>
+				<div class="footer--main__column-socials desktop--only">
+											<a href="https://www.facebook.com/Renocar/" class="fb" target="_blank" rel="noopener"></a>
+											<a href="https://www.instagram.com/renocar_a.s/" class="ig" target="_blank" rel="noopener"></a>
+											<a href="Array" class="bmw" target="_blank" rel="noopener"></a>
+											<a href="Array" class="mini" target="_blank" rel="noopener"></a>
+											<a href="Array" class="motorrad" target="_blank" rel="noopener"></a>
+									</div>
+			</div>
+			<div class="footer--main__column-socials mobile--only mobile-center-content">
+									<a href="https://www.facebook.com/Renocar/" class="fb" target="_blank" rel="noopener"></a>
+									<a href="https://www.instagram.com/renocar_a.s/" class="ig" target="_blank" rel="noopener"></a>
+									<a href="Array" class="bmw" target="_blank" rel="noopener"></a>
+									<a href="Array" class="mini" target="_blank" rel="noopener"></a>
+									<a href="Array" class="motorrad" target="_blank" rel="noopener"></a>
+							</div>
+		</div>
+	</div>
+</div>
+
+                    
+                            
+            </body>
+</html>

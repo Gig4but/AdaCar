@@ -190,6 +190,7 @@ class CarAd(Base):
     is_primary: Mapped[bool] = mapped_column(default=True)
     status: Mapped[CarStatus] = mapped_column(String(10), default="active")
     price: Mapped[int | None]  # this ad's price (a car may cost differently elsewhere)
+    card_price: Mapped[int | None]  # the price its listing card showed: a change re-reads the ad
     content_hash: Mapped[str | None] = mapped_column(String(64))  # of this ad's version
     detail_at: Mapped[datetime | None]  # when the detail page was read; None = listing only
     first_seen_at: Mapped[datetime]

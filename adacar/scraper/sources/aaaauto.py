@@ -20,7 +20,7 @@ import re
 from datetime import date, datetime, time, timedelta
 from typing import Any
 
-from adacar.core import ParsedCar, ParsedLocation, ScrapeQuery
+from adacar.core import ParsedCar, ParsedLocation, ScrapeQuery, SourceKind
 from adacar.geo.places import PlaceResolver
 from adacar.normalize import cars
 from adacar.normalize.text import clean_spaces, fold
@@ -264,6 +264,7 @@ def add_detail(car: ParsedCar, item: dict) -> None:
 class AaaAuto(CrawlSource):
     id = SOURCE_ID
     label = "AAA Auto"
+    kind: SourceKind = "dealer"
     newest_first = True
     nationwide = True
     max_pages = 400  # the first run reads the whole stock (~314 pages): later runs stop early

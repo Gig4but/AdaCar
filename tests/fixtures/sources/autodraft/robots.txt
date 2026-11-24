@@ -1,0 +1,3 @@
+Sitemap: https://www.autodraft.cz/sitemap.xml
+User-agent: *
+Allow: /

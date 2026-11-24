@@ -12,7 +12,7 @@ Precision = Literal["address", "street", "part", "municipality", "district", "re
 CarStatus = Literal["active", "expired"]  # also of a car's ad on one source
 # "stopped": the app closed mid-run.
 RunStatus = Literal["running", "ok", "partial", "failed", "stopped", "blocked", "skipped"]
-SourceKind = Literal["portal", "classifieds"]  # groups of the Sources page
+SourceKind = Literal["portal", "dealer", "leasing", "auction", "classifieds"]  # Sources page groups
 SellerKind = Literal["private", "dealer"]
 
 

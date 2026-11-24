@@ -1,0 +1,15 @@
+User-agent: *
+Disallow: /_auta/
+Disallow: /_reklama/
+Disallow: /_reporty/
+Disallow: /_xml-feed/
+Disallow: /adm24ja/
+Disallow: /adm24ok/
+Disallow: /class/
+Disallow: /cron/
+Disallow: /fotodokumentace/
+Disallow: /send-mail/
+Disallow: /teas/
+Disallow: /web/
+
+Sitemap: https://www.andy-auta.cz/sitemap.xml

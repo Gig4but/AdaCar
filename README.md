@@ -1,8 +1,8 @@
 # AdaCar
 
-Desktop app that collects cars for sale in Czechia from 16 car portals, dealers and classifieds
-into one list, with filters for make, price, year, mileage, fuel and more, and the travel time
-to each seller. A fork of AdaWork (job search).
+Desktop app that collects cars for sale in Czechia from 57 sources (car portals, dealers,
+leasing companies, auctions and classifieds) into one list, with filters for make, price,
+year, mileage, fuel and more, and the travel time to each seller. A fork of AdaWork (job search).
 
 See [PLAN.md](PLAN.md) for the plan and milestones, [ARCHITECTURE.md](ARCHITECTURE.md) for
 how the code is organized.

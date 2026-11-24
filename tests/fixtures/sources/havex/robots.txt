@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+Disallow: /campaign
+Disallow: /car
+Disallow: /dial
+Disallow: /admin
+Disallow: /import
+Disallow: /tag
+Disallow: /campaign
+Disallow: /banner
+Disallow: /user
+Disallow: /mail
+Disallow: /setting
+Disallow: /migration
+
+Sitemap: http://havex.local/sitemap.xml

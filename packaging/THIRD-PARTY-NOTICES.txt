@@ -32,7 +32,7 @@ Web libraries (in the app's pages)
 - htmx (0BSD), MapLibre GL JS (BSD-3-Clause), Pico CSS (MIT): licenses\web\
 
 Data downloaded by the app (not part of the installer)
-- Car ads from the 16 sites the user switches on, and official registers: MPSV codebooks,
+- Car ads from the 57 sites the user switches on, and official registers: MPSV codebooks,
   ČÚZK (RÚIAN), ARES, the insolvency register, the VAT payers register and, with the user's
   own keys, the vehicle register (dataovozidlech.cz) and Google Places.
 - Maps: © OpenStreetMap contributors (ODbL), the extract from Geofabrik; until the

@@ -1,0 +1,8 @@
+﻿User-agent: *
+
+Sitemap: https://autolouda.cz/sitemap.xml 
+Disallow: /*text=
+Disallow: /*rok-od=
+Disallow: /*barva=
+Disallow: /*akcni-vozy=
+Disallow: /*?*=*&*=&*=&

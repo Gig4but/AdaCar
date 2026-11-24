@@ -15,7 +15,7 @@ import re
 
 from selectolax.lexbor import LexborHTMLParser
 
-from adacar.core import ParsedCar, ScrapeQuery
+from adacar.core import ParsedCar, ScrapeQuery, SourceKind
 from adacar.geo.places import PlaceResolver
 from adacar.normalize import cars
 from adacar.normalize.text import clean_spaces, fold
@@ -64,6 +64,7 @@ def params(tree: LexborHTMLParser) -> dict[str, str]:
 class Mototechna(CrawlSource):
     id = SOURCE_ID
     label = "Mototechna"
+    kind: SourceKind = "dealer"
     nationwide = True
     max_pages = 100
     max_details = 100

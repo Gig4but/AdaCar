@@ -1,0 +1,1982 @@
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="3nicom.cz" />
+<meta name="language" content="czech" />
+<meta name="robots" content="INDEX,FOLLOW" />
+<title>Vyhledávání vozidel - CarAukce.cz</title>
+<meta name="description" content="" />
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+<link rel="stylesheet" href="/plugins/swipebox/src/css/swipebox.min.css">
+
+<script src="https://code.jquery.com/jquery.min.js"  crossorigin="anonymous"></script>
+<script type="text/javascript" src="/res/vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/plugins/swipebox/src/js/jquery.swipebox.min.js"></script>
+<script type="text/javascript" src="/plugins/bootbox/bootbox.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/cs.js"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+<link href="/css/select2-bootstrap.min.css" rel="stylesheet">
+
+<link href="/plugins/fileuploader-2/dist/font/font-fileuploader.css" rel="stylesheet">
+<link href="/plugins/fileuploader-2/dist/jquery.fileuploader.min.css" media="all" rel="stylesheet">
+<link href="/plugins/fileuploader-2/examples/gallery/css/jquery.fileuploader-theme-gallery.css" media="all" rel="stylesheet">
+<script src="/plugins/fileuploader-2/src/jquery.fileuploader.js?1" type="text/javascript"></script>
+<script src="/js/fileuploader.js" type="text/javascript"></script>
+
+
+<script type="text/javascript" src="/plugins/bootstrap-pincode-input-master/js/bootstrap-pincode-input.js"></script>
+<link rel="stylesheet" type="text/css" href="/plugins/bootstrap-pincode-input-master/css/bootstrap-pincode-input.css" />
+
+<script type="text/javascript" src="/plugins/flagstrap-master/dist/js/jquery.flagstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/plugins/flagstrap-master/dist/css/flags.css" />
+
+<script src="/js/jquery.colorbox-min.js"></script>
+
+<script src="/js/bootstrap-timepicker.min.js"></script>
+<script src="/js/bootstrap-select.js"></script>
+
+<script src="/js/jquery.jcountdown.min.js"></script>
+
+
+
+<!-- Cookie Consent by https://www.FreePrivacyPolicy.com -->
+<script type="text/javascript" src="//www.freeprivacypolicy.com/public/cookie-consent/4.0.0/cookie-consent.js" charset="UTF-8"></script>
+<script type="text/javascript" charset="UTF-8">
+    document.addEventListener('DOMContentLoaded', function () {
+        cookieconsent.run({
+            "notice_banner_type": "simple", "consent_type": "express", "palette": "light", "language": "cs", "page_load_consent_levels": ["strictly-necessary"], "notice_banner_reject_button_hide": false, "preferences_center_close_button_hide": false, "page_refresh_confirmation_buttons": false, "website_name": "https://www.caraukce.cz"
+        });
+    });
+</script>
+<noscript>Cookie Consent by <a href="https://www.freeprivacypolicy.com/" rel="nofollow noopener">Free Privacy Policy Generator website</a></noscript>
+<!-- End Cookie Consent -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-106896161-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments)
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-106896161-1');
+</script>
+
+<!-- Foxentry start -->
+<script type="text/javascript" async>
+    var Foxentry;
+    (function () {
+        var e = document.querySelector("script"), s = document.createElement('script');
+        s.setAttribute('type', 'text/javascript');
+        s.setAttribute('async', 'true');
+        s.setAttribute('src', 'https://cdn.foxentry.cz/lib');
+        e.parentNode.appendChild(s);
+        s.onload = function () {
+            Foxentry = new FoxentryBase('432s5kaQzw');
+        }
+    })();
+</script>
+<!-- Foxentry end -->
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?58"/>
+<link rel="stylesheet" type="text/css" href="/css/vehicle_filter.css?5"/>
+<link rel="stylesheet" type="text/css" href="/css/top_bar.css?7"/>
+<script type="text/javascript" src="/js/head.js?48"></script>
+<script type="text/javascript" src="/js/vehicle_filter.js?4"></script>
+    </head>
+    <body >
+                <div id="loading-overlay">
+            <div class="spinner"></div>
+            <p id="loading-text"></p>
+        </div>
+        <section id="login_top" class="d-sm-none">
+                            <div class="text-right">
+                    <a href="#" data-toggle="modal" data-target="#loginModal" class="mr-3"><img src="/images/new/piktogramy/login_top.svg" alt="Log in" class="mr-2" />Přihlášení</a>
+                    <a href="/registrace/start" class="mr-3"><img src="/images/new/piktogramy/registration_top.svg" alt="Registrace" class="mr-2" />Registrace</a>
+                </div>
+                </section>
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light d-sm-none">
+    <a class="navbar-brand pt-0" href="/">
+        <img alt="CarAukce" src="/images/new/logo.svg" class="img-fluid d-inline-block" style="max-height: 25px;">
+    </a>
+    <div class="d-inline-block">
+        <a href="/"><img src="/images/new/ico_home.svg" alt=" " class="" /></a>
+    </div>
+    <div class="d-inline-block">
+        <div class="gtranslate dropdown notranslate">
+    <a href="#" class="gtranslate__current dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Jazyk / Language">
+        <img src="/images/flags/24/cz.png" alt="" class="gtranslate__flag" /> <span class="gtranslate__code">CS</span>
+    </a>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="#" data-gtranslate="cs"><img src="/images/flags/24/cz.png" alt="" /> Čeština</a>
+        <a class="dropdown-item" href="#" data-gtranslate="en"><img src="/images/flags/24/gb.png" alt="" /> English</a>
+        <a class="dropdown-item" href="#" data-gtranslate="de"><img src="/images/flags/24/de.png" alt="" /> Deutsch</a>
+        <a class="dropdown-item" href="#" data-gtranslate="pl"><img src="/images/flags/24/pl.png" alt="" /> Polski</a>
+        <a class="dropdown-item" href="#" data-gtranslate="uk"><img src="/images/flags/24/ua.png" alt="" /> Українська</a>
+    </div>
+</div>
+    </div>
+    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+</nav>
+<div class="collapse navbar-collapse" id="navbarNav">
+    <!--<ul class="navbar-nav text-left pr-4" style="padding-left: 60%;">-->
+    <ul class="navbar-nav text-left pr-4 text-right">
+        <li class="nav-item">
+            <a class="nav-link" href="/videa">Videonávody <i class="fas fa-external-link-alt ml-2"></i></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="/strana/proc-my">Proč my <i class="fas fa-external-link-alt ml-2"></i></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/strana/jak-probiha-aukce">Jak to funguje <i class="fas fa-external-link-alt ml-2"></i></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/strana/faq">FAQ <i class="fas fa-external-link-alt ml-2"></i></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/strana/prohlaseni">Prohlášení <i class="fas fa-external-link-alt ml-2"></i></a>
+        </li>
+        <li class="nav-item">
+                        <a class="nav-link" href="/data/vop/vop.pdf" target="_blank">VOP <i class="fas fa-external-link-alt ml-2"></i></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/strana/typy-aukci">Typy aukcí <i class="fas fa-external-link-alt ml-2"></i></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/strana/kontakt">Kontakty <i class="fas fa-external-link-alt ml-2"></i></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/?ukoncene-drazby">Ukončené dražby <i class="fas fa-external-link-alt ml-2"></i></a>
+        </li>
+    </ul>
+</div>
+<!--    responsive menu end-->
+
+
+<section id="top" class="d-none d-sm-flex">
+    <div class="container h-100">
+        <div class="top-bar">
+            <a title="CarAukce" href="/" class="top-bar__logo">
+                <img alt="CarAukce" src="/images/new/logo.svg" class="img-fluid">
+            </a>
+            <a href="/" class="top-bar__home" aria-label="Úvodní strana"><img src="/images/new/ico_home.svg" alt="" /></a>
+            <div class="top-bar__videa">
+                <a class="nav-link" href="/videa"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 3v18l16-9z"/></svg> Videonávody</a>
+            </div>
+            <div class="top-bar__info">
+                <div class="dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownInfo" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Informace</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownInfo">
+                        <a class="dropdown-item" href="/strana/proc-my">Proč my </a>
+                        <a class="dropdown-item" href="/strana/jak-probiha-aukce">Jak to funguje</a>
+                        <a class="dropdown-item" href="/strana/faq">FAQ</a>
+                        <a class="dropdown-item" href="/strana/prohlaseni">Prohlášení</a>
+                        <a class="dropdown-item" href="/doc/vop/VOP_drazba.pdf" target="_blank">VOP dražba</a>
+                        <a class="dropdown-item" href="/doc/vop/VOP_soutez.pdf" target="_blank">VOP soutěž</a>
+                        <a class="dropdown-item" href="/strana/typy-aukci">Typy aukcí</a>
+                        <a class="dropdown-item" href="/strana/kontakt">Kontakty</a>
+                    </div>
+                </div>
+                <div class="gtranslate dropdown notranslate">
+    <a href="#" class="gtranslate__current dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Jazyk / Language">
+        <img src="/images/flags/24/cz.png" alt="" class="gtranslate__flag" /> <span class="gtranslate__code">CS</span>
+    </a>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="#" data-gtranslate="cs"><img src="/images/flags/24/cz.png" alt="" /> Čeština</a>
+        <a class="dropdown-item" href="#" data-gtranslate="en"><img src="/images/flags/24/gb.png" alt="" /> English</a>
+        <a class="dropdown-item" href="#" data-gtranslate="de"><img src="/images/flags/24/de.png" alt="" /> Deutsch</a>
+        <a class="dropdown-item" href="#" data-gtranslate="pl"><img src="/images/flags/24/pl.png" alt="" /> Polski</a>
+        <a class="dropdown-item" href="#" data-gtranslate="uk"><img src="/images/flags/24/ua.png" alt="" /> Українська</a>
+    </div>
+</div>
+            </div>
+
+            <div class="top-bar__contact d-none d-md-flex">
+                <span><img src="/images/new/ico_phone.svg" alt="" /> +420 700 000 000</span>
+                <a href="mailto:kontakt@example.cz"><img src="/images/new/ico_mail.svg" alt="" /> kontakt@example.cz</a>
+            </div>
+            <div class="top-bar__stats d-none d-lg-flex">
+                <span class="top-bar__stats-head">22 let zkušeností</span>
+                <span class="top-bar__stats-row">
+                    <span class="top-bar__stat"><small>V nabídce</small><strong>153</strong></span>
+                    <span class="top-bar__stats-divider"></span>
+                    <span class="top-bar__stat"><small>Prodáno</small><strong>53 942</strong></span>
+                </span>
+            </div>
+            <div class="top-bar__user">
+                                    <div class="top-bar__login">
+                        <a href="#" data-toggle="modal" data-target="#loginModal"><img src="/images/new/ico_login.svg" class="mr-2" alt=""> Přihlášení</a>
+                        <a href="/registrace/start"><img src="/images/new/ico_registrace.svg" class="mr-1" alt=""/> Registrace</a>
+                    </div>
+                            </div>
+        </div>
+    </div>
+</section>
+    <section id="header">
+        <div id="actual_time" class="text-center d-none d-sm-block"><br /></div>
+        <h1>Chci koupit auto</h1>
+                <div id="menu_main">
+            <div class="container">
+                <div class="row no-gutters ">
+                    <div class="col-md col-6">
+                        <div class="item h-100 rounded-left active">
+                            <div class="row no-gutters">
+                                <div class="col-12 col-md-12">
+                                    <div class="ico">
+                                        <a href="/"><img src="/images/new/menu_icons/chci_koupit.svg" alt="Chci koupit auto" class="img-fluid" /></a>
+                                        <a href="/"><img src="/images/new/menu_icons/active/chci_koupit.svg" alt="Chci koupit auto" class="img-fluid active" /></a>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-12">
+                                    <div class="text">
+                                        <a href="/"><strong><span class="text-normal">Chci</span> </strong>koupit auto</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md col-6">
+                        <div class="item h-100 ">
+                            <div class="row no-gutters">
+                                <div class="col-12 col-md-12">
+                                    <div class="ico">
+                                        <a href="/chci-prodat/start"><img src="/images/new/menu_icons/chci_prodat.svg" alt="Chci prodat auto" class="img-fluid" /></a>
+                                        <a href="/chci-prodat/start"><img src="/images/new/menu_icons/active/chci_prodat.svg" alt="Chci prodat auto" class="img-fluid active" /></a>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-12">
+                                    <div class="text">
+                                        <a href="/chci-prodat/start"><strong><span class="text-normal">Chci</span> </strong>prodat auto</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md col-6 d-none d-sm-block">
+                        <div class="item h-100 ">
+                            <div class="row no-gutters">
+                                <div class="col-12 col-md-12">
+                                    <div class="ico">
+                                        <a href="/chci-prodat-fleet"><img src="/images/new/menu_icons/chci_nabidku.svg" alt="Chci prodat fleet" class="img-fluid" /></a>
+                                        <a href="/chci-prodat-fleet"><img src="/images/new/menu_icons/active/chci_nabidku.svg" alt="Chci prodat fleet" class="img-fluid active" /></a>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-12">
+                                    <div class="text">
+                                        <a href="/chci-prodat-fleet"><strong><span class="text-normal">Chci</span> </strong>prodat fleet</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md col-6">
+                        <div class="item h-100  ">
+                            <div class="row no-gutters">
+                                <div class="col-12 col-md-12">
+                                    <div class="ico">
+                                        <a href="/chci-leasing"><img src="/images/new/menu_icons/chci_leasing.svg" alt="Chci operativní leasing" class="img-fluid" /></a>
+                                        <a href="/chci-leasing"><img src="/images/new/menu_icons/active/chci_leasing.svg" alt="Chci operativní leasing" class="img-fluid active" /></a>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-12">
+                                    <div class="text">
+                                        <a href="/chci-leasing"><span class="text-normal">Chci</span> <strong>operativní leasing</strong></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md col-6 mx-auto">
+                        <div class="item h-100 rounded-right ">
+                            <div class="row no-gutters">
+                                <div class="col-12 col-md-12">
+                                    <div class="ico">
+                                        <a href="/chci-proverit"><img src="/images/new/menu_icons/chci_proverit.svg" alt="Chci prověřit vozidlo" class="img-fluid" /></a>
+                                        <a href="/chci-proverit"><img src="/images/new/menu_icons/active/chci_proverit.svg" alt="Chci prověřit vozidlo" class="img-fluid active" /></a>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-12">
+                                    <div class="text">
+                                        <a href="/chci-proverit"><span class="text-normal">Chci</span> <strong>prověřit auto</strong></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            </section>
+
+    <div class="container">
+            </div>
+
+
+
+            <div class="modal fade Xshow Xd-block" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="container">
+                <div class="modal-dialog mw-100 w-md-75" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body p-0">
+                            <div class="row no-gutters">
+                                <div class="col-md-6">
+                                    <div class="p-4">
+                                        <form action="" method="post">
+                                            <div class="login_box mb-2">
+                                                <!--<div class="small"><input type="checkbox" required="" /> Souhlasím s <a href="/strana/voppartner" target="_blank">obchodnímí podmínkami</a></div>-->
+                                                <div class="form-group">
+                                                    <label for="user_login"><span class="text-orange">*</span> Uživatelské jméno</label>
+                                                    <input type="text" name="login" placeholder="Uživatelské jméno" class="form-control" value="" autofocus=""/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="user_login"><span class="text-orange">*</span> Heslo</label>
+                                                    <input type="password" name="password" placeholder="Heslo" class="form-control"/>
+                                                    <div class="small text-right">
+                                                        <a href="/registrace/lost" class="text-orange mb-2">Zapomněli jste heslo?</a>
+                                                    </div>
+                                                </div>
+                                                <div class="small text-left">
+                                                    <input type="checkbox" required="" /> Souhlasím s <a href="/doc/vop/VOP_drazba.pdf" class="text-orange" target="_blank">VOP DRAŽBA</a> a <a href="/doc/vop/VOP_soutez.pdf" class="text-orange" target="_blank">VOP VEŘEJNÁ SOUTĚŽ</a>.<br /><br />
+                                                </div>
+                                                <div class="input-group-btn my-2">
+                                                    <button type="submit" name="doLogin" class="btn btn-warning btn-block text-up">Přihlásit se</button>
+                                                </div>
+                                                <div class="input-group-btn my-2">
+                                                    <a href="/registrace/apple-web" class="btn btn-dark btn-block text-up" id="apple-login-btn">
+                                                        <i class="fa fa-apple mr-1"></i> Přihlásit přes Apple ID
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <br />
+                                        <div class="text-center text-gray">
+                                            <small>Nedaří se přihlásit ? Kontaktujte nás na tel. 600000000.</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 bg-blue">
+                                    <div class="mr-3 mt-2">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true" class="text-white">&times;</span>
+                                        </button>
+                                        <a href="https://www.cardetect.cz" target="_blank"><img src="/images/new/certificates.png" alt=" " class="img-fluid px-5" /></a>
+                                        <div class="text-center mb-3">
+                                            <small>
+                                                <a href="https://www.cardetect.cz" target="_blank" class="text-white">
+                                                    Neriskujte při nákupu vozidla, <br />
+                                                    <strong>a prověřte si Váš vůz před koupí.</strong></a>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--                        <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    <script>
+        (function () {
+            var btn = document.getElementById('apple-login-btn');
+            if (!btn) {
+                return;
+            }
+            btn.addEventListener('click', function (e) {
+                if (navigator.userAgent.indexOf('CarAukceApp') !== -1) {
+                    e.preventDefault();
+                    window.location.href = 'caraukce://apple-login';
+                    return;
+                }
+            });
+        })();
+    </script>
+
+
+
+
+        <section id="vehicle_filter" class="vehicle-filter is-open">
+        <div class="container">
+            <button type="button" class="vehicle-filter__toggle" aria-expanded="true" aria-controls="vehicle_filter_panel">
+                <span class="vehicle-filter__toggle-ico"><i class="fas fa-search"></i></span>
+                <span class="vehicle-filter__toggle-text">
+                    <strong>Hledám konkrétní vozidlo</strong>
+                </span>
+                <span class="vehicle-filter__toggle-count">
+                    153 vozidel v nabídce
+                </span>
+                <span class="vehicle-filter__toggle-arrow"><i class="fas fa-chevron-down"></i></span>
+            </button>
+
+            <div class="vehicle-filter__panel" id="vehicle_filter_panel">
+                <form action="/vozidla" method="get" id="vehicle_filter_form">
+                    <div class="vehicle-filter__top">
+                        <div class="vehicle-filter__druh" role="radiogroup" aria-label="Druh vozidla">
+                            <label class="vehicle-filter__druh-option">
+                                <input type="radio" name="druh" value="">
+                                <span>Všechna vozidla <small>153</small></span>
+                            </label>
+                                                            <label class="vehicle-filter__druh-option">
+                                    <input type="radio" name="druh" value="osobni" checked="checked">
+                                    <span>Osobní <small>120</small></span>
+                                </label>
+                                                            <label class="vehicle-filter__druh-option">
+                                    <input type="radio" name="druh" value="uzitkove">
+                                    <span>Užitková <small>33</small></span>
+                                </label>
+                                                    </div>
+
+                                                                                                <div class="vehicle-filter__price" data-price-range data-steps="0,25000,50000,75000,100000,150000,200000,250000,300000,400000,500000,750000,1000000,1500000,2000000,3000000">
+                            <div class="vehicle-filter__price-head">
+                                <label>Cena</label>
+                                <span class="vehicle-filter__price-value" data-price-value aria-live="polite">libovolná</span>
+                            </div>
+                            <div class="vehicle-filter__price-slider">
+                                <div class="vehicle-filter__price-track"><div class="vehicle-filter__price-fill"></div></div>
+                                <input type="range" min="0" max="15" step="1" value="0" data-price-od aria-label="Cena od">
+                                <input type="range" min="0" max="15" step="1" value="15" data-price-do aria-label="Cena do">
+                            </div>
+                            <input type="hidden" name="cena_od" value="">
+                            <input type="hidden" name="cena_do" value="">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-12 col-lg-3 mb-2">
+                            <label for="vf_znacka">Značka</label>
+                            <select name="znacka" id="vf_znacka" class="form-control">
+                                <option value="">Všechny značky</option>
+                                                                    <option value="AJ">AJ (1)</option>
+                                                                    <option value="ALFAROMEO">Alfa Romeo (1)</option>
+                                                                    <option value="AUDI">Audi (8)</option>
+                                                                    <option value="BMW">BMW (10)</option>
+                                                                    <option value="CHEVROLET">Chevrolet (1)</option>
+                                                                    <option value="CITROEN">Citroën (4)</option>
+                                                                    <option value="DACIA">Dacia (2)</option>
+                                                                    <option value="DAIMLER">Daimler (1)</option>
+                                                                    <option value="DODGE">Dodge (1)</option>
+                                                                    <option value="DONGFENG">Dongfeng (1)</option>
+                                                                    <option value="FIAT">Fiat (2)</option>
+                                                                    <option value="FORD">Ford (10)</option>
+                                                                    <option value="HONDA">Honda (1)</option>
+                                                                    <option value="HYUNDAI">Hyundai (3)</option>
+                                                                    <option value="ISUZU">Isuzu (1)</option>
+                                                                    <option value="IVECO">Iveco (1)</option>
+                                                                    <option value="JAGUAR">Jaguar (1)</option>
+                                                                    <option value="JEEP">Jeep (1)</option>
+                                                                    <option value="KIA">Kia (4)</option>
+                                                                    <option value="KTM">KTM (1)</option>
+                                                                    <option value="LANDROVER">Land Rover (3)</option>
+                                                                    <option value="LEXUS">Lexus (2)</option>
+                                                                    <option value="MAXUS">Maxus (1)</option>
+                                                                    <option value="MAZDA">Mazda (1)</option>
+                                                                    <option value="MERCEDESBENZ">Mercedes-Benz (14)</option>
+                                                                    <option value="MITSUBISHI">Mitsubishi (1)</option>
+                                                                    <option value="NISSAN">Nissan (1)</option>
+                                                                    <option value="OPEL">Opel (5)</option>
+                                                                    <option value="PEUGEOT">Peugeot (8)</option>
+                                                                    <option value="RENAULT">Renault (3)</option>
+                                                                    <option value="SEAT">Seat (1)</option>
+                                                                    <option value="SKODA">Škoda (27)</option>
+                                                                    <option value="SUZUKI">Suzuki (1)</option>
+                                                                    <option value="TESLA">Tesla (1)</option>
+                                                                    <option value="TOYOTA">Toyota (5)</option>
+                                                                    <option value="TPM">TPM (1)</option>
+                                                                    <option value="VEZEKO">Vezeko (1)</option>
+                                                                    <option value="VOLKSWAGEN">Volkswagen (19)</option>
+                                                                    <option value="VOLVO">Volvo (2)</option>
+                                                            </select>
+                        </div>
+
+                        <div class="col-12 col-lg-3 mb-2">
+                            <label>Rok výroby</label>
+                            <div class="form-row vehicle-filter__range">
+                                <div class="col-6">
+                                    <select name="rok_od" class="form-control" aria-label="Rok výroby od">
+                                        <option value="">od</option>
+                                                                                    <option value="2024">2024</option>
+                                                                                    <option value="2023">2023</option>
+                                                                                    <option value="2022">2022</option>
+                                                                                    <option value="2021">2021</option>
+                                                                                    <option value="2020">2020</option>
+                                                                                    <option value="2019">2019</option>
+                                                                                    <option value="2018">2018</option>
+                                                                                    <option value="2017">2017</option>
+                                                                                    <option value="2016">2016</option>
+                                                                                    <option value="2015">2015</option>
+                                                                                    <option value="2014">2014</option>
+                                                                                    <option value="2013">2013</option>
+                                                                                    <option value="2012">2012</option>
+                                                                                    <option value="2011">2011</option>
+                                                                                    <option value="2010">2010</option>
+                                                                                    <option value="2009">2009</option>
+                                                                                    <option value="2008">2008</option>
+                                                                                    <option value="2007">2007</option>
+                                                                                    <option value="2006">2006</option>
+                                                                                    <option value="2005">2005</option>
+                                                                                    <option value="2004">2004</option>
+                                                                                    <option value="2003">2003</option>
+                                                                                    <option value="2002">2002</option>
+                                                                                    <option value="2001">2001</option>
+                                                                                    <option value="2000">2000</option>
+                                                                                    <option value="1999">1999</option>
+                                                                                    <option value="1998">1998</option>
+                                                                                    <option value="1997">1997</option>
+                                                                                    <option value="1996">1996</option>
+                                                                                    <option value="1995">1995</option>
+                                                                                    <option value="1994">1994</option>
+                                                                                    <option value="1993">1993</option>
+                                                                                    <option value="1992">1992</option>
+                                                                                    <option value="1991">1991</option>
+                                                                                    <option value="1990">1990</option>
+                                                                                    <option value="1989">1989</option>
+                                                                                    <option value="1988">1988</option>
+                                                                                    <option value="1987">1987</option>
+                                                                                    <option value="1986">1986</option>
+                                                                                    <option value="1985">1985</option>
+                                                                                    <option value="1984">1984</option>
+                                                                                    <option value="1983">1983</option>
+                                                                                    <option value="1982">1982</option>
+                                                                                    <option value="1981">1981</option>
+                                                                                    <option value="1980">1980</option>
+                                                                                    <option value="1979">1979</option>
+                                                                                    <option value="1978">1978</option>
+                                                                                    <option value="1977">1977</option>
+                                                                                    <option value="1976">1976</option>
+                                                                                    <option value="1975">1975</option>
+                                                                                    <option value="1974">1974</option>
+                                                                                    <option value="1973">1973</option>
+                                                                                    <option value="1972">1972</option>
+                                                                                    <option value="1971">1971</option>
+                                                                                    <option value="1970">1970</option>
+                                                                                    <option value="1969">1969</option>
+                                                                                    <option value="1968">1968</option>
+                                                                                    <option value="1967">1967</option>
+                                                                                    <option value="1966">1966</option>
+                                                                                    <option value="1965">1965</option>
+                                                                                    <option value="1964">1964</option>
+                                                                                    <option value="1963">1963</option>
+                                                                                    <option value="1962">1962</option>
+                                                                                    <option value="1961">1961</option>
+                                                                                    <option value="1960">1960</option>
+                                                                                    <option value="1959">1959</option>
+                                                                            </select>
+                                </div>
+                                <div class="col-6">
+                                    <select name="rok_do" class="form-control" aria-label="Rok výroby do">
+                                        <option value="">do</option>
+                                                                                    <option value="2024">2024</option>
+                                                                                    <option value="2023">2023</option>
+                                                                                    <option value="2022">2022</option>
+                                                                                    <option value="2021">2021</option>
+                                                                                    <option value="2020">2020</option>
+                                                                                    <option value="2019">2019</option>
+                                                                                    <option value="2018">2018</option>
+                                                                                    <option value="2017">2017</option>
+                                                                                    <option value="2016">2016</option>
+                                                                                    <option value="2015">2015</option>
+                                                                                    <option value="2014">2014</option>
+                                                                                    <option value="2013">2013</option>
+                                                                                    <option value="2012">2012</option>
+                                                                                    <option value="2011">2011</option>
+                                                                                    <option value="2010">2010</option>
+                                                                                    <option value="2009">2009</option>
+                                                                                    <option value="2008">2008</option>
+                                                                                    <option value="2007">2007</option>
+                                                                                    <option value="2006">2006</option>
+                                                                                    <option value="2005">2005</option>
+                                                                                    <option value="2004">2004</option>
+                                                                                    <option value="2003">2003</option>
+                                                                                    <option value="2002">2002</option>
+                                                                                    <option value="2001">2001</option>
+                                                                                    <option value="2000">2000</option>
+                                                                                    <option value="1999">1999</option>
+                                                                                    <option value="1998">1998</option>
+                                                                                    <option value="1997">1997</option>
+                                                                                    <option value="1996">1996</option>
+                                                                                    <option value="1995">1995</option>
+                                                                                    <option value="1994">1994</option>
+                                                                                    <option value="1993">1993</option>
+                                                                                    <option value="1992">1992</option>
+                                                                                    <option value="1991">1991</option>
+                                                                                    <option value="1990">1990</option>
+                                                                                    <option value="1989">1989</option>
+                                                                                    <option value="1988">1988</option>
+                                                                                    <option value="1987">1987</option>
+                                                                                    <option value="1986">1986</option>
+                                                                                    <option value="1985">1985</option>
+                                                                                    <option value="1984">1984</option>
+                                                                                    <option value="1983">1983</option>
+                                                                                    <option value="1982">1982</option>
+                                                                                    <option value="1981">1981</option>
+                                                                                    <option value="1980">1980</option>
+                                                                                    <option value="1979">1979</option>
+                                                                                    <option value="1978">1978</option>
+                                                                                    <option value="1977">1977</option>
+                                                                                    <option value="1976">1976</option>
+                                                                                    <option value="1975">1975</option>
+                                                                                    <option value="1974">1974</option>
+                                                                                    <option value="1973">1973</option>
+                                                                                    <option value="1972">1972</option>
+                                                                                    <option value="1971">1971</option>
+                                                                                    <option value="1970">1970</option>
+                                                                                    <option value="1969">1969</option>
+                                                                                    <option value="1968">1968</option>
+                                                                                    <option value="1967">1967</option>
+                                                                                    <option value="1966">1966</option>
+                                                                                    <option value="1965">1965</option>
+                                                                                    <option value="1964">1964</option>
+                                                                                    <option value="1963">1963</option>
+                                                                                    <option value="1962">1962</option>
+                                                                                    <option value="1961">1961</option>
+                                                                                    <option value="1960">1960</option>
+                                                                                    <option value="1959">1959</option>
+                                                                            </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-lg-2 mb-2">
+                            <label for="vf_palivo">Palivo</label>
+                            <select name="palivo" id="vf_palivo" class="form-control">
+                                <option value="">vše</option>
+                                                                    <option value="benzin">Benzín (50)</option>
+                                                                    <option value="nafta">Nafta (97)</option>
+                                                                    <option value="elektro">Elektro (4)</option>
+                                                                    <option value="lpg">LPG (1)</option>
+                                                            </select>
+                        </div>
+
+                        <div class="col-6 col-lg-2 mb-2">
+                            <label for="vf_prevodovka">Převodovka</label>
+                            <select name="prevodovka" id="vf_prevodovka" class="form-control">
+                                <option value="">vše</option>
+                                                                    <option value="manual">Manuální (82)</option>
+                                                                    <option value="automat">Automatická (60)</option>
+                                                            </select>
+                        </div>
+
+                        <div class="col-12 col-lg-2 mb-2">
+                            <label>Stav tachometru</label>
+                            <div class="form-row vehicle-filter__range">
+                                <div class="col-6">
+                                    <select name="km_od" class="form-control" aria-label="Stav tachometru od">
+                                        <option value="">od</option>
+                                                                                    <option value="10000">10 000</option>
+                                                                                    <option value="25000">25 000</option>
+                                                                                    <option value="50000">50 000</option>
+                                                                                    <option value="75000">75 000</option>
+                                                                                    <option value="100000">100 000</option>
+                                                                                    <option value="125000">125 000</option>
+                                                                                    <option value="150000">150 000</option>
+                                                                                    <option value="175000">175 000</option>
+                                                                                    <option value="200000">200 000</option>
+                                                                                    <option value="250000">250 000</option>
+                                                                                    <option value="300000">300 000</option>
+                                                                                    <option value="400000">400 000</option>
+                                                                                    <option value="500000">500 000</option>
+                                                                            </select>
+                                </div>
+                                <div class="col-6">
+                                    <select name="km_do" class="form-control" aria-label="Stav tachometru do">
+                                        <option value="">do</option>
+                                                                                    <option value="10000">10 000</option>
+                                                                                    <option value="25000">25 000</option>
+                                                                                    <option value="50000">50 000</option>
+                                                                                    <option value="75000">75 000</option>
+                                                                                    <option value="100000">100 000</option>
+                                                                                    <option value="125000">125 000</option>
+                                                                                    <option value="150000">150 000</option>
+                                                                                    <option value="175000">175 000</option>
+                                                                                    <option value="200000">200 000</option>
+                                                                                    <option value="250000">250 000</option>
+                                                                                    <option value="300000">300 000</option>
+                                                                                    <option value="400000">400 000</option>
+                                                                                    <option value="500000">500 000</option>
+                                                                            </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="vehicle-filter__actions">
+                        <a href="/vozidla" class="vehicle-filter__reset" data-vehicle-filter-reset>
+                            <i class="fas fa-times mr-1"></i>Zrušit filtr
+                        </a>
+                                                <noscript>
+                            <button type="submit" class="btn btn-warning btn-sm ml-3">
+                                <i class="fas fa-search mr-2"></i>Vyhledat
+                            </button>
+                        </noscript>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+<div id="main_content">
+    <div class="container">
+        <div id="vehicle_results" data-vehicle-results>
+            <div class="vehicle-results__head">
+    <h2>
+                    Nalezená vozidla
+                <span class="vehicle-results__count">120</span>
+    </h2>
+    <div class="vehicle-results__note text-gray small">
+        Vozidla ze všech probíhajících i připravovaných elektronických soutěží a dražeb.
+    </div>
+</div>
+
+    <div class="row vehicle-results">
+                                                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+                <div class="vehicle-card h-100">
+                    <a href="/item/58657" class="vehicle-card__image">
+                                                    <img src="/data/images/58657/preview/image00001.jpg" alt="AUDI A6 AVANT" class="img-fluid" />
+                                                                            <span class="vehicle-card__flag">Soutěž</span>
+                                            </a>
+
+                    <div class="vehicle-card__body">
+                        <h3 class="vehicle-card__title">
+                            <a href="/item/58657">AUDI A6 AVANT</a>
+                        </h3>
+
+                        <ul class="vehicle-card__params">
+                            <li>
+                                <img src="/images/new/icons/ic-actions-calendar.png" alt="" />
+                                2018                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-km.png" alt="" />
+                                119 593 km                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-fuel.png" alt="" />
+                                Nafta                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-engine.png" alt="" />
+                                Automatická                            </li>
+                        </ul>
+
+                        <div class="vehicle-card__price">
+                            <span class="vehicle-card__price-title">Orientační cena</span>
+                            <strong>549 000 Kč</strong>
+                        </div>
+                    </div>
+
+                    <div class="vehicle-card__footer">
+                        <div class="vehicle-card__auction">
+                            <i class="fas fa-hourglass-half mr-1"></i>Konec:
+                            <strong>24.11.2026 14:00</strong>
+                        </div>
+                        <a href="/item/58657" class="btn btn-outline-warning btn-sm">Detail vozidla</a>
+                    </div>
+                </div>
+            </div>
+                                                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+                <div class="vehicle-card h-100">
+                    <a href="/item/58655" class="vehicle-card__image">
+                                                    <img src="/data/images/58655/preview/image00001.jpg" alt="TOYOTA COROLLA TS 1.8 HYBRID" class="img-fluid" />
+                                                                            <span class="vehicle-card__flag">Soutěž</span>
+                                            </a>
+
+                    <div class="vehicle-card__body">
+                        <h3 class="vehicle-card__title">
+                            <a href="/item/58655">TOYOTA COROLLA TS 1.8 HYBRID</a>
+                        </h3>
+
+                        <ul class="vehicle-card__params">
+                            <li>
+                                <img src="/images/new/icons/ic-actions-calendar.png" alt="" />
+                                2023                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-km.png" alt="" />
+                                43 669 km                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-fuel.png" alt="" />
+                                Benzín                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-engine.png" alt="" />
+                                Automatická                            </li>
+                        </ul>
+
+                        <div class="vehicle-card__price">
+                            <span class="vehicle-card__price-title">Orientační cena</span>
+                            <strong>430 000 Kč</strong>
+                        </div>
+                    </div>
+
+                    <div class="vehicle-card__footer">
+                        <div class="vehicle-card__auction">
+                            <i class="fas fa-hourglass-half mr-1"></i>Konec:
+                            <strong>24.11.2026 14:00</strong>
+                        </div>
+                        <a href="/item/58655" class="btn btn-outline-warning btn-sm">Detail vozidla</a>
+                    </div>
+                </div>
+            </div>
+                                                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+                <div class="vehicle-card h-100">
+                    <a href="/item/58656" class="vehicle-card__image">
+                                                    <img src="/data/images/58656/preview/image00001.jpg" alt="TOYOTA COROLLA TS 1.8 HYBRID" class="img-fluid" />
+                                                                            <span class="vehicle-card__flag">Soutěž</span>
+                                            </a>
+
+                    <div class="vehicle-card__body">
+                        <h3 class="vehicle-card__title">
+                            <a href="/item/58656">TOYOTA COROLLA TS 1.8 HYBRID</a>
+                        </h3>
+
+                        <ul class="vehicle-card__params">
+                            <li>
+                                <img src="/images/new/icons/ic-actions-calendar.png" alt="" />
+                                2023                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-km.png" alt="" />
+                                79 607 km                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-fuel.png" alt="" />
+                                Benzín                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-engine.png" alt="" />
+                                Automatická                            </li>
+                        </ul>
+
+                        <div class="vehicle-card__price">
+                            <span class="vehicle-card__price-title">Orientační cena</span>
+                            <strong>500 000 Kč</strong>
+                        </div>
+                    </div>
+
+                    <div class="vehicle-card__footer">
+                        <div class="vehicle-card__auction">
+                            <i class="fas fa-hourglass-half mr-1"></i>Konec:
+                            <strong>24.11.2026 14:00</strong>
+                        </div>
+                        <a href="/item/58656" class="btn btn-outline-warning btn-sm">Detail vozidla</a>
+                    </div>
+                </div>
+            </div>
+                                                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+                <div class="vehicle-card h-100">
+                    <a href="/item/58654" class="vehicle-card__image">
+                                                    <img src="/data/images/58654/preview/image00001.jpg" alt="TOYOTA RAV4" class="img-fluid" />
+                                                                            <span class="vehicle-card__flag">Soutěž</span>
+                                            </a>
+
+                    <div class="vehicle-card__body">
+                        <h3 class="vehicle-card__title">
+                            <a href="/item/58654">TOYOTA RAV4</a>
+                        </h3>
+
+                        <ul class="vehicle-card__params">
+                            <li>
+                                <img src="/images/new/icons/ic-actions-calendar.png" alt="" />
+                                2023                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-km.png" alt="" />
+                                140 316 km                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-fuel.png" alt="" />
+                                Benzín                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-engine.png" alt="" />
+                                Automatická                            </li>
+                        </ul>
+
+                        <div class="vehicle-card__price">
+                            <span class="vehicle-card__price-title">Orientační cena</span>
+                            <strong>690 000 Kč</strong>
+                        </div>
+                    </div>
+
+                    <div class="vehicle-card__footer">
+                        <div class="vehicle-card__auction">
+                            <i class="fas fa-hourglass-half mr-1"></i>Konec:
+                            <strong>24.11.2026 14:00</strong>
+                        </div>
+                        <a href="/item/58654" class="btn btn-outline-warning btn-sm">Detail vozidla</a>
+                    </div>
+                </div>
+            </div>
+                                                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+                <div class="vehicle-card h-100">
+                    <a href="/item/58782" class="vehicle-card__image">
+                                                    <img src="/data/images/58782/preview/001-10.jpg" alt="MERCEDES-BENZ GLB 200 D" class="img-fluid" />
+                                                                            <span class="vehicle-card__flag">Soutěž</span>
+                                            </a>
+
+                    <div class="vehicle-card__body">
+                        <h3 class="vehicle-card__title">
+                            <a href="/item/58782">MERCEDES-BENZ GLB 200 D</a>
+                        </h3>
+
+                        <ul class="vehicle-card__params">
+                            <li>
+                                <img src="/images/new/icons/ic-actions-calendar.png" alt="" />
+                                2022                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-km.png" alt="" />
+                                48 450 km                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-fuel.png" alt="" />
+                                Nafta                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-engine.png" alt="" />
+                                Automatická                            </li>
+                        </ul>
+
+                        <div class="vehicle-card__price">
+                            <span class="vehicle-card__price-title">Orientační cena</span>
+                            <strong>1 000 Kč</strong>
+                        </div>
+                    </div>
+
+                    <div class="vehicle-card__footer">
+                        <div class="vehicle-card__auction">
+                            <i class="fas fa-hourglass-half mr-1"></i>Konec:
+                            <strong>25.11.2026 10:00</strong>
+                        </div>
+                        <a href="/item/58782" class="btn btn-outline-warning btn-sm">Detail vozidla</a>
+                    </div>
+                </div>
+            </div>
+                                                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+                <div class="vehicle-card h-100">
+                    <a href="/item/58787" class="vehicle-card__image">
+                                                    <img src="/data/images/58787/preview/001-IMG_1862.png" alt="ŠKODA OCTAVIA" class="img-fluid" />
+                                                                            <span class="vehicle-card__flag">Soutěž</span>
+                                            </a>
+
+                    <div class="vehicle-card__body">
+                        <h3 class="vehicle-card__title">
+                            <a href="/item/58787">ŠKODA OCTAVIA</a>
+                        </h3>
+
+                        <ul class="vehicle-card__params">
+                            <li>
+                                <img src="/images/new/icons/ic-actions-calendar.png" alt="" />
+                                2009                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-km.png" alt="" />
+                                302 000 km                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-fuel.png" alt="" />
+                                Nafta                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-engine.png" alt="" />
+                                Manuální                            </li>
+                        </ul>
+
+                        <div class="vehicle-card__price">
+                            <span class="vehicle-card__price-title">Orientační cena</span>
+                            <strong>60 000 Kč</strong>
+                        </div>
+                    </div>
+
+                    <div class="vehicle-card__footer">
+                        <div class="vehicle-card__auction">
+                            <i class="fas fa-hourglass-half mr-1"></i>Konec:
+                            <strong>25.11.2026 10:20</strong>
+                        </div>
+                        <a href="/item/58787" class="btn btn-outline-warning btn-sm">Detail vozidla</a>
+                    </div>
+                </div>
+            </div>
+                                                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+                <div class="vehicle-card h-100">
+                    <a href="/item/58788" class="vehicle-card__image">
+                                                    <img src="/data/images/58788/preview/001-IMG_20260825_184834.jpg" alt="ŠKODA OCTAVIA" class="img-fluid" />
+                                                                            <span class="vehicle-card__flag">Soutěž</span>
+                                            </a>
+
+                    <div class="vehicle-card__body">
+                        <h3 class="vehicle-card__title">
+                            <a href="/item/58788">ŠKODA OCTAVIA</a>
+                        </h3>
+
+                        <ul class="vehicle-card__params">
+                            <li>
+                                <img src="/images/new/icons/ic-actions-calendar.png" alt="" />
+                                2008                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-km.png" alt="" />
+                                232 000 km                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-fuel.png" alt="" />
+                                Benzín                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-engine.png" alt="" />
+                                Manuální                            </li>
+                        </ul>
+
+                        <div class="vehicle-card__price">
+                            <span class="vehicle-card__price-title">Orientační cena</span>
+                            <strong>60 000 Kč</strong>
+                        </div>
+                    </div>
+
+                    <div class="vehicle-card__footer">
+                        <div class="vehicle-card__auction">
+                            <i class="fas fa-hourglass-half mr-1"></i>Konec:
+                            <strong>25.11.2026 10:40</strong>
+                        </div>
+                        <a href="/item/58788" class="btn btn-outline-warning btn-sm">Detail vozidla</a>
+                    </div>
+                </div>
+            </div>
+                                                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+                <div class="vehicle-card h-100">
+                    <a href="/item/58789" class="vehicle-card__image">
+                                                    <img src="/data/images/58789/preview/001-IMG_3669.jpg" alt="AUDI A5 SPORTBACK" class="img-fluid" />
+                                                                            <span class="vehicle-card__flag">Soutěž</span>
+                                            </a>
+
+                    <div class="vehicle-card__body">
+                        <h3 class="vehicle-card__title">
+                            <a href="/item/58789">AUDI A5 SPORTBACK</a>
+                        </h3>
+
+                        <ul class="vehicle-card__params">
+                            <li>
+                                <img src="/images/new/icons/ic-actions-calendar.png" alt="" />
+                                2013                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-km.png" alt="" />
+                                287 000 km                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-fuel.png" alt="" />
+                                Nafta                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-engine.png" alt="" />
+                                Manuální                            </li>
+                        </ul>
+
+                        <div class="vehicle-card__price">
+                            <span class="vehicle-card__price-title">Orientační cena</span>
+                            <strong>1 000 Kč</strong>
+                        </div>
+                    </div>
+
+                    <div class="vehicle-card__footer">
+                        <div class="vehicle-card__auction">
+                            <i class="fas fa-hourglass-half mr-1"></i>Konec:
+                            <strong>26.11.2026 10:00</strong>
+                        </div>
+                        <a href="/item/58789" class="btn btn-outline-warning btn-sm">Detail vozidla</a>
+                    </div>
+                </div>
+            </div>
+                                                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+                <div class="vehicle-card h-100">
+                    <a href="/item/58790" class="vehicle-card__image">
+                                                    <img src="/data/images/58790/preview/001-IMG_3545.jpg" alt="ŠKODA OCTAVIA" class="img-fluid" />
+                                                                            <span class="vehicle-card__flag">Soutěž</span>
+                                            </a>
+
+                    <div class="vehicle-card__body">
+                        <h3 class="vehicle-card__title">
+                            <a href="/item/58790">ŠKODA OCTAVIA</a>
+                        </h3>
+
+                        <ul class="vehicle-card__params">
+                            <li>
+                                <img src="/images/new/icons/ic-actions-calendar.png" alt="" />
+                                2015                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-km.png" alt="" />
+                                330 979 km                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-fuel.png" alt="" />
+                                Nafta                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-engine.png" alt="" />
+                                Manuální                            </li>
+                        </ul>
+
+                        <div class="vehicle-card__price">
+                            <span class="vehicle-card__price-title">Orientační cena</span>
+                            <strong>1 000 Kč</strong>
+                        </div>
+                    </div>
+
+                    <div class="vehicle-card__footer">
+                        <div class="vehicle-card__auction">
+                            <i class="fas fa-hourglass-half mr-1"></i>Konec:
+                            <strong>26.11.2026 10:20</strong>
+                        </div>
+                        <a href="/item/58790" class="btn btn-outline-warning btn-sm">Detail vozidla</a>
+                    </div>
+                </div>
+            </div>
+                                                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+                <div class="vehicle-card h-100">
+                    <a href="/item/58791" class="vehicle-card__image">
+                                                    <img src="/data/images/58791/preview/001-IMG_3758.jpg" alt="MERCEDES-BENZ S 350 D" class="img-fluid" />
+                                                                            <span class="vehicle-card__flag">Soutěž</span>
+                                            </a>
+
+                    <div class="vehicle-card__body">
+                        <h3 class="vehicle-card__title">
+                            <a href="/item/58791">MERCEDES-BENZ S 350 D</a>
+                        </h3>
+
+                        <ul class="vehicle-card__params">
+                            <li>
+                                <img src="/images/new/icons/ic-actions-calendar.png" alt="" />
+                                2018                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-km.png" alt="" />
+                                170 500 km                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-fuel.png" alt="" />
+                                Nafta                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-engine.png" alt="" />
+                                Automatická                            </li>
+                        </ul>
+
+                        <div class="vehicle-card__price">
+                            <span class="vehicle-card__price-title">Orientační cena</span>
+                            <strong>790 000 Kč</strong>
+                        </div>
+                    </div>
+
+                    <div class="vehicle-card__footer">
+                        <div class="vehicle-card__auction">
+                            <i class="fas fa-hourglass-half mr-1"></i>Konec:
+                            <strong>26.11.2026 10:40</strong>
+                        </div>
+                        <a href="/item/58791" class="btn btn-outline-warning btn-sm">Detail vozidla</a>
+                    </div>
+                </div>
+            </div>
+                                                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+                <div class="vehicle-card h-100">
+                    <a href="/item/58845" class="vehicle-card__image">
+                                                    <img src="/data/images/58845/preview/1.jpg" alt="Audi A6 2,0 TDI" class="img-fluid" />
+                                                                            <span class="vehicle-card__flag">Soutěž</span>
+                                            </a>
+
+                    <div class="vehicle-card__body">
+                        <h3 class="vehicle-card__title">
+                            <a href="/item/58845">Audi A6 2,0 TDI</a>
+                        </h3>
+
+                        <ul class="vehicle-card__params">
+                            <li>
+                                <img src="/images/new/icons/ic-actions-calendar.png" alt="" />
+                                2018                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-km.png" alt="" />
+                                176 902 km                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-fuel.png" alt="" />
+                                Nafta                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-engine.png" alt="" />
+                                Automatická                            </li>
+                        </ul>
+
+                        <div class="vehicle-card__price">
+                            <span class="vehicle-card__price-title">Orientační cena</span>
+                            <strong>289 000 Kč</strong>
+                        </div>
+                    </div>
+
+                    <div class="vehicle-card__footer">
+                        <div class="vehicle-card__auction">
+                            <i class="fas fa-hourglass-half mr-1"></i>Konec:
+                            <strong>26.11.2026 11:00</strong>
+                        </div>
+                        <a href="/item/58845" class="btn btn-outline-warning btn-sm">Detail vozidla</a>
+                    </div>
+                </div>
+            </div>
+                                                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+                <div class="vehicle-card h-100">
+                    <a href="/item/58867" class="vehicle-card__image">
+                                                    <img src="/data/images/58867/preview/1.jpg" alt="Audi A6 AVANT 2,0 TDI" class="img-fluid" />
+                                                                            <span class="vehicle-card__flag">Soutěž</span>
+                                            </a>
+
+                    <div class="vehicle-card__body">
+                        <h3 class="vehicle-card__title">
+                            <a href="/item/58867">Audi A6 AVANT 2,0 TDI</a>
+                        </h3>
+
+                        <ul class="vehicle-card__params">
+                            <li>
+                                <img src="/images/new/icons/ic-actions-calendar.png" alt="" />
+                                2017                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-km.png" alt="" />
+                                222 959 km                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-fuel.png" alt="" />
+                                Nafta                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-engine.png" alt="" />
+                                Manuální                            </li>
+                        </ul>
+
+                        <div class="vehicle-card__price">
+                            <span class="vehicle-card__price-title">Orientační cena</span>
+                            <strong>297 000 Kč</strong>
+                        </div>
+                    </div>
+
+                    <div class="vehicle-card__footer">
+                        <div class="vehicle-card__auction">
+                            <i class="fas fa-hourglass-half mr-1"></i>Konec:
+                            <strong>26.11.2026 11:00</strong>
+                        </div>
+                        <a href="/item/58867" class="btn btn-outline-warning btn-sm">Detail vozidla</a>
+                    </div>
+                </div>
+            </div>
+                                                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+                <div class="vehicle-card h-100">
+                    <a href="/item/58865" class="vehicle-card__image">
+                                                    <img src="/data/images/58865/preview/1.jpg" alt="Audi A6 AVANT 3,0 TDI BIT QUATTRO TIPTRONIC" class="img-fluid" />
+                                                                            <span class="vehicle-card__flag">Soutěž</span>
+                                            </a>
+
+                    <div class="vehicle-card__body">
+                        <h3 class="vehicle-card__title">
+                            <a href="/item/58865">Audi A6 AVANT 3,0 TDI BIT QUATTRO TIPTRONIC</a>
+                        </h3>
+
+                        <ul class="vehicle-card__params">
+                            <li>
+                                <img src="/images/new/icons/ic-actions-calendar.png" alt="" />
+                                2013                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-km.png" alt="" />
+                                330 490 km                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-fuel.png" alt="" />
+                                Nafta                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-engine.png" alt="" />
+                                Automatická                            </li>
+                        </ul>
+
+                        <div class="vehicle-card__price">
+                            <span class="vehicle-card__price-title">Orientační cena</span>
+                            <strong>150 000 Kč</strong>
+                        </div>
+                    </div>
+
+                    <div class="vehicle-card__footer">
+                        <div class="vehicle-card__auction">
+                            <i class="fas fa-hourglass-half mr-1"></i>Konec:
+                            <strong>26.11.2026 11:00</strong>
+                        </div>
+                        <a href="/item/58865" class="btn btn-outline-warning btn-sm">Detail vozidla</a>
+                    </div>
+                </div>
+            </div>
+                                                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+                <div class="vehicle-card h-100">
+                    <a href="/item/58848" class="vehicle-card__image">
+                                                    <img src="/data/images/58848/preview/1.jpg" alt="Audi A6 AVANT 3,0 TDI QUATTRO" class="img-fluid" />
+                                                                            <span class="vehicle-card__flag">Soutěž</span>
+                                            </a>
+
+                    <div class="vehicle-card__body">
+                        <h3 class="vehicle-card__title">
+                            <a href="/item/58848">Audi A6 AVANT 3,0 TDI QUATTRO</a>
+                        </h3>
+
+                        <ul class="vehicle-card__params">
+                            <li>
+                                <img src="/images/new/icons/ic-actions-calendar.png" alt="" />
+                                2010                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-km.png" alt="" />
+                                272 124 km                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-fuel.png" alt="" />
+                                Nafta                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-engine.png" alt="" />
+                                Automatická                            </li>
+                        </ul>
+
+                        <div class="vehicle-card__price">
+                            <span class="vehicle-card__price-title">Orientační cena</span>
+                            <strong>29 000 Kč</strong>
+                        </div>
+                    </div>
+
+                    <div class="vehicle-card__footer">
+                        <div class="vehicle-card__auction">
+                            <i class="fas fa-hourglass-half mr-1"></i>Konec:
+                            <strong>26.11.2026 11:00</strong>
+                        </div>
+                        <a href="/item/58848" class="btn btn-outline-warning btn-sm">Detail vozidla</a>
+                    </div>
+                </div>
+            </div>
+                                                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+                <div class="vehicle-card h-100">
+                    <a href="/item/58842" class="vehicle-card__image">
+                                                    <img src="/data/images/58842/preview/1.jpg" alt="Audi A8 4,2V8 QUATTRO" class="img-fluid" />
+                                                                            <span class="vehicle-card__flag">Soutěž</span>
+                                            </a>
+
+                    <div class="vehicle-card__body">
+                        <h3 class="vehicle-card__title">
+                            <a href="/item/58842">Audi A8 4,2V8 QUATTRO</a>
+                        </h3>
+
+                        <ul class="vehicle-card__params">
+                            <li>
+                                <img src="/images/new/icons/ic-actions-calendar.png" alt="" />
+                                2012                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-km.png" alt="" />
+                                195 034 km                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-fuel.png" alt="" />
+                                Benzín                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-engine.png" alt="" />
+                                Automatická                            </li>
+                        </ul>
+
+                        <div class="vehicle-card__price">
+                            <span class="vehicle-card__price-title">Orientační cena</span>
+                            <strong>182 000 Kč</strong>
+                        </div>
+                    </div>
+
+                    <div class="vehicle-card__footer">
+                        <div class="vehicle-card__auction">
+                            <i class="fas fa-hourglass-half mr-1"></i>Konec:
+                            <strong>26.11.2026 11:00</strong>
+                        </div>
+                        <a href="/item/58842" class="btn btn-outline-warning btn-sm">Detail vozidla</a>
+                    </div>
+                </div>
+            </div>
+                                                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+                <div class="vehicle-card h-100">
+                    <a href="/item/58874" class="vehicle-card__image">
+                                                    <img src="/data/images/58874/preview/1.jpg" alt="BMW  318 D KOMBI" class="img-fluid" />
+                                                                            <span class="vehicle-card__flag">Soutěž</span>
+                                            </a>
+
+                    <div class="vehicle-card__body">
+                        <h3 class="vehicle-card__title">
+                            <a href="/item/58874">BMW  318 D KOMBI</a>
+                        </h3>
+
+                        <ul class="vehicle-card__params">
+                            <li>
+                                <img src="/images/new/icons/ic-actions-calendar.png" alt="" />
+                                2010                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-km.png" alt="" />
+                                229 737 km                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-fuel.png" alt="" />
+                                Nafta                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-engine.png" alt="" />
+                                Manuální                            </li>
+                        </ul>
+
+                        <div class="vehicle-card__price">
+                            <span class="vehicle-card__price-title">Orientační cena</span>
+                            <strong>25 000 Kč</strong>
+                        </div>
+                    </div>
+
+                    <div class="vehicle-card__footer">
+                        <div class="vehicle-card__auction">
+                            <i class="fas fa-hourglass-half mr-1"></i>Konec:
+                            <strong>26.11.2026 11:00</strong>
+                        </div>
+                        <a href="/item/58874" class="btn btn-outline-warning btn-sm">Detail vozidla</a>
+                    </div>
+                </div>
+            </div>
+                                                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+                <div class="vehicle-card h-100">
+                    <a href="/item/58836" class="vehicle-card__image">
+                                                    <img src="/data/images/58836/preview/1.jpg" alt="BMW M5 4,4 AT" class="img-fluid" />
+                                                                            <span class="vehicle-card__flag">Soutěž</span>
+                                            </a>
+
+                    <div class="vehicle-card__body">
+                        <h3 class="vehicle-card__title">
+                            <a href="/item/58836">BMW M5 4,4 AT</a>
+                        </h3>
+
+                        <ul class="vehicle-card__params">
+                            <li>
+                                <img src="/images/new/icons/ic-actions-calendar.png" alt="" />
+                                2021                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-km.png" alt="" />
+                                130 310 km                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-fuel.png" alt="" />
+                                Benzín                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-engine.png" alt="" />
+                                Automatická                            </li>
+                        </ul>
+
+                        <div class="vehicle-card__price">
+                            <span class="vehicle-card__price-title">Orientační cena</span>
+                            <strong>1 200 000 Kč</strong>
+                        </div>
+                    </div>
+
+                    <div class="vehicle-card__footer">
+                        <div class="vehicle-card__auction">
+                            <i class="fas fa-hourglass-half mr-1"></i>Konec:
+                            <strong>26.11.2026 11:00</strong>
+                        </div>
+                        <a href="/item/58836" class="btn btn-outline-warning btn-sm">Detail vozidla</a>
+                    </div>
+                </div>
+            </div>
+                                                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+                <div class="vehicle-card h-100">
+                    <a href="/item/58830" class="vehicle-card__image">
+                                                    <img src="/data/images/58830/preview/1.jpg" alt="BMW R  1150 R" class="img-fluid" />
+                                                                            <span class="vehicle-card__flag">Soutěž</span>
+                                            </a>
+
+                    <div class="vehicle-card__body">
+                        <h3 class="vehicle-card__title">
+                            <a href="/item/58830">BMW R  1150 R</a>
+                        </h3>
+
+                        <ul class="vehicle-card__params">
+                            <li>
+                                <img src="/images/new/icons/ic-actions-calendar.png" alt="" />
+                                2005                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-km.png" alt="" />
+                                57 433 km                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-fuel.png" alt="" />
+                                Benzín                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-engine.png" alt="" />
+                                &ndash;                            </li>
+                        </ul>
+
+                        <div class="vehicle-card__price">
+                            <span class="vehicle-card__price-title">Orientační cena</span>
+                            <strong>39 000 Kč</strong>
+                        </div>
+                    </div>
+
+                    <div class="vehicle-card__footer">
+                        <div class="vehicle-card__auction">
+                            <i class="fas fa-hourglass-half mr-1"></i>Konec:
+                            <strong>26.11.2026 11:00</strong>
+                        </div>
+                        <a href="/item/58830" class="btn btn-outline-warning btn-sm">Detail vozidla</a>
+                    </div>
+                </div>
+            </div>
+                                                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+                <div class="vehicle-card h-100">
+                    <a href="/item/58852" class="vehicle-card__image">
+                                                    <img src="/data/images/58852/preview/1.jpg" alt="BMW Řada 5 540D XDRIVE TOURING" class="img-fluid" />
+                                                                            <span class="vehicle-card__flag">Soutěž</span>
+                                            </a>
+
+                    <div class="vehicle-card__body">
+                        <h3 class="vehicle-card__title">
+                            <a href="/item/58852">BMW Řada 5 540D XDRIVE TOURING</a>
+                        </h3>
+
+                        <ul class="vehicle-card__params">
+                            <li>
+                                <img src="/images/new/icons/ic-actions-calendar.png" alt="" />
+                                2017                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-km.png" alt="" />
+                                135 834 km                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-fuel.png" alt="" />
+                                Nafta                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-engine.png" alt="" />
+                                Automatická                            </li>
+                        </ul>
+
+                        <div class="vehicle-card__price">
+                            <span class="vehicle-card__price-title">Orientační cena</span>
+                            <strong>390 000 Kč</strong>
+                        </div>
+                    </div>
+
+                    <div class="vehicle-card__footer">
+                        <div class="vehicle-card__auction">
+                            <i class="fas fa-hourglass-half mr-1"></i>Konec:
+                            <strong>26.11.2026 11:00</strong>
+                        </div>
+                        <a href="/item/58852" class="btn btn-outline-warning btn-sm">Detail vozidla</a>
+                    </div>
+                </div>
+            </div>
+                                                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+                <div class="vehicle-card h-100">
+                    <a href="/item/58851" class="vehicle-card__image">
+                                                    <img src="/data/images/58851/preview/1.jpg" alt="BMW Řada 5 560 TOURING" class="img-fluid" />
+                                                                            <span class="vehicle-card__flag">Soutěž</span>
+                                            </a>
+
+                    <div class="vehicle-card__body">
+                        <h3 class="vehicle-card__title">
+                            <a href="/item/58851">BMW Řada 5 560 TOURING</a>
+                        </h3>
+
+                        <ul class="vehicle-card__params">
+                            <li>
+                                <img src="/images/new/icons/ic-actions-calendar.png" alt="" />
+                                2008                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-km.png" alt="" />
+                                224 449 km                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-fuel.png" alt="" />
+                                Benzín                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-engine.png" alt="" />
+                                Manuální                            </li>
+                        </ul>
+
+                        <div class="vehicle-card__price">
+                            <span class="vehicle-card__price-title">Orientační cena</span>
+                            <strong>69 000 Kč</strong>
+                        </div>
+                    </div>
+
+                    <div class="vehicle-card__footer">
+                        <div class="vehicle-card__auction">
+                            <i class="fas fa-hourglass-half mr-1"></i>Konec:
+                            <strong>26.11.2026 11:00</strong>
+                        </div>
+                        <a href="/item/58851" class="btn btn-outline-warning btn-sm">Detail vozidla</a>
+                    </div>
+                </div>
+            </div>
+                                                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+                <div class="vehicle-card h-100">
+                    <a href="/item/58871" class="vehicle-card__image">
+                                                    <img src="/data/images/58871/preview/1.jpg" alt="BMW Řada 7 730D XDRIVE" class="img-fluid" />
+                                                                            <span class="vehicle-card__flag">Soutěž</span>
+                                            </a>
+
+                    <div class="vehicle-card__body">
+                        <h3 class="vehicle-card__title">
+                            <a href="/item/58871">BMW Řada 7 730D XDRIVE</a>
+                        </h3>
+
+                        <ul class="vehicle-card__params">
+                            <li>
+                                <img src="/images/new/icons/ic-actions-calendar.png" alt="" />
+                                2018                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-km.png" alt="" />
+                                161 723 km                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-fuel.png" alt="" />
+                                Nafta                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-engine.png" alt="" />
+                                Automatická                            </li>
+                        </ul>
+
+                        <div class="vehicle-card__price">
+                            <span class="vehicle-card__price-title">Orientační cena</span>
+                            <strong>483 000 Kč</strong>
+                        </div>
+                    </div>
+
+                    <div class="vehicle-card__footer">
+                        <div class="vehicle-card__auction">
+                            <i class="fas fa-hourglass-half mr-1"></i>Konec:
+                            <strong>26.11.2026 11:00</strong>
+                        </div>
+                        <a href="/item/58871" class="btn btn-outline-warning btn-sm">Detail vozidla</a>
+                    </div>
+                </div>
+            </div>
+                                                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+                <div class="vehicle-card h-100">
+                    <a href="/item/58870" class="vehicle-card__image">
+                                                    <img src="/data/images/58870/preview/1.jpg" alt="BMW řada 4 435I XDRIVE 3,0" class="img-fluid" />
+                                                                            <span class="vehicle-card__flag">Soutěž</span>
+                                            </a>
+
+                    <div class="vehicle-card__body">
+                        <h3 class="vehicle-card__title">
+                            <a href="/item/58870">BMW řada 4 435I XDRIVE 3,0</a>
+                        </h3>
+
+                        <ul class="vehicle-card__params">
+                            <li>
+                                <img src="/images/new/icons/ic-actions-calendar.png" alt="" />
+                                2016                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-km.png" alt="" />
+                                147 447 km                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-fuel.png" alt="" />
+                                Benzín                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-engine.png" alt="" />
+                                Automatická                            </li>
+                        </ul>
+
+                        <div class="vehicle-card__price">
+                            <span class="vehicle-card__price-title">Orientační cena</span>
+                            <strong>405 000 Kč</strong>
+                        </div>
+                    </div>
+
+                    <div class="vehicle-card__footer">
+                        <div class="vehicle-card__auction">
+                            <i class="fas fa-hourglass-half mr-1"></i>Konec:
+                            <strong>26.11.2026 11:00</strong>
+                        </div>
+                        <a href="/item/58870" class="btn btn-outline-warning btn-sm">Detail vozidla</a>
+                    </div>
+                </div>
+            </div>
+                                                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+                <div class="vehicle-card h-100">
+                    <a href="/item/58866" class="vehicle-card__image">
+                                                    <img src="/data/images/58866/preview/1.jpg" alt="Citroën C4 GRAND PICASSO 1,6 HDI AT" class="img-fluid" />
+                                                                            <span class="vehicle-card__flag">Soutěž</span>
+                                            </a>
+
+                    <div class="vehicle-card__body">
+                        <h3 class="vehicle-card__title">
+                            <a href="/item/58866">Citroën C4 GRAND PICASSO 1,6 HDI AT</a>
+                        </h3>
+
+                        <ul class="vehicle-card__params">
+                            <li>
+                                <img src="/images/new/icons/ic-actions-calendar.png" alt="" />
+                                2010                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-km.png" alt="" />
+                                143 434 km                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-fuel.png" alt="" />
+                                Nafta                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-engine.png" alt="" />
+                                Manuální                            </li>
+                        </ul>
+
+                        <div class="vehicle-card__price">
+                            <span class="vehicle-card__price-title">Orientační cena</span>
+                            <strong>63 000 Kč</strong>
+                        </div>
+                    </div>
+
+                    <div class="vehicle-card__footer">
+                        <div class="vehicle-card__auction">
+                            <i class="fas fa-hourglass-half mr-1"></i>Konec:
+                            <strong>26.11.2026 11:00</strong>
+                        </div>
+                        <a href="/item/58866" class="btn btn-outline-warning btn-sm">Detail vozidla</a>
+                    </div>
+                </div>
+            </div>
+                                                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+                <div class="vehicle-card h-100">
+                    <a href="/item/58857" class="vehicle-card__image">
+                                                    <img src="/data/images/58857/preview/1.jpg" alt="Citroën C4 PICASSO 2,0 HDI AT" class="img-fluid" />
+                                                                            <span class="vehicle-card__flag">Soutěž</span>
+                                            </a>
+
+                    <div class="vehicle-card__body">
+                        <h3 class="vehicle-card__title">
+                            <a href="/item/58857">Citroën C4 PICASSO 2,0 HDI AT</a>
+                        </h3>
+
+                        <ul class="vehicle-card__params">
+                            <li>
+                                <img src="/images/new/icons/ic-actions-calendar.png" alt="" />
+                                2011                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-km.png" alt="" />
+                                231 287 km                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-fuel.png" alt="" />
+                                Nafta                            </li>
+                            <li>
+                                <img src="/images/new/icons/ic-actions-engine.png" alt="" />
+                                Automatická                            </li>
+                        </ul>
+
+                        <div class="vehicle-card__price">
+                            <span class="vehicle-card__price-title">Orientační cena</span>
+                            <strong>45 000 Kč</strong>
+                        </div>
+                    </div>
+
+                    <div class="vehicle-card__footer">
+                        <div class="vehicle-card__auction">
+                            <i class="fas fa-hourglass-half mr-1"></i>Konec:
+                            <strong>26.11.2026 11:00</strong>
+                        </div>
+                        <a href="/item/58857" class="btn btn-outline-warning btn-sm">Detail vozidla</a>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <nav class="vehicle-results__paginator">
+            <ul class="pagination justify-content-center">
+                                    <li class="page-item active">
+                        <a class="page-link" href="/vozidla?druh=osobni&amp;strana=1">1</a>
+                    </li>
+                                    <li class="page-item">
+                        <a class="page-link" href="/vozidla?druh=osobni&amp;strana=2">2</a>
+                    </li>
+                                    <li class="page-item">
+                        <a class="page-link" href="/vozidla?druh=osobni&amp;strana=3">3</a>
+                    </li>
+                                    <li class="page-item">
+                        <a class="page-link" href="/vozidla?druh=osobni&amp;strana=4">4</a>
+                    </li>
+                                    <li class="page-item">
+                        <a class="page-link" href="/vozidla?druh=osobni&amp;strana=5">5</a>
+                    </li>
+                            </ul>
+        </nav>
+            </div>
+    </div>
+</div>
+    <section id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 mb-3">
+                <img src="/images/new/logo.png" alt=" " class="img-fluid mb-3 logo" /> <br />
+                <div class="line"></div>
+                <p>
+                    On-line  platforma pro <br />
+
+                    ◦ nákup <br />
+                    ◦ prodej <br />
+                    ◦ prověření vozidel <br />
+                </p>
+            </div>
+            <div class="col-md-3 mb-3">
+                <strong>Informace</strong> <br />
+                <a href="/strana/proc-my">Proč my</a> <br />
+                <a href="/strana/jak-probiha-aukce">Jak to funguje</a> <br />
+                <a href="/strana/typy-aukci">Typy aukcí</a> <br />
+                <a href="/strana/faq">FAQ</a> <br />
+                <a href="/strana/prohlaseni">Prohlášení</a> <br />
+                <!--<a href="/strana/voppartner">VOP</a> <br />-->
+                <a href="/strana/kontakt">Kontakty</a> <br />
+            </div>
+            <div class="col-md-3 mb-3">
+                <strong>Sídlo společnosti</strong> <br />
+                <p>
+                    Car Aukce, spol. s.r.o. <br />
+                    Mostecká 273/21 <br />
+                    118 00 Praha 1, Malá Strana
+                </p>
+                <p>
+                    IČ: 26972697 <br />
+                    DIČ: CZ 26972697
+                </p>
+            </div>
+            <div class="col-md-3 mb-3">
+                <strong>Kontaktujte nás</strong> <br />
+                <img src="/images/new/ico_mail.svg" alt=" " class="mr-2" /> <a href="mailto:kontakt@example.cz">kontakt@example.cz</a> <br />
+                <img src="/images/new/ico_phone.svg" alt=" " class="mr-2" /> <a href="tel:+420700000000">+420 700 000 000</a> <br />
+                <img src="/images/new/ico_phone.svg" alt=" " class="mr-2" /> <a href="tel:+420700000000">+420 700 000 000</a> <br />
+                <div class="mt-3">
+                    <span class="social-icons">
+    <a href="https://www.facebook.com/caraukce" target="_blank" rel="noopener" title="Facebook"><img src="/images/new/ico_fb.png" alt="CarAukce na Facebooku" width="39" height="39"/></a>
+    <a href="https://www.instagram.com/caraukce" target="_blank" rel="noopener" title="Instagram"><img src="/images/new/ico_yt.png" alt="CarAukce na Instagramu" width="39" height="39"/></a>
+    <a href="https://www.youtube.com/@caraukcecz-l7c" target="_blank" rel="noopener" title="YouTube"><img src="/images/new/ico_ig.png" alt="CarAukce na YouTube" width="39" height="39"/></a>
+    <a href="https://www.tiktok.com/search?q=car%20aukce&amp;t=1789385267601" target="_blank" rel="noopener" title="TikTok" aria-label="CarAukce na TikToku">
+        <svg width="39" height="39" viewBox="0 0 39 39" aria-hidden="true"><rect width="39" height="39" rx="9" fill="#000"/><g transform="translate(7.5 7.5)"><path fill="#25F4EE" d="M14.9 2.2h2.7c.2 1.5.9 2.8 2 3.6.8.6 1.8 1 2.9 1.1v2.8c-1.9-.1-3.6-.7-5-1.8v6.4c0 1.4-.4 2.7-1.2 3.7-1 1.4-2.6 2.3-4.4 2.4h-.4c-1.8 0-3.4-.8-4.5-2.1a5.6 5.6 0 0 1 4-9.2c.4 0 .8 0 1.2.1v2.9a2.7 2.7 0 0 0-3.4 2.6 2.7 2.7 0 0 0 2.7 2.7c1.4 0 2.6-1.1 2.7-2.5V2.2Z" transform="translate(-.8 -.6)"/><path fill="#FE2C55" d="M14.9 2.2h2.7c.2 1.5.9 2.8 2 3.6.8.6 1.8 1 2.9 1.1v2.8c-1.9-.1-3.6-.7-5-1.8v6.4c0 1.4-.4 2.7-1.2 3.7-1 1.4-2.6 2.3-4.4 2.4h-.4c-1.8 0-3.4-.8-4.5-2.1a5.6 5.6 0 0 1 4-9.2c.4 0 .8 0 1.2.1v2.9a2.7 2.7 0 0 0-3.4 2.6 2.7 2.7 0 0 0 2.7 2.7c1.4 0 2.6-1.1 2.7-2.5V2.2Z" transform="translate(.8 .6)"/><path fill="#fff" d="M14.9 2.2h2.7c.2 1.5.9 2.8 2 3.6.8.6 1.8 1 2.9 1.1v2.8c-1.9-.1-3.6-.7-5-1.8v6.4c0 1.4-.4 2.7-1.2 3.7-1 1.4-2.6 2.3-4.4 2.4h-.4c-1.8 0-3.4-.8-4.5-2.1a5.6 5.6 0 0 1 4-9.2c.4 0 .8 0 1.2.1v2.9a2.7 2.7 0 0 0-3.4 2.6 2.7 2.7 0 0 0 2.7 2.7c1.4 0 2.6-1.1 2.7-2.5V2.2Z"/></g></svg>
+    </a>
+</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="footer_bottom">
+    <div class="container">
+                <a href="/doc/vop/VOP_drazba.pdf" target="_blank">Všeobecné obchodní podmínky - Dražba</a> <br class="d-sm-none" />
+        <a href="/doc/vop/VOP_soutez.pdf" target="_blank">Všeobecné obchodní podmínky - Soutěž</a> <br class="d-sm-none" />
+        <a href="/strana/oou">Ochrana osobních údajů</a> <br class="d-sm-none" />
+        © 2026 Caraukce.cz
+    </div>
+</section>
+
+<div class="container">
+    <div id="go_up">
+        <a href="#" id="go_up_btn">
+            <i class="fas fa-angle-double-up fa-3x"></i>
+                    </a>
+
+    </div>
+</div>
+    <div class="hidden-print">
+        <script type="text/javascript">
+        
+    
+        
+</script>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modal_general">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Podmínky aukce</h4>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modal_progress">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Podmínky průběhu</h4>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" tabindex="-1" role="dialog" id="modal_christmas">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            </div>
+            <div class="modal-body">
+                Vážení obchodní partneři, <br />
+                dovolte, abychom vám poděkovali za projevenou důvěru v uplynulém roce a současně se těšíme na další  spolupráci. <br />
+                Přejeme vám i všem vašim blízkým příjemné prožití vánočních svátků a do nového roku 2024 pevné zdraví, mnoho štěstí, osobních i pracovních úspěchů. <br /><br />
+
+                Rádi bychom Vás informovali o provozní době během letošních svátků : <br />
+                <strong>od 21.12.2023 - 01.01.2024      -   zavřeno</strong> <br />
+                od 02.01.2024                            -    normální provoz <br /><br />
+                Car Aukce
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" tabindex="-1" role="dialog" id="access_1">
+    <div class="modal-dialog Xmodal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Registrace do dražby</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                Zaujalo Vás toto vozidlo ? <br />
+                Chcete se účastnit dražby ? <br /><br />
+                
+                <a href="#" data-toggle="modal" data-target="#loginModal"><img src="/images/new/ico_login.svg" class="mr-2"> Přihlášení </a> <br />
+                <a href="/registrace/start"><img src="/images/new/ico_registrace.svg" class="mr-1"> Registrace</a>
+
+                                            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="access_2">
+    <div class="modal-dialog Xmodal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Registrace do dražby</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                Chcete se aktivně účastnit dražby ? <br /><br />
+                <form action="" method="post">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="1" id="access" required="">
+                        <label class="form-check-label" for="access">
+                            chci být zapsán na seznam účastníků
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="1" id="confirm" required="">
+                        <label class="form-check-label" for="confirm">
+                            čestně prohlašuji, že nejsem osoba vyloučena z účasti ve smyslu z.č. 250/2023 Sb. §12
+                            <span data-toggle="popover" data-html="true" title="Informace" data-placement="left" data-content="Osoby vyloučené z účasti ve veřejné dražbě <br />(1) Účastníkem veřejné dražby nesmí být <br /><br /><ol><li>dražebník provádějící veřejnou dražbu a v případě, že je dražebník právnickou osobou, osoba, která je členem jeho statutárního, kontrolního nebo jiného obdobného orgánu nebo je zástupcem právnické osoby v takovém orgánu,</li><li>osoba, která při veřejné dražbě zastupuje dražebníka, a v případě, že je tato osoba právnickou osobou, osoba, která je členem jejího statutárního, kontrolního nebo jiného obdobného orgánu nebo je zástupcem právnické osoby v takovém orgánu,</li><li>osoby blízké k osobám podle písmene a) nebo b),</li><li>osoby jednající s osobou podle písmene a) nebo b) ve shodě, osoby ovládané osobou podle písmene a) nebo b), osoby ovládající osobu podle písmene a) nebo b) a osoby, které jsou s osobou podle písmene a) nebo b) ovládané stejnou osobou,</li><li>navrhovatel,</li><li>vlastník předmětu veřejné dražby (dále jen „vlastník“),</li><li>osoba, která nesplňuje požadavky stanovené jiným právním předpisem nebo zakladatelským právním jednáním pro nabytí podílu v obchodní korporaci, který je omezeně převoditelný, je-li předmětem veřejné dražby tento podíl, a</li><li>osoba pověřená kontrolou veřejné dražby</li></ol>"><i class="fas fa-info-circle"></i> </span>
+                        </label>
+                    </div>
+                    <br />
+                    <div class="text-left">
+                        <input type="hidden" name="item_id" value="" />
+                        <button type="submit" name="doAccess" class="btn btn-primary">Odeslat</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->        <input type="hidden" name="id_user" value="0" id="id_user" />
+        <input type="hidden" name="id_auction" value="0" id="id_auction" />
+    </div>
+    <div id="google_translate_element"></div>
+    <script type="text/javascript" src="/js/gtranslate.js?2"></script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
+</body>
+</html>

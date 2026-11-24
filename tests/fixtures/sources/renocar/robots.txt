@@ -1,0 +1,19 @@
+Sitemap: https://www.renocar.cz/Sitemap.xml
+# interní vyhledávání
+Disallow: /vysledky-vyhledavani
+Disallow: /*?s=
+
+# řazení
+Disallow: /*sort=
+
+# filtrace vozů
+Disallow: /*price=
+Disallow: /*mileage=
+Disallow: /*reg_year=
+Disallow: /*features=
+Disallow: /*color=
+
+# tracking parametry
+Disallow: /*utm_
+Disallow: /*fbclid=
+Disallow: /*gclid=

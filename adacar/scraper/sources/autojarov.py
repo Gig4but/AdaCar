@@ -14,7 +14,7 @@ import re
 
 from selectolax.lexbor import LexborHTMLParser, LexborNode
 
-from adacar.core import ParsedCar, ParsedLocation, ScrapeQuery
+from adacar.core import ParsedCar, ParsedLocation, ScrapeQuery, SourceKind
 from adacar.geo.places import PlaceResolver
 from adacar.normalize import cars
 from adacar.normalize.text import clean_spaces
@@ -75,6 +75,7 @@ def model_name(text: str | None) -> str | None:
 class AutoJarov(CrawlSource):
     id = SOURCE_ID
     label = "Auto Jarov"
+    kind: SourceKind = "dealer"
     nationwide = True
     max_pages = 100
 

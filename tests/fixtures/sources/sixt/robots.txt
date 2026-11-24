@@ -1,0 +1,7 @@
+User-agent: *
+
+Disallow: /proadmin/
+Disallow: /admin/
+
+
+Sitemap: https://www.sixt.cz/sitemap.xml

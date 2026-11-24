@@ -62,6 +62,8 @@ Sitemap: https://example.cz/sitemap.xml
     assert rules.allowed("https://example.cz/a/b.pdf?x=1")  # "$" anchors the end
     assert rules.crawl_delay == 4 and rules.sitemaps == ["https://example.cz/sitemap.xml"]
     assert not RobotsRules.parse(text, "googlebot").allowed("https://example.cz/jobs")
+    bom = RobotsRules.parse("﻿User-agent: *\nDisallow: /*text=\n", "adacar")
+    assert not bom.allowed("https://example.cz/koupit?text=golf")
 
 
 class Clock:

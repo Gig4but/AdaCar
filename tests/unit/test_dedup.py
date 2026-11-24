@@ -6,7 +6,7 @@ from sqlalchemy import select
 from adacar.core import ParsedCar, ParsedLocation
 from adacar.db.models import Car, CarAd, table
 from adacar.db.session import make_engine, make_sessionmaker, migrate
-from adacar.scraper.dedup import DedupIndex, model_key, valid_vin
+from adacar.scraper.dedup import DedupIndex, model_key, models_agree, valid_vin
 from adacar.scraper.store import _CAR_FIELDS, _GAP_FIELDS, _PRICE_FIELDS, CarStore
 
 LONG = (
@@ -68,6 +68,9 @@ def test_normalized_keys():
     assert model_key("Octavia Combi") == model_key("octavia") == "octavia"
     assert model_key("Mégane Grandtour") == "megane"
     assert model_key(None) == ""
+    assert model_key("Řada 3 Touring") == "rada 3" != model_key("Řada 5")
+    assert models_agree("rada", "rada 3") and not models_agree("rada 3", "rada 5")
+    assert not models_agree("golf", "golfsportsvan") and models_agree("", "golf")
 
 
 def test_the_same_vin_on_another_source_is_the_same_car():

@@ -1,0 +1,309 @@
+{
+ "0": {
+  "hash": "abpVg",
+  "item": {
+   "title": "VOLKSWAGEN TIGUAN 2.0 TDI 176KW DSG Highline 4Motion, PLATNÁ STK, možnost ODEČTU DPH",
+   "category": {
+    "full_path": "/Movitosti/Auto-moto",
+    "id": 33,
+    "title": "Auto-moto",
+    "path": "Movitosti-25,Auto-moto-33,",
+    "type": "movable",
+    "slug": "auto-moto"
+   },
+   "description": "<p><strong><u>VOLKSWAGEN TIGUAN 2.0 TDI 176KW DSG Highline - 4Motion</u></strong></p><p><strong>RZ: 2AB 1001</strong></p><p><strong>VIN: WVGZZZ5NZJM149036</strong></p><p>Barva: ČERNÁ</p><p>Typ Motoru: CUA</p><p>Datum první evidence: 28.8.2018</p><p>Datum první evidence v ČR: 17.1.2019</p><p>Stav KM: 255.080</p><p>TK+EM: do: 2.7.2028 - <strong><u>platná</u></strong></p><p>Emisní norma: EURO 6 – bez eko poplatku</p><p>K dispozici: <strong>ORV + 1 klíč</strong></p><p>Popis, výbava, stav: viz předávací protokol</p><p>ZEMĚ PŮVODU: ŠVÉDSKO</p>",
+   "location_district": {
+    "district_code": 40711,
+    "district_name": "Brno-město",
+    "county": {
+     "county_code": 3115,
+     "county_name": "Jihomoravský kraj",
+     "slug": "jihomoravsky-kraj"
+    },
+    "city": {
+     "city_code": 582786,
+     "city_name": "Brno"
+    },
+    "coords": {
+     "points": []
+    },
+    "slug": "okres-brno-mesto"
+   }
+  },
+  "link": "https://www.portaldrazeb.cz/drazba/160ex4917-26-67-abpvg",
+  "slug": "160ex4917-26-67-abpvg",
+  "start_at": "2026-11-24T09:30:00.000+00:00",
+  "end_at": "2026-11-24T10:27:08.000+00:00",
+  "estimated_price": 393000,
+  "item_price": 131000,
+  "minimal_bid": 500,
+  "caution_deposit": null,
+  "electronic": true,
+  "online": true,
+  "images": {
+   "Gn0k8": {
+    "pathname": "/auctions/abpVg/ac1b3ef7934283361dd0230a7f896c36.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 229993,
+    "original_name": "obrázek 1.jpg",
+    "description": null,
+    "hash": "Gn0k8",
+    "width": 1600,
+    "height": 900,
+    "priority": 0
+   },
+   "0JpMW": {
+    "pathname": "/auctions/abpVg/bd79a5ea911a02c9095ac6254d6375f8.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 229779,
+    "original_name": "obrázek 2.jpg",
+    "description": null,
+    "hash": "0JpMW",
+    "width": 1600,
+    "height": 900,
+    "priority": 1
+   },
+   "eDNLz": {
+    "pathname": "/auctions/abpVg/1586f22923aa5b1ee131fb27d6b0dea0.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 241746,
+    "original_name": "obrázek 3.jpg",
+    "description": null,
+    "hash": "eDNLz",
+    "width": 1600,
+    "height": 900,
+    "priority": 2
+   },
+   "zxM76": {
+    "pathname": "/auctions/abpVg/65f5d594dd97b35d0bb75092fe2190da.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 228668,
+    "original_name": "obrázek 4.jpg",
+    "description": null,
+    "hash": "zxM76",
+    "width": 1600,
+    "height": 900,
+    "priority": 3
+   },
+   "myN2o": {
+    "pathname": "/auctions/abpVg/1127cbad322f76add705e2422c9dea40.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 154534,
+    "original_name": "obrázek 5.jpg",
+    "description": null,
+    "hash": "myN2o",
+    "width": 1600,
+    "height": 900,
+    "priority": 4
+   },
+   "B1ejP": {
+    "pathname": "/auctions/abpVg/a4db5b7963f8aa510d84675a3e48207b.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 182559,
+    "original_name": "obrázek 6.jpg",
+    "description": null,
+    "hash": "B1ejP",
+    "width": 1600,
+    "height": 900,
+    "priority": 5
+   },
+   "xloZk": {
+    "pathname": "/auctions/abpVg/08ddbc8339f80571180dc2f2a16ec0f4.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 89824,
+    "original_name": "obrázek 7.jpg",
+    "description": null,
+    "hash": "xloZk",
+    "width": 1600,
+    "height": 900,
+    "priority": 6
+   },
+   "5Qe6j": {
+    "pathname": "/auctions/abpVg/17b80c3246ef736bea0fd9f5b9cb142d.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 92750,
+    "original_name": "obrázek 8.jpg",
+    "description": null,
+    "hash": "5Qe6j",
+    "width": 1600,
+    "height": 900,
+    "priority": 7
+   },
+   "oyYG6": {
+    "pathname": "/auctions/abpVg/01ff864276bc28063cd208831aaa60ea.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 199490,
+    "original_name": "obrázek 9.jpg",
+    "description": null,
+    "hash": "oyYG6",
+    "width": 1600,
+    "height": 900,
+    "priority": 8
+   },
+   "M60nv": {
+    "pathname": "/auctions/abpVg/f989b7fb7d11015eb66c61c76e837d53.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 133093,
+    "original_name": "obrázek 10.jpg",
+    "description": null,
+    "hash": "M60nv",
+    "width": 1600,
+    "height": 900,
+    "priority": 9
+   },
+   "32LbP": {
+    "pathname": "/auctions/abpVg/03784bfaeaadc953ad79b4e73c2a2aea.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 89778,
+    "original_name": "obrázek 11.jpg",
+    "description": null,
+    "hash": "32LbP",
+    "width": 1600,
+    "height": 900,
+    "priority": 10
+   },
+   "jWZGL": {
+    "pathname": "/auctions/abpVg/cfbc40cb9100a6f7a0fdecd6f52181c4.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 113558,
+    "original_name": "obrázek 12.jpg",
+    "description": null,
+    "hash": "jWZGL",
+    "width": 1600,
+    "height": 900,
+    "priority": 11
+   },
+   "pyzGa": {
+    "pathname": "/auctions/abpVg/962cb26479d6e7ce9e2ac37065c50448.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 84396,
+    "original_name": "obrázek 13.jpg",
+    "description": null,
+    "hash": "pyzGa",
+    "width": 1600,
+    "height": 900,
+    "priority": 12
+   },
+   "7Xe6M": {
+    "pathname": "/auctions/abpVg/7d3825671e5a30b5d49ce39198c9c40c.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 157419,
+    "original_name": "obrázek 14.jpg",
+    "description": null,
+    "hash": "7Xe6M",
+    "width": 1600,
+    "height": 900,
+    "priority": 13
+   },
+   "16xzn": {
+    "pathname": "/auctions/abpVg/52fe055a84a5a358769bd485873d4d5e.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 103094,
+    "original_name": "obrázek 15.jpg",
+    "description": null,
+    "hash": "16xzn",
+    "width": 1600,
+    "height": 900,
+    "priority": 14
+   },
+   "Nx0vR": {
+    "pathname": "/auctions/abpVg/c062386da3393ab0192c591543dfe038.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 85810,
+    "original_name": "obrázek 16.jpg",
+    "description": null,
+    "hash": "Nx0vR",
+    "width": 900,
+    "height": 1600,
+    "priority": 15
+   }
+  },
+  "status": "bidding",
+  "type": "execution",
+  "location_district": null,
+  "auctioneer_office": {
+   "title": "Svobodová Eva JUDr.",
+   "ex_number": "160"
+  }
+ },
+ "1": {
+  "hash": "dbO4J",
+  "item": {
+   "title": "Osobní automobil VOLKSWAGEN TIGUAN",
+   "category": {
+    "full_path": "/Movitosti/Auto-moto",
+    "id": 33,
+    "title": "Auto-moto",
+    "path": "Movitosti-25,Auto-moto-33,",
+    "type": "movable",
+    "slug": "auto-moto"
+   },
+   "description": "<p>Druh movité věci: AUTOMOBIL</p><p>Tovární značka: VOLKSWAGEN</p><p>Tovární typ: TIGUAN</p><p>SPZ: 1AB1000</p><p>VIN: WVGZZZ5NZCW577918</p><p>Další informace:</p><p>rv. 2012</p><p>stav km nezjištěn</p><p>klíče ani doklady nejsou k dispozici</p>",
+   "location_district": null
+  },
+  "link": "https://www.portaldrazeb.cz/drazba/219ex05958-26-055-dbo4j",
+  "slug": "219ex05958-26-055-dbo4j",
+  "start_at": "2026-11-24T09:30:00.000+00:00",
+  "end_at": "2026-11-24T10:25:34.000+00:00",
+  "estimated_price": 120000,
+  "item_price": 40000,
+  "minimal_bid": 1000,
+  "caution_deposit": null,
+  "electronic": true,
+  "online": true,
+  "images": {
+   "328e4": {
+    "pathname": "/auctions/dbO4J/817539067389d3ff7dbfe8164750577c.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 490064,
+    "original_name": "obrázek 1.jpg",
+    "description": null,
+    "hash": "328e4",
+    "width": 2048,
+    "height": 1536,
+    "priority": 0
+   },
+   "jW229": {
+    "pathname": "/auctions/dbO4J/13d34978cfe0352ae19c6d545a3a7c8c.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 750543,
+    "original_name": "obrázek 2.jpg",
+    "description": null,
+    "hash": "jW229",
+    "width": 1536,
+    "height": 2048,
+    "priority": 1
+   },
+   "pyaag": {
+    "pathname": "/auctions/dbO4J/e7f356620aecad4c6fc9a74570d12441.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 643663,
+    "original_name": "obrázek 3.jpg",
+    "description": null,
+    "hash": "pyaag",
+    "width": 1536,
+    "height": 2048,
+    "priority": 2
+   },
+   "7X889": {
+    "pathname": "/auctions/dbO4J/a1782684fe44d9ab67211a92013d2fb8.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 717680,
+    "original_name": "obrázek 4.jpg",
+    "description": null,
+    "hash": "7X889",
+    "width": 1536,
+    "height": 2048,
+    "priority": 3
+   }
+  },
+  "status": "bidding",
+  "type": "execution",
+  "location_district": null,
+  "auctioneer_office": {
+   "title": "Novák Jan Mgr.",
+   "ex_number": "219"
+  }
+ },
+ "@count": 2
+}

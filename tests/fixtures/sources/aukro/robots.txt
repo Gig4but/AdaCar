@@ -1,0 +1,42 @@
+# Sitemaps
+Sitemap: https://cdn.aukro.cz/sitemaps/cs-cz/sitemap.xml
+Sitemap: https://cdn.aukro.cz/sitemaps/cs-cz/sitemapimages.xml
+
+
+# Other bots
+User-Agent: *
+
+Disallow: /registrace*
+Disallow: /overeni-uctu
+Disallow: /zapomenute-heslo*
+Disallow: /reset-hesla
+Disallow: /kosik$
+Disallow: /kosik?
+Disallow: /kosik/
+Disallow: /rozhodnuti-vraceni-provize
+Disallow: /blaznive-ceny-interni
+Disallow: /nabidky-s-apv
+Disallow: /zhave-aukce
+Allow: /zhave-aukce$
+Disallow: /nove-nabidky
+Allow: /nove-nabidky$
+Disallow: /premiove-nabidky
+Allow: /premiove-nabidky$
+Disallow: /specialni-od-1kc
+Allow: /specialni-od-1kc$
+Disallow: /zaplatit*
+Disallow: /nahlasit-poruseni-pravidel*
+Disallow: /zacit-konverzaci/
+Disallow: /jednoduche-vystaveni
+Disallow: /vystavit*
+Disallow: /zavreno
+
+
+# Anthropic's bot
+User-agent: ClaudeBot
+Disallow: /
+
+
+# AdSense bot - https://searchengineland.com/a-deeper-look-at-robotstxt-17573
+User-agent: Mediapartners-Google
+Disallow:

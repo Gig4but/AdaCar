@@ -1,0 +1,12 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /apcz
+Disallow: */?*
+Disallow: *_*_*_*_*_*
+Disallow: *vozy/modely_*
+Disallow: *nove/modely_*
+Disallow: *ojete/modely_*
+Disallow: *vozidel/modely_*
+
+
+Sitemap: https://www.autopalace.cz/sitemap.xml

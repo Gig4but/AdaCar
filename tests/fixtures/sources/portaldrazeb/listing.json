@@ -1,0 +1,1837 @@
+{
+ "0": {
+  "hash": "lDO9b",
+  "item": {
+   "title": "Chevrolet 2,4 HHR",
+   "category": {
+    "full_path": "/Movitosti",
+    "id": 25,
+    "title": "Movitosti",
+    "path": "Movitosti-25,",
+    "type": "movable",
+    "slug": "movitosti"
+   },
+   "description": "<p>Osobní automobil Chevrolet 2,4 HHR 2LT, RZ: 1AB1000, rok výroby 2009, VIN: 3GNDA53PX8S594368, barva černá, objem motoru 2384, výkon 125 kW, stav tachometru 125504 km, převodovka manuální</p>",
+   "location_district": null
+  },
+  "link": "https://www.portaldrazeb.cz/drazba/152dd5-26-11-ldo9b",
+  "slug": "152dd5-26-11-ldo9b",
+  "start_at": "2026-11-24T13:00:00.000+00:00",
+  "end_at": null,
+  "estimated_price": 47000,
+  "item_price": 15667,
+  "minimal_bid": null,
+  "caution_deposit": null,
+  "electronic": true,
+  "online": false,
+  "images": {
+   "B1W7Y": {
+    "pathname": "/auctions/lDO9b/9832b674bf796078a967cf0e30db6728.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 551142,
+    "original_name": "obrázek 1.jpg",
+    "description": null,
+    "hash": "B1W7Y",
+    "width": 1015,
+    "height": 761,
+    "priority": 0
+   },
+   "xlL94": {
+    "pathname": "/auctions/lDO9b/aaf496327c3031eb0dd1c2386f774544.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 535512,
+    "original_name": "obrázek 2.jpg",
+    "description": null,
+    "hash": "xlL94",
+    "width": 1018,
+    "height": 763,
+    "priority": 1
+   },
+   "5Qg20": {
+    "pathname": "/auctions/lDO9b/05aafd678e5111fc9460f668bf0cd77f.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 542299,
+    "original_name": "obrázek 3.jpg",
+    "description": null,
+    "hash": "5Qg20",
+    "width": 1093,
+    "height": 820,
+    "priority": 2
+   },
+   "oyMwM": {
+    "pathname": "/auctions/lDO9b/c5f4a912d36f3b2d64fe2a9769ad4d85.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 575055,
+    "original_name": "obrázek 4.jpg",
+    "description": null,
+    "hash": "oyMwM",
+    "width": 1029,
+    "height": 771,
+    "priority": 3
+   },
+   "M65OA": {
+    "pathname": "/auctions/lDO9b/a487add5633a18efb3144f4a75597ac5.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 440465,
+    "original_name": "obrázek 5.jpg",
+    "description": null,
+    "hash": "M65OA",
+    "width": 1205,
+    "height": 904,
+    "priority": 4
+   }
+  },
+  "status": "upcoming",
+  "type": "execution",
+  "location_district": null,
+  "auctioneer_office": {
+   "title": "Novák Jan Mgr.",
+   "ex_number": "152"
+  }
+ },
+ "1": {
+  "hash": "Yk5JQ",
+  "item": {
+   "title": "Škoda Octavia 2.0TDi 110kW DSG Style, tažné",
+   "category": {
+    "full_path": "/Movitosti/Auto-moto",
+    "id": 33,
+    "title": "Auto-moto",
+    "path": "Movitosti-25,Auto-moto-33,",
+    "type": "movable",
+    "slug": "auto-moto"
+   },
+   "description": "<p>Vozidlo tovární značka                        Škoda Octavia</p><p>Vozidlo VIN                                          TMBAJ8NX5PY127263</p><p>Vozidlo první registrace                        08/2023</p><p>Vozidlo stav tachometru                        65.000 km</p><p>Vozidlo výkon                                         110 kW</p><p>Vozidlo objem                                         1.968 ccm</p><p>Vozidlo barva                                           černá metal.</p><p>Vozidlo palivo                                           NM</p><p> </p><p>Vozidlo popis výbava               Černá Magic s perleťovým efektem, Kožený paket, orig sklápěcí tažné zařízení.</p>",
+   "location_district": null
+  },
+  "link": "https://www.portaldrazeb.cz/drazba/091dd461-00-002-yk5jq",
+  "slug": "091dd461-00-002-yk5jq",
+  "start_at": "2026-11-25T09:00:00.000+00:00",
+  "end_at": null,
+  "estimated_price": 480000,
+  "item_price": 160000,
+  "minimal_bid": null,
+  "caution_deposit": null,
+  "electronic": true,
+  "online": false,
+  "images": {
+   "M65Ze": {
+    "pathname": "/auctions/Yk5JQ/4f51fb16c4962b78cc24dcb8c74785d3.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 391292,
+    "original_name": "obrázek 1.jpg",
+    "description": null,
+    "hash": "M65Ze",
+    "width": 1371,
+    "height": 1028,
+    "priority": 0
+   },
+   "328N8": {
+    "pathname": "/auctions/Yk5JQ/b32bb82ad3f71628b75d9f29ef69aac6.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 434862,
+    "original_name": "obrázek 2.jpg",
+    "description": null,
+    "hash": "328N8",
+    "width": 1371,
+    "height": 1028,
+    "priority": 1
+   },
+   "jW2eM": {
+    "pathname": "/auctions/Yk5JQ/9978ecbf6c06365c1a3a4e7cb26e4f15.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 417414,
+    "original_name": "obrázek 3.jpg",
+    "description": null,
+    "hash": "jW2eM",
+    "width": 1371,
+    "height": 1028,
+    "priority": 2
+   },
+   "pyaeb": {
+    "pathname": "/auctions/Yk5JQ/35f4c77c787212a6bc909d4636d655ee.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 443044,
+    "original_name": "obrázek 4.jpg",
+    "description": null,
+    "hash": "pyaeb",
+    "width": 1371,
+    "height": 1028,
+    "priority": 3
+   },
+   "5Qgdr": {
+    "pathname": "/auctions/Yk5JQ/db956829edf6056b6455fdcea13f0c55.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 473228,
+    "original_name": "obrázek 5.jpg",
+    "description": null,
+    "hash": "5Qgdr",
+    "width": 1371,
+    "height": 1028,
+    "priority": 4
+   },
+   "oyMeG": {
+    "pathname": "/auctions/Yk5JQ/386581fbc2b3bb646e1ce115d9159d4f.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 313978,
+    "original_name": "obrázek 6.jpg",
+    "description": null,
+    "hash": "oyMeG",
+    "width": 1210,
+    "height": 907,
+    "priority": 5
+   },
+   "M65Zg": {
+    "pathname": "/auctions/Yk5JQ/354c9b72c52c8a2107a044d524270637.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 565596,
+    "original_name": "obrázek 7.jpg",
+    "description": null,
+    "hash": "M65Zg",
+    "width": 1371,
+    "height": 1028,
+    "priority": 6
+   },
+   "328NN": {
+    "pathname": "/auctions/Yk5JQ/c91c026f8d5499d8f11c376ff287307c.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 488693,
+    "original_name": "obrázek 8.jpg",
+    "description": null,
+    "hash": "328NN",
+    "width": 1371,
+    "height": 1028,
+    "priority": 7
+   },
+   "jW2eP": {
+    "pathname": "/auctions/Yk5JQ/f61101a7cadac9f70eeffe23a930be27.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 361660,
+    "original_name": "obrázek 9.jpg",
+    "description": null,
+    "hash": "jW2eP",
+    "width": 1371,
+    "height": 1028,
+    "priority": 8
+   },
+   "pyaem": {
+    "pathname": "/auctions/Yk5JQ/4f9bf2cae1dfeddff72f6b177662a6fa.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 578966,
+    "original_name": "obrázek 10.jpg",
+    "description": null,
+    "hash": "pyaem",
+    "width": 1371,
+    "height": 1028,
+    "priority": 9
+   },
+   "7X8vd": {
+    "pathname": "/auctions/Yk5JQ/ab8b126b8639f7280147f8050753e14a.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 550091,
+    "original_name": "obrázek 11.jpg",
+    "description": null,
+    "hash": "7X8vd",
+    "width": 1371,
+    "height": 1028,
+    "priority": 10
+   },
+   "16l1G": {
+    "pathname": "/auctions/Yk5JQ/fd6214a02324482d3be9851d0e88e5af.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 558106,
+    "original_name": "obrázek 12.jpg",
+    "description": null,
+    "hash": "16l1G",
+    "width": 1371,
+    "height": 1028,
+    "priority": 11
+   },
+   "NxQln": {
+    "pathname": "/auctions/Yk5JQ/c0755a359712afd4c9560a9c8acaf0c3.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 468803,
+    "original_name": "obrázek 13.jpg",
+    "description": null,
+    "hash": "NxQln",
+    "width": 1210,
+    "height": 907,
+    "priority": 12
+   },
+   "dvleb": {
+    "pathname": "/auctions/Yk5JQ/74e2806804d4dfa70e8896803f09e13a.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 477498,
+    "original_name": "obrázek 14.jpg",
+    "description": null,
+    "hash": "dvleb",
+    "width": 1210,
+    "height": 907,
+    "priority": 13
+   }
+  },
+  "status": "upcoming",
+  "type": "execution",
+  "location_district": null,
+  "auctioneer_office": {
+   "title": "Svobodová Eva JUDr.",
+   "ex_number": "091"
+  }
+ },
+ "2": {
+  "hash": "AVmZW",
+  "item": {
+   "title": "Volvo XC90 B6 Awd Inscription, ČR, 22´ALU",
+   "category": {
+    "full_path": "/Movitosti/Auto-moto",
+    "id": 33,
+    "title": "Auto-moto",
+    "path": "Movitosti-25,Auto-moto-33,",
+    "type": "movable",
+    "slug": "auto-moto"
+   },
+   "description": "<p>Vozidlo tovární značka                         Volvo XC90</p><p>Vozidlo VIN                                           YV1LC06UCN1856279</p><p>Vozidlo první registrace                         04/2022</p><p>Vozidlo stav tachometru                        147.000 km</p><p>Vozidlo výkon                                         220 kW</p><p>Vozidlo objem                                         1.969 ccm</p><p>Vozidlo barva                                           černá</p><p>Vozidlo palivo                                           BA</p><p> </p><p>Vozidlo popis výbava              Pravidelný servis Volvo, posl. 10/26 ve 144tkm.  Výbava Inscription, ventilovaná sedadla, orig tažné,Litá kola 22\" kola Diamond Cut, jemná kůže Nappa Agne,barva  Savile Grey Pearl.</p>",
+   "location_district": null
+  },
+  "link": "https://www.portaldrazeb.cz/drazba/091dd462-00-002-avmzw",
+  "slug": "091dd462-00-002-avmzw",
+  "start_at": "2026-11-25T09:00:00.000+00:00",
+  "end_at": null,
+  "estimated_price": 870000,
+  "item_price": 290000,
+  "minimal_bid": null,
+  "caution_deposit": null,
+  "electronic": true,
+  "online": false,
+  "images": {
+   "wy7Xw": {
+    "pathname": "/auctions/AVmZW/7c1f54d0317d93d8737c5e943ecc791c.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 427334,
+    "original_name": "obrázek 1.jpg",
+    "description": null,
+    "hash": "wy7Xw",
+    "width": 1311,
+    "height": 983,
+    "priority": 0
+   },
+   "JwZwO": {
+    "pathname": "/auctions/AVmZW/2f11c0be3f2ca703f61d6d3e35896f6a.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 434513,
+    "original_name": "obrázek 2.jpg",
+    "description": null,
+    "hash": "JwZwO",
+    "width": 1311,
+    "height": 983,
+    "priority": 1
+   },
+   "Wrprv": {
+    "pathname": "/auctions/AVmZW/1d078955377cca5b68553d755b58db5b.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 417570,
+    "original_name": "obrázek 3.jpg",
+    "description": null,
+    "hash": "Wrprv",
+    "width": 1311,
+    "height": 983,
+    "priority": 2
+   },
+   "yylyk": {
+    "pathname": "/auctions/AVmZW/a6e0b93054ee13f467a8f8dd5af5ab70.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 481522,
+    "original_name": "obrázek 4.jpg",
+    "description": null,
+    "hash": "yylyk",
+    "width": 1311,
+    "height": 983,
+    "priority": 3
+   },
+   "GnWnY": {
+    "pathname": "/auctions/AVmZW/4d647045bb654af327e459bda5aaab73.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 423876,
+    "original_name": "obrázek 5.jpg",
+    "description": null,
+    "hash": "GnWnY",
+    "width": 1311,
+    "height": 983,
+    "priority": 4
+   },
+   "0J8Jb": {
+    "pathname": "/auctions/AVmZW/4b7133c3fd54ee244f15f49460a216d5.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 389392,
+    "original_name": "obrázek 6.jpg",
+    "description": null,
+    "hash": "0J8Jb",
+    "width": 1311,
+    "height": 983,
+    "priority": 5
+   },
+   "eDxDm": {
+    "pathname": "/auctions/AVmZW/3dadbe90cd768badd0ac80964dd7f9e7.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 282818,
+    "original_name": "obrázek 7.jpg",
+    "description": null,
+    "hash": "eDxDm",
+    "width": 1311,
+    "height": 983,
+    "priority": 6
+   },
+   "zxlxz": {
+    "pathname": "/auctions/AVmZW/a5d325f155316cb2d569a14f9c851141.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 377670,
+    "original_name": "obrázek 8.jpg",
+    "description": null,
+    "hash": "zxlxz",
+    "width": 1210,
+    "height": 907,
+    "priority": 7
+   },
+   "myxyx": {
+    "pathname": "/auctions/AVmZW/1d601bbb790c6ae9d13af22e4c89dd8d.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 342916,
+    "original_name": "obrázek 9.jpg",
+    "description": null,
+    "hash": "myxyx",
+    "width": 1311,
+    "height": 983,
+    "priority": 8
+   },
+   "B1W14": {
+    "pathname": "/auctions/AVmZW/c58e63ebce1f561ba634135a7730febc.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 401646,
+    "original_name": "obrázek 10.jpg",
+    "description": null,
+    "hash": "B1W14",
+    "width": 1311,
+    "height": 983,
+    "priority": 9
+   },
+   "xlLlX": {
+    "pathname": "/auctions/AVmZW/aa880016db4c9433d37a7037a110f4ae.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 343519,
+    "original_name": "obrázek 11.jpg",
+    "description": null,
+    "hash": "xlLlX",
+    "width": 1311,
+    "height": 983,
+    "priority": 10
+   },
+   "5QgQr": {
+    "pathname": "/auctions/AVmZW/b8db5e2177fef199f7df28e6bd70948e.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 430090,
+    "original_name": "obrázek 12.jpg",
+    "description": null,
+    "hash": "5QgQr",
+    "width": 1210,
+    "height": 907,
+    "priority": 11
+   },
+   "oyMyG": {
+    "pathname": "/auctions/AVmZW/0abbf43feeec9c8cef0e36a3b775c53f.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 462381,
+    "original_name": "obrázek 13.jpg",
+    "description": null,
+    "hash": "oyMyG",
+    "width": 1210,
+    "height": 907,
+    "priority": 12
+   }
+  },
+  "status": "upcoming",
+  "type": "execution",
+  "location_district": null,
+  "auctioneer_office": {
+   "title": "Svobodová Eva JUDr.",
+   "ex_number": "091"
+  }
+ },
+ "3": {
+  "hash": "ngOq4",
+  "item": {
+   "title": "Škoda RAPID",
+   "category": {
+    "full_path": "/Movitosti/Auto-moto",
+    "id": 33,
+    "title": "Auto-moto",
+    "path": "Movitosti-25,Auto-moto-33,",
+    "type": "movable",
+    "slug": "auto-moto"
+   },
+   "description": "<p>rok výroby 2018</p>",
+   "location_district": null
+  },
+  "link": "https://www.portaldrazeb.cz/drazba/131ex4250-26-ngoq4",
+  "slug": "131ex4250-26-ngoq4",
+  "start_at": "2026-11-26T08:00:00.000+00:00",
+  "end_at": null,
+  "estimated_price": 240000,
+  "item_price": 80000,
+  "minimal_bid": null,
+  "caution_deposit": null,
+  "electronic": false,
+  "online": false,
+  "images": {
+   "mylYx": {
+    "pathname": "/auctions/ngOq4/ecbd3c68ea72729e9ec0e8115c6764cb.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 829591,
+    "original_name": "obrázek 1.jpg",
+    "description": null,
+    "hash": "mylYx",
+    "width": 2048,
+    "height": 1536,
+    "priority": 0
+   },
+   "B1gO4": {
+    "pathname": "/auctions/ngOq4/3a20e7d612a2dd95cf99a64096addc30.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 942781,
+    "original_name": "obrázek 2.jpg",
+    "description": null,
+    "hash": "B1gO4",
+    "width": 2048,
+    "height": 1536,
+    "priority": 1
+   },
+   "xlY4X": {
+    "pathname": "/auctions/ngOq4/4224d3b8ebd68c046ed8a609d57e1823.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 1032989,
+    "original_name": "obrázek 3.jpg",
+    "description": null,
+    "hash": "xlY4X",
+    "width": 2048,
+    "height": 1536,
+    "priority": 2
+   }
+  },
+  "status": "upcoming",
+  "type": "execution",
+  "location_district": null,
+  "auctioneer_office": {
+   "title": "Dvořák Petr Mgr.",
+   "ex_number": "131"
+  }
+ },
+ "4": {
+  "hash": "D5ZDJ",
+  "item": {
+   "title": "ŠKODA SUPERB",
+   "category": {
+    "full_path": "/Movitosti/Auto-moto",
+    "id": 33,
+    "title": "Auto-moto",
+    "path": "Movitosti-25,Auto-moto-33,",
+    "type": "movable",
+    "slug": "auto-moto"
+   },
+   "description": "<p>Předmětem dražby je motorové vozidlo značky ŠKODA SUPERB, vyrobené v roce 2011. Opotřebování odpovídá stáří vozidla. K dispozici je klíč od vozidla. Bližší informace jsou k nalezení v protokolu o stavu vozidla.</p><p></p><p>Vydražitel je povinen ve smyslu § 329 odst. 3, 5 a 6 o.s.ř. nejvyšší podání či doplatek na nejvyšší podání ihned zaplatit v hotovosti, pokud nejvyšší podání nepřesahuje částku stanovenou jako nejvyšší možnou pro platbu v hotovosti podle zvláštního právního předpisu. Neučiní-li tak, draží se věc znovu bez jeho účasti. Nejvyšší podání či doplatek na nejvyšší podání přesahující tento limit musí vydražitel zaplatit bezhotovostní platbou do sedmi dnů od udělení příklepu, jinak soudní exekutor nařídí opětovnou dražbu.</p>",
+   "location_district": null
+  },
+  "link": "https://www.portaldrazeb.cz/drazba/204ex17460-20-d5zdj",
+  "slug": "204ex17460-20-d5zdj",
+  "start_at": "2026-11-26T08:45:00.000+00:00",
+  "end_at": null,
+  "estimated_price": 75000,
+  "item_price": 25000,
+  "minimal_bid": null,
+  "caution_deposit": null,
+  "electronic": false,
+  "online": false,
+  "images": {
+   "329Wb": {
+    "pathname": "/auctions/D5ZDJ/5927db9b9a905ae3f95e3cb381aef959.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 278236,
+    "original_name": "obrázek 1.jpg",
+    "description": null,
+    "hash": "329Wb",
+    "width": 1200,
+    "height": 1600,
+    "priority": 0
+   },
+   "jWynr": {
+    "pathname": "/auctions/D5ZDJ/193d209be8d6fd768a632ca2ef190748.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 249758,
+    "original_name": "obrázek 2.jpg",
+    "description": null,
+    "hash": "jWynr",
+    "width": 1200,
+    "height": 1600,
+    "priority": 1
+   },
+   "py62e": {
+    "pathname": "/auctions/D5ZDJ/91f194ab09ee1b587cc802c56cdd4cdf.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 267280,
+    "original_name": "obrázek 3.jpg",
+    "description": null,
+    "hash": "py62e",
+    "width": 1200,
+    "height": 1600,
+    "priority": 2
+   },
+   "7XoWa": {
+    "pathname": "/auctions/D5ZDJ/17da219368f1315aad1ba130e637e94d.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 222384,
+    "original_name": "obrázek 4.jpg",
+    "description": null,
+    "hash": "7XoWa",
+    "width": 1200,
+    "height": 1600,
+    "priority": 3
+   },
+   "16dWr": {
+    "pathname": "/auctions/D5ZDJ/d087ad106d7172a2863d22a496fe10a9.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 320460,
+    "original_name": "obrázek 5.jpg",
+    "description": null,
+    "hash": "16dWr",
+    "width": 1200,
+    "height": 1600,
+    "priority": 4
+   },
+   "NxD8j": {
+    "pathname": "/auctions/D5ZDJ/2ab5eb3a5cc5c6e3c1f39e28c9a16b94.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 254773,
+    "original_name": "obrázek 6.jpg",
+    "description": null,
+    "hash": "NxD8j",
+    "width": 1200,
+    "height": 1600,
+    "priority": 5
+   },
+   "dv8LR": {
+    "pathname": "/auctions/D5ZDJ/06b49af3f6cc6bf6390b8a4be87558d0.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 278121,
+    "original_name": "obrázek 7.jpg",
+    "description": null,
+    "hash": "dv8LR",
+    "width": 1200,
+    "height": 1600,
+    "priority": 6
+   },
+   "vZ6aw": {
+    "pathname": "/auctions/D5ZDJ/7962a542935a95710d631da0143e96b9.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 203308,
+    "original_name": "obrázek 8.jpg",
+    "description": null,
+    "hash": "vZ6aw",
+    "width": 1200,
+    "height": 1600,
+    "priority": 7
+   },
+   "wy634": {
+    "pathname": "/auctions/D5ZDJ/9013d6c95fd74b487eb7946aa32eba91.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 217424,
+    "original_name": "obrázek 9.jpg",
+    "description": null,
+    "hash": "wy634",
+    "width": 1200,
+    "height": 1600,
+    "priority": 8
+   },
+   "Jw8Lx": {
+    "pathname": "/auctions/D5ZDJ/56d849c102a81e37899d6be55bcb9e7a.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 252306,
+    "original_name": "obrázek 10.jpg",
+    "description": null,
+    "hash": "Jw8Lx",
+    "width": 1200,
+    "height": 1600,
+    "priority": 9
+   },
+   "WrJ5Q": {
+    "pathname": "/auctions/D5ZDJ/8f944f2763ae95b1fbd8f78ec4936ff7.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 224271,
+    "original_name": "obrázek 11.jpg",
+    "description": null,
+    "hash": "WrJ5Q",
+    "width": 1200,
+    "height": 1600,
+    "priority": 10
+   },
+   "yyzaQ": {
+    "pathname": "/auctions/D5ZDJ/37194627ab6785386e0e01dad821787a.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 330459,
+    "original_name": "obrázek 12.jpg",
+    "description": null,
+    "hash": "yyzaQ",
+    "width": 1200,
+    "height": 1600,
+    "priority": 11
+   },
+   "GneGB": {
+    "pathname": "/auctions/D5ZDJ/4794c2bfc8ba5901b7e5f5092f7274bf.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 305363,
+    "original_name": "obrázek 13.jpg",
+    "description": null,
+    "hash": "GneGB",
+    "width": 1200,
+    "height": 1600,
+    "priority": 12
+   },
+   "0JdLO": {
+    "pathname": "/auctions/D5ZDJ/995476ceced825754fe6dbd48762d414.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 208287,
+    "original_name": "obrázek 14.jpg",
+    "description": null,
+    "hash": "0JdLO",
+    "width": 1200,
+    "height": 1600,
+    "priority": 13
+   }
+  },
+  "status": "upcoming",
+  "type": "execution",
+  "location_district": {
+   "district_code": 40193,
+   "district_name": "Kolín",
+   "county": {
+    "county_code": 3026,
+    "county_name": "Středočeský kraj",
+    "slug": "stredocesky-kraj"
+   },
+   "city": {
+    "city_code": 533165,
+    "city_name": "Kolín"
+   },
+   "coords": {
+    "points": []
+   },
+   "slug": "okres-kolin"
+  },
+  "auctioneer_office": {
+   "title": "Černá Marie Mgr.",
+   "ex_number": "204"
+  }
+ },
+ "5": {
+  "hash": "9plkK",
+  "item": {
+   "title": "HYUNDAI IX 55 EN, CRDi",
+   "category": {
+    "full_path": "/Movitosti/Auto-moto",
+    "id": 33,
+    "title": "Auto-moto",
+    "path": "Movitosti-25,Auto-moto-33,",
+    "type": "movable",
+    "slug": "auto-moto"
+   },
+   "description": "<p>Předmětem dražby je motorové vozidlo značky HYUNDAI IX 55 EN, CRDi, vyrobené v roce 2011 s platnou STK. Stav tachometru cca 509 tis. km. Opotřebování odpovídá stáří vozidla. K dispozici je malý technický průkaz včetně klíče od vozidla. Bližší informace jsou k nalezení v protokolu o stavu vozidla.</p><p>Vydražitel je povinen ve smyslu § 329 odst. 3, 5 a 6 o.s.ř. nejvyšší podání či doplatek na nejvyšší podání ihned zaplatit v hotovosti, pokud nejvyšší podání nepřesahuje částku stanovenou jako nejvyšší možnou pro platbu v hotovosti podle zvláštního právního předpisu. Neučiní-li tak, draží se věc znovu bez jeho účasti. Nejvyšší podání či doplatek na nejvyšší podání přesahující tento limit musí vydražitel zaplatit bezhotovostní platbou do sedmi dnů od udělení příklepu, jinak soudní exekutor nařídí opětovnou dražbu.</p>",
+   "location_district": null
+  },
+  "link": "https://www.portaldrazeb.cz/drazba/204ex31697-22-9plkk",
+  "slug": "204ex31697-22-9plkk",
+  "start_at": "2026-11-26T09:00:00.000+00:00",
+  "end_at": null,
+  "estimated_price": 90000,
+  "item_price": 30000,
+  "minimal_bid": null,
+  "caution_deposit": null,
+  "electronic": false,
+  "online": false,
+  "images": {
+   "mylQG": {
+    "pathname": "/auctions/9plkK/03be31ba5d924f80a9b9fd41be5e0d0b.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 310163,
+    "original_name": "obrázek 1.jpg",
+    "description": null,
+    "hash": "mylQG",
+    "width": 1200,
+    "height": 1600,
+    "priority": 0
+   },
+   "B1gN8": {
+    "pathname": "/auctions/9plkK/96f2ac38dde0b72d2ff421b96e9e02f2.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 378764,
+    "original_name": "obrázek 2.jpg",
+    "description": null,
+    "hash": "B1gN8",
+    "width": 1200,
+    "height": 1600,
+    "priority": 1
+   },
+   "xlY7M": {
+    "pathname": "/auctions/9plkK/b76c29a59db83afa8ac1b35bb7205571.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 272053,
+    "original_name": "obrázek 3.jpg",
+    "description": null,
+    "hash": "xlY7M",
+    "width": 1200,
+    "height": 1600,
+    "priority": 2
+   },
+   "5Q5XX": {
+    "pathname": "/auctions/9plkK/4fc809dfb24e941d2eeef6cf69282296.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 257454,
+    "original_name": "obrázek 4.jpg",
+    "description": null,
+    "hash": "5Q5XX",
+    "width": 1200,
+    "height": 1600,
+    "priority": 3
+   },
+   "oy8Xm": {
+    "pathname": "/auctions/9plkK/d97ffa8317c276d79e7069d2821b158a.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 315833,
+    "original_name": "obrázek 5.jpg",
+    "description": null,
+    "hash": "oy8Xm",
+    "width": 1200,
+    "height": 1600,
+    "priority": 4
+   },
+   "M6zPr": {
+    "pathname": "/auctions/9plkK/28f53b1c9c34f36a8184f0d19681fbb3.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 171977,
+    "original_name": "obrázek 6.jpg",
+    "description": null,
+    "hash": "M6zPr",
+    "width": 1200,
+    "height": 1600,
+    "priority": 5
+   },
+   "329Q0": {
+    "pathname": "/auctions/9plkK/7d0c4a07aab4e9fb48b854a132adffcf.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 261942,
+    "original_name": "obrázek 7.jpg",
+    "description": null,
+    "hash": "329Q0",
+    "width": 1200,
+    "height": 1600,
+    "priority": 6
+   },
+   "jWyPp": {
+    "pathname": "/auctions/9plkK/e68a8713bf17e4a73a3c338053263204.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 205089,
+    "original_name": "obrázek 8.jpg",
+    "description": null,
+    "hash": "jWyPp",
+    "width": 1200,
+    "height": 1600,
+    "priority": 7
+   }
+  },
+  "status": "upcoming",
+  "type": "execution",
+  "location_district": {
+   "district_code": 40193,
+   "district_name": "Kolín",
+   "county": {
+    "county_code": 3026,
+    "county_name": "Středočeský kraj",
+    "slug": "stredocesky-kraj"
+   },
+   "city": {
+    "city_code": 533165,
+    "city_name": "Kolín"
+   },
+   "coords": {
+    "points": []
+   },
+   "slug": "okres-kolin"
+  },
+  "auctioneer_office": {
+   "title": "Černá Marie Mgr.",
+   "ex_number": "204"
+  }
+ },
+ "6": {
+  "hash": "lDOar",
+  "item": {
+   "title": "Osobní automobil Škoda Octavia",
+   "category": {
+    "full_path": "/Movitosti/Auto-moto",
+    "id": 33,
+    "title": "Auto-moto",
+    "path": "Movitosti-25,Auto-moto-33,",
+    "type": "movable",
+    "slug": "auto-moto"
+   },
+   "description": "<p>Osobní automobil Škoda Octavia, hnědá, 1.evid.: 15.10.2004, bez klíčů, ORV a VTP</p>",
+   "location_district": null
+  },
+  "link": "https://www.portaldrazeb.cz/drazba/149ex9930-15-66-ldoar",
+  "slug": "149ex9930-15-66-ldoar",
+  "start_at": "2026-11-26T09:00:00.000+00:00",
+  "end_at": null,
+  "estimated_price": 15000,
+  "item_price": 5000,
+  "minimal_bid": null,
+  "caution_deposit": null,
+  "electronic": false,
+  "online": false,
+  "images": [],
+  "status": "upcoming",
+  "type": "execution",
+  "location_district": null,
+  "auctioneer_office": {
+   "title": "Novák Jan Mgr.",
+   "ex_number": "149"
+  }
+ },
+ "7": {
+  "hash": "1bQ9Z",
+  "item": {
+   "title": "AUDI A6 AVANT, 3.0 TDI QUATTRO, 165 kW",
+   "category": {
+    "full_path": "/Movitosti/Auto-moto",
+    "id": 33,
+    "title": "Auto-moto",
+    "path": "Movitosti-25,Auto-moto-33,",
+    "type": "movable",
+    "slug": "auto-moto"
+   },
+   "description": "<p>Předmětem dražby je motorové vozidlo značky AUDI A6 AVANT, 3.0 TDI QUATTRO, 165 kW,  s platnou STK. Stav tachometru cca 380 tis. km. Opotřebování odpovídá stáří vozidla. K dispozici je malý technický průkaz včetně 2 klíčů od vozidla. Bližší informace jsou k nalezení v protokolu o stavu vozidla.</p><p>Vydražitel je povinen ve smyslu § 329 odst. 3, 5 a 6 o.s.ř. nejvyšší podání či doplatek na nejvyšší podání ihned zaplatit v hotovosti, pokud nejvyšší podání nepřesahuje částku stanovenou jako nejvyšší možnou pro platbu v hotovosti podle zvláštního právního předpisu. Neučiní-li tak, draží se věc znovu bez jeho účasti. Nejvyšší podání či doplatek na nejvyšší podání přesahující tento limit musí vydražitel zaplatit bezhotovostní platbou do sedmi dnů od udělení příklepu, jinak soudní exekutor nařídí opětovnou dražbu.</p>",
+   "location_district": null
+  },
+  "link": "https://www.portaldrazeb.cz/drazba/204ex76579-23-1bq9z",
+  "slug": "204ex76579-23-1bq9z",
+  "start_at": "2026-11-26T09:15:00.000+00:00",
+  "end_at": null,
+  "estimated_price": 75000,
+  "item_price": 25000,
+  "minimal_bid": null,
+  "caution_deposit": null,
+  "electronic": false,
+  "online": false,
+  "images": {
+   "jWyBw": {
+    "pathname": "/auctions/1bQ9Z/f319b3885bd96d70985b13168f15b51c.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 414466,
+    "original_name": "obrázek 1.jpg",
+    "description": null,
+    "hash": "jWyBw",
+    "width": 1200,
+    "height": 1600,
+    "priority": 0
+   },
+   "py6BZ": {
+    "pathname": "/auctions/1bQ9Z/5a192ae9e50da9501c9b45df4398a761.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 381271,
+    "original_name": "obrázek 2.jpg",
+    "description": null,
+    "hash": "py6BZ",
+    "width": 1200,
+    "height": 1600,
+    "priority": 1
+   },
+   "5Q5vL": {
+    "pathname": "/auctions/1bQ9Z/b98e43dbe9e512fd407c7b43cb73f331.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 383174,
+    "original_name": "obrázek 3.jpg",
+    "description": null,
+    "hash": "5Q5vL",
+    "width": 1200,
+    "height": 1600,
+    "priority": 2
+   },
+   "oy8B9": {
+    "pathname": "/auctions/1bQ9Z/2a574c6fa33c1bd7a37057ae820028d5.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 398112,
+    "original_name": "obrázek 4.jpg",
+    "description": null,
+    "hash": "oy8B9",
+    "width": 1200,
+    "height": 1600,
+    "priority": 3
+   },
+   "M6zme": {
+    "pathname": "/auctions/1bQ9Z/320210c4777f9e118f8bef3c19bb43b9.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 305172,
+    "original_name": "obrázek 5.jpg",
+    "description": null,
+    "hash": "M6zme",
+    "width": 1200,
+    "height": 1600,
+    "priority": 4
+   },
+   "329d8": {
+    "pathname": "/auctions/1bQ9Z/fa7f1ad5572fb1e1f68830a4848d7239.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 217329,
+    "original_name": "obrázek 6.jpg",
+    "description": null,
+    "hash": "329d8",
+    "width": 1200,
+    "height": 1600,
+    "priority": 5
+   },
+   "jWyBM": {
+    "pathname": "/auctions/1bQ9Z/9fcad1b6da5986508d803a5dcdd13a3d.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 224775,
+    "original_name": "obrázek 7.jpg",
+    "description": null,
+    "hash": "jWyBM",
+    "width": 1200,
+    "height": 1600,
+    "priority": 6
+   },
+   "py6Bb": {
+    "pathname": "/auctions/1bQ9Z/9d03e2d4b24e104dd3a19a39527c7423.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 246193,
+    "original_name": "obrázek 8.jpg",
+    "description": null,
+    "hash": "py6Bb",
+    "width": 1200,
+    "height": 1600,
+    "priority": 7
+   }
+  },
+  "status": "upcoming",
+  "type": "execution",
+  "location_district": {
+   "district_code": 40193,
+   "district_name": "Kolín",
+   "county": {
+    "county_code": 3026,
+    "county_name": "Středočeský kraj",
+    "slug": "stredocesky-kraj"
+   },
+   "city": {
+    "city_code": 533165,
+    "city_name": "Kolín"
+   },
+   "coords": {
+    "points": []
+   },
+   "slug": "okres-kolin"
+  },
+  "auctioneer_office": {
+   "title": "Černá Marie Mgr.",
+   "ex_number": "204"
+  }
+ },
+ "8": {
+  "hash": "D5Z1J",
+  "item": {
+   "title": "FORD GALAXY, 2.0 TDCi, 120 kW",
+   "category": {
+    "full_path": "/Movitosti/Auto-moto",
+    "id": 33,
+    "title": "Auto-moto",
+    "path": "Movitosti-25,Auto-moto-33,",
+    "type": "movable",
+    "slug": "auto-moto"
+   },
+   "description": "<p>Předmětem dražby je motorové vozidlo značky FORD GALAXY, 2.0 TDCi, 120 kW, vyrobené v roce 2012 s platnou STK. Stav tachometru cca 339 tis. km. Opotřebování odpovídá stáří vozidla. K dispozici je malý technický průkaz včetně klíče od vozidla. Bližší informace jsou k nalezení v protokolu o stavu vozidla.</p><p>Vydražitel je povinen ve smyslu § 329 odst. 3, 5 a 6 o.s.ř. nejvyšší podání či doplatek na nejvyšší podání ihned zaplatit v hotovosti, pokud nejvyšší podání nepřesahuje částku stanovenou jako nejvyšší možnou pro platbu v hotovosti podle zvláštního právního předpisu. Neučiní-li tak, draží se věc znovu bez jeho účasti. Nejvyšší podání či doplatek na nejvyšší podání přesahující tento limit musí vydražitel zaplatit bezhotovostní platbou do sedmi dnů od udělení příklepu, jinak soudní exekutor nařídí opětovnou dražbu.</p>",
+   "location_district": null
+  },
+  "link": "https://www.portaldrazeb.cz/drazba/204ex44884-24-834-d5z1j",
+  "slug": "204ex44884-24-834-d5z1j",
+  "start_at": "2026-11-26T09:30:00.000+00:00",
+  "end_at": null,
+  "estimated_price": 90000,
+  "item_price": 30000,
+  "minimal_bid": null,
+  "caution_deposit": null,
+  "electronic": false,
+  "online": false,
+  "images": {
+   "32918": {
+    "pathname": "/auctions/D5Z1J/9caf97565d47100cd8cd178fe9984aaf.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 404072,
+    "original_name": "obrázek 1.jpg",
+    "description": null,
+    "hash": "32918",
+    "width": 1200,
+    "height": 1600,
+    "priority": 0
+   },
+   "jWyXM": {
+    "pathname": "/auctions/D5Z1J/0cf6769b3ff6842be7b743365d585038.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 389180,
+    "original_name": "obrázek 2.jpg",
+    "description": null,
+    "hash": "jWyXM",
+    "width": 1200,
+    "height": 1600,
+    "priority": 1
+   },
+   "py6Ab": {
+    "pathname": "/auctions/D5Z1J/a30286374075dee9a645b3ab51b68cf1.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 286059,
+    "original_name": "obrázek 3.jpg",
+    "description": null,
+    "hash": "py6Ab",
+    "width": 1200,
+    "height": 1600,
+    "priority": 2
+   },
+   "7XodA": {
+    "pathname": "/auctions/D5Z1J/52b88ffede34fe6c15abea94e94d661f.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 338837,
+    "original_name": "obrázek 4.jpg",
+    "description": null,
+    "hash": "7XodA",
+    "width": 1200,
+    "height": 1600,
+    "priority": 3
+   },
+   "16d7z": {
+    "pathname": "/auctions/D5Z1J/cfb0c06fb2b9ffeb129fc1e83f387283.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 337843,
+    "original_name": "obrázek 5.jpg",
+    "description": null,
+    "hash": "16d7z",
+    "width": 1200,
+    "height": 1600,
+    "priority": 4
+   },
+   "NxDjg": {
+    "pathname": "/auctions/D5Z1J/7c08f36b765a30b8a76647aea170911c.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 313493,
+    "original_name": "obrázek 6.jpg",
+    "description": null,
+    "hash": "NxDjg",
+    "width": 1200,
+    "height": 1600,
+    "priority": 5
+   },
+   "dv8Ge": {
+    "pathname": "/auctions/D5Z1J/4b38b0cb3e446cc1d6916c7f35bf2b2e.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 347961,
+    "original_name": "obrázek 7.jpg",
+    "description": null,
+    "hash": "dv8Ge",
+    "width": 1200,
+    "height": 1600,
+    "priority": 6
+   },
+   "vZ64p": {
+    "pathname": "/auctions/D5Z1J/6bb6cd2059d2499b634e55f6b3c75f76.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 314006,
+    "original_name": "obrázek 8.jpg",
+    "description": null,
+    "hash": "vZ64p",
+    "width": 1200,
+    "height": 1600,
+    "priority": 7
+   },
+   "wy6Nm": {
+    "pathname": "/auctions/D5Z1J/a9a955a8fc49d00f6287e478637180d3.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 289059,
+    "original_name": "obrázek 9.jpg",
+    "description": null,
+    "hash": "wy6Nm",
+    "width": 1200,
+    "height": 1600,
+    "priority": 8
+   },
+   "Jw8MM": {
+    "pathname": "/auctions/D5Z1J/ec211891cd440b9775ec5a69dbc7f73f.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 152450,
+    "original_name": "obrázek 10.jpg",
+    "description": null,
+    "hash": "Jw8MM",
+    "width": 1200,
+    "height": 1600,
+    "priority": 9
+   }
+  },
+  "status": "upcoming",
+  "type": "execution",
+  "location_district": {
+   "district_code": 40193,
+   "district_name": "Kolín",
+   "county": {
+    "county_code": 3026,
+    "county_name": "Středočeský kraj",
+    "slug": "stredocesky-kraj"
+   },
+   "city": {
+    "city_code": 533165,
+    "city_name": "Kolín"
+   },
+   "coords": {
+    "points": []
+   },
+   "slug": "okres-kolin"
+  },
+  "auctioneer_office": {
+   "title": "Černá Marie Mgr.",
+   "ex_number": "204"
+  }
+ },
+ "9": {
+  "hash": "ngOpY",
+  "item": {
+   "title": "FIAT DUCATO, r.v. 2013, 96 kW",
+   "category": {
+    "full_path": "/Movitosti/Auto-moto",
+    "id": 33,
+    "title": "Auto-moto",
+    "path": "Movitosti-25,Auto-moto-33,",
+    "type": "movable",
+    "slug": "auto-moto"
+   },
+   "description": "<p>Tovární značka a typ: <strong>FIAT DUCATO 2.3 JTD 130 15</strong></p><p> VIN nebo číslo podvozku: <strong>ZFA25000002437213</strong></p><p> Kód barvy vozidla: <strong>BÍLÁ</strong></p><p> Datum první registrace nebo rok výroby vozidla: <strong>01.07.2013</strong></p><p> Palivo: <strong>nafta</strong></p><p> Typ motoru: <strong>F1AE3481 D</strong></p><p> Max. výkon [kW] / [min⁻¹]: <strong>96 / 3600</strong></p><p> Zdvihový objem [cm³]: <strong>2287</strong></p><p> Spotřeba město /mimo město/kombinovaná [l.100km⁻¹]: <strong>8.5 / 6.4 / 7.2</strong></p><p> Celková délka/šířka/výška [mm]: <strong>5413/ 2050/ 2254</strong></p><p> Provozní hmotnost: <strong>1975</strong></p><p> Nejvyšší rychlost [km.h⁻¹]: <strong>155</strong></p><p> Pravidelná technická prohlídka do: <strong>10.04.2028</strong></p><p><strong><br /></strong></p><p><strong>K vozidlu je k dispozici 1 ks klíč, malý a velký  technický průkaz.</strong></p><p><strong> <br />Prohlídka vozidla se koná dne 20. 11. 2026 od 10:00 do 10:30, na adrese Ostopovická 1, 664 47 Střelice.</strong></p><p><strong> <br />Všechny dostupné informace o vozidlu jsou zveřejněny.</strong></p><p><strong><br /></strong></p><p><strong><br /></strong></p>",
+   "location_district": null
+  },
+  "link": "https://www.portaldrazeb.cz/drazba/137ex2778-23-ma-ngopy",
+  "slug": "137ex2778-23-ma-ngopy",
+  "start_at": "2026-11-26T11:00:00.000+00:00",
+  "end_at": "2026-11-26T11:30:00.000+00:00",
+  "estimated_price": 210000,
+  "item_price": 70000,
+  "minimal_bid": null,
+  "caution_deposit": null,
+  "electronic": true,
+  "online": false,
+  "images": {
+   "Nx0A1": {
+    "pathname": "/auctions/ngOpY/015cd8610dd1a6c30f946d41b2de267f.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 195565,
+    "original_name": "obrázek 1.jpg",
+    "description": null,
+    "hash": "Nx0A1",
+    "width": 768,
+    "height": 1024,
+    "priority": 1
+   },
+   "dv1Yl": {
+    "pathname": "/auctions/ngOpY/79389266e35d7163f67348989b23f17c.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 219057,
+    "original_name": "obrázek 2.jpg",
+    "description": null,
+    "hash": "dv1Yl",
+    "width": 1024,
+    "height": 768,
+    "priority": 2
+   },
+   "vZ59J": {
+    "pathname": "/auctions/ngOpY/7c584576a2c13beb2ab6cee8592d9937.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 172234,
+    "original_name": "obrázek 3.jpg",
+    "description": null,
+    "hash": "vZ59J",
+    "width": 1024,
+    "height": 768,
+    "priority": 3
+   },
+   "wyQzo": {
+    "pathname": "/auctions/ngOpY/ab7fac5c24889e4ec0886a1bf36bac37.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 151822,
+    "original_name": "obrázek 4.jpg",
+    "description": null,
+    "hash": "wyQzo",
+    "width": 768,
+    "height": 1024,
+    "priority": 4
+   },
+   "Jw0Dr": {
+    "pathname": "/auctions/ngOpY/26b3ae4aecf8aedc3d75d953b26d7595.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 181283,
+    "original_name": "obrázek 5.jpg",
+    "description": null,
+    "hash": "Jw0Dr",
+    "width": 1024,
+    "height": 768,
+    "priority": 5
+   },
+   "WrxX3": {
+    "pathname": "/auctions/ngOpY/9f804bb8cc37bc3622c13798b418a05d.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 211588,
+    "original_name": "obrázek 6.jpg",
+    "description": null,
+    "hash": "WrxX3",
+    "width": 1024,
+    "height": 768,
+    "priority": 6
+   },
+   "yyXkw": {
+    "pathname": "/auctions/ngOpY/25f3a9fd5b195ccae867fad16057a5c2.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 163085,
+    "original_name": "obrázek 7.jpg",
+    "description": null,
+    "hash": "yyXkw",
+    "width": 1024,
+    "height": 768,
+    "priority": 7
+   },
+   "Gn0yG": {
+    "pathname": "/auctions/ngOpY/1f8830dbdd6dadaa396a9ed4362af5b4.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 210863,
+    "original_name": "obrázek 8.jpg",
+    "description": null,
+    "hash": "Gn0yG",
+    "width": 1024,
+    "height": 768,
+    "priority": 8
+   },
+   "0JpOP": {
+    "pathname": "/auctions/ngOpY/90162170f4a4840bf1ce73f98f5eee50.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 227772,
+    "original_name": "obrázek 9.jpg",
+    "description": null,
+    "hash": "0JpOP",
+    "width": 1024,
+    "height": 768,
+    "priority": 9
+   },
+   "eDNYy": {
+    "pathname": "/auctions/ngOpY/9cbb9367d3914fc8e8fab2f9e86d1194.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 165864,
+    "original_name": "obrázek 10.jpg",
+    "description": null,
+    "hash": "eDNYy",
+    "width": 768,
+    "height": 1024,
+    "priority": 10
+   }
+  },
+  "status": "upcoming",
+  "type": "execution",
+  "location_district": null,
+  "auctioneer_office": {
+   "title": "Svobodová Eva JUDr.",
+   "ex_number": "137"
+  }
+ },
+ "10": {
+  "hash": "5pEDw",
+  "item": {
+   "title": "Automobil BMW 320 D - techn. údaje ve fotogalerii",
+   "category": {
+    "full_path": "/Movitosti/Auto-moto",
+    "id": 33,
+    "title": "Auto-moto",
+    "path": "Movitosti-25,Auto-moto-33,",
+    "type": "movable",
+    "slug": "auto-moto"
+   },
+   "description": "<p>Podrobné informace jsou uvedeny v přiložené dražební vyhlášce.</p><p>Vydražitel je povinen zaplatit nejvyšší podání do 6 kalendářních dnů ode dne udělení příklepu.\nNejvyšší podání zaplatí vydražitel buď po předchozí dohodě v hotovosti v pokladně soudního exekutora na\nvýše uvedené adrese exekutorského úřadu, nebo na účet soudního exekutora č. ú. 4356373359/0800 vedený\nu České spořitelny, a.s. Platba musí být provedena pod variabilním symbolem V. S. 0326003, a s uvedením\nspecifického symbolu S.S. rodného čísla nebo IČ vydražitele. Za řádné a včasné zaplacení se považuje\npřipsání nejvyššího podání na účet soudního exekutora nebo složení částky do pokladny v sídle\nexekutorského úřadu. Zaplatí-li vydražitel nejvyšší podání řádně a včas, přejde na vydražitele vlastnické\nprávo k vydražené věci anebo souboru vydražených věcí, a to s právními účinky k okamžiku udělení\npříklepu. Přechodem vlastnictví na vydražitele zanikají zástavní a zadržovací práva a další práva váznoucí na\nvěci. Přejde-li vlastnické právo na vydražitele, vydá soudní exekutor vydražiteli na základě žádosti potvrzení\no přechodu vlastnického práva k vydražené věci k okamžiku udělení příklepu.</p><p>Vydražitel je oprávněn převzít vydraženou movitou věc, jakmile se stane jejím vlastníkem, a to na\nadrese Cejl 40/107, 602 00 Brno, dne 3.12.2026, a to po předchozí telefonické domluvě se\nzaměstnancem exekutorského úřadu – tel. 600 000 000. Při převzetí vydražených movitých věcí bude\nvydražiteli předáno potvrzení o příklepu.</p>",
+   "location_district": {
+    "district_code": 40711,
+    "district_name": "Brno-město",
+    "county": {
+     "county_code": 3115,
+     "county_name": "Jihomoravský kraj",
+     "slug": "jihomoravsky-kraj"
+    },
+    "city": {
+     "city_code": 582786,
+     "city_name": "Brno"
+    },
+    "coords": {
+     "points": []
+    },
+    "slug": "okres-brno-mesto"
+   }
+  },
+  "link": "https://www.portaldrazeb.cz/drazba/206dd3-26-3-5pedw",
+  "slug": "206dd3-26-3-5pedw",
+  "start_at": "2026-11-26T12:00:00.000+00:00",
+  "end_at": "2026-11-26T12:30:00.000+00:00",
+  "estimated_price": 40000,
+  "item_price": 40000,
+  "minimal_bid": null,
+  "caution_deposit": null,
+  "electronic": true,
+  "online": false,
+  "images": {
+   "5QeMo": {
+    "pathname": "/auctions/5pEDw/5de2f1a2798f1893d976758d1f0e2a96.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 799988,
+    "original_name": "obrázek 1.jpg",
+    "description": null,
+    "hash": "5QeMo",
+    "width": 1920,
+    "height": 1440,
+    "priority": 1
+   },
+   "oyY7b": {
+    "pathname": "/auctions/5pEDw/7a0b33a3efd7c0901729da798b869830.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 839607,
+    "original_name": "obrázek 2.jpg",
+    "description": null,
+    "hash": "oyY7b",
+    "width": 1440,
+    "height": 1920,
+    "priority": 2
+   },
+   "M60gp": {
+    "pathname": "/auctions/5pEDw/4ec18d32ee2322c4d21751d5b424af9d.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 779087,
+    "original_name": "obrázek 3.jpg",
+    "description": null,
+    "hash": "M60gp",
+    "width": 1920,
+    "height": 1440,
+    "priority": 3
+   },
+   "32Lob": {
+    "pathname": "/auctions/5pEDw/7e5a5e81dcd846235bac6040eac447a7.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 780510,
+    "original_name": "obrázek 4.jpg",
+    "description": null,
+    "hash": "32Lob",
+    "width": 1920,
+    "height": 1440,
+    "priority": 4
+   },
+   "jWZrr": {
+    "pathname": "/auctions/5pEDw/54f12f73ba9b7118e297f6e49595989c.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 233908,
+    "original_name": "obrázek 5.jpg",
+    "description": null,
+    "hash": "jWZrr",
+    "width": 1348,
+    "height": 826,
+    "priority": 5
+   },
+   "pyzLe": {
+    "pathname": "/auctions/5pEDw/736c90c34a430233ad501551a9b0c2d2.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 278081,
+    "original_name": "obrázek 6.jpg",
+    "description": null,
+    "hash": "pyzLe",
+    "width": 1156,
+    "height": 846,
+    "priority": 6
+   },
+   "7Xe3a": {
+    "pathname": "/auctions/5pEDw/c77547863da836432556c10061d03e50.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 122265,
+    "original_name": "obrázek 7.jpg",
+    "description": null,
+    "hash": "7Xe3a",
+    "width": 654,
+    "height": 860,
+    "priority": 7
+   },
+   "16x5r": {
+    "pathname": "/auctions/5pEDw/30b20ec922e483bc629a001af427f4ca.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 171120,
+    "original_name": "obrázek 8.jpg",
+    "description": null,
+    "hash": "16x5r",
+    "width": 711,
+    "height": 944,
+    "priority": 8
+   },
+   "Nx0gj": {
+    "pathname": "/auctions/5pEDw/604ed2e35fbf20434e88a548645bfe01.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 159334,
+    "original_name": "obrázek 9.jpg",
+    "description": null,
+    "hash": "Nx0gj",
+    "width": 708,
+    "height": 939,
+    "priority": 9
+   },
+   "dv1QR": {
+    "pathname": "/auctions/5pEDw/44dd7454b971c83667074e995e3e46b3.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 179244,
+    "original_name": "obrázek 10.jpg",
+    "description": null,
+    "hash": "dv1QR",
+    "width": 705,
+    "height": 948,
+    "priority": 10
+   },
+   "vZ5nw": {
+    "pathname": "/auctions/5pEDw/6042947940a64647e1fd076998189975.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 163051,
+    "original_name": "obrázek 11.jpg",
+    "description": null,
+    "hash": "vZ5nw",
+    "width": 1108,
+    "height": 750,
+    "priority": 11
+   },
+   "wyQv4": {
+    "pathname": "/auctions/5pEDw/15570ba98c157b6d3d380a83fb7a7327.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 164509,
+    "original_name": "obrázek 12.jpg",
+    "description": null,
+    "hash": "wyQv4",
+    "width": 1266,
+    "height": 932,
+    "priority": 12
+   },
+   "Jw0gx": {
+    "pathname": "/auctions/5pEDw/b76cbc1710047c613fdd3727475a1823.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 125637,
+    "original_name": "obrázek 13.jpg",
+    "description": null,
+    "hash": "Jw0gx",
+    "width": 732,
+    "height": 791,
+    "priority": 13
+   },
+   "WrxgQ": {
+    "pathname": "/auctions/5pEDw/8c47512deda8c785d0617f26139f13c8.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 245963,
+    "original_name": "obrázek 14.jpg",
+    "description": null,
+    "hash": "WrxgQ",
+    "width": 773,
+    "height": 904,
+    "priority": 14
+   },
+   "yyXjQ": {
+    "pathname": "/auctions/5pEDw/402cbf13e6b1665dece197cd4259ce92.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 193412,
+    "original_name": "obrázek 15.jpg",
+    "description": null,
+    "hash": "yyXjQ",
+    "width": 915,
+    "height": 859,
+    "priority": 15
+   },
+   "Gn0pB": {
+    "pathname": "/auctions/5pEDw/5c38cd9066597f38d44993cee4eb16be.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 219982,
+    "original_name": "obrázek 16.jpg",
+    "description": null,
+    "hash": "Gn0pB",
+    "width": 1043,
+    "height": 691,
+    "priority": 16
+   },
+   "0JpzO": {
+    "pathname": "/auctions/5pEDw/25253943873f5a7bb35f791075106e4c.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 252559,
+    "original_name": "obrázek 17.jpg",
+    "description": null,
+    "hash": "0JpzO",
+    "width": 1273,
+    "height": 939,
+    "priority": 17
+   },
+   "eDN1p": {
+    "pathname": "/auctions/5pEDw/11e0c8d51f99dcf19f0b35c23dc48c16.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 154985,
+    "original_name": "obrázek 18.jpg",
+    "description": null,
+    "hash": "eDN1p",
+    "width": 1082,
+    "height": 750,
+    "priority": 18
+   }
+  },
+  "status": "upcoming",
+  "type": "execution",
+  "location_district": {
+   "district_code": 40711,
+   "district_name": "Brno-město",
+   "county": {
+    "county_code": 3115,
+    "county_name": "Jihomoravský kraj",
+    "slug": "jihomoravsky-kraj"
+   },
+   "city": {
+    "city_code": 582786,
+    "city_name": "Brno"
+   },
+   "coords": {
+    "points": []
+   },
+   "slug": "okres-brno-mesto"
+  },
+  "auctioneer_office": {
+   "title": "Dvořák Petr Mgr.",
+   "ex_number": "206"
+  }
+ },
+ "11": {
+  "hash": "ngOyQ",
+  "item": {
+   "title": "Dražba PORSCHE TAYCAN, elektrické, Chrudim",
+   "category": {
+    "full_path": "/Movitosti/Auto-moto",
+    "id": 33,
+    "title": "Auto-moto",
+    "path": "Movitosti-25,Auto-moto-33,",
+    "type": "movable",
+    "slug": "auto-moto"
+   },
+   "description": "<p class=\"MsoNormal\"><span><strong><br /></strong></span></p><p class=\"MsoNormal\"><span><strong>Soudní exekutor výslovně upozorňuje\nzájemce o dražbu, že bude konána prohlídka dražené movité věci a to dne 24.11.2026\nod 10:00 do 10:30 hodin na adrese Chrudim, Škroupova 1, dvorní trakt. Tedy\npřed zahájením dražebního jednání nebude v jiné termíny prohlídka konána.</strong></span></p><p class=\"MsoNormal\"><span><strong>Soudní exekutor upozorňuje dražitele, že\ndražená movitá věc náleží do obchodního majetku a je vedena v režimu daně z\npřidané hodnoty.</strong></span></p><p class=\"MsoNormal\"><span><strong>PORSCHE TAYCAN, RZ: EL1 23AB, VIN: WP0ZZZY1ZNSA62106,dovoz do ČR 2025</strong></span></p><p class=\"MsoNormal\"><span><strong>k dispozici malý TP a 1ks klíč od vozidla</strong></span></p>",
+   "location_district": {
+    "district_code": 40614,
+    "district_name": "Chrudim",
+    "county": {
+     "county_code": 3093,
+     "county_name": "Pardubický kraj",
+     "slug": "pardubicky-kraj"
+    },
+    "city": {
+     "city_code": 571164,
+     "city_name": "Chrudim"
+    },
+    "coords": {
+     "points": []
+    },
+    "slug": "okres-chrudim"
+   }
+  },
+  "link": "https://www.portaldrazeb.cz/drazba/129ex1511-26-42-ngoyq",
+  "slug": "129ex1511-26-42-ngoyq",
+  "start_at": "2026-11-26T13:00:00.000+00:00",
+  "end_at": "2026-11-26T13:30:00.000+00:00",
+  "estimated_price": 2400000,
+  "item_price": 800000,
+  "minimal_bid": null,
+  "caution_deposit": null,
+  "electronic": true,
+  "online": false,
+  "images": {
+   "my0ov": {
+    "pathname": "/auctions/ngOyQ/935a2775b30e7299c222f8c45d805c7f.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 1091578,
+    "original_name": "obrázek 1.jpg",
+    "description": null,
+    "hash": "my0ov",
+    "width": 1440,
+    "height": 1920,
+    "priority": 1
+   },
+   "B1nor": {
+    "pathname": "/auctions/ngOyQ/54f711c605ba724bddcb72f3521910aa.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 622483,
+    "original_name": "obrázek 2.jpg",
+    "description": null,
+    "hash": "B1nor",
+    "width": 1440,
+    "height": 1920,
+    "priority": 2
+   },
+   "xldJN": {
+    "pathname": "/auctions/ngOyQ/8c8e0eb7909fc6b21aa9a81eb0f2ef08.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 405676,
+    "original_name": "obrázek 3.jpg",
+    "description": null,
+    "hash": "xldJN",
+    "width": 1440,
+    "height": 1920,
+    "priority": 3
+   },
+   "5QOnm": {
+    "pathname": "/auctions/ngOyQ/3ddf0b696074196a2639158ec10f0fe7.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 531561,
+    "original_name": "obrázek 4.jpg",
+    "description": null,
+    "hash": "5QOnm",
+    "width": 1920,
+    "height": 1440,
+    "priority": 4
+   },
+   "oy033": {
+    "pathname": "/auctions/ngOyQ/c00de57910da6615f1d54db1263630f6.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 639450,
+    "original_name": "obrázek 5.jpg",
+    "description": null,
+    "hash": "oy033",
+    "width": 1440,
+    "height": 1920,
+    "priority": 5
+   },
+   "M65Ga": {
+    "pathname": "/auctions/ngOyQ/6a1ff5997b2a8a92e999dc5db3241ca0.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 722991,
+    "original_name": "obrázek 6.jpg",
+    "description": null,
+    "hash": "M65Ga",
+    "width": 1440,
+    "height": 1920,
+    "priority": 6
+   },
+   "328vR": {
+    "pathname": "/auctions/ngOyQ/fa4eac68b272ab6dedc1d7b335ff65f6.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 553084,
+    "original_name": "obrázek 7.jpg",
+    "description": null,
+    "hash": "328vR",
+    "width": 1440,
+    "height": 1920,
+    "priority": 7
+   },
+   "jW2kw": {
+    "pathname": "/auctions/ngOyQ/a41f9939033387f7d4220751dd40cd41.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 848279,
+    "original_name": "obrázek 8.jpg",
+    "description": null,
+    "hash": "jW2kw",
+    "width": 1440,
+    "height": 1920,
+    "priority": 8
+   },
+   "pyarZ": {
+    "pathname": "/auctions/ngOyQ/55fef63787a384ba51843d551954d2d6.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 1180202,
+    "original_name": "obrázek 9.jpg",
+    "description": null,
+    "hash": "pyarZ",
+    "width": 1440,
+    "height": 1920,
+    "priority": 9
+   },
+   "5QgyL": {
+    "pathname": "/auctions/ngOyQ/6f364caee79e47677d617ea4e6c8bd2f.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 740745,
+    "original_name": "obrázek 10.jpg",
+    "description": null,
+    "hash": "5QgyL",
+    "width": 1440,
+    "height": 1920,
+    "priority": 10
+   },
+   "oyMa9": {
+    "pathname": "/auctions/ngOyQ/36a0c2605a2f50f22e4c49a305f18474.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 382623,
+    "original_name": "obrázek 11.jpg",
+    "description": null,
+    "hash": "oyMa9",
+    "width": 1440,
+    "height": 1920,
+    "priority": 11
+   },
+   "M65Ge": {
+    "pathname": "/auctions/ngOyQ/4e952d90f3e835bb2c76682f9d2818ed.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 713712,
+    "original_name": "obrázek 12.jpg",
+    "description": null,
+    "hash": "M65Ge",
+    "width": 1440,
+    "height": 1920,
+    "priority": 12
+   },
+   "328v8": {
+    "pathname": "/auctions/ngOyQ/829d5baaea22e67ca89a00c103d0cfa3.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 869598,
+    "original_name": "obrázek 13.jpg",
+    "description": null,
+    "hash": "328v8",
+    "width": 1440,
+    "height": 1920,
+    "priority": 13
+   },
+   "jW2kM": {
+    "pathname": "/auctions/ngOyQ/bedd13a7f835b7a57a1aeb42366c1239.jpeg",
+    "mime_type": "image/jpeg",
+    "size": 743879,
+    "original_name": "obrázek 14.jpg",
+    "description": null,
+    "hash": "jW2kM",
+    "width": 1440,
+    "height": 1920,
+    "priority": 14
+   }
+  },
+  "status": "upcoming",
+  "type": "execution",
+  "location_district": {
+   "district_code": 40614,
+   "district_name": "Chrudim",
+   "county": {
+    "county_code": 3093,
+    "county_name": "Pardubický kraj",
+    "slug": "pardubicky-kraj"
+   },
+   "city": {
+    "city_code": 571164,
+    "city_name": "Chrudim"
+   },
+   "coords": {
+    "points": []
+   },
+   "slug": "okres-chrudim"
+  },
+  "auctioneer_office": {
+   "title": "Černá Marie Mgr.",
+   "ex_number": "129"
+  }
+ },
+ "@count": 99
+}

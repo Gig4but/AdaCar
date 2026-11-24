@@ -1,0 +1,7 @@
+User-Agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api/
+Disallow: /monitoring
+
+Sitemap: https://www.automaton.cz/sitemap.xml

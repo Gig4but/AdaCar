@@ -1,0 +1,21 @@
+
+User-agent: Googlebot
+Sitemap: https://autoklokocka.cz/sitemap.xml
+Disallow: /onlinepayment/
+Disallow: /eshop/
+Disallow: /cart/
+Disallow: /ajax/
+
+User-Agent: MJ12bot
+Crawl-Delay: 5
+Disallow: /onlinepayment/
+Disallow: /eshop/
+Disallow: /cart/
+Disallow: /ajax/
+
+User-Agent: *
+Sitemap: https://autoklokocka.cz/sitemap.xml
+Disallow: /onlinepayment/
+Disallow: /eshop/
+Disallow: /cart/
+Disallow: /ajax/

@@ -105,7 +105,7 @@ def add_facts(car: ParsedCar, make: str | None) -> None:
 FILLER = frozenset({"prodam", "predam", "prodej", "nabizim", "vymenim", "super", "top"})
 MAKE_WORDS = frozenset(
     word for names in MAKES.values() for word in re.findall(r"[a-z]+", fold(names["cs"]))
-) | {"vw", "merc", "mercedes", "alfa", "landrover"}
+) | {"vw", "merc", "mercedes", "alfa", "landrover", "great", "wall", "motors"}
 
 
 def model_name(title: str, make: str | None) -> str | None:
@@ -176,10 +176,10 @@ class Bazos(CrawlSource):
         has_next = any(next_page.match(a.attributes.get("href") or "") for a in tree.css("a"))
         # No link: the last page, or a changed layout. The ad count tells which; without it,
         # reading on until an empty page beats taking every page after this as gone.
+        shown = SHOWN.search(html)
         if not has_next:
-            shown = SHOWN.search(html)
             has_next = _int(shown[1]) < _int(shown[2]) if shown else bool(leads)
-        return ListingPage(leads, has_next)
+        return ListingPage(leads, has_next, none_listed=shown is not None and _int(shown[2]) == 0)
 
     def wanted(self, lead: Lead, query: ScrapeQuery, places: PlaceResolver) -> bool:
         card = lead.card

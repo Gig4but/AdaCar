@@ -249,6 +249,8 @@ class _Crawl:
         self.done_kraje: list[str] = []  # regions whose listing was read to the end
         self.failures = 0  # pages in a row the site did not answer
         self.unfinished: set[str] = set()  # see the module docstring
+        self.broken = False
+        self.none_listed = False
 
     def run(self) -> CrawlResult:
         source, result = self.source, self.result
@@ -268,7 +270,8 @@ class _Crawl:
                     if not left[kraj]:
                         self.done_kraje.append(kraj)
             self.read_details()
-            result.complete = whole and bool(self.seen) and not result.unreachable
+            found = bool(self.seen) or self.none_listed
+            result.complete = whole and found and not result.unreachable
         except SourceBlocked as exc:
             result.blocked = str(exc)
             log.warning("%s blocked: %s", source.id, exc)
@@ -314,6 +317,7 @@ class _Crawl:
                 resp = self.get(url)
             except httpx.HTTPError as exc:
                 self.unanswered(url, exc)
+                self.broken = True
                 return False, False  # the rest of this listing waits for the next run
             self.failures = 0
             if resp is None:
@@ -334,6 +338,7 @@ class _Crawl:
                 and source.expire_after_days is None
                 and not (source.empty_last_page and page > 1)
             )
+            self.none_listed = self.none_listed or listing.none_listed
             if not listing.has_next or not listing.leads:
                 return True, not empty
             if source.newest_first and not fresh and not resume:
@@ -359,14 +364,17 @@ class _Crawl:
             if lead.card is not None:  # listed at once, not after the whole site was read
                 store.add(lead.card, detail=False)
             return True
+        card_price = lead.card.price if lead.card else None
         if lead.card is not None and not store.has_detail(external_id):
             store.add(lead.card, detail=False)  # updated when it changed
         else:
-            store.touch(external_id)
+            store.touch(external_id, card_price)
         if not lead.fetch_url:
             return False
         if not store.has_detail(external_id):
             self.incomplete.append(lead)
+        elif store.card_price_changed(external_id, card_price):
+            self.changed.append(lead)
         elif lead.modified:
             if store.detail_older_than(external_id, lead.modified):
                 self.changed.append(lead)
@@ -409,7 +417,8 @@ class _Crawl:
             failed_in_row = 0
             car.external_id, car.url = lead.external_id, lead.url
             with store.writing():
-                store.add(merge_card(car, lead.card), detail=True)
+                card_price = lead.card.price if lead.card else None
+                store.add(merge_card(car, lead.card), detail=True, card_price=card_price)
             result.details += 1
             self.progress("details", result.details)
 
@@ -418,16 +427,24 @@ class _Crawl:
         region only), or when unseen for `expire_after_days`."""
         source, result, store = self.source, self.result, self.store
         with store.lock:
-            if result.unreachable:
+            if result.unreachable or result.blocked:
                 return  # ads unseen because the site was down are not gone
             if source.expire_after_days is not None:
+                if self.broken or not (self.seen or self.none_listed):
+                    return
+                if result.complete and store.mostly_unseen(
+                    None if source.nationwide else self.query.kraje, source.kind == "auction"
+                ):
+                    result.complete = False
+                    log.warning("%s: most known ads not listed any more: none expired", source.id)
+                    return
                 store.expire_unseen(source.expire_after_days)
             elif result.complete or self.done_kraje:
                 # A region read to the end counts even when another one's listing broke off.
                 kraje: list[str] | None = self.done_kraje
                 if result.complete:
                     kraje = None if source.nationwide else self.query.kraje
-                if store.mostly_unseen(kraje):
+                if store.mostly_unseen(kraje, source.kind == "auction"):
                     result.complete = False
                     log.warning("%s: most known ads not listed any more: none expired", source.id)
                 else:

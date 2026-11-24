@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html lang="cs-cz" class="ie6"><![endif]-->
+<!--[if IE 7 ]><html lang="cs-cz" class="ie7"><![endif]-->
+<!--[if IE 8 ]><html lang="cs-cz" class="ie8"><![endif]-->
+<!--[if IE 9 ]><html lang="cs-cz" class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="cs-cz"><!--<![endif]-->
+<head>
+
+<style>
+#cconsent-bar {
+    font-size: 17px !important;
+    line-height: 32px !important;
+    max-width: 100vw;
+    max-height: 80vh;
+    overflow: auto;
+    box-shadow: 0 0 2rem rgba(0,0,0,0.75);
+}
+#cconsent-bar .ccb__wrapper {
+  justify-content: end !important;
+}
+#cconsent-bar button {
+    font-size: 20px !important;
+}
+#cconsent-bar .ccb__wrapper {
+  max-width: 1070px !important;
+}
+</style>
+
+<script src="/js/cookieconsent.min.js"></script>
+<script>
+window.CookieConsent.init({
+    modalMainTextMoreLink: null,
+    barTimeout: 1000,
+    theme: {
+        barColor: '#333',
+        barTextColor: '#FFF',
+        barMainButtonColor: '#af1d2c',
+        barMainButtonTextColor: '#FFF',
+        modalMainButtonColor: '#666',
+        modalMainButtonTextColor: '#FFF',
+    },
+    language: {
+        current: 'cs',
+        locale: {
+            cs: {
+                barMainText: 'Webové stránky AutoVolf.cz používají cookies a další technologie k tomu, aby zajistily spolehlivost a bezpečnost našich stránek, sledovaly jejich výkonnost a zprostředkovaly personalizovaný nákupní zážitek a cílenou reklamu. Za tímto účelem shromažďujeme informace o uživatelích, jejich chování a zařízeních. Kliknutím na tlačítko “Rozumím”, toto přijímáte a souhlasíte s tím, že tyto informace budeme sdílet se třetími stranami, např. našimi obchodními partnery. Pokud toto odmítnete budeme používat jen základní cookies a bohužel nebudete dostávat žádný personalizovaný obsah. Pro podrobnosti a nastavení vlastních úprav zvolte možnost “Pokročilé nastavení”. Své preference můžete kdykoliv upravit.',
+                barLinkSetting: 'Pokročilé nastavení',
+                barBtnAcceptAll: 'Rozumím',
+                modalMainTitle: 'Nastavení souborů cookie',
+                modalMainText: 'Váš prohlížeč ukládá každou zprávu do malého souboru, který se nazývá cookie. Když si ze serveru vyžádáte další stránku, váš prohlížeč odešle cookie zpět na server. Soubory cookies byly navrženy tak, aby byly spolehlivým mechanismem, pomocí kterého si webové stránky zapamatují informace nebo zaznamenají aktivitu uživatele při prohlížení.',
+                modalBtnSave: 'Uložit aktuální nastavení ',
+                modalBtnAcceptAll: 'Přijmout všechny soubory cookies a zavřít',
+                modalAffectedSolutions: 'Dotčené služby:',
+                learnMore: 'Více informací',
+                on: 'Zap.',
+                off: 'Vyp.',
+            }
+        }
+    },
+    categories: {
+        necessary: {
+            needed: true,
+            wanted: true,
+            checked: true,
+            language: {
+                locale: {
+                    cs: {
+                        name: 'Nezbytně nutné cookies',
+                        description: 'Tyto cookies jsou vyžadovány pro správnou funkčnost našich webových stránek a v našem systému je nelze vypnout.',
+                    }
+                }
+            }
+        },
+        various: {
+            needed: false,
+            wanted: true,
+            checked: true,
+            language: {
+                locale: {
+                    cs: {
+                        name: 'Ostatní cookies',
+                        description: 'Soubory cookies určené pro analýzu výkonu webu a reklamní účely.',
+                    }
+                }
+            }
+        }
+    },
+    services: {
+        phpsess: {
+            category: 'necessary',
+            type: 'dynamic-script',
+            search: '',
+            cookies: [{
+                    name: 'PHPSESSID',
+                    domain: '.${window.location.hostname}'
+                },
+                {
+                    name: 'carLast',
+                    domain: '.${window.location.hostname}'
+                },
+                {
+                    name: 'carBack',
+                    domain: '.${window.location.hostname}'
+                },
+                {
+                    name: 'collapse-filter',
+                    domain: '.${window.location.hostname}'
+                }
+            ],
+            language: {
+                locale: {
+                    cs: {
+                        name: 'PHPSESSID, carLast, carBack - Systémové Cookies'
+                    }
+                }
+            }
+        },
+        analytics: {
+            category: 'various',
+            type: 'dynamic-script',
+            search: 'analytics',
+            cookies: [{
+                    name: '_gid',
+                    domain: '.${window.location.hostname}'
+                },
+                {
+                    name: /^_ga/,
+                    domain: '.${window.location.hostname}'
+                },
+                {
+                    name: /^_utm/,
+                    domain: '.${window.location.hostname}'
+                }
+            ],
+            language: {
+                locale: {
+                    cs: {
+                        name: 'Google Analytics'
+                    }
+                }
+            }
+        },
+        ads: {
+            category: 'various',
+            type: 'dynamic-script',
+            search: 'ads',
+            cookies: [{
+                    name: '_gid',
+                    domain: '.${window.location.hostname}'
+                },
+                {
+                    name: /^_ga/,
+                    domain: '.${window.location.hostname}'
+                },
+                {
+                    name: /^_utm/,
+                    domain: '.${window.location.hostname}'
+                },
+                {
+                    name: 'IDE',
+                    domain: '.doubleclick.net'
+                }
+            ],
+            language: {
+                locale: {
+                    cs: {
+                        name: 'Google Ads'
+                    }
+                }
+            }
+        },
+        adsense: {
+            category: 'various',
+            type: 'dynamic-script',
+            search: '',
+            cookies: [{
+                    name: '_gcl_au',
+                    domain: '.${window.location.hostname}'
+                }
+            ],
+            language: {
+                locale: {
+                    cs: {
+                        name: 'Google Adsense'
+                    }
+                }
+            }
+        },
+        seznam: {
+            category: 'various',
+            type: 'dynamic-script',
+            search: 'seznam',
+            cookies: [{
+                    name: 'sid',
+                    domain: '.seznam.cz'
+                }
+            ],
+            language: {
+                locale: {
+                    cs: {
+                        name: 'Sklik'
+                    }
+                }
+            }
+        },
+        facebook: {
+            category: 'various',
+            type: 'dynamic-script',
+            search: 'facebook',
+            cookies: [{
+                name: /^_fbp/,
+                domain: '.${window.location.hostname}'
+            }],
+            language: {
+                locale: {
+                    cs: {
+                        name: 'Facebook'
+                    }
+                }
+            }
+        }
+    }
+});
+</script>
+
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NFXV5W3');</script>
+<!-- End Google Tag Manager -->
+
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="googlebot" content="snippet, archive" />
+<meta name="robots" content="index, follow" />
+<meta name="author" content="Walk - oddělení vývoje | email: kontakt@example.cz" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<title>Ojeté a předváděcí vozy skladem - stránka 20</title>
+<link href="/css/bootstrap.css?v=24" media="all" rel="stylesheet" type="text/css" />
+<link href="/css/default.css?v=24" media="all" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700" media="all" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="/css/jquery/ui-lightness/jquery-ui-1.10.3.custom.min.css?v=4" type="text/css" media="screen" />
+<link rel="stylesheet" href="/css/colorbox/walk/colorbox.css?v=4" type="text/css" media="screen" />
+
+<script type="text/javascript" src="/js/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="/js/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript">var $j = jQuery.noConflict();</script>
+<script type="text/javascript" src="/js/tether.min.js?v=4"></script>
+<script type="text/javascript" src="/js/bootstrap.js?v=4"></script>
+<script type="text/javascript" src="/js/jquery.cookie.min.js?v=4"></script>
+<script type="text/javascript" src="/js/jquery.colorbox-1.4.21.min.js?v=4"></script>
+<script type="text/javascript" src="/js/jquery-ui-1.10.3-i18n.min.js?v=4"></script>
+<script type="text/javascript" src="/js/json2.js?v=4"></script>
+<script type="text/javascript" src="/js/jquery.cycle.3.0.3.min.js?v=4"></script>
+<script type="text/javascript" src="/js/jquery.touchSwipe.min.js?v=4"></script>
+<script type="text/javascript" src="/js/clipboard.min.js?v=4"></script>
+<script type="text/javascript" src="/js/w.js?v=4"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-beta.2/lazyload.js"></script>
+
+<link rel="manifest" href="/js/manifest.json">
+<meta name="apple-itunes-app" content="app-id=id1447108130">
+
+<meta name="theme-color" content="#af1d2c" />
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="page0">
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NFXV5W3"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<header>    
+    <nav class="navbar p-a-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-lg-3">
+                    <div class="pull-xs-right m-t-1 hidden-lg-up hidden-print">
+                        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar">
+                          <i class="menu-icon"></i>
+                          <span class="hidden-xs-down">Menu</span>
+                        </button>
+                    </div>
+                    <a class="d-inline-block p-y-1" href="/">
+                       <img width="200" height="40"
+                            src="/img/cs_CZ/logo-auto-volf.svg"
+                            alt="Auto Volf - ŠKODA - VOLVO - KIA"
+                            class="img-fluid logo" />
+                    </a>
+                </div>        
+                <div class="col-xs-12 col-lg-9 hidden-print">
+                    <div class="collapse navbar-toggleable-md text-center" id="navbar" aria-expanded="false">
+                        <div class="main-nav clearfix text-uppercase pull-lg-left">
+                                                                                                                                                    <ul class="navbar-top nav navbar-nav font-weight-bold pull-lg-left">
+    <li class="nav-item pull-xs-none pull-lg-left">
+        <a class="volvo" href="/volvo">VOLVO</a>
+        <ul>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/nove-vozy-volvo">Nové vozy skladem</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/ojete-vozy-volvo">Ojeté a předváděcí vozy</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/pdf-stazeni/volvo">Katalog vozů v PDF</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/katalog-cenik-volvo">Katalog | Ceník</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/konfigurator-volvo">Konfigurátor</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/operativni-leasing-volvo">Operativní leasing</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/servis#volvo">Servis</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/kontakt#volvo-prodej">Kontakt</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a class="outlink" href="https://volvocars.autovolf.cz/">web Volvo Cars</a>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-item pull-xs-none pull-lg-left">
+        <a class="skoda" href="/skoda">ŠKODA</a>
+        <ul>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/nove-vozy-skoda">Nové vozy skladem</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/ojete-vozy-skoda">Ojeté a předváděcí vozy</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/pdf-stazeni/skoda">Katalog vozů v PDF</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/katalog-cenik-skoda">Katalog | Ceník</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/konfigurator-skoda">Konfigurátor</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/operativni-leasing-skoda">Operativní leasing</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/servis#skoda">Servis</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/kontakt#skoda-prodej">Kontakt</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a class="outlink" href="https://volf.skoda-auto.cz/">web Škoda Auto</a>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-item pull-xs-none pull-lg-left">
+        <a class="kia" href="/kia">KIA</a>
+        <ul>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/nove-vozy-kia">Nové vozy skladem</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/ojete-vozy-kia">Ojeté a předváděcí vozy</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/pdf-stazeni/kia">Katalog vozů v PDF</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/katalog-cenik-kia">Katalog | Ceník</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/konfigurator-kia">Konfigurátor</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/operativni-leasing-kia">Operativní leasing</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/servis#kia">Servis</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/kontakt#kia-prodej">Kontakt</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="https://www.kia.com/cz/dealer/auto-volf/">web Kia</a>
+            </li>
+        </ul>
+    </li>
+</ul>                                                        <div class="navbar-top nav navbar-nav pull-lg-left">
+                                <div class="nav-separator nav-item pull-xs-left hidden-md-down">|</div>
+                            </div>
+                                                                                                                                                    <ul class="navbar-top nav navbar-nav pull-lg-left">
+    <li class="nav-item pull-xs-none pull-lg-left">
+        <a class="skladem" href="/nove-vozy">Nové vozy</a>
+    </li>
+    <li class="nav-item pull-xs-none pull-lg-left">
+        <a class="skladem" href="/ojete-vozy">Ojeté vozy</a>
+    </li>
+    <li class="nav-item pull-xs-none pull-lg-left">
+        <a href="/servis">Servis</a>
+        <ul>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/servis#sluzby">Servis a služby</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/online-objednavka-servisu">Online objednávka do servisu</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/servis#nahradni-vozy">Náhradní vozy</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/servis#pomoc">Pomoc v nouzi</a>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-item pull-xs-none pull-lg-left">
+        <a href="/o-firme">O firmě</a>
+        <ul>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/o-firme#historie">Historie společnosti</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/fotogalerie-plzen">Fotogalerie Plzeň</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/fotogalerie-holysov">Fotogalerie Holýšov</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/fotogalerie-stribro">Fotogalerie Stříbro</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/fotogalerie-domazlice">Fotogalerie Domažlice</a>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-item pull-xs-none pull-lg-left">
+        <a href="/kontakt">Kontakt</a>
+    </li>
+</ul>                                                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main>
+        <div class="bg-inverse bg-car-used p-t-3">
+        <div id="top-content" class="container text-xs-center p-y-3">
+            <p class="text-uppercase m-b-1">Prověřené vozy bez obav</p>
+            <h1>Ojeté a předváděcí vozy skladem</h1>
+        </div>
+    </div>
+    <div class="container p-t-1 hidden-sm-down small-lg-down text-uppercase hidden-print">
+        
+<div class="volf-icons row text-xs-center m-t-1 m-x--025 flexbox">
+            <div class="col-xs-4 col-sm-2 p-a-025">
+            <img class="m-b-1" src="/img/icons/icon-financovani.svg" alt="ikona Financování" />
+            <p>Značkové financování a&nbsp;pojištění</p>
+        </div>
+            <div class="col-xs-4 col-sm-2 p-a-025">
+            <img class="m-b-1" src="/img/icons/icon-garance.svg" alt="ikona Garance kilometrů" />
+            <p>Garance kilometrů a&nbsp;technického stavu</p>
+        </div>
+            <div class="col-xs-4 col-sm-2 p-a-025">
+            <img class="m-b-1" src="/img/icons/icon-zaruka.svg" alt="ikona Prodloužená záruka" />
+            <p>Prodloužená záruka až&nbsp;5&nbsp;let</p>
+        </div>
+            <div class="col-xs-4 col-sm-2 p-a-025">
+            <img class="m-b-1" src="/img/icons/icon-rocni-vozy.svg" alt="ikona Roční vozy" />
+            <p>Roční vozy do 18&nbsp;měsíců / 30&nbsp;000&nbsp;km</p>
+        </div>
+            <div class="col-xs-4 col-sm-2 p-a-025">
+            <img class="m-b-1" src="/img/icons/icon-profesionalni-pristup.svg" alt="ikona Profesionální přístup" />
+            <p>Profesionální přístup</p>
+        </div>
+            <div class="col-xs-4 col-sm-2 p-a-025">
+            <img class="m-b-1" src="/img/icons/icon-pece.svg" alt="ikona 100% péče" />
+            <p>100% péče a&nbsp;jistota</p>
+        </div>
+    </div>
+    </div>
+
+<div class="bg-faded shadow-inner navbar-toggleable-md collapse" id="collapseFilter">
+    
+<div id="car-search-container" class="container p-y-3">
+    <h3>Vyhledávání</h3>
+    <div class="row">
+        <form id="car-search-form"
+              method="post"
+              action="/vozy-skladem#show"
+              enctype="application/x-www-form-urlencoded">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 form-group">
+                <label for="stavID" class="form-control-label text-muted h6">Stav</label>
+                
+<select name="stavId" id="stavId" class="form-control custom-select">
+    <option value="0">Nerozhoduje</option>
+    <option value="1">Nové a předváděcí</option>
+    <option value="2" selected="selected">Ojeté a předváděcí</option>
+</select>            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 form-group">
+                <label for="znackaId" class="form-control-label text-muted h6">Značka</label>
+                
+<select name="znackaId" id="znackaId" class="form-control custom-select">
+    <option value="0">Nerozhoduje</option>
+    <option value="1">Škoda</option>
+    <option value="3">Volvo</option>
+    <option value="23">Kia</option>
+    <option value="7">Volkswagen</option>
+    <option value="8">Hyundai</option>
+</select>            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 form-group">
+                <label for="modelId" class="form-control-label text-muted h6">Model</label>
+                
+<select name="modelId" id="modelId" class="form-control custom-select">
+    <option value="0">Nerozhoduje</option>
+</select>            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 form-group">
+                <label for="karoserieId" class="form-control-label text-muted h6">Karoserie</label>
+                
+<select name="karoserieId" id="karoserieId" class="form-control custom-select">
+    <option value="0">Nerozhoduje</option>
+    <option value="1">Hatchback</option>
+    <option value="2">Kombi</option>
+    <option value="7">Liftback</option>
+    <option value="3">Sedan</option>
+    <option value="4">MPV</option>
+    <option value="5">SUV</option>
+    <option value="9">Osobní</option>
+</select>            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 form-group">
+                <label for="palivoId" class="form-control-label text-muted h6">Palivo</label>
+                
+<select name="palivoId" id="palivoId" class="form-control custom-select">
+    <option value="0">Nerozhoduje</option>
+    <option value="1">Benzin</option>
+    <option value="2">Nafta</option>
+    <option value="3">Elektro</option>
+    <option value="6">Hybrid</option>
+</select>            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 form-group">
+                <label for="priceFrom" class="form-control-label text-muted h6">Cena od</label>
+                
+<select name="priceFrom" id="priceFrom" class="form-control custom-select">
+    <option value="0">Nerozhoduje</option>
+    <option value="50000">50 000</option>
+    <option value="100000">100 000</option>
+    <option value="150000">150 000</option>
+    <option value="200000">200 000</option>
+    <option value="250000">250 000</option>
+    <option value="300000">300 000</option>
+    <option value="350000">350 000</option>
+    <option value="400000">400 000</option>
+    <option value="450000">450 000</option>
+    <option value="500000">500 000</option>
+    <option value="750000">750 000</option>
+    <option value="1000000">1 000 000</option>
+    <option value="2000000">2 000 000</option>
+</select>            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 form-group">
+                <label for="priceTo" class="form-control-label text-muted h6">Cena do</label>
+                
+<select name="priceTo" id="priceTo" class="form-control custom-select">
+    <option value="0">Nerozhoduje</option>
+    <option value="50000">50 000</option>
+    <option value="100000">100 000</option>
+    <option value="150000">150 000</option>
+    <option value="200000">200 000</option>
+    <option value="250000">250 000</option>
+    <option value="300000">300 000</option>
+    <option value="350000">350 000</option>
+    <option value="400000">400 000</option>
+    <option value="450000">450 000</option>
+    <option value="500000">500 000</option>
+    <option value="750000">750 000</option>
+    <option value="1000000">1 000 000</option>
+    <option value="2000000">2 000 000</option>
+    <option value="3000000">3 000 000</option>
+</select>            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 form-group">
+                
+<input type="hidden" name="orderBy" value="low" id="orderBy" />                <label for="submit-search" class="form-control-label text-muted h6"></label>
+                <button id="submit-search" type="submit" class="btn btn-primary btn-block">Zobrazit vozy <span>(192)</span></button>
+            </div>
+        </form>
+    </div>
+</div>    
+</div>
+
+<a id="collapseFilterBtn" class="btn btn-primary btn-block rounded-0 text-lowercase hidden-lg-up collapsed hidden-print" type="button" data-toggle="collapse" href="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter">
+    → upravit filtr
+</a>  
+  
+
+    <div id="main" class="container p-y-3">
+        
+        
+
+<div class="row m-b-2">
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-6">
+        <p id="car-headline" class="h3 p-t-2 m-t-1">Vozy skladem</p>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 p-t-2 hidden-print">
+                    <a href="#" class="pdf-download btn btn-outline-primary btn-block">PDF výpis ke stažení</a>
+            </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 form-group hidden-print">
+        <label for="orderByFake" class="form-control-label text-muted h6">Řadit dle</label>
+        <select id="orderByFake" name="orderByFake"  class="form-control custom-select">
+            <option value="low">Od nejlevnějšího</option>
+            <option value="high">Od nejdražšího</option>
+        </select>
+    </div>
+</div>
+
+        
+
+
+<div class="row flexbox">
+            <div class="col-xs-12 col-sm-6 col-lg-3 m-b-2 text-xs-center">
+            <a href="/vuz-skladem/9029/volvo-xc90-ultra-bright-t8-awd-299kw" class="card text-black h-100 m-b-0">
+                <div class="card-block h-100 flexbox">
+                    <div class="w-100 m-b-auto m-t-0">
+                      <div class="embed-responsive embed-responsive-4by3">
+                                                                                     <img class="img-fluid m-x-auto" src="/share/cache/image/car_list/outsidebox/vuz-predvadeci-hlavni/116242.jpg"
+                                alt="Volvo XC90 Ultra Bright T8 AWD 299kW" />
+                                                </div>
+                      <hr />
+                      <h2 class="h4 text-truncate">Volvo XC90 Ultra Bright</h2>
+                      <p class="m-b-1">
+                          T8 AWD <span class="text-primary">|</span>
+                          299kW <span class="text-primary">|</span>
+                          8° automat <span class="text-primary">|</span>
+                          SUV                      </p>
+                      
+                    </div>
+                    <div class="w-100 m-t-auto">
+                      <p class="m-b-05">
+                                                      <del>2 724 500 Kč</del>
+                                                    <span class="d-inline-block">
+                                                              <span class="text-success h4">1 999 900 Kč</span>
+                                                                                              <small>vč DPH</small>
+                                                        </span>
+                      </p>
+                      
+                        
+                                                                      
+                                            </div>
+                                                                <ul class="car-list-tags list-unstyled text-uppercase text-xs-left">
+                                                            <li class="m-b-0"><span class="tag tag-success">předváděcí vůz</span></li>
+                                                    </ul>
+                    
+                                            <ul class="car-list-compare-fav-btns list-unstyled text-xs-right">
+                            <li class="m-b-0">
+                                                                    <span data-id="9029" data-state="0" class="fav-button">
+                                        <img class="p-a-025" src="/img/icon-favorite.svg" width="26" height="26">
+                                        <span>Oblíbené</span>
+                                    </span>
+                                                            </li>
+                            <li class="m-b-0">
+                                                                    <span data-id="9029" data-state="0" class="compare-button">
+                                        <img class="p-a-025" src="/img/icon-compare.svg" width="26" height="26">
+                                        <span>Porovnat</span>
+                                    </span>
+                                                            </li>
+                        </ul>
+                    
+                </div>
+            </a>
+        </div>
+
+                                                             <div class="col-xs-12 col-sm-6 col-lg-3 m-b-2 text-xs-center">
+                    <a href="/vuz-skladem/4285/skoda-karoq-classic-1-5-tsi-110-kw" class="card text-black h-100 m-b-0"
+                    style="-webkit-box-shadow: 0 0 0 2px rgb(0,180,0); box-shadow: 0 0 0 2px rgb(0,180,0); overflow: hidden;">
+                        <div class="card-block h-100 flexbox">
+                            <div class="w-100 m-b-auto m-t-0">
+                                <div class="embed-responsive embed-responsive-4by3">
+                                                                                                                    <img class="img-fluid m-x-auto" src="/share/cache/image/car_list/outsidebox/vuz-leasingovy-hlavni/86751.png"
+                                             alt="Škoda Karoq Classic 1,5 TSI 110 kW" />
+                                                                    </div>
+                                <hr />
+                                <h2 class="h4 text-truncate">Škoda Karoq Classic</h2>
+                                <p class="m-b-1">
+                                    1,5 TSI <span class="text-primary">|</span>
+                                    110 kW <span class="text-primary">|</span>
+                                    7° automatická <span class="text-primary">|</span>
+                                    SUV                                </p>
+
+                            </div>
+                            <div class="w-100 m-t-auto">
+                                <p class="m-b-05">
+                                                                        <span class="d-inline-block">
+                                                                                                        </span>
+                                </p>
+
+                                
+                                                                                                    <div class="m-b-0 small">
+                                        <hr class="m-y-0">
+                                        <div class="p-a-05">
+                                            Měsíční splátka
+                                            <span tabindex="0" data-toggle="popover"
+                                                  data-trigger="hover" data-placement="top" data-html="true"
+                                                                                              title="Není to žádná věda"
+                                                  data-content="jedná se o výši měsíční splátky bez DPH, která pro Vás bude platit po celou dobu pronájmu při zvolených parametrech produktu. Výše splátky v sobě zahrnuje povinné ručení, havarijní pojištění a poplatky s provozem vozu spojené.">
+                                                                                          <img src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDQ5MCA0OTAiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDQ5MCA0OTA7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iMTZweCIgaGVpZ2h0PSIxNnB4Ij4KPGc+Cgk8Zz4KCQk8Zz4KCQkJPHBhdGggZD0iTTI0NSw0OTBDMTA5LjksNDkwLDAsMzgwLjEsMCwyNDVTMTA5LjksMCwyNDUsMHMyNDUsMTA5LjksMjQ1LDI0NVMzODAuMSw0OTAsMjQ1LDQ5MHogTTI0NSw2MkMxNDQuMSw2Miw2MiwxNDQuMSw2MiwyNDUgICAgIHM4Mi4xLDE4MywxODMsMTgzczE4My04Mi4xLDE4My0xODNTMzQ1LjksNjIsMjQ1LDYyeiIgZmlsbD0iIzAwMDAwMCIvPgoJCTwvZz4KCQk8Zz4KCQkJPGc+CgkJCQk8Y2lyY2xlIGN4PSIyNDEuMyIgY3k9IjE1OS4yIiByPSIyOS4xIiBmaWxsPSIjMDAwMDAwIi8+CgkJCTwvZz4KCQkJPGc+CgkJCQk8cG9seWdvbiBwb2ludHM9IjI4NS4xLDM1OS45IDI3MC40LDM1OS45IDIxOS42LDM1OS45IDIwNC45LDM1OS45IDIwNC45LDMyMSAyMTkuNiwzMjEgMjE5LjYsMjU0LjggMjA1LjEsMjU0LjggMjA1LjEsMjE1LjkgICAgICAgMjE5LjYsMjE1LjkgMjYzLjEsMjE1LjkgMjcwLjQsMjE1LjkgMjcwLjQsMzIxIDI4NS4xLDMyMSAgICAgIiBmaWxsPSIjMDAwMDAwIi8+CgkJCTwvZz4KCQk8L2c+Cgk8L2c+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==" />
+                                        </span>
+                                        </div>
+                                    </div>
+                                    <div class="p-b-0 h4 text-primary">od 6 424 Kč</div>
+                                    <div class="m-b-0 small">bez DPH</div>
+                                
+                            </div>
+                                                                                        <ul class="car-list-tags list-unstyled text-uppercase text-xs-left" style="width: 100%; top: 0;">
+                                                                            <li class="m-b-0" ><span style="width: 102%" class="tag tag-success">operativní leasing</span></li>
+                                                                    </ul>
+                            
+                        </div>
+                    </a>
+                </div>
+                            <div class="col-xs-12 col-sm-6 col-lg-3 m-b-2 text-xs-center">
+            <a href="/vuz-skladem/9115/volvo-ex90-ultra-twin-motor-335" class="card text-black h-100 m-b-0">
+                <div class="card-block h-100 flexbox">
+                    <div class="w-100 m-b-auto m-t-0">
+                      <div class="embed-responsive embed-responsive-4by3">
+                                                                                     <img class="img-fluid m-x-auto" src="/share/cache/image/car_list/outsidebox/vuz-predvadeci-hlavni/118598.png"
+                                alt="Volvo EX90 ULTRA TWIN MOTOR 335" />
+                                                </div>
+                      <hr />
+                      <h2 class="h4 text-truncate">Volvo EX90 ULTRA</h2>
+                      <p class="m-b-1">
+                          TWIN MOTOR <span class="text-primary">|</span>
+                          335 <span class="text-primary">|</span>
+                          1° automatická <span class="text-primary">|</span>
+                          SUV                      </p>
+                      
+                    </div>
+                    <div class="w-100 m-t-auto">
+                      <p class="m-b-05">
+                                                      <del>2 781 500 Kč</del>
+                                                    <span class="d-inline-block">
+                                                              <span class="text-success h4">2 259 900 Kč</span>
+                                                                                              <small>vč DPH</small>
+                                                        </span>
+                      </p>
+                      
+                        
+                                                                      
+                                            </div>
+                                                                <ul class="car-list-tags list-unstyled text-uppercase text-xs-left">
+                                                            <li class="m-b-0"><span class="tag tag-success">dodání 3-6 měsíců</span></li>
+                                                            <li class="m-b-0"><span class="tag tag-success">předváděcí vůz</span></li>
+                                                    </ul>
+                    
+                                            <ul class="car-list-compare-fav-btns list-unstyled text-xs-right">
+                            <li class="m-b-0">
+                                                                    <span data-id="9115" data-state="0" class="fav-button">
+                                        <img class="p-a-025" src="/img/icon-favorite.svg" width="26" height="26">
+                                        <span>Oblíbené</span>
+                                    </span>
+                                                            </li>
+                            <li class="m-b-0">
+                                                                    <span data-id="9115" data-state="0" class="compare-button">
+                                        <img class="p-a-025" src="/img/icon-compare.svg" width="26" height="26">
+                                        <span>Porovnat</span>
+                                    </span>
+                                                            </li>
+                        </ul>
+                    
+                </div>
+            </a>
+        </div>
+
+                      
+</div>        <div class="text-xs-center p-b-3">
+        <div class="d-inline-block paginator-car">
+            <ul class="m-y-0 m-x-1 pagination">
+                
+                
+                                                    
+                                    <li class="page-item">
+                        <a class="page-link" href="/ojete-vozy?stavId=2">«</a>
+                    </li>
+                
+                <!-- Numbered page links -->
+                                    <li class="page-item ">
+                                            
+                        
+                        <a class="page-link" href="/ojete-vozy/11?stavId=2">11</a>
+                                        </li>
+                                    <li class="page-item ">
+                                            
+                        
+                        <a class="page-link" href="/ojete-vozy/12?stavId=2">12</a>
+                                        </li>
+                                    <li class="page-item ">
+                                            
+                        
+                        <a class="page-link" href="/ojete-vozy/13?stavId=2">13</a>
+                                        </li>
+                                    <li class="page-item ">
+                                            
+                        
+                        <a class="page-link" href="/ojete-vozy/14?stavId=2">14</a>
+                                        </li>
+                                    <li class="page-item ">
+                                            
+                        
+                        <a class="page-link" href="/ojete-vozy/15?stavId=2">15</a>
+                                        </li>
+                                    <li class="page-item ">
+                                            
+                        
+                        <a class="page-link" href="/ojete-vozy/16?stavId=2">16</a>
+                                        </li>
+                                    <li class="page-item ">
+                                            
+                        
+                        <a class="page-link" href="/ojete-vozy/17?stavId=2">17</a>
+                                        </li>
+                                    <li class="page-item ">
+                                            
+                        
+                        <a class="page-link" href="/ojete-vozy/18?stavId=2">18</a>
+                                        </li>
+                                    <li class="page-item ">
+                                            
+                        
+                        <a class="page-link" href="/ojete-vozy/19?stavId=2">19</a>
+                                        </li>
+                                    <li class="page-item active">
+                                            <span class="page-link">20</span>
+                                        </li>
+                
+                <!-- Next page link -->
+                            </ul>
+        </div>
+    </div>
+
+
+    </div>
+
+    <div style="bottom: 0;width: 100%; display: none; z-index: 3; left: 0;" class="bg-primary pos-fixed shadow" id="compare-ribbon">
+    <div class="container text-xs-center p-x-0">
+        <p class="m-a-0">
+            <a id="compare-link" style="display: none;" href="/porovnavac-vozu" class="m-x-05 m-sm-x-1 text-nowrap">
+                <img class="m-sm-r-05" src="/img/icon-compare-white.svg" width="24" height="24"><span class="hidden-sm-down">V porovnávači máte:</span><!-- 
+             --><strong class="d-inline-block m-y-05 m-x-05">
+                    <span id="compare-ribbon-text" class="tag bg-white text-black text-xs-center" style="border-radius: 50%;width: 2rem;line-height: 1.2rem;">0</span>
+                    <span id="compare-ribbon-text2">vozidel</span>
+                </strong></a>
+            <a id="favorite-link" style="display: none;" href="/oblibene-vozy" class="m-x-05 m-sm-x-1 text-nowrap">
+                <img class="m-sm-r-05" src="/img/icon-favorite-white.svg" width="24" height="24"><span class="hidden-sm-down">V oblíbených máte:</span><!-- 
+             --><strong class="d-inline-block m-y-05 m-x-05">
+                    <span id="favorite-ribbon-text" class="tag bg-white text-black text-xs-center" style="border-radius: 50%;width: 2rem;line-height: 1.2rem;">0</span>
+                    <span id="favorite-ribbon-text2">vozidel</span>
+                </strong></a>
+        </p>
+    </div>
+</div>    
+</main>
+
+<aside id="bottom-wrap" class="">
+    <div class="bg-primary">
+        <div class="container text-xs-center p-x-0 p-y-1">
+            <div class="infobox infoboxIdrychlykontakt" data-component-name="infobox"><p class="m-a-0"><img class="m-r-1 hidden-md-down" src="/img/icon-phone-white.svg" alt="ikona telefon" width="24" height="24" /> <strong class="m-r-2 text-uppercase hidden-lg-down">Rychlý kontakt</strong> <span class="d-inline-block m-y-1"><strong>Plzeň</strong> <br class="hidden-lg-up" /><a href="tel:+420-300000000">+420 300 000 000</a></span> <span class="m-x-1">|</span> <span class="d-inline-block m-y-1"><strong>Domažlice</strong> <br class="hidden-lg-up" /><a href="tel:+420-300000000">+420 300 000 000</a></span> <br class="hidden-md-up" /> <span class="m-x-1 hidden-sm-down">|</span> <span class="d-inline-block m-y-1"><strong>Stříbro</strong> <br class="hidden-lg-up" /><a href="tel:+420-300000000">+420 300 000 000</a></span> <span class="m-x-1">|</span> <span class="d-inline-block m-y-1"><strong>Holýšov</strong> <br class="hidden-lg-up" /><a href="tel:+420-300000000">+420 300 000 000</a></span></p></div>        </div>
+    </div>
+    <div id="bottom" class="container p-y-3 m-b-0 text-xs-center text-sm-left hidden-print">
+                <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 hidden-md-down">
+                <h3 class="h5 text-uppercase">Konfigurátory</h3>
+                <hr />
+                                                    <ul class="list-unstyled navbar-bottom">
+    <li class="list-item">
+        <a href="/konfigurator-volvo">Konfigurátor VOLVO</a>
+    </li>
+    <li class="list-item">
+        <a href="/konfigurator-skoda">Konfigurátor Škoda</a>
+    </li>
+    <li class="list-item">
+        <a href="/konfigurator-kia">Konfigurátor KIA</a>
+    </li>
+</ul>                            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 hidden-xs-down">
+                <h3 class="h5 text-uppercase">Často hledáte</h3>
+                <hr />
+                                                    <ul class="list-unstyled navbar-bottom">
+    <li class="list-item">
+        <a href="/nove-vozy">Nové vozy</a>
+    </li>
+    <li class="list-item">
+        <a href="/ojete-vozy">Ojeté vozy</a>
+    </li>
+    <li class="list-item">
+        <a href="/online-objednavka-servisu">Online objednávka do servisu</a>
+    </li>
+    <li class="list-item">
+        <a href="/financovani">Financování a pojištění</a>
+    </li>
+    <li class="list-item">
+        <a href="/oblibene-vozy">Oblíbené vozy</a>
+    </li>
+</ul>                            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 hidden-sm-down">
+                <h3 class="h5 text-uppercase">Kontakty</h3>
+                <hr />
+                                                    <ul class="list-unstyled navbar-bottom">
+    <li class="list-item">
+        <a href="/kontakt#plzen">Plzeň – Borská pole</a>
+    </li>
+    <li class="list-item">
+        <a href="/kontakt#holysov">Holýšov</a>
+    </li>
+    <li class="list-item">
+        <a href="/kontakt#stribro">Stříbro</a>
+    </li>
+    <li class="list-item">
+        <a href="/kontakt#domazlice">Domažlice</a>
+    </li>
+    <li class="list-item">
+        <a href="/servis#pomoc">Pomoc v nouzi</a>
+    </li>
+</ul>                            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <h3 class="h5 text-uppercase">Další informace</h3>
+                <hr />
+                                                    <ul class="list-unstyled navbar-bottom">
+    <li class="list-item">
+        <a href="/fleet-program">Fleet program Škoda</a>
+    </li>
+    <li class="list-item">
+        <a href="/nabidka-zamestnani">Nabídka zaměstnání</a>
+    </li>
+    <li class="list-item">
+        <a href="https://www.facebook.com/autovolf.cz/" target="_blank">Facebook</a>
+    </li>
+    <li class="list-item">
+        <a href="/share/download/web/1740.pdf">Reklamační řád</a>
+    </li>
+    <li class="list-item">
+        <a href="/share/download/dokumenty/3437.pdf">Zásady zpracování osobních údajů pro zákazníky</a>
+    </li>
+    <li class="list-item">
+        <a href="/share/download/dokumenty/4969.pdf">Upozornění pro věřitele a společníky na jejich práva</a>
+    </li>
+    <li class="list-item">
+        <a class="ccb__edit" href="#">Nastavení cookies</a>
+    </li>
+    <li class="list-item">
+        <a href="/whistleblowing">Whistleblowing</a>
+    </li>
+</ul>                                <div class="infobox infoboxIdpatickabutton" data-component-name="infobox"><p><a href="/poptavka" class="btn btn-block btn-outline-primary">Nezávazně poptat vůz</a></p></div>            </div>
+        </div>
+    </div>
+</aside>
+
+<footer class="">
+    <div id="footer" class="container text-xs-center p-b-2 small">
+        <p class="m-b-0">
+          <a target="_blank" href='https://play.google.com/store/apps/details?id=cz.autovolf.app&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img style="width: 154px;" alt='Nyní na Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/cs_badge_web_generic.png'/></a>
+          <a target="_blank" href="https://itunes.apple.com/cz/app/auto-volf/id1447108130?l=cs" style="vertical-align: middle; display:inline-block;overflow:hidden;background:url(/img/ios-badge.svg) no-repeat;width:135px;height:40px;"></a>
+        </p>  
+
+        <hr class="m-t-0 m-b-1" />
+        <div class="infobox infoboxIdpatickatext" data-component-name="infobox"><p class="pull-xs-left m-a-0">Auto Volf spol. s r.o. | IČ: 49194216 | sídlo: Plzeňská 1444, 349 01 Stříbro</p></div>        <p class="pull-xs-right m-a-0">
+            <span class="hidden-xs-down">Copyright </span>&copy; 2018 - 2026            <a href="http://www.walk.cz">Walk.cz</a>
+        </p>
+    </div>
+</footer>
+
+
+
+<script type="text/javascript">
+//<![CDATA[
+$j(document).ready(function() {
+    
+
+$j(document).on("change", "#car-search-form select", function(e){
+    $j("#car-search-container").addClass('loading');
+    $j.ajax({
+        type : "POST",
+        url  : "/volf-category/ajax-form",
+        data : $j("#car-search-form").serialize(),
+        success: function(data) {
+            var action = $j("#car-search-form").attr("action");
+            $j("#car-search-container").replaceWith(data);
+            $j("#car-search-form").attr("action", action);
+        }
+    });
+});
+
+$j("#orderByFake").val($j("#orderBy").val());
+
+$j(document).on("change", "#orderByFake", function(e){
+        var val = $j("#orderByFake option:selected").val();
+        $j("#orderBy").val(val);
+        $j("#car-search-form").submit();
+});
+
+$j("#collapseFilterBtn").click(function(){
+    $j(this).text($j(this).text() == '↑ skrýt filtr' ? '→ upravit filtr' : '↑ skrýt filtr');
+});
+
+
+var urlTab = document.location.toString();
+
+if (urlTab.match('#')) {
+    if (urlTab.split('#')[1] == 'show') {
+    var showv = $j('#car-search-container:visible').length;
+
+        if (showv > 0) {
+            smoothScrollTo(document.getElementById("car-search-container"), 500);
+        } else {
+            smoothScrollTo(document.getElementById("collapseFilterBtn"), 500);
+        }
+    }
+}
+
+$j(document).on("click",'.pdf-download', function(e){
+    e.preventDefault();
+    location.href='/vozy-pdf?' + $j('#car-search-form').serialize();
+});
+
+
+
+
+    $j('a.image-gallery-item-image').colorbox({"maxWidth":"95%","maxHeight":"95%","previous":"\u00ab","next":"\u00bb","close":"zav\u0159\u00edt","current":"{current} \/ {total}","opacity":0.7});
+    
+
+$j(document).bind('cbox_open', function() {
+   $j('a.colorbox-switch').each(function(index, item){
+        $item = $j(item);
+        var htmlTitle = $item.data('title');
+        var title = $item.attr('title');
+        $item.attr('title', htmlTitle);
+        $item.data('title', title);
+
+    });
+});
+
+$j(document).bind('cbox_closed', function() {
+    $j('a.colorbox-switch').each(function(index, item){
+        $item = $j(item);
+        var htmlTitle = $item.data('title');
+        var title = $item.attr('title');
+        $item.attr('title', htmlTitle);
+        $item.data('title', title);
+    });
+});
+
+$j(document).bind('cbox_open', function() {
+        $j('#colorbox').swipe({
+            //Generic swipe handler for all directions
+            swipeLeft: function(event, direction, distance, duration, fingerCount) {
+                jQuery.colorbox.prev();
+            },
+            swipeRight: function(event, direction, distance, duration, fingerCount) {
+                jQuery.colorbox.next();
+            },
+            //Default is 75px, set to 0 for demo so any distance triggers swipe
+            threshold: 75,
+            swipeStatus:function(event, phase, direction, distance) {
+              //Here we can check the:
+              //phase : 'start', 'move', 'end', 'cancel'
+              //direction : 'left', 'right', 'up', 'down'
+              //distance : Distance finger is from initial touch point in px
+              if (phase=='move') {
+                if (direction=='right') {
+                    $j('#cboxLoadedContent').css('transform', 'translateX(' + distance + 'px');
+                    $j('#cboxLoadedContent').css('opacity', 1 - distance/200);
+                } else if (direction=='left') {
+                    $j('#cboxLoadedContent').css('transform', 'translateX(-' + distance + 'px');
+                    $j('#cboxLoadedContent').css('opacity', 1 - distance/200);
+                }
+              } else if (phase=='cancel') {
+                $j('#cboxLoadedContent').css('transform', 'none');
+                $j('#cboxLoadedContent').css('opacity', 1);
+              }
+            }
+        });
+});
+
+
+$j('.navbar-top > .nav-item > ul').click(function() {
+        $j(this).parent().toggleClass('active');
+}); 
+
+if ($j('.main-nav').has('.active').length) {
+    $j('.main-nav').addClass('active');
+}
+
+
+$j('[data-toggle="popover"]').popover();
+
+$j('a.outlink').prop('target', '_blank');
+
+var volfRibbon = { carsLike: [], carsCompare: [] };
+
+volfRibbon.text = function() {
+
+    var text = 'vozidel';
+
+    if (this.carsCompare.length == 1) {
+        text = 'vozidlo';
+    } else if (this.carsCompare.length > 1 && this.carsCompare.length < 5 ) {
+        text = 'vozidla'
+    }
+
+    $j("#compare-ribbon-text").text(this.carsCompare.length);
+    $j("#compare-ribbon-text2").text(text);
+
+    text = 'vozidel';
+
+    if (this.carsLike.length == 1) {
+        text = 'vozidlo';
+    } else if (this.carsLike.length > 1 && this.carsLike.length < 5 ) {
+        text = 'vozidla'
+    }
+
+    $j("#favorite-ribbon-text").text(this.carsLike.length);
+    $j("#favorite-ribbon-text2").text(text);
+
+};
+
+volfRibbon.run = function() {
+    if (this.carsLike.length > 0 || this.carsCompare.length > 0) {
+        $j("#compare-ribbon").css('display', 'block');
+        volfRibbon.text();
+        if (this.carsLike.length > 0) {
+            $j("#favorite-link").css('display', '');
+        } else {
+            $j("#favorite-link").css('display', 'none');
+        }
+        if (this.carsCompare.length > 0) {
+            $j("#compare-link").css('display', '');
+        } else {
+            $j("#compare-link").css('display', 'none');
+        }
+    }
+};
+
+
+volfRibbon.draw = function() {
+ if (this.carsLike.length > 0 || this.carsCompare.length > 0) {
+        if (this.carsLike.length > 0) {
+            $j("#favorite-link").fadeIn();
+        } else {
+            $j("#favorite-link").css('display', 'none');
+        }
+        if (this.carsCompare.length > 0) {
+            $j("#compare-link").fadeIn();
+        } else {
+            $j("#compare-link").css('display', 'none');
+        }
+        $j("#compare-ribbon").fadeIn();
+    } else {
+        $j("#compare-ribbon").fadeOut();
+    }
+};
+
+
+var gridFav = {
+    'trigger' : '.fav-button'
+};
+
+gridFav.run = function() {
+
+var cookieStart = $j.cookie('carLike');
+var cars = [];
+
+if (cookieStart != null) {
+    cars = JSON.parse(cookieStart);
+}
+
+volfRibbon.carsLike= cars;
+
+
+
+$j(this.trigger).click(function(e){
+    e.preventDefault();
+    var $item = $j(this);
+    var cookie = $j.cookie('carLike');
+    var cars = [];
+
+    if (cookie != null) {
+        cars = JSON.parse(cookie);
+    }
+
+    if ($item.data('state') == '0') {
+        // add
+        cars.push($item.data('id'));
+        $item.attr('data-state', '1');
+        $item.data('state', '1');
+        $item.children('span').text('Odebrat');
+        $item.children('img').attr('src','/img/icon-favorite-active.svg');
+    } else {
+                if (window.location.pathname == '/oblibene-vozy') {
+            $item.parent().parent().parent().parent().parent().fadeOut();
+        }
+
+        // remove
+        for (var i = cars.length - 1; i >= 0; i--) {
+            if (cars[i] == $item.data('id')) {
+                cars.splice(i, 1);
+                $item.attr('data-state', '0');
+                $item.data('state', '0');
+                $item.children('span').text('Oblíbené');
+                $item.children('img').attr('src','/img/icon-favorite.svg');
+            }
+        }
+    }
+
+    $j.cookie('carLike', JSON.stringify(cars), { expires: 120, path: '/' });
+
+                if (window.location.pathname == '/oblibene-vozy' && cars.length == 0) {
+            location.reload();
+        }
+
+    volfRibbon.carsLike = cars;
+    volfRibbon.draw();
+
+    if ($item.data('state') == '1') {
+        var sbmOriginal = $item.children('img');
+        var cart = $j('#favorite-link');
+        var sbm = sbmOriginal.clone();
+        sbm.appendTo($j('body'));
+        var top =  sbmOriginal.offset().top;
+        var left = sbmOriginal.offset().left;
+        sbm.css({
+            'position': 'absolute',
+            'z-index': '100'});
+        sbm.offset({
+            top: top,
+            left: left});
+        sbm.animate({
+            'top': cart.offset().top + 0,
+            'left': cart.offset().left + 0,
+            'width': 26,
+            'height': 26
+            }, 1200, 'easeInOutExpo');
+        sbm.animate({
+            'width': 0,
+            'height': 0
+            }, function () {
+                sbm.remove();
+                volfRibbon.text();
+        });
+    } else {
+        volfRibbon.text();
+    }
+
+});
+};
+
+
+
+var gridCompare = {
+    'trigger' : '.compare-button'
+};
+
+gridCompare.run = function() {
+
+var cookieStart = $j.cookie('carCompare');
+var cars = [];
+
+if (cookieStart != null) {
+    cars = JSON.parse(cookieStart);
+}
+
+volfRibbon.carsCompare = cars;
+
+$j('.compare-remove').click(function(e){
+    console.log('click');
+    setTimeout( function() {
+        if (volfRibbon.carsCompare.length > 0 ) {
+            volfRibbon.carsCompare.splice(-1,1)
+        }
+        volfRibbon.draw();
+        volfRibbon.text();
+    }, 300);
+});
+
+$j(this.trigger).click(function(e){
+    e.preventDefault();
+    var $item = $j(this);
+    var cookie = $j.cookie('carCompare');
+    var cars = [];
+
+    console.log($item.data('state'));
+
+
+    if (cookie != null) {
+        cars = JSON.parse(cookie);
+    }
+
+    if ($item.data('state') == '0') {
+        // add
+        cars.push($item.data('id'));
+        $item.attr('data-state', '1');
+        $item.data('state', '1');
+        $item.children('span').text('Odebrat');
+    } else {
+        // remove
+        for (var i = cars.length - 1; i >= 0; i--) {
+            if (cars[i] == $item.data('id')) {
+                cars.splice(i, 1);
+                $item.attr('data-state', '0');
+                $item.data('state', '0');
+                $item.children('span').text('Porovnat');
+            }
+        }
+    }
+
+    $j.cookie('carCompare', JSON.stringify(cars), { expires: 120, path: '/' });
+    volfRibbon.carsCompare = cars;
+    volfRibbon.draw();
+
+    if ($item.data('state') == '1') {
+        var sbmOriginal = $item.children('img');
+        var cart = $j('#compare-link');
+        var sbm = sbmOriginal.clone();
+        sbm.appendTo($j('body'));
+        var top =  sbmOriginal.offset().top;
+        var left = sbmOriginal.offset().left;
+        sbm.css({
+            'position': 'absolute',
+            'z-index': '100'});
+        sbm.offset({
+            top: top,
+            left: left});
+        sbm.animate({
+            'top': cart.offset().top + 0,
+            'left': cart.offset().left + 0,
+            'width': 26,
+            'height': 26
+            }, 1200, 'easeInOutExpo');
+        sbm.animate({
+            'width': 0,
+            'height': 0
+            }, function () {
+                sbm.remove();
+                volfRibbon.text();
+        });
+    } else {
+        volfRibbon.text();
+    }
+
+
+
+
+});
+
+};
+
+gridFav.run();
+gridCompare.run();
+volfRibbon.run();
+
+
+
+
+});
+//]]>
+
+</script>
+</body>
+</html>

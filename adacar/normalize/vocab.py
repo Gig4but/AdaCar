@@ -18,20 +18,24 @@ def _same(*names: str) -> Labels:
 
 
 MAKES: Labels = _same(
-    "abarth", "Abarth", "alfa-romeo", "Alfa Romeo", "aston-martin", "Aston Martin",
+    "abarth", "Abarth", "alfa-romeo", "Alfa Romeo", "alpina", "Alpina", "alpine", "Alpine",
+    "aston-martin", "Aston Martin",
     "audi", "Audi", "bentley", "Bentley", "bmw", "BMW", "byd", "BYD", "cadillac", "Cadillac",
     "chevrolet", "Chevrolet", "chrysler", "Chrysler", "citroen", "Citroën", "cupra", "Cupra",
     "dacia", "Dacia", "daewoo", "Daewoo", "dodge", "Dodge", "ds", "DS", "ferrari", "Ferrari",
-    "fiat", "Fiat", "ford", "Ford", "honda", "Honda", "hummer", "Hummer", "hyundai", "Hyundai",
+    "fiat", "Fiat", "ford", "Ford", "genesis", "Genesis", "gmc", "GMC", "gwm", "GWM",
+    "honda", "Honda", "hummer", "Hummer", "hyundai", "Hyundai",
     "infiniti", "Infiniti", "isuzu", "Isuzu", "jaguar", "Jaguar", "jeep", "Jeep", "kia", "Kia",
     "lada", "Lada", "lamborghini", "Lamborghini", "lancia", "Lancia", "land-rover", "Land Rover",
     "leapmotor", "Leapmotor", "lexus", "Lexus", "lotus", "Lotus", "maserati", "Maserati",
-    "maxus", "Maxus", "mazda", "Mazda", "mercedes-benz", "Mercedes-Benz", "mg", "MG",
+    "maxus", "Maxus", "mazda", "Mazda", "mclaren", "McLaren", "mercedes-benz", "Mercedes-Benz",
+    "mg", "MG",
     "mini", "Mini", "mitsubishi", "Mitsubishi", "nissan", "Nissan", "opel", "Opel",
     "peugeot", "Peugeot", "polestar", "Polestar", "porsche", "Porsche", "renault", "Renault",
     "rolls-royce", "Rolls-Royce", "saab", "Saab", "seat", "Seat", "skoda", "Škoda",
     "smart", "Smart", "ssangyong", "SsangYong", "subaru", "Subaru", "suzuki", "Suzuki",
     "tesla", "Tesla", "toyota", "Toyota", "volkswagen", "Volkswagen", "volvo", "Volvo",
+    "xpeng", "XPeng",
 )  # fmt: skip
 
 FUELS: Labels = {
@@ -112,6 +116,8 @@ _MAKE_WORDS: dict[str, str] = {
     "alfa": "alfa-romeo",
     "range rover": "land-rover",
     "landrover": "land-rover",
+    "great wall": "gwm",
+    "bmw alpina": "alpina",
 }
 _MAKE_RE = re.compile(
     r"(?<![a-z0-9])("
@@ -126,3 +132,9 @@ def make_code(text: str | None) -> str | None:
         return None
     m = _MAKE_RE.search(fold(text).replace("-", " "))
     return _MAKE_WORDS[m[1]] if m else None
+
+
+def make_end(text: str) -> int | None:
+    """Where the first make named in a text ends ("AUDI A4" -> 4); None without a make."""
+    m = _MAKE_RE.search(fold(text).replace("-", " "))
+    return m.end() if m else None

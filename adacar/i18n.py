@@ -73,6 +73,21 @@ TEXTS: dict[str, dict[str, str]] = {
         "en": "Choose where the app downloads cars from.",
     },
     "sources.kind.portal": {"cs": "Autoportály", "en": "Car portals"},
+    "sources.kind.dealer": {
+        "cs": "Autobazary, prodejci a programy značek",
+        "en": "Dealers and makers' used-car programmes",
+    },
+    "sources.kind.leasing": {
+        "cs": "Leasingové společnosti a půjčovny",
+        "en": "Leasing and rental companies",
+    },
+    "sources.kind.auction": {"cs": "Dražby a aukce", "en": "Auctions"},
+    "sources.auction.hint": {
+        "cs": "Auta prodávaná v dražbě k určitému dni. Cena je vyvolávací (nejnižší podání), "
+        "konečná bývá vyšší; přihazovat lze až po registraci na stránkách dražby.",
+        "en": "Cars sold at auction on a set day. The price is the starting bid and the "
+        "final one is often higher; bidding needs a registration on the auction's site.",
+    },
     "sources.kind.classifieds": {"cs": "Inzertní servery", "en": "Classified ad boards"},
     "sources.classifieds.hint": {
         "cs": "Inzeráty od kohokoli. Ty, které auto neprodávají (výkup, „koupím“, náhradní "

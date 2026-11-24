@@ -1,0 +1,25 @@
+User-agent: *
+Disallow: /zaruky/
+Disallow: /dealerska-sit/prodejni-a-servisni-sit/
+Disallow: /financovani/o-mobilize-financial-services/o-spolecnosti-rci-financial-services-prev/
+Disallow: /prislusenstvi-a-pneumatiky/prislusenstvi-pro-ojete-vozy/
+Disallow: /kontakt/kalkulacka/
+Disallow: /vyhledani-ojeteho-vozidla/
+Disallow: /o-renew/o-renew/
+Disallow: /financovani/caste-dotazy/caste-dotazy/
+Disallow: /financovani/o-mobilize-financial-services/o-mobilize-financial-services/
+Disallow: /zaruky/zaruky-renault/zaruky-na-ojete-vozy/
+Disallow: /zaruky/zaruky-dacia/zaruky-na-ojete-vozy/
+Disallow: /partneri-portalu/partneri-portalu/
+Disallow: /financovani/akcni-nabidka/akce-renew/akce-renew/
+Disallow: /financovani/financovani/
+Disallow: /search/
+Disallow: /data/forms/
+Disallow: /data/jobs/
+Disallow: /data/mailings_preview/
+Disallow: /data/qrcodes/
+Disallow: /data/templates_preview/
+Disallow: /mailings/
+Allow: /
+
+Sitemap: https://renew.renault.cz/sitemap.xml

@@ -1,0 +1,4 @@
+User-agent: *
+Request-rate: 1/5s
+Disallow: /pdf
+Sitemap: https://www.nissan-exclusive.cz/sitemap.xml

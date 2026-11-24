@@ -402,6 +402,30 @@ def test_known_card_only_cars_follow_their_card(sessions, tmp_path):
         assert car.title == "Škoda Fabia – sleva"
 
 
+def test_a_card_price_change_reads_the_ad_again(sessions, tmp_path):
+    site = Site()
+    run(sessions, tmp_path, site, max_details=31)
+    assert site.details() == 25  # the dealers' 6 cars are card only
+    listed = 'id="01" href="/inzerat/01" data-price="250000"'
+    site.first_page = FIRST_PAGE.replace(listed, listed.replace("250000", "230000"))
+    run(sessions, tmp_path, site, max_details=31)
+    assert site.requests.count("https://www.portal.test/inzerat/01") == site.details() == 1
+    with sessions() as s:
+        car = s.scalar(select(Car).join(CarAd).where(CarAd.external_id == "01"))
+        assert (car.price, car.price_was) == (230_000, 250_000)
+    run(sessions, tmp_path, site, max_details=31)
+    assert site.details() == 0
+
+    # Ads stored before card prices were kept only note theirs.
+    with sessions() as s:
+        s.execute(update(CarAd).values(card_price=None))
+        s.commit()
+    run(sessions, tmp_path, site, max_details=31)
+    assert site.details() == 0
+    with sessions() as s:
+        assert s.scalar(select(func.count()).where(CarAd.card_price.is_(None))) == 0
+
+
 def test_failing_detail_pages_keep_the_cards(sessions, tmp_path):
     site = Site()
     site.detail_status = 500
@@ -657,13 +681,137 @@ def test_a_newest_first_source_only_after_opt_in(sessions, tmp_path):
     assert site.details() == 10
 
     # Three weeks unseen: gone.
-    site.answers = {}
+    site.answers = {"https://www.portal.test/auta/": httpx.Response(200, text=page(card("n1")))}
     with sessions() as s:
         for ad in s.scalars(select(CarAd)):
             ad.last_seen_at -= timedelta(days=22)
         s.commit()
     runner = run(sessions, tmp_path, site, sources=[board], choices={"board": 1})
     assert runner.progress.results["board"]["removed"] == 10
+
+
+class Dump(Board):
+    newest_first = False
+    expire_after_days = 3
+
+
+def crawl_dump(sessions, site: Site, dump: Dump) -> set[str]:
+    """One crawl alone (no checks of known ads' pages after it), after the stored ads went
+    unseen for 5 days; the statuses of the ads afterwards."""
+    fetcher = PoliteFetcher(
+        httpx.Client(transport=httpx.MockTransport(site)), delay=0, sleep=lambda s: None
+    )
+    with sessions() as s:
+        for ad in s.scalars(select(CarAd)):
+            ad.last_seen_at -= timedelta(days=5)
+        s.commit()
+        crawl(dump, fetcher, CarStore(s, dump.id), PlaceResolver(s), ScrapeQuery(kraje=[]), 0)
+        return set(s.scalars(select(CarAd.status)))
+
+
+def test_a_listing_broken_off_expires_nothing_unseen(sessions, tmp_path):
+    site, dump = Site(), Dump("dump")
+    site.answers["https://www.portal.test/auta/"] = httpx.Response(
+        200, text=page(*(card(f"b{i}") for i in range(10)), more=True)
+    )
+    site.answers["https://www.portal.test/auta/?page=2"] = httpx.Response(
+        200, text=page(*(card(f"c{i}") for i in range(10)))
+    )
+    run(sessions, tmp_path, site, max_details=20, sources=[dump], choices={"dump": 1})
+    site.answers["https://www.portal.test/auta/?page=2"] = httpx.Response(503)
+    assert crawl_dump(sessions, site, dump) == {"active"}
+
+
+def test_an_error_page_expires_nothing_unseen(sessions, tmp_path):
+    site, dump = Site(), Dump("dump")
+    site.answers["https://www.portal.test/auta/"] = httpx.Response(
+        200, text=page(*(card(f"b{i}") for i in range(10)))
+    )
+    run(sessions, tmp_path, site, max_details=20, sources=[dump], choices={"dump": 1})
+    for answer in (httpx.Response(200, text="<html>údržba</html>"), httpx.Response(404)):
+        site.answers["https://www.portal.test/auta/"] = answer
+        assert crawl_dump(sessions, site, dump) == {"active"}
+    site.answers["https://www.portal.test/auta/"] = httpx.Response(200, text="<html></html>")
+    dump.parse_listing = lambda html, page, places: ListingPage([], False, none_listed=True)
+    assert crawl_dump(sessions, site, dump) == {"expired"}  # the site says: none left
+
+
+def test_a_listing_cut_short_by_an_odd_page_expires_nothing_unseen(sessions, tmp_path):
+    site, dump = Site(), Dump("dump")
+    site.answers["https://www.portal.test/auta/"] = httpx.Response(
+        200, text=page(*(card(f"b{i}") for i in range(10)), more=True)
+    )
+    site.answers["https://www.portal.test/auta/?page=2"] = httpx.Response(
+        200, text=page(*(card(f"c{i}") for i in range(20)))
+    )
+    run(sessions, tmp_path, site, max_details=30, sources=[dump], choices={"dump": 1})
+    site.answers["https://www.portal.test/auta/?page=2"] = httpx.Response(
+        200, text="<html>údržba</html>"
+    )
+    assert crawl_dump(sessions, site, dump) == {"active"}
+    with sessions() as s:
+        for ad in s.scalars(select(CarAd)):
+            ad.last_seen_at -= timedelta(days=5)
+        s.commit()
+    run(sessions, tmp_path, site, sources=[dump], choices={"dump": 1})
+    with sessions() as s:
+        last = s.scalars(select(Run).where(Run.source_id == "dump").order_by(Run.id.desc())).first()
+        assert last is not None and last.status == "partial"
+        assert set(s.scalars(select(CarAd.status))) == {"active"}
+
+
+class Whole(Board):
+    newest_first = False
+    expire_after_days = None
+
+
+def test_a_listing_with_none_left_expires_its_last_ads(sessions, tmp_path):
+    site, whole = Site(), Whole("whole")
+    site.answers["https://www.portal.test/auta/"] = httpx.Response(
+        200, text=page(*(card(f"b{i}") for i in range(3)))
+    )
+    run(sessions, tmp_path, site, max_details=20, sources=[whole], choices={"whole": 1})
+    whole.parse_listing = lambda html, page, places: ListingPage([], False, none_listed=True)
+    assert crawl_dump(sessions, site, whole) == {"expired"}
+
+
+@pytest.mark.parametrize("kind", ["auction", "portal"])
+def test_ended_auctions_gone_at_once_do_not_stop_expiry(sessions, tmp_path, kind):
+    site, whole = Site(), Whole("whole")
+    whole.kind = kind
+    site.answers["https://www.portal.test/auta/"] = httpx.Response(
+        200, text=page(*(card(f"b{i}") for i in range(24)))
+    )
+    run(sessions, tmp_path, site, max_details=30, sources=[whole], choices={"whole": 1})
+    with sessions() as s:
+        for ad in s.scalars(select(CarAd).where(CarAd.external_id.not_in(["b0", "b1"]))):
+            ad.car.expires_at = utcnow() - timedelta(hours=1)
+        s.commit()
+    site.answers["https://www.portal.test/auta/"] = httpx.Response(
+        200, text=page(card("b0"), card("b1"))
+    )
+    crawl_dump(sessions, site, whole)
+    with sessions() as s:
+        statuses = {ad.external_id: ad.status for ad in s.scalars(select(CarAd))}
+    assert statuses["b0"] == statuses["b1"] == "active"
+    expired = sum(status == "expired" for status in statuses.values())
+    assert expired == (22 if kind == "auction" else 0)
+
+
+def test_a_refused_run_expires_nothing(sessions, tmp_path):
+    site, board = Site(), Board("board")
+    site.answers["https://www.portal.test/auta/"] = httpx.Response(
+        200, text=page(*(card(f"b{i}") for i in range(10)))
+    )
+    run(sessions, tmp_path, site, sources=[board], choices={"board": 1})
+    with sessions() as s:
+        for ad in s.scalars(select(CarAd)):
+            ad.last_seen_at -= timedelta(days=22)
+        s.commit()
+    site.answers, site.status = {}, 429
+    run(sessions, tmp_path, site, sources=[board], choices={"board": 1})
+    with sessions() as s:
+        assert set(s.scalars(select(CarAd.status))) == {"active"}
 
 
 def test_a_newest_first_listing_cut_short_is_read_on_next_time(sessions, tmp_path):

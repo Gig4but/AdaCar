@@ -30,8 +30,21 @@ def places(tmp_path, municipalities):
 
 
 def test_sauto_is_opt_in_and_the_rest_on():
-    on = {source_id for source_id, default in SWITCHABLE if default}
-    assert len(SWITCHABLE) == 16 and on == {source_id for source_id, _ in SWITCHABLE} - {"sauto"}
+    ids = [source_id for source_id, _ in SWITCHABLE]
+    off = {source_id for source_id, default in SWITCHABLE if not default}
+    assert len(ids) == len(set(ids)) == 57
+    assert off == {
+        "sauto",
+        "automodul",
+        "carvago",
+        "renault",
+        "renocar",
+        "autoesa",
+        "louda",
+        "havex",
+        "autoingarant",
+        "caraukce",
+    }
     assert set(NEEDS_CONSENT) == {"sauto"}
     assert sauto.SOURCE.obey_robots is False and sauto.SOURCE.delay == 3.0
 
@@ -214,6 +227,27 @@ def test_words_inside_other_words_say_nothing():
     assert cars.gearbox_in_text("Golf", "Převodovka: automatická") == "automatic"
     assert cars.not_offer_reason("Hledám nového majitele pro Fabii") is None
     assert cars.not_offer_reason("Hledám Octavii") == "wanted"
+    for text in ("po předchozí dohodě", "klempířské práce", "větší kufr", "odcizení"):
+        assert cars.fuel_in_text(text) is None and cars.gearbox_in_text(text) is None
+    glued = {
+        "3.0 BiTDi": "diesel",
+        "2.2BHDi": "diesel",
+        "2.0 EcoBlue": "diesel",
+        "1.5 eTSI": "petrol",
+        "60 eTFSi": "petrol",
+        "1.0 TGDI": "petrol",
+        "1.5 VC-T": "petrol",
+        "1.8 FHEV": "hybrid",
+        "1.5 eTSI mHEV": "petrol",
+        "2.2 i-CTDi": "diesel",
+        "2.0 VCDi": "diesel",
+        "1.6 BlueTDI": "diesel",
+        "E 200 BlueCDI": "diesel",
+        "2.0 TwinTDI": "diesel",
+        "1.8 iVTEC": "petrol",
+    }
+    assert {text: cars.fuel_in_text(text) for text in glued} == glued
+    assert cars.body_in_text("BMW 430d GranCoupe") == "coupe"
 
 
 def test_model_names_skip_makes_and_fillers():
@@ -241,3 +275,12 @@ def test_make_codes():
     assert make_code("ŠKODA OCTAVIA") == "skoda"
     assert make_code("Land Rover Defender") == "land-rover"
     assert make_code("Octavia 2.0") is None
+    added = {"Alpine A110": "alpine", "BMW Alpina B3": "alpina", "ALPINA D3 S": "alpina"}
+    added |= {"McLaren 720S": "mclaren", "XPeng G6": "xpeng", "BMW 320d Alpine White": "bmw"}
+    assert {text: make_code(text) for text in added} == added
+
+
+def test_bazos_empty_category_says_so(places):
+    empty = "<html><div>Zobrazeno 0-0 inzerátů z 0</div></html>"
+    assert bazos.SOURCE.parse_listing(empty, 1, places).none_listed
+    assert not bazos.SOURCE.parse_listing(read("bazos/listing_skoda.html"), 1, places).none_listed

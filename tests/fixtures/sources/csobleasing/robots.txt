@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /admin
+Disallow: /api/
+Disallow: /xapi/
+Disallow: /_blazor
+Disallow: /cmsctx/
+Disallow: /hledani
+Disallow: /confirmation-result
+
+Sitemap: https://autosalon.csobleasing.cz/sitemap.xml

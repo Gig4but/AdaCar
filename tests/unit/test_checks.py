@@ -154,6 +154,8 @@ def test_a_vin_of_another_maker_or_year_is_a_warning():
     # The site kept the make of an ad rewritten for another car; the title names the right one.
     assert vin.mismatches(OCTAVIA_VIN, "jaguar", 2018, "Škoda Octavia 2.0 TDI") == []
     assert vin.mismatches("VF1HJD40669617908", "dacia", 2022) == []  # built by Renault
+    assert vin.mismatches("KMHGN4JE9HU000000", "genesis", 2017) == []
+    assert vin.mismatches("KMTG34TA0PU000000", "genesis", 2023) == []
 
 
 # --- the register ------------------------------------------------------------------------------

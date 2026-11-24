@@ -1,0 +1,1857 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html lang="cs-cz" class="ie6"><![endif]-->
+<!--[if IE 7 ]><html lang="cs-cz" class="ie7"><![endif]-->
+<!--[if IE 8 ]><html lang="cs-cz" class="ie8"><![endif]-->
+<!--[if IE 9 ]><html lang="cs-cz" class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="cs-cz"><!--<![endif]-->
+<head>
+
+<style>
+#cconsent-bar {
+    font-size: 17px !important;
+    line-height: 32px !important;
+    max-width: 100vw;
+    max-height: 80vh;
+    overflow: auto;
+    box-shadow: 0 0 2rem rgba(0,0,0,0.75);
+}
+#cconsent-bar .ccb__wrapper {
+  justify-content: end !important;
+}
+#cconsent-bar button {
+    font-size: 20px !important;
+}
+#cconsent-bar .ccb__wrapper {
+  max-width: 1070px !important;
+}
+</style>
+
+<script src="/js/cookieconsent.min.js"></script>
+<script>
+window.CookieConsent.init({
+    modalMainTextMoreLink: null,
+    barTimeout: 1000,
+    theme: {
+        barColor: '#333',
+        barTextColor: '#FFF',
+        barMainButtonColor: '#af1d2c',
+        barMainButtonTextColor: '#FFF',
+        modalMainButtonColor: '#666',
+        modalMainButtonTextColor: '#FFF',
+    },
+    language: {
+        current: 'cs',
+        locale: {
+            cs: {
+                barMainText: 'Webové stránky AutoVolf.cz používají cookies a další technologie k tomu, aby zajistily spolehlivost a bezpečnost našich stránek, sledovaly jejich výkonnost a zprostředkovaly personalizovaný nákupní zážitek a cílenou reklamu. Za tímto účelem shromažďujeme informace o uživatelích, jejich chování a zařízeních. Kliknutím na tlačítko “Rozumím”, toto přijímáte a souhlasíte s tím, že tyto informace budeme sdílet se třetími stranami, např. našimi obchodními partnery. Pokud toto odmítnete budeme používat jen základní cookies a bohužel nebudete dostávat žádný personalizovaný obsah. Pro podrobnosti a nastavení vlastních úprav zvolte možnost “Pokročilé nastavení”. Své preference můžete kdykoliv upravit.',
+                barLinkSetting: 'Pokročilé nastavení',
+                barBtnAcceptAll: 'Rozumím',
+                modalMainTitle: 'Nastavení souborů cookie',
+                modalMainText: 'Váš prohlížeč ukládá každou zprávu do malého souboru, který se nazývá cookie. Když si ze serveru vyžádáte další stránku, váš prohlížeč odešle cookie zpět na server. Soubory cookies byly navrženy tak, aby byly spolehlivým mechanismem, pomocí kterého si webové stránky zapamatují informace nebo zaznamenají aktivitu uživatele při prohlížení.',
+                modalBtnSave: 'Uložit aktuální nastavení ',
+                modalBtnAcceptAll: 'Přijmout všechny soubory cookies a zavřít',
+                modalAffectedSolutions: 'Dotčené služby:',
+                learnMore: 'Více informací',
+                on: 'Zap.',
+                off: 'Vyp.',
+            }
+        }
+    },
+    categories: {
+        necessary: {
+            needed: true,
+            wanted: true,
+            checked: true,
+            language: {
+                locale: {
+                    cs: {
+                        name: 'Nezbytně nutné cookies',
+                        description: 'Tyto cookies jsou vyžadovány pro správnou funkčnost našich webových stránek a v našem systému je nelze vypnout.',
+                    }
+                }
+            }
+        },
+        various: {
+            needed: false,
+            wanted: true,
+            checked: true,
+            language: {
+                locale: {
+                    cs: {
+                        name: 'Ostatní cookies',
+                        description: 'Soubory cookies určené pro analýzu výkonu webu a reklamní účely.',
+                    }
+                }
+            }
+        }
+    },
+    services: {
+        phpsess: {
+            category: 'necessary',
+            type: 'dynamic-script',
+            search: '',
+            cookies: [{
+                    name: 'PHPSESSID',
+                    domain: '.${window.location.hostname}'
+                },
+                {
+                    name: 'carLast',
+                    domain: '.${window.location.hostname}'
+                },
+                {
+                    name: 'carBack',
+                    domain: '.${window.location.hostname}'
+                },
+                {
+                    name: 'collapse-filter',
+                    domain: '.${window.location.hostname}'
+                }
+            ],
+            language: {
+                locale: {
+                    cs: {
+                        name: 'PHPSESSID, carLast, carBack - Systémové Cookies'
+                    }
+                }
+            }
+        },
+        analytics: {
+            category: 'various',
+            type: 'dynamic-script',
+            search: 'analytics',
+            cookies: [{
+                    name: '_gid',
+                    domain: '.${window.location.hostname}'
+                },
+                {
+                    name: /^_ga/,
+                    domain: '.${window.location.hostname}'
+                },
+                {
+                    name: /^_utm/,
+                    domain: '.${window.location.hostname}'
+                }
+            ],
+            language: {
+                locale: {
+                    cs: {
+                        name: 'Google Analytics'
+                    }
+                }
+            }
+        },
+        ads: {
+            category: 'various',
+            type: 'dynamic-script',
+            search: 'ads',
+            cookies: [{
+                    name: '_gid',
+                    domain: '.${window.location.hostname}'
+                },
+                {
+                    name: /^_ga/,
+                    domain: '.${window.location.hostname}'
+                },
+                {
+                    name: /^_utm/,
+                    domain: '.${window.location.hostname}'
+                },
+                {
+                    name: 'IDE',
+                    domain: '.doubleclick.net'
+                }
+            ],
+            language: {
+                locale: {
+                    cs: {
+                        name: 'Google Ads'
+                    }
+                }
+            }
+        },
+        adsense: {
+            category: 'various',
+            type: 'dynamic-script',
+            search: '',
+            cookies: [{
+                    name: '_gcl_au',
+                    domain: '.${window.location.hostname}'
+                }
+            ],
+            language: {
+                locale: {
+                    cs: {
+                        name: 'Google Adsense'
+                    }
+                }
+            }
+        },
+        seznam: {
+            category: 'various',
+            type: 'dynamic-script',
+            search: 'seznam',
+            cookies: [{
+                    name: 'sid',
+                    domain: '.seznam.cz'
+                }
+            ],
+            language: {
+                locale: {
+                    cs: {
+                        name: 'Sklik'
+                    }
+                }
+            }
+        },
+        facebook: {
+            category: 'various',
+            type: 'dynamic-script',
+            search: 'facebook',
+            cookies: [{
+                name: /^_fbp/,
+                domain: '.${window.location.hostname}'
+            }],
+            language: {
+                locale: {
+                    cs: {
+                        name: 'Facebook'
+                    }
+                }
+            }
+        }
+    }
+});
+</script>
+
+<script>
+    dataLayer = [{
+        'itemId': '8039',
+        'pageType': 'offerdetail',
+        'itemPrice': '910000'
+    }];
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NFXV5W3');</script>
+<!-- End Google Tag Manager -->
+
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="googlebot" content="snippet, archive" />
+<meta name="robots" content="index, follow" />
+<meta name="og:type" content="product" />
+<meta name="og:title" content="Škoda Kodiaq Selection 2,0 TDI 142 kW 4x4" />
+<meta name="og:url" content="https://www.autovolf.cz/vuz-skladem/8039/skoda-kodiaq-selection-2-0-tdi-142-kw-4x4" />
+<meta name="og:site_name" content="www.autovolf.cz" />
+<meta name="og:image" content="https://www.autovolf.cz/share/cache/image/car_lightbox/outsidebox/vuz-ojety-hlavni/94711.jpg" />
+<meta name="author" content="Walk - oddělení vývoje | email: kontakt@example.cz" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<title>Škoda Kodiaq Selection 2,0 TDI 142 kW 4x4</title>
+<link href="/css/bootstrap.css?v=24" media="all" rel="stylesheet" type="text/css" />
+<link href="/css/default.css?v=24" media="all" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700" media="all" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="/css/jquery/ui-lightness/jquery-ui-1.10.3.custom.min.css?v=4" type="text/css" media="screen" />
+<link rel="stylesheet" href="/css/colorbox/walk/colorbox.css?v=4" type="text/css" media="screen" />
+
+<script type="text/javascript" src="/js/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="/js/jquery-ui-1.10.3.min.js"></script>
+<script type="text/javascript">var $j = jQuery.noConflict();</script>
+<script type="text/javascript" src="/js/tether.min.js?v=4"></script>
+<script type="text/javascript" src="/js/bootstrap.js?v=4"></script>
+<script type="text/javascript" src="/js/jquery.cookie.min.js?v=4"></script>
+<script type="text/javascript" src="/js/jquery.colorbox-1.4.21.min.js?v=4"></script>
+<script type="text/javascript" src="/js/jquery-ui-1.10.3-i18n.min.js?v=4"></script>
+<script type="text/javascript" src="/js/json2.js?v=4"></script>
+<script type="text/javascript" src="/js/jquery.cycle.3.0.3.min.js?v=4"></script>
+<script type="text/javascript" src="/js/jquery.touchSwipe.min.js?v=4"></script>
+<script type="text/javascript" src="/js/clipboard.min.js?v=4"></script>
+<script type="text/javascript" src="/js/w.js?v=4"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-beta.2/lazyload.js"></script>
+
+<link rel="manifest" href="/js/manifest.json">
+<meta name="apple-itunes-app" content="app-id=id1447108130">
+
+<meta name="theme-color" content="#af1d2c" />
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="page0">
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NFXV5W3"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<header>    
+    <nav class="navbar p-a-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-lg-3">
+                    <div class="pull-xs-right m-t-1 hidden-lg-up hidden-print">
+                        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar">
+                          <i class="menu-icon"></i>
+                          <span class="hidden-xs-down">Menu</span>
+                        </button>
+                    </div>
+                    <a class="d-inline-block p-y-1" href="/">
+                       <img width="200" height="40"
+                            src="/img/cs_CZ/logo-auto-volf.svg"
+                            alt="Auto Volf - ŠKODA - VOLVO - KIA"
+                            class="img-fluid logo" />
+                    </a>
+                </div>        
+                <div class="col-xs-12 col-lg-9 hidden-print">
+                    <div class="collapse navbar-toggleable-md text-center" id="navbar" aria-expanded="false">
+                        <div class="main-nav clearfix text-uppercase pull-lg-left">
+                                                                                                                                                    <ul class="navbar-top nav navbar-nav font-weight-bold pull-lg-left">
+    <li class="nav-item pull-xs-none pull-lg-left">
+        <a class="volvo" href="/volvo">VOLVO</a>
+        <ul>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/nove-vozy-volvo">Nové vozy skladem</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/ojete-vozy-volvo">Ojeté a předváděcí vozy</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/pdf-stazeni/volvo">Katalog vozů v PDF</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/katalog-cenik-volvo">Katalog | Ceník</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/konfigurator-volvo">Konfigurátor</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/operativni-leasing-volvo">Operativní leasing</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/servis#volvo">Servis</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/kontakt#volvo-prodej">Kontakt</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a class="outlink" href="https://volvocars.autovolf.cz/">web Volvo Cars</a>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-item pull-xs-none pull-lg-left">
+        <a class="skoda" href="/skoda">ŠKODA</a>
+        <ul>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/nove-vozy-skoda">Nové vozy skladem</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/ojete-vozy-skoda">Ojeté a předváděcí vozy</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/pdf-stazeni/skoda">Katalog vozů v PDF</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/katalog-cenik-skoda">Katalog | Ceník</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/konfigurator-skoda">Konfigurátor</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/operativni-leasing-skoda">Operativní leasing</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/servis#skoda">Servis</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/kontakt#skoda-prodej">Kontakt</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a class="outlink" href="https://volf.skoda-auto.cz/">web Škoda Auto</a>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-item pull-xs-none pull-lg-left">
+        <a class="kia" href="/kia">KIA</a>
+        <ul>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/nove-vozy-kia">Nové vozy skladem</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/ojete-vozy-kia">Ojeté a předváděcí vozy</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/pdf-stazeni/kia">Katalog vozů v PDF</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/katalog-cenik-kia">Katalog | Ceník</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/konfigurator-kia">Konfigurátor</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/operativni-leasing-kia">Operativní leasing</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/servis#kia">Servis</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/kontakt#kia-prodej">Kontakt</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="https://www.kia.com/cz/dealer/auto-volf/">web Kia</a>
+            </li>
+        </ul>
+    </li>
+</ul>                                                        <div class="navbar-top nav navbar-nav pull-lg-left">
+                                <div class="nav-separator nav-item pull-xs-left hidden-md-down">|</div>
+                            </div>
+                                                                                                                                                    <ul class="navbar-top nav navbar-nav pull-lg-left">
+    <li class="nav-item pull-xs-none pull-lg-left">
+        <a class="skladem" href="/nove-vozy">Nové vozy</a>
+    </li>
+    <li class="nav-item pull-xs-none pull-lg-left">
+        <a class="skladem" href="/ojete-vozy">Ojeté vozy</a>
+    </li>
+    <li class="nav-item pull-xs-none pull-lg-left">
+        <a href="/servis">Servis</a>
+        <ul>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/servis#sluzby">Servis a služby</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/online-objednavka-servisu">Online objednávka do servisu</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/servis#nahradni-vozy">Náhradní vozy</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/servis#pomoc">Pomoc v nouzi</a>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-item pull-xs-none pull-lg-left">
+        <a href="/o-firme">O firmě</a>
+        <ul>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/o-firme#historie">Historie společnosti</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/fotogalerie-plzen">Fotogalerie Plzeň</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/fotogalerie-holysov">Fotogalerie Holýšov</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/fotogalerie-stribro">Fotogalerie Stříbro</a>
+            </li>
+            <li class="nav-item pull-xs-none pull-lg-left">
+                <a href="/fotogalerie-domazlice">Fotogalerie Domažlice</a>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-item pull-xs-none pull-lg-left">
+        <a href="/kontakt">Kontakt</a>
+    </li>
+</ul>                                                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main>
+        <div class="bg-inverse bg-car-used p-t-3 hidden-print">
+        <div id="top-content" class="container text-xs-center p-y-3">
+            <p class="text-uppercase m-b-1">Prověřené vozy bez obav</p>
+            <p class="h1">Ojeté vozy skladem</p>
+                    </div>
+    </div>
+
+    <div id="main" class="container p-y-3">
+        
+
+
+
+
+<div class="row m-b-2">
+    <div class="col-xs-12 col-lg-7 col-xl-6 pull-lg-right">
+        <h1 class="h2 p-b-0 m-b-05">Škoda Kodiaq Selection</h1>
+        <p class="m-b-1">
+            2,0 TDI <span class="text-primary">|</span>
+            142 kW 4x4 <span class="text-primary">|</span>
+            7°automatická/4x4        </p>
+
+        
+                    <ul class="list-inline text-uppercase text-xs-left">
+                                    <li class="m-b-0 list-inline-item"><span class="tag tag-success">Záruka 5let/100.000km ZDARMA</span></li>
+                                    <li class="m-b-0 list-inline-item"><span class="tag tag-success">roční vůz</span></li>
+                                    <li class="m-b-0 list-inline-item"><span class="tag tag-success">1.majitel</span></li>
+                                    <li class="m-b-0 list-inline-item"><span class="tag tag-success">servisní knížka</span></li>
+                                    <li class="m-b-0 list-inline-item"><span class="tag tag-success">4x4</span></li>
+                            </ul>
+            </div>
+
+    <div class="col-xs-12 col-lg-5 col-xl-6">
+        
+
+
+
+    <a class="d-block m-b-05 car-gallery" href="/share/cache/image/car_lightbox/outsidebox/vuz-ojety-hlavni/94711.jpg" >
+        <img class="img-fluid m-x-auto" src="/share/cache/image/car_detail_image/outsidebox/vuz-ojety-hlavni/94711.jpg"
+             alt="Škoda Kodiaq Selection">
+    </a>
+    <div class="row m-x--0125 m-b-2">
+                                	                                                
+                                
+                <div class="col-xs-3 p-a-0125 ">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94717.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94717.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 ">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94712.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94712.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 ">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94713.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94713.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 ">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94715.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94715.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                    <span class="gallery-item-more">+31</span>    
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 hidden-xs-up">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94718.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94718.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 hidden-xs-up">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94719.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94719.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 hidden-xs-up">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94720.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94720.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 hidden-xs-up">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94732.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94732.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 hidden-xs-up">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94733.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94733.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 hidden-xs-up">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94722.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94722.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 hidden-xs-up">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94725.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94725.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 hidden-xs-up">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94721.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94721.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 hidden-xs-up">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94726.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94726.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 hidden-xs-up">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94723.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94723.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 hidden-xs-up">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94724.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94724.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 hidden-xs-up">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94728.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94728.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 hidden-xs-up">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94727.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94727.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 hidden-xs-up">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94729.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94729.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 hidden-xs-up">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94736.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94736.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 hidden-xs-up">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94737.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94737.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 hidden-xs-up">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94738.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94738.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 hidden-xs-up">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94739.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94739.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 hidden-xs-up">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94744.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94744.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 hidden-xs-up">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94745.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94745.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 hidden-xs-up">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94746.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94746.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 hidden-xs-up">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94741.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94741.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 hidden-xs-up">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94743.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94743.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 hidden-xs-up">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94731.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94731.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 hidden-xs-up">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94735.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94735.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 hidden-xs-up">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94742.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94742.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 hidden-xs-up">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94747.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94747.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 hidden-xs-up">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94734.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94734.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 hidden-xs-up">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94730.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94730.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                                            
+                                
+                <div class="col-xs-3 p-a-0125 hidden-xs-up">
+                    <a class="embed-responsive embed-responsive-4by3 car-gallery" href="/share/cache/image/lightbox/outsidebox/94740.jpg" >
+                        <img class="img-fluid m-x-auto" src="/share/cache/image/detail_thumb/outsidebox/94740.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                            </a>
+                </div>
+                        </div>
+
+        
+
+    </div>
+
+    <div class="col-xs-12 col-lg-7 col-xl-6 pull-lg-right" style="clear:right;">
+        <div class="small">
+                            
+<div class="volf-icons row text-xs-center m-t-1 m-x--025 flexbox">
+            <div class="col-xs-4 col-sm-2 p-a-025">
+            <img class="m-b-1" src="/img/icons/icon-prihlaseni.svg" alt="ikona Přihlášení vozu" />
+            <p>Zajistíme přihlášení vozu</p>
+        </div>
+            <div class="col-xs-4 col-sm-2 p-a-025">
+            <img class="m-b-1" src="/img/icons/icon-financovani.svg" alt="ikona Financování" />
+            <p>Značkové financování na míru</p>
+        </div>
+            <div class="col-xs-4 col-sm-2 p-a-025">
+            <img class="m-b-1" src="/img/icons/icon-pojisteni.svg" alt="ikona Pojištění" />
+            <p>Komplexní pojištění vozu</p>
+        </div>
+            <div class="col-xs-4 col-sm-2 p-a-025">
+            <img class="m-b-1" src="/img/icons/icon-vykup-stavajiciho.svg" alt="ikona Výkup vozu" />
+            <p>Vykoupíme Váš stávající vůz</p>
+        </div>
+            <div class="col-xs-4 col-sm-2 p-a-025">
+            <img class="m-b-1" src="/img/icons/icon-siroka-nabidka.svg" alt="ikona Široká nabídka" />
+            <p>Široká nabídka příslušenství</p>
+        </div>
+            <div class="col-xs-4 col-sm-2 p-a-025">
+            <img class="m-b-1" src="/img/icons/icon-profesionalni-pristup.svg" alt="ikona Profesionální přístup" />
+            <p>Profesionální přístup</p>
+        </div>
+    </div>
+                    </div>
+
+        <div class="row text-xs-center m-x--0125 m-b-2 flexbox">
+            
+    <div class="col-xs-6 col-sm-3 p-a-0125">
+        <p class="m-b-025 p-a-025 p-y-075 bg-faded h-100">
+            <small>Do provozu</small><br>
+            <span class="h4">05/2024</span>
+        </p>
+    </div>
+    <div class="col-xs-6 col-sm-3 p-a-0125">
+        <p class="m-b-025 p-a-025 p-y-075 bg-faded h-100">
+            <small>Tachometr</small><br>
+            <span class="h4">19739 km</span>
+        </p>
+    </div>
+    <div class="col-xs-6 col-sm-3 p-a-0125">
+        <p class="m-b-025 p-a-025 p-y-075 bg-faded h-100">
+            <small>Palivo</small><br>
+            <span class="h4">Nafta</span>
+        </p>
+    </div>
+    <div class="col-xs-6 col-sm-3 p-a-0125">
+        <p class="m-b-025 p-a-025 p-y-075 bg-faded h-100">
+            <small>Výkon</small><br>
+            <span class="h4">142 kW 4x4</span>
+        </p>
+    </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table w-100 table-sm m-b-2">
+                <tbody>
+                 
+    <tr>
+        <th class="text-muted font-weight-normal">STK do</th>
+        <td>05/2028</td>
+    </tr>
+    <tr>
+        <th class="text-muted font-weight-normal">Pohon / převodovka</th>
+        <td>7°automatická/4x4</td>
+    </tr>
+    <tr>
+        <th class="text-muted font-weight-normal">Barva</th>
+        <td>bílá Moon metalíza</td>
+    </tr>
+    <tr>
+        <th class="text-muted font-weight-normal">Objem motoru</th>
+        <td>1968 cm<sup>3</sup></td>
+    </tr>
+    <tr>
+        <th class="text-muted font-weight-normal">Karoserie</th>
+        <td>SUV</td>
+    </tr>
+    <tr>
+        <th class="text-muted font-weight-normal">Stav</th>
+        <td>perfektní</td>
+    </tr>
+    <tr>
+        <th class="text-muted font-weight-normal">První majitel</th>
+        <td>ANO</td>
+    </tr>
+    <tr>
+        <th class="text-muted font-weight-normal">Servisní knížka</th>
+        <td>ANO</td>
+    </tr>
+    <tr>
+        <th class="text-muted font-weight-normal">Původ</th>
+        <td>ČR</td>
+    </tr>
+    <tr>
+        <th class="text-muted font-weight-normal">ID vozu</th>
+        <td>25202</td>
+    </tr>
+    <tr>
+        <th class="text-muted font-weight-normal">VIN</th>
+        <td>TMBLN7PS9RT013520</td>
+    </tr>
+    <tr>
+        <th class="text-muted font-weight-normal">Cena nového vozu</th>
+        <td>1 268 900 Kč</td>
+    </tr>
+    <tr>
+        <th class="text-muted font-weight-normal">Cena při platbě v hotovosti</th>
+        <td>910 000 Kč</td>
+    </tr>
+    <tr>
+        <th class="text-muted font-weight-normal">Záruka</th>
+        <td>5 let/do 100 000 km</td>
+    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        
+<p class="m-b-05">
+    <span class="h2 text-success m-b-0">910 000 Kč</span> vč. DPH<br>
+    752 066 Kč bez DPH
+</p>
+
+<p class="bg-faded p-a-075 p-x-1 m-b-1">
+    Měsíční splátka <span class="h4 text-primary">od 8 864 Kč</span>
+</p>
+
+
+<hr class="m-y-1" />
+<div class="m-b-1 small note-field">
+    <p>Tovární záruka Škoda na 5 let/do 100 000 km platí od data uvedení do provozu zdarma.</p>
+<p>Vůz je na pobočce Auto Volf v Domažlicích. ID:25202</p></div>
+
+
+
+        <div class="row hidden-print">
+            <div class="col-xs-12 col-sm-6 p-b-1">
+                <a id="show-contact" href="#" class="btn btn-primary btn-block p-x-0">Kontaktovat prodejce</a>
+                            </div>
+            
+                        <div class="col-xs-12 col-sm-6 p-b-1">
+                <a href="/financovani" target="_blank" class="btn btn-outline-primary btn-block p-x-0">Financování a pojištění</a>
+                <p class="text-xs-center m-a-0 p-y-075 small">
+                    <a class="text-black text-muted" href="#reprezentativ" data-toggle="modal">Reprezentativní příklad a informace</a>
+                </p>
+            </div>
+            
+            <div id="reprezentativ" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="reprezentativLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                   <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                      <h4 class="modal-title p-b-0" id="reprezentativLabel">Reprezentativní příklad a další informace</h4>
+                   </div>
+                   <div class="modal-body">
+                      <div class="infobox infoboxIdreprezentativ" data-component-name="infobox"><p>Bližší informace k uvedené nabídce jsou k dispozici u našich prodejců. Vyobrazený model je ilustrativní a může obsahovat prvky příplatkové výbavy. Nejedná se o nabídku ve smyslu § 1732 zákona č. 89/2012 Sb., občanského zákoníku, a jejím přijetím nevzniká mezi společností AUTO VOLF spol. s r.o. a druhou stranou závazkový vztah.</p>
+<p>Reprezentativní příklad: Cena vozu 270.900 Kč, akontace 30%, výpůjční úroková sazba 8,46% p.a., počet splátek 60, výše splátky 3.887 Kč, celková splatná částka 233.220 Kč, RPSN 21,19%. Součástí úvěru je havarijní pojištění Allrisk a povinné pojištění Bonus od Allianz pojišťovny s nadstandardními limity pojistného plnění a garantovanou sazbou po celou dobu pojištění. Splátka pojištění 1.054 Kč měsíčně. Rozdíl mezi úrokovou sazbou (p.a.) a RPSN je způsoben povinností započítávat cenu pojištění do této sazby dle zákona o spotřebitelských úvěrech.</p>
+<hr />
+<p>Poskytnutí informací o pneumatikách je splněním informační povinnosti stanovené právními předpisy, která však nedává kupujícím možnost vybrat si na objednávané vozidlo konkrétní pneumatiku. Konkrétní pneumatiky, jimiž bude vozidlo vybaveno určuje výrobce s ohledem na aktuální dodávku ze strany výrobců pneumatik v době výroby vozidla. Bližší informace k energetickým štítkům a informačním listům jednotlivých pneumatik obdržíte u našich prodejců</p></div>                   </div>
+                </div>
+              </div>
+            </div>
+
+                    </div>
+    </div>
+</div>
+
+
+<ul class="nav nav-tabs hidden-print" role="tablist" id="car-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#vybava" role="tab">Výbava</a>
+    </li>
+        <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#galerie" role="tab">Galerie</a>
+    </li>
+            <li class="nav-item">
+        <a id="car-tab-contact" class="nav-link" data-toggle="tab" href="#kontakty" role="tab">Kontakty</a>
+    </li>
+    <li class="nav-item pull-md-right">
+        <a id="car-tab-contact" class="nav-link bg-primary" data-toggle="tab" href="#formular" role="tab">Kontaktní formulář</a>
+    </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/vuz-pdf/8039/skoda-kodiaq-selection-2-0-tdi-142-kw-4x4" id="">Katalogový list v PDF</a>
+    </li>
+
+    <li class="nav-item pull-md-right">
+                    <span data-id="8039" data-state="0" class="fav-button nav-link cursor-pointer">
+                <img class="m-r-025" src="/img/icon-favorite.svg" width="16" height="16">
+                <span>Oblíbené</span>
+            </span>
+            </li>
+    <li class="nav-item pull-md-right">
+                    <span data-id="8039" data-state="0" class="compare-button nav-link cursor-pointer">
+                <img class="m-r-025" src="/img/icon-compare.svg" width="16" height="16">
+                <span>Porovnat</span>
+            </span>
+            </li>
+    <li class="nav-item pull-md-right">
+        <a data-toggle="modal" href="#shareModal" class="nav-link">
+            <img class="m-r-05 text-muted" alt="ikona sdílet" src="/img/icon-share.svg" height="16" width="16" />
+            Sdílet
+        </a>
+    </li>
+    </ul>
+<div class="tab-content p-t-2 p-b-3">
+    <div class="tab-pane fade in active" id="vybava" role="tabpanel">
+
+    
+        
+                                                <h3>Exteriér</h3>
+                <ul class="cols">
+                                            <li><span class="d-inline-block valign-t" lang="ab">Metalický lak</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Kola z lehké slitiny 17&quot;</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Střešní nosič černý</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">LED denní svícení</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">LED přední světlomety</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">LED zadní světlomety</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Přední mlhovky</span></li>
+                                    </ul>
+                                                            <h3>Interiér</h3>
+                <ul class="cols">
+                                            <li><span class="d-inline-block valign-t" lang="ab">Sedadla látkové provedení</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Nastavitelný volant</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Kožený volant</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Multifunkční volant</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Loketní opěrka vpředu</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Loketní opěrka vzadu</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Ambientní osvětlení interiéru</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Textilní koberce vkládané</span></li>
+                                    </ul>
+                                                            <h3>Bezpečnost</h3>
+                <ul class="cols">
+                                            <li><span class="d-inline-block valign-t" lang="ab">Pohon 4x4</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">ABS</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">ASR (protiprokluzový systém kol)</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">EDS (Elektronická uzávěrka diferenciálu)</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">ESP (stabilizace podvozku)</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Kontrola tlaku v pneumatikách</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">7x airbag</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Deaktivace airbagu spolujezdce</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">ISOFIX</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Front asistent</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Asistent rozpoznání únavy řidiče</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Asistent rozjezdu do kopce</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Asistent jízdy v jízdním pruhu</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Asistent změny jízdního pruhu (mrtvý úhel)</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Rozpoznávání dopravních značek</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Automatické rozsvěcování světel</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Dešťový senzor</span></li>
+                                    </ul>
+                                                            <h3>Funkčnost</h3>
+                <ul class="cols">
+                                            <li><span class="d-inline-block valign-t" lang="ab">Parkovací senzory vpředu</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Parkovací senzory vzadu</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Parkovací kamera</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Bezklíčové startování vozu (startování tlačítkem)</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Tempomat</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Centrální zamykání s dálkovým ovladačem</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Elektricky ovládaná zpětná zrcátka, vyhřívaná</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Elektricky sklopná zpětná zrcátka</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Vnitřní zpětné zrcátko automaticky odcloněné</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Rezervní kolo dojezdové</span></li>
+                                    </ul>
+                                                            <h3>Komfort</h3>
+                <ul class="cols">
+                                            <li><span class="d-inline-block valign-t" lang="ab">Automatická převodovka</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Řazení pádly pod volantem</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Klimatizace automatická, 3-zónová</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Elektrická okna vpředu + vzadu</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Palubní počítač</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Tónovaná skla</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Sunset</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Výškově stavitelné sedadlo řidiče a spolujezdce</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Vyhřívaná přední sedadla</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Vyhřívaný volant</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Vyhřívané trysky ostřikovače čelního skla</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Záruka</span></li>
+                                    </ul>
+                                                            <h3>Infotainment</h3>
+                <ul class="cols">
+                                            <li><span class="d-inline-block valign-t" lang="ab">Radio s dotykovým displejem</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Bluetooth hands-free sada</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Indukční dobíjení telefonu</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">USB vpředu</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">USB vzadu</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">DAB (digitální radiopříjem)</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Digitální přístrojová deska</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Android Auto</span></li>
+                                            <li><span class="d-inline-block valign-t" lang="ab">Apple Car Play</span></li>
+                                    </ul>
+                            
+            
+        
+        <div class="h6 text-muted m-t-3">
+            <div class="infobox infoboxIdvybavainfo" data-component-name="infobox"><p>Poznámka: Uvedená výbava má pouze informativní charakter. Za chyby vzniklé v prezentaci neručíme. Pro detailní informaci o výbavě konkrétního vozidla prosím kontaktujte naše prodejce.</p></div>        </div>
+    </div>
+            <div class="tab-pane fade" id="galerie" role="tabpanel">
+                        
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94717.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94717.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94712.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94712.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94713.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94713.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94715.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94715.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94718.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94718.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94719.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94719.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94720.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94720.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94732.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94732.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94733.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94733.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94722.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94722.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94725.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94725.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94721.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94721.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94726.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94726.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94723.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94723.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94724.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94724.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94728.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94728.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94727.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94727.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94729.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94729.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94736.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94736.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94737.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94737.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94738.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94738.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94739.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94739.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94744.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94744.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94745.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94745.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94746.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94746.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94741.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94741.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94743.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94743.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94731.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94731.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94735.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94735.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94742.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94742.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94747.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94747.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94734.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94734.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94730.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94730.jpg"
+                             alt="Škoda Kodiaq Selection">
+                                                                    <img class="lazy-load-car img-fluid m-x-auto p-t-2" data-src="/share/cache/image/lightbox/outsidebox/94740.jpg"
+                             src="/share/cache/image/detail_thumb/outsidebox/94740.jpg"
+                             alt="Škoda Kodiaq Selection">
+                        
+                    </div>
+            <div class="tab-pane fade" id="kontakty" role="tabpanel">
+        
+
+    <div class="volf-accordion" id="accordion8039"
+         role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                <div class="panel-heading" role="tab"
+                     id="heading-4">
+                    <h5 class="panel-title">
+                        <a data-toggle="collapse"
+                           data-parent="#accordion8039"
+                           href="#collapse-4"
+                           aria-expanded="true"
+                           aria-controls="collapse-4">
+                            Domažlice                        </a>
+                    </h5>
+                </div>
+                <div id="collapse-4"
+                     class="panel-collapse collapse in"
+                     role="tabpanel" aria-labelledby="heading-4">
+                    <div class="p-a-1">
+                            <div class="row flexbox">
+                            <div class="col-xs-12 col-sm-6 col-lg-4">
+                <div class="row p-y-1">
+                    <div class="col-xs-4 col-md-5 p-r-0">
+                                                                                <img class="img-fluid"
+                                 src="/share/cache/image/contact_image/outsidebox/kontakt/56761.jpg"
+                                 alt="Bc. Petr Malý" />
+                                                </div>
+                    <div class="col-xs-8 col-md-7">
+                        <h3 class="h5 m-b-0">Bc. Petr Malý</h3>
+                        <p class="m-b-0 h6">
+                            prodejce vozů                                                            <br />
+                                vedoucí prodeje provozovny Domažlice                                                    </p>
+                        <p class="m-b-0 h6">
+                                                                                        <a href="tel:+420700000000"
+                                   class="text-black text-underline-none">
+                                    <img class="icon-phone" src="/img/icon-phone-cell.svg" alt="Ikona mobil" width="12" height="12">
+                                    +420 700 000 000                                </a><br />
+                                                                                    <a href="mailto:kontakt@example.cz" class="text-underline">
+                                <img class="icon-mail" src="/img/icon-mail.svg" alt="Ikona mail" width="12" height="12">
+                                kontakt@example.cz</a>
+                                                    </p>
+                    </div>
+                </div>
+            </div>
+            </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+    </div>
+    <div class="tab-pane fade" id="formular" role="tabpanel">
+                                    <div id="contactFormId0" class="contact-form" data-component-name="contact-form"><form enctype="application/x-www-form-urlencoded" method="post" action="/vuz-skladem/8039/skoda-kodiaq-selection-2-0-tdi-142-kw-4x4#contactFormId0">
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 m-y-3">
+        <div class="card p-a-2 shadow">
+            <div class="row">
+                <div class="col-xs-12 col-lg-12 contact-form-firstname">
+                    <label for="firstname" class="optional">jméno</label>
+
+<input type="text" name="firstname" id="firstname" value="" class="form-control" />                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 contact-form-email p-t-1">
+                    <label for="email" class="required">email*</label>
+
+<input type="text" name="email" id="email" value="" class="form-control" />                </div>
+                <div class="col-xs-12 col-sm-6 contact-form-cell p-t-1">
+                    <label for="cell" class="required">telefon*</label>
+
+<div class="row"><div class="col-xs-4"><div class="input-group"><span class="input-group-addon" id="cell-plus">+</span><input type="text" name="cell[prefix]" id="cell-prefix" value="420" maxlength="3" class="form-control p-x-0 text-xs-center" /></div></div><div class="col-xs-8 p-l-0"><input type="text" name="cell[number]" id="cell" value="" maxlength="15" class="form-control" /></div></div>                </div>
+            </div>
+            
+            <div class="contact-form-message p-t-1">
+                <label for="message" class="required">zpráva*</label>
+
+<textarea name="message" id="message" rows="5" cols="45" class="form-control"></textarea>            </div>
+            
+            
+<input type="hidden" name="subject" value="" id="subject" />            
+<input type="hidden" name="title" value="" id="title" />            
+                        
+            <div class="modal-footer">
+                <p>Odesláním formuláře souhlasíte se <a href="#form-souhlas" data-toggle="modal">zpracováním osobních údajů</a>.</p>
+                
+<input type="submit" name="contactSubmit" id="contactSubmit" value="odeslat zprávu" class="btn btn-primary" />            </div>
+        </div>
+    </div>
+</div>
+
+<div id="form-souhlas" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="formSouhlasLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title p-b-0" id="formSouhlasLabel">Zpracování osobních údajů</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                Odesláním kontaktního formuláře uděluji dobrovolně souhlas se zpracováním osobních údajů ve smyslu nařízení Evropského parlamentu a Rady (EU) 2016/679 ze dne 27. dubna 2016,
+                společnosti AUTO VOLF spol. s r.o., Plzeňská 1444, 349 01 Stříbro, IČ: 49194216 (dále jen "správce"), a to:
+                </p>
+                <ul>
+                    <li>a) v rozsahu jméno, příjmení, e-mailová adresa, telefon</li>
+                    <li>b) za účelem marketingových a obchodních aktivit správce; včetně šíření obchodních sdělení týkajících se jeho výrobků či služeb;</li>
+                    <li>c) po dobu nezbytně nutnou, maximálně však 1 rok ode dne odeslání.</li>
+                </ul>
+
+        </div>
+    </div>
+</div>
+</form></div>
+            
+            
+                </div>
+
+</div>
+
+
+<div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Zavřít">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title p-a-0" id="shareModalLabel">Sdílet vůz "Škoda Kodiaq Selection"</h4>
+      </div>
+      <div class="modal-body">
+          <a href="https://www.facebook.com/sharer.php?u=https://www.autovolf.cz/vuz-skladem/8039/skoda-kodiaq-selection-2-0-tdi-142-kw-4x4"
+             OnClick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=250'); return false;"
+             class="m-r-05" title="sdílet na Facebooku">
+              <img  src="/img/icon-facebook.svg" height="48" width="48" /></a>
+          <a href="https://twitter.com/share?url=https://www.autovolf.cz/vuz-skladem/8039/skoda-kodiaq-selection-2-0-tdi-142-kw-4x4"
+             OnClick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=470'); return false;"
+             class="m-r-05" title="sdílet na Twitteru">
+              <img alt="ikona Twitter" src="/img/icon-twitter.svg" height="48" width="48" /></a>
+          <a href="https://plus.google.com/share?url=https://www.autovolf.cz/vuz-skladem/8039/skoda-kodiaq-selection-2-0-tdi-142-kw-4x4"
+             OnClick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=450,height=480'); return false;"
+             class="m-r-05" title="sdílet na Google+">
+              <img alt="ikona Google+" src="/img/icon-google-plus.svg" height="48" width="48" /></a>
+          
+          <div class="clearfix">
+              <input id="copyInput" type="text" class="form-control form-control-sm m-y-1" value="https://www.autovolf.cz/vuz-skladem/8039/skoda-kodiaq-selection-2-0-tdi-142-kw-4x4" />
+              <button id="copyBtnInput" data-clipboard-target="#copyInput" class="btn btn-secondary btn-sm pull-xs-right" type="button">Kopírovat odkaz</button>
+          </div>
+          
+                          </div>
+    </div>
+  </div>
+</div>
+
+
+        
+    </div>
+
+    <div style="bottom: 0;width: 100%; display: none; z-index: 3; left: 0;" class="bg-primary pos-fixed shadow" id="compare-ribbon">
+    <div class="container text-xs-center p-x-0">
+        <p class="m-a-0">
+            <a id="compare-link" style="display: none;" href="/porovnavac-vozu" class="m-x-05 m-sm-x-1 text-nowrap">
+                <img class="m-sm-r-05" src="/img/icon-compare-white.svg" width="24" height="24"><span class="hidden-sm-down">V porovnávači máte:</span><!-- 
+             --><strong class="d-inline-block m-y-05 m-x-05">
+                    <span id="compare-ribbon-text" class="tag bg-white text-black text-xs-center" style="border-radius: 50%;width: 2rem;line-height: 1.2rem;">0</span>
+                    <span id="compare-ribbon-text2">vozidel</span>
+                </strong></a>
+            <a id="favorite-link" style="display: none;" href="/oblibene-vozy" class="m-x-05 m-sm-x-1 text-nowrap">
+                <img class="m-sm-r-05" src="/img/icon-favorite-white.svg" width="24" height="24"><span class="hidden-sm-down">V oblíbených máte:</span><!-- 
+             --><strong class="d-inline-block m-y-05 m-x-05">
+                    <span id="favorite-ribbon-text" class="tag bg-white text-black text-xs-center" style="border-radius: 50%;width: 2rem;line-height: 1.2rem;">0</span>
+                    <span id="favorite-ribbon-text2">vozidel</span>
+                </strong></a>
+        </p>
+    </div>
+</div>    
+</main>
+
+<aside id="bottom-wrap" class="">
+    <div class="bg-primary">
+        <div class="container text-xs-center p-x-0 p-y-1">
+            <div class="infobox infoboxIdrychlykontakt" data-component-name="infobox"><p class="m-a-0"><img class="m-r-1 hidden-md-down" src="/img/icon-phone-white.svg" alt="ikona telefon" width="24" height="24" /> <strong class="m-r-2 text-uppercase hidden-lg-down">Rychlý kontakt</strong> <span class="d-inline-block m-y-1"><strong>Plzeň</strong> <br class="hidden-lg-up" /><a href="tel:+420-300000000">+420 300 000 000</a></span> <span class="m-x-1">|</span> <span class="d-inline-block m-y-1"><strong>Domažlice</strong> <br class="hidden-lg-up" /><a href="tel:+420-300000000">+420 300 000 000</a></span> <br class="hidden-md-up" /> <span class="m-x-1 hidden-sm-down">|</span> <span class="d-inline-block m-y-1"><strong>Stříbro</strong> <br class="hidden-lg-up" /><a href="tel:+420-300000000">+420 300 000 000</a></span> <span class="m-x-1">|</span> <span class="d-inline-block m-y-1"><strong>Holýšov</strong> <br class="hidden-lg-up" /><a href="tel:+420-300000000">+420 300 000 000</a></span></p></div>        </div>
+    </div>
+    <div id="bottom" class="container p-y-3 m-b-0 text-xs-center text-sm-left hidden-print">
+                <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 hidden-md-down">
+                <h3 class="h5 text-uppercase">Konfigurátory</h3>
+                <hr />
+                                                    <ul class="list-unstyled navbar-bottom">
+    <li class="list-item">
+        <a href="/konfigurator-volvo">Konfigurátor VOLVO</a>
+    </li>
+    <li class="list-item">
+        <a href="/konfigurator-skoda">Konfigurátor Škoda</a>
+    </li>
+    <li class="list-item">
+        <a href="/konfigurator-kia">Konfigurátor KIA</a>
+    </li>
+</ul>                            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 hidden-xs-down">
+                <h3 class="h5 text-uppercase">Často hledáte</h3>
+                <hr />
+                                                    <ul class="list-unstyled navbar-bottom">
+    <li class="list-item">
+        <a href="/nove-vozy">Nové vozy</a>
+    </li>
+    <li class="list-item">
+        <a href="/ojete-vozy">Ojeté vozy</a>
+    </li>
+    <li class="list-item">
+        <a href="/online-objednavka-servisu">Online objednávka do servisu</a>
+    </li>
+    <li class="list-item">
+        <a href="/financovani">Financování a pojištění</a>
+    </li>
+    <li class="list-item">
+        <a href="/oblibene-vozy">Oblíbené vozy</a>
+    </li>
+</ul>                            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 hidden-sm-down">
+                <h3 class="h5 text-uppercase">Kontakty</h3>
+                <hr />
+                                                    <ul class="list-unstyled navbar-bottom">
+    <li class="list-item">
+        <a href="/kontakt#plzen">Plzeň – Borská pole</a>
+    </li>
+    <li class="list-item">
+        <a href="/kontakt#holysov">Holýšov</a>
+    </li>
+    <li class="list-item">
+        <a href="/kontakt#stribro">Stříbro</a>
+    </li>
+    <li class="list-item">
+        <a href="/kontakt#domazlice">Domažlice</a>
+    </li>
+    <li class="list-item">
+        <a href="/servis#pomoc">Pomoc v nouzi</a>
+    </li>
+</ul>                            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <h3 class="h5 text-uppercase">Další informace</h3>
+                <hr />
+                                                    <ul class="list-unstyled navbar-bottom">
+    <li class="list-item">
+        <a href="/fleet-program">Fleet program Škoda</a>
+    </li>
+    <li class="list-item">
+        <a href="/nabidka-zamestnani">Nabídka zaměstnání</a>
+    </li>
+    <li class="list-item">
+        <a href="https://www.facebook.com/autovolf.cz/" target="_blank">Facebook</a>
+    </li>
+    <li class="list-item">
+        <a href="/share/download/web/1740.pdf">Reklamační řád</a>
+    </li>
+    <li class="list-item">
+        <a href="/share/download/dokumenty/3437.pdf">Zásady zpracování osobních údajů pro zákazníky</a>
+    </li>
+    <li class="list-item">
+        <a href="/share/download/dokumenty/4969.pdf">Upozornění pro věřitele a společníky na jejich práva</a>
+    </li>
+    <li class="list-item">
+        <a class="ccb__edit" href="#">Nastavení cookies</a>
+    </li>
+    <li class="list-item">
+        <a href="/whistleblowing">Whistleblowing</a>
+    </li>
+</ul>                                <div class="infobox infoboxIdpatickabutton" data-component-name="infobox"><p><a href="/poptavka" class="btn btn-block btn-outline-primary">Nezávazně poptat vůz</a></p></div>            </div>
+        </div>
+    </div>
+</aside>
+
+<footer class="">
+    <div id="footer" class="container text-xs-center p-b-2 small">
+        <p class="m-b-0">
+          <a target="_blank" href='https://play.google.com/store/apps/details?id=cz.autovolf.app&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img style="width: 154px;" alt='Nyní na Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/cs_badge_web_generic.png'/></a>
+          <a target="_blank" href="https://itunes.apple.com/cz/app/auto-volf/id1447108130?l=cs" style="vertical-align: middle; display:inline-block;overflow:hidden;background:url(/img/ios-badge.svg) no-repeat;width:135px;height:40px;"></a>
+        </p>  
+
+        <hr class="m-t-0 m-b-1" />
+        <div class="infobox infoboxIdpatickatext" data-component-name="infobox"><p class="pull-xs-left m-a-0">Auto Volf spol. s r.o. | IČ: 49194216 | sídlo: Plzeňská 1444, 349 01 Stříbro</p></div>        <p class="pull-xs-right m-a-0">
+            <span class="hidden-xs-down">Copyright </span>&copy; 2018 - 2026            <a href="http://www.walk.cz">Walk.cz</a>
+        </p>
+    </div>
+</footer>
+
+
+
+<script type="text/javascript">
+//<![CDATA[
+$j(document).ready(function() {
+    $j('a.car-gallery').colorbox({"rel":"car-gallery","maxWidth":"95%","maxHeight":"95%","previous":"\u00ab","next":"\u00bb","close":"zav\u0159\u00edt","current":"{current} \/ {total}","opacity":0.7});
+                    $j('#show-contact').click(function(e){
+                    e.preventDefault();
+                    $j('#car-tab-contact').tab('show');
+		    smoothScrollTo(document.getElementById("car-tab-contact"), 500);
+                });
+            
+                    var images = document.querySelectorAll(".lazy-load-car");
+                lazyload(images);
+            
+                    var urlTab = document.location.toString();
+                if (urlTab.match('#')) {
+                    if (urlTab.split('#')[1] == 'contactFormId0') {
+                        $j('.nav-tabs a[href="#formular"]').tab('show');
+                    }
+                } else {
+                    $j('#message').val('Prosím o zaslání více informací o Škoda Kodiaq Selection 2,0 TDI 142 kW 4x4 (ID: 25202).');
+                }
+
+            
+                  var copyBtn = document.getElementById('copyBtnInput');
+              var clipboard = new ClipboardJS(copyBtn, {
+                  container: document.getElementById('shareModal')
+              });
+          
+    $j('a.image-gallery-item-image').colorbox({"maxWidth":"95%","maxHeight":"95%","previous":"\u00ab","next":"\u00bb","close":"zav\u0159\u00edt","current":"{current} \/ {total}","opacity":0.7});
+    
+
+$j(document).bind('cbox_open', function() {
+   $j('a.colorbox-switch').each(function(index, item){
+        $item = $j(item);
+        var htmlTitle = $item.data('title');
+        var title = $item.attr('title');
+        $item.attr('title', htmlTitle);
+        $item.data('title', title);
+
+    });
+});
+
+$j(document).bind('cbox_closed', function() {
+    $j('a.colorbox-switch').each(function(index, item){
+        $item = $j(item);
+        var htmlTitle = $item.data('title');
+        var title = $item.attr('title');
+        $item.attr('title', htmlTitle);
+        $item.data('title', title);
+    });
+});
+
+$j(document).bind('cbox_open', function() {
+        $j('#colorbox').swipe({
+            //Generic swipe handler for all directions
+            swipeLeft: function(event, direction, distance, duration, fingerCount) {
+                jQuery.colorbox.prev();
+            },
+            swipeRight: function(event, direction, distance, duration, fingerCount) {
+                jQuery.colorbox.next();
+            },
+            //Default is 75px, set to 0 for demo so any distance triggers swipe
+            threshold: 75,
+            swipeStatus:function(event, phase, direction, distance) {
+              //Here we can check the:
+              //phase : 'start', 'move', 'end', 'cancel'
+              //direction : 'left', 'right', 'up', 'down'
+              //distance : Distance finger is from initial touch point in px
+              if (phase=='move') {
+                if (direction=='right') {
+                    $j('#cboxLoadedContent').css('transform', 'translateX(' + distance + 'px');
+                    $j('#cboxLoadedContent').css('opacity', 1 - distance/200);
+                } else if (direction=='left') {
+                    $j('#cboxLoadedContent').css('transform', 'translateX(-' + distance + 'px');
+                    $j('#cboxLoadedContent').css('opacity', 1 - distance/200);
+                }
+              } else if (phase=='cancel') {
+                $j('#cboxLoadedContent').css('transform', 'none');
+                $j('#cboxLoadedContent').css('opacity', 1);
+              }
+            }
+        });
+});
+
+
+$j('.navbar-top > .nav-item > ul').click(function() {
+        $j(this).parent().toggleClass('active');
+}); 
+
+if ($j('.main-nav').has('.active').length) {
+    $j('.main-nav').addClass('active');
+}
+
+
+$j('[data-toggle="popover"]').popover();
+
+$j('a.outlink').prop('target', '_blank');
+
+var volfRibbon = { carsLike: [], carsCompare: [] };
+
+volfRibbon.text = function() {
+
+    var text = 'vozidel';
+
+    if (this.carsCompare.length == 1) {
+        text = 'vozidlo';
+    } else if (this.carsCompare.length > 1 && this.carsCompare.length < 5 ) {
+        text = 'vozidla'
+    }
+
+    $j("#compare-ribbon-text").text(this.carsCompare.length);
+    $j("#compare-ribbon-text2").text(text);
+
+    text = 'vozidel';
+
+    if (this.carsLike.length == 1) {
+        text = 'vozidlo';
+    } else if (this.carsLike.length > 1 && this.carsLike.length < 5 ) {
+        text = 'vozidla'
+    }
+
+    $j("#favorite-ribbon-text").text(this.carsLike.length);
+    $j("#favorite-ribbon-text2").text(text);
+
+};
+
+volfRibbon.run = function() {
+    if (this.carsLike.length > 0 || this.carsCompare.length > 0) {
+        $j("#compare-ribbon").css('display', 'block');
+        volfRibbon.text();
+        if (this.carsLike.length > 0) {
+            $j("#favorite-link").css('display', '');
+        } else {
+            $j("#favorite-link").css('display', 'none');
+        }
+        if (this.carsCompare.length > 0) {
+            $j("#compare-link").css('display', '');
+        } else {
+            $j("#compare-link").css('display', 'none');
+        }
+    }
+};
+
+
+volfRibbon.draw = function() {
+ if (this.carsLike.length > 0 || this.carsCompare.length > 0) {
+        if (this.carsLike.length > 0) {
+            $j("#favorite-link").fadeIn();
+        } else {
+            $j("#favorite-link").css('display', 'none');
+        }
+        if (this.carsCompare.length > 0) {
+            $j("#compare-link").fadeIn();
+        } else {
+            $j("#compare-link").css('display', 'none');
+        }
+        $j("#compare-ribbon").fadeIn();
+    } else {
+        $j("#compare-ribbon").fadeOut();
+    }
+};
+
+
+var gridFav = {
+    'trigger' : '.fav-button'
+};
+
+gridFav.run = function() {
+
+var cookieStart = $j.cookie('carLike');
+var cars = [];
+
+if (cookieStart != null) {
+    cars = JSON.parse(cookieStart);
+}
+
+volfRibbon.carsLike= cars;
+
+
+
+$j(this.trigger).click(function(e){
+    e.preventDefault();
+    var $item = $j(this);
+    var cookie = $j.cookie('carLike');
+    var cars = [];
+
+    if (cookie != null) {
+        cars = JSON.parse(cookie);
+    }
+
+    if ($item.data('state') == '0') {
+        // add
+        cars.push($item.data('id'));
+        $item.attr('data-state', '1');
+        $item.data('state', '1');
+        $item.children('span').text('Odebrat');
+        $item.children('img').attr('src','/img/icon-favorite-active.svg');
+    } else {
+                if (window.location.pathname == '/oblibene-vozy') {
+            $item.parent().parent().parent().parent().parent().fadeOut();
+        }
+
+        // remove
+        for (var i = cars.length - 1; i >= 0; i--) {
+            if (cars[i] == $item.data('id')) {
+                cars.splice(i, 1);
+                $item.attr('data-state', '0');
+                $item.data('state', '0');
+                $item.children('span').text('Oblíbené');
+                $item.children('img').attr('src','/img/icon-favorite.svg');
+            }
+        }
+    }
+
+    $j.cookie('carLike', JSON.stringify(cars), { expires: 120, path: '/' });
+
+                if (window.location.pathname == '/oblibene-vozy' && cars.length == 0) {
+            location.reload();
+        }
+
+    volfRibbon.carsLike = cars;
+    volfRibbon.draw();
+
+    if ($item.data('state') == '1') {
+        var sbmOriginal = $item.children('img');
+        var cart = $j('#favorite-link');
+        var sbm = sbmOriginal.clone();
+        sbm.appendTo($j('body'));
+        var top =  sbmOriginal.offset().top;
+        var left = sbmOriginal.offset().left;
+        sbm.css({
+            'position': 'absolute',
+            'z-index': '100'});
+        sbm.offset({
+            top: top,
+            left: left});
+        sbm.animate({
+            'top': cart.offset().top + 0,
+            'left': cart.offset().left + 0,
+            'width': 26,
+            'height': 26
+            }, 1200, 'easeInOutExpo');
+        sbm.animate({
+            'width': 0,
+            'height': 0
+            }, function () {
+                sbm.remove();
+                volfRibbon.text();
+        });
+    } else {
+        volfRibbon.text();
+    }
+
+});
+};
+
+
+
+var gridCompare = {
+    'trigger' : '.compare-button'
+};
+
+gridCompare.run = function() {
+
+var cookieStart = $j.cookie('carCompare');
+var cars = [];
+
+if (cookieStart != null) {
+    cars = JSON.parse(cookieStart);
+}
+
+volfRibbon.carsCompare = cars;
+
+$j('.compare-remove').click(function(e){
+    console.log('click');
+    setTimeout( function() {
+        if (volfRibbon.carsCompare.length > 0 ) {
+            volfRibbon.carsCompare.splice(-1,1)
+        }
+        volfRibbon.draw();
+        volfRibbon.text();
+    }, 300);
+});
+
+$j(this.trigger).click(function(e){
+    e.preventDefault();
+    var $item = $j(this);
+    var cookie = $j.cookie('carCompare');
+    var cars = [];
+
+    console.log($item.data('state'));
+
+
+    if (cookie != null) {
+        cars = JSON.parse(cookie);
+    }
+
+    if ($item.data('state') == '0') {
+        // add
+        cars.push($item.data('id'));
+        $item.attr('data-state', '1');
+        $item.data('state', '1');
+        $item.children('span').text('Odebrat');
+    } else {
+        // remove
+        for (var i = cars.length - 1; i >= 0; i--) {
+            if (cars[i] == $item.data('id')) {
+                cars.splice(i, 1);
+                $item.attr('data-state', '0');
+                $item.data('state', '0');
+                $item.children('span').text('Porovnat');
+            }
+        }
+    }
+
+    $j.cookie('carCompare', JSON.stringify(cars), { expires: 120, path: '/' });
+    volfRibbon.carsCompare = cars;
+    volfRibbon.draw();
+
+    if ($item.data('state') == '1') {
+        var sbmOriginal = $item.children('img');
+        var cart = $j('#compare-link');
+        var sbm = sbmOriginal.clone();
+        sbm.appendTo($j('body'));
+        var top =  sbmOriginal.offset().top;
+        var left = sbmOriginal.offset().left;
+        sbm.css({
+            'position': 'absolute',
+            'z-index': '100'});
+        sbm.offset({
+            top: top,
+            left: left});
+        sbm.animate({
+            'top': cart.offset().top + 0,
+            'left': cart.offset().left + 0,
+            'width': 26,
+            'height': 26
+            }, 1200, 'easeInOutExpo');
+        sbm.animate({
+            'width': 0,
+            'height': 0
+            }, function () {
+                sbm.remove();
+                volfRibbon.text();
+        });
+    } else {
+        volfRibbon.text();
+    }
+
+
+
+
+});
+
+};
+
+gridFav.run();
+gridCompare.run();
+volfRibbon.run();
+
+
+
+
+});
+//]]>
+
+</script>
+</body>
+</html>

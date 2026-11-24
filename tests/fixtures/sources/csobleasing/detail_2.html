@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/" />
+    <link rel="icon" href="/autosalon/assets/favicon.ico">
+
+    
+<title>PEUGEOT 308 | &#x10C;SOB Leasing</title>
+
+
+    <meta name="robots" content="noindex,nofollow" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="&#x10C;SOB Leasing" />
+
+    <meta property="og:title" content="PEUGEOT 308" />
+
+
+
+
+    <link href="/autosalon/assets/css/autosalon.min.css?v=2f5oFl3Jg91SUgvlCSpGc1ytwr5qpLlHWU-XcXFxpkY" rel="stylesheet">
+
+    <link href="/_content/Kentico.Content.Web.Rcl/Content/Bundles/Public/systemPageComponents.min.css" rel="stylesheet" />
+
+<script>
+    (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+            'gtm.start':
+                new Date().getTime(),
+            event: 'gtm.js'
+        });
+        var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s),
+            dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src =
+            'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        var n = d.querySelector('[nonce]');
+        n && j.setAttribute('nonce', n.nonce || n.getAttribute('nonce'));
+        f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer','GTM-NVKJG3PS');
+</script></head>
+<body class="as-body">
+             <noscript>
+                 <iframe src='https://www.googletagmanager.com/ns.html?id=GTM-NVKJG3PS'
+                         height='0'
+                         width='0'
+                         style='display:none;visibility:hidden'
+                         title='GTMNoScript'>
+                 </iframe>
+             </noscript>
+            
+
+    
+<header class="as-header" x-data="asHeader">
+    <div class="as-header__bar">
+
+        <span class="as-header__logo-cell">
+            <button class="as-header__hamburger"
+                    @click="drawerOpen = !drawerOpen"
+                    type="button"
+                    aria-label="Otev&#x159;&#xED;t navigaci">
+                <span class="as-header__hamburger-line"></span>
+                <span class="as-header__hamburger-line"></span>
+                <span class="as-header__hamburger-line"></span>
+            </button>
+            <a href="/" class="as-header__logo-link" aria-label="&#x10C;SOB Leasing Auto Salon &#x2013; dom&#x16F;">
+                <img src="/autosalon/assets/images/logo.png" alt="&#x10C;SOB Leasing Auto Salon" />
+            </a>
+        </span>
+
+                <span class="as-header__nav-cell">
+                    <a href="/"
+                       class="as-header__nav-link"
+                       target="_self"
+                       :class="{ 'as-header__nav-link--active': isActive('/') }">Z&#xE1;novn&#xED; vozy</a>
+                </span>
+                <span class="as-header__nav-cell">
+                    <a href="/nakladni-vozidla"
+                       class="as-header__nav-link"
+                       target="_self"
+                       :class="{ 'as-header__nav-link--active': isActive('/nakladni-vozidla') }">N&#xE1;kladn&#xED; vozy</a>
+                </span>
+                <span class="as-header__nav-cell">
+                    <a href="/stroje-zarizeni"
+                       class="as-header__nav-link"
+                       target="_self"
+                       :class="{ 'as-header__nav-link--active': isActive('/stroje-zarizeni') }">Stroje a za&#x159;&#xED;zen&#xED;</a>
+                </span>
+    </div>
+
+    <aside class="as-header__drawer" :class="{ 'as-header__drawer--open': drawerOpen }">
+        <button class="as-header__drawer-close"
+                @click="drawerOpen = false"
+                type="button"
+                aria-label="Zav&#x159;&#xED;t navigaci"></button>
+
+        <ul class="as-header__drawer-tree as-header__drawer-tree--desktop">
+                    <li class="as-header__drawer-item as-header__drawer-item--label">O n&#xE1;s</li>
+                    <li class="as-header__drawer-item">
+                        <a href="https://www.csobleasing.cz/" class="as-header__drawer-link" target="_blank">&#x10C;SOB Leasing</a>
+                    </li>
+                    <li class="as-header__drawer-item">
+                        <a href="/o-nas/faq" class="as-header__drawer-link" target="_self">&#x10C;ast&#xE9; dotazy</a>
+                    </li>
+                    <li class="as-header__drawer-item as-header__drawer-item--label">Informace pro z&#xE1;kazn&#xED;ky</li>
+                    <li class="as-header__drawer-item">
+                        <a href="https://www.csobpm.cz/informace-pro-zakazniky/Cookies-a-podminky-pouzivani" class="as-header__drawer-link" target="_self">Cookies a podm&#xED;nky pou&#x17E;&#xED;v&#xE1;n&#xED;</a>
+                    </li>
+                    <li class="as-header__drawer-item">
+                        <a href="https://www.csob.cz/csob/ochrana-osobnich-udaju" class="as-header__drawer-link" target="_blank">Ochrana osobn&#xED;ch &#xFA;daj&#x16F;</a>
+                    </li>
+                    <li class="as-header__drawer-item">
+                        <a href="https://www.csobleasing.cz/informace-pro-zakazniky/informace-pro-spotrebitele#reklamace" class="as-header__drawer-link" target="_blank">Reklama&#x10D;n&#xED; &#x159;&#xE1;d</a>
+                    </li>
+        </ul>
+
+        <ul class="as-header__drawer-tree as-header__drawer-tree--mobile">
+                    <li class="as-header__drawer-item">
+                        <a href="https://www.csobleasing.cz/" class="as-header__drawer-link as-header__drawer-link--main" target="_blank">&#x10C;SOB Leasing</a>
+                    </li>
+                    <li class="as-header__drawer-item">
+                        <a href="/o-nas/faq" class="as-header__drawer-link as-header__drawer-link--main" target="_self">&#x10C;ast&#xE9; dotazy</a>
+                    </li>
+                    <li class="as-header__drawer-item">
+                        <a href="https://www.csobpm.cz/informace-pro-zakazniky/Cookies-a-podminky-pouzivani" class="as-header__drawer-link as-header__drawer-link--main" target="_self">Cookies a podm&#xED;nky pou&#x17E;&#xED;v&#xE1;n&#xED;</a>
+                    </li>
+                    <li class="as-header__drawer-item">
+                        <a href="https://www.csob.cz/csob/ochrana-osobnich-udaju" class="as-header__drawer-link as-header__drawer-link--main" target="_blank">Ochrana osobn&#xED;ch &#xFA;daj&#x16F;</a>
+                    </li>
+                    <li class="as-header__drawer-item">
+                        <a href="https://www.csobleasing.cz/informace-pro-zakazniky/informace-pro-spotrebitele#reklamace" class="as-header__drawer-link as-header__drawer-link--main" target="_blank">Reklama&#x10D;n&#xED; &#x159;&#xE1;d</a>
+                    </li>
+        </ul>
+    </aside>
+</header>
+
+
+    <main class="as-main">
+        
+<div class="as-item-detail" x-data="asCarDetail">
+
+    <div class="as-item-detail__content">
+        <div class="as-item-detail__photo"
+             style="background-image:url('/getContentAsset/bd295c9a-0312-4a0f-ae7c-a0b4c06370b8/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_0.jpg?language=cz'); cursor:pointer"
+             @click="openGallery(0)">
+            <a href="javascript:history.back()" class="as-item-detail__back" aria-label="Zp&#x11B;t na v&#xFD;pis" @click.stop></a>
+                <span class="as-gallery__count">15 foto</span>
+        </div>
+        <div class="as-item-detail__sidebar">
+            <span class="as-item-detail__model">308</span>
+            <span class="as-item-detail__brand">PEUGEOT</span>
+                <span class="as-item-detail__tag">308 SW 1.5 BlueHDi 130 S&amp;S EAT8</span>
+                <span class="as-item-detail__bodytype">
+                        <img src="/autosalon/assets/icons/carType/combi.svg" class="as-item-detail__bodytype-icon" alt="" />
+                    kombi
+                </span>
+
+            <table class="as-item-detail__params">
+                    <tr>
+                        <td class="label">V provozu od</td>
+                        <td class="value">1. 7. 2020</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Tachometr</td>
+                        <td class="value">106&#xA0;137 km</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Palivo</td>
+                        <td class="value">nafta motorov&#xE1;</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Objem, v&#xFD;kon</td>
+                        <td class="value">1&#xA0;499 cm&#xB3;, 96 kW (131 k)</td>
+                    </tr>
+                    <tr>
+                        <td class="label">P&#x159;evodovka</td>
+                        <td class="value">automatick&#xE1;</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Pohon</td>
+                        <td class="value">4x2</td>
+                    </tr>
+                    <tr>
+                        <td class="label">ID</td>
+                        <td class="value">129227</td>
+                    </tr>
+            </table>
+
+            <button type="button" class="as-item-detail__techspec-link" @click="specOpen = true">
+                Kompletn&#xED; technick&#xE1; specifikace
+            </button>
+        </div>
+    </div>
+
+        <div class="as-gallery">
+                <button type="button"
+                        class="as-gallery__thumb"
+                        style="background-image:url('/getContentAsset/bd295c9a-0312-4a0f-ae7c-a0b4c06370b8/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_0.jpg?language=cz')"
+                        @click="openGallery(0)"
+                        aria-label="Foto 1"></button>
+                <button type="button"
+                        class="as-gallery__thumb"
+                        style="background-image:url('/getContentAsset/1a2b25cb-d957-4dfc-8e28-8ef07ffc9f9e/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_1.jpg?language=cz')"
+                        @click="openGallery(1)"
+                        aria-label="Foto 2"></button>
+                <button type="button"
+                        class="as-gallery__thumb"
+                        style="background-image:url('/getContentAsset/f858f1fe-5c1b-48a5-88ea-87c8f75d4083/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_2.jpg?language=cz')"
+                        @click="openGallery(2)"
+                        aria-label="Foto 3"></button>
+                <button type="button"
+                        class="as-gallery__thumb"
+                        style="background-image:url('/getContentAsset/d738c51f-834b-457d-b0ea-b9dce79f5454/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_3.jpg?language=cz')"
+                        @click="openGallery(3)"
+                        aria-label="Foto 4"></button>
+                <button type="button"
+                        class="as-gallery__thumb"
+                        style="background-image:url('/getContentAsset/5771b29a-9ea9-49d8-a99f-ce37149ec311/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_4.jpg?language=cz')"
+                        @click="openGallery(4)"
+                        aria-label="Foto 5"></button>
+                <button type="button"
+                        class="as-gallery__thumb"
+                        style="background-image:url('/getContentAsset/8c20b573-2978-43c1-98e9-167606efea06/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_5.jpg?language=cz')"
+                        @click="openGallery(5)"
+                        aria-label="Foto 6"></button>
+                <button type="button"
+                        class="as-gallery__thumb"
+                        style="background-image:url('/getContentAsset/39284835-5917-4778-8310-d5ec648f150f/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_6.jpg?language=cz')"
+                        @click="openGallery(6)"
+                        aria-label="Foto 7"></button>
+                <button type="button"
+                        class="as-gallery__thumb"
+                        style="background-image:url('/getContentAsset/2cdbe77c-f5fe-4b9d-ad73-5c3d6622a99f/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_7.jpg?language=cz')"
+                        @click="openGallery(7)"
+                        aria-label="Foto 8"></button>
+                <button type="button"
+                        class="as-gallery__thumb"
+                        style="background-image:url('/getContentAsset/ca0b7def-3d00-4a1f-bafb-bb82c2945077/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_8.jpg?language=cz')"
+                        @click="openGallery(8)"
+                        aria-label="Foto 9"></button>
+                <button type="button"
+                        class="as-gallery__thumb"
+                        style="background-image:url('/getContentAsset/d5976239-1b4a-4419-85d3-06b2fdf4e7bf/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_9.jpg?language=cz')"
+                        @click="openGallery(9)"
+                        aria-label="Foto 10"></button>
+                <button type="button"
+                        class="as-gallery__thumb"
+                        style="background-image:url('/getContentAsset/0631552a-8a8d-4826-9b6b-70e75e5e04c8/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_10.jpg?language=cz')"
+                        @click="openGallery(10)"
+                        aria-label="Foto 11"></button>
+                <button type="button"
+                        class="as-gallery__thumb"
+                        style="background-image:url('/getContentAsset/6e0ca92a-ff83-4b60-9afb-8421eb36755f/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_11.jpg?language=cz')"
+                        @click="openGallery(11)"
+                        aria-label="Foto 12"></button>
+                <button type="button"
+                        class="as-gallery__thumb"
+                        style="background-image:url('/getContentAsset/75b78cc7-e931-428f-94ee-e26e9da8a452/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_12.jpg?language=cz')"
+                        @click="openGallery(12)"
+                        aria-label="Foto 13"></button>
+                <button type="button"
+                        class="as-gallery__thumb"
+                        style="background-image:url('/getContentAsset/f84feb9d-56ab-4fa8-8a1a-74faa2e40e4f/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_13.jpg?language=cz')"
+                        @click="openGallery(13)"
+                        aria-label="Foto 14"></button>
+                <button type="button"
+                        class="as-gallery__thumb"
+                        style="background-image:url('/getContentAsset/9cd70f11-1efa-4327-9f18-15781b6d7933/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_14.jpg?language=cz')"
+                        @click="openGallery(14)"
+                        aria-label="Foto 15"></button>
+        </div>
+        <div class="as-detail-cols">
+
+            <div class="as-detail-cols__col">
+                <h2 class="as-detail-cols__title">V&#xFD;bava</h2>
+                <ul class="as-equipment">
+                        <li class="as-equipment__item">Parkovac&#xED; senzory vp&#x159;edu i vzadu</li>
+                        <li class="as-equipment__item">V&#xFD;&#x161;kov&#x11B; nastaviteln&#xFD; volant </li>
+                        <li class="as-equipment__item">Z&#xE1;mek p&#x159;evodovky </li>
+                        <li class="as-equipment__item">Ta&#x17E;n&#xE9; za&#x159;&#xED;zen&#xED; </li>
+                        <li class="as-equipment__item">Vzduchov&#xE9; odpru&#x17E;en&#xED; </li>
+                        <li class="as-equipment__item">V&#xFD;&#x161;kov&#x11B; nastaviteln&#xFD; volant </li>
+                        <li class="as-equipment__item">Sledov&#xE1;n&#xED; &#xFA;navy &#x159;idi&#x10D;e </li>
+                        <li class="as-equipment__item">Sledov&#xE1;n&#xED; j&#xED;zdn&#xED;ho pruhu </li>
+                        <li class="as-equipment__item">Parkovac&#xED; asistent </li>
+                        <li class="as-equipment__item">Naviga&#x10D;n&#xED; syst&#xE9;m </li>
+                        <li class="as-equipment__item">Startov&#xE1;n&#xED; tla&#x10D;&#xED;tkem </li>
+                        <li class="as-equipment__item">Sportovn&#xED; podvozek </li>
+                        <li class="as-equipment__item">Senzor sv&#x11B;tel </li>
+                        <li class="as-equipment__item">Senzor opot&#x159;eben&#xED; brzd </li>
+                        <li class="as-equipment__item">Regulace tuhosti podvozku </li>
+                        <li class="as-equipment__item">P&#x159;&#xED;davn&#xE9; sv&#x11B;tlomety </li>
+                        <li class="as-equipment__item">Isofix</li>
+                        <li class="as-equipment__item">Parkovac&#xED; asistent </li>
+                        <li class="as-equipment__item">Naviga&#x10D;n&#xED; syst&#xE9;m </li>
+                        <li class="as-equipment__item">Nastaviteln&#xE1; v&#xFD;&#x161;ka podvozku </li>
+                        <li class="as-equipment__item">Multifunk&#x10D;n&#xED; volant </li>
+                        <li class="as-equipment__item">Mlhovky</li>
+                        <li class="as-equipment__item">MaxiDot</li>
+                        <li class="as-equipment__item">Mal&#xFD; ko&#x17E;en&#xFD; paket </li>
+                        <li class="as-equipment__item">Loketn&#xED; op&#x11B;rka zadn&#xED; </li>
+                        <li class="as-equipment__item">Ko&#x17E;en&#xE9; &#x10D;aloun&#x11B;n&#xED; </li>
+                        <li class="as-equipment__item">Kontrola tlaku pneu </li>
+                        <li class="as-equipment__item">Isofix</li>
+                        <li class="as-equipment__item">Hl&#xED;d&#xE1;n&#xED; mrtv&#xE9;ho &#xFA;hlu </li>
+                        <li class="as-equipment__item">Klimatizace automatick&#xE1;</li>
+                        <li class="as-equipment__item">Vyh&#x159;&#xED;van&#xE1; sedadla vp&#x159;edu</li>
+                        <li class="as-equipment__item">LED sv&#x11B;tlomety</li>
+                        <li class="as-equipment__item">Tempomat</li>
+                </ul>
+                    <button type="button" class="as-detail__btn" @click="specOpen = true">V&#xED;ce k v&#xFD;bav&#x11B;</button>
+            </div>
+
+            <div class="as-detail-cols__col">
+                <h2 class="as-detail-cols__title">Cena</h2>
+                    <span class="as-price__list">Cen&#xED;kov&#xE1; cena 725&#xA0;000 K&#x10D;</span>
+                    <span class="as-price__value">289&#xA0;000 K&#x10D;</span>
+                        <span class="as-price__novat">238&#xA0;843 K&#x10D; bez DPH</span>
+
+                <hr class="as-price__divider" />
+
+                <h2 class="as-detail-cols__title">Spl&#xE1;tka</h2>
+                <div class="as-price__actions">
+                    <button type="button" class="as-detail__btn" @click="carLoanRedirect()" :disabled="leasingLoading">
+                        <span x-show="!leasingLoading">Spo&#x10D;&#xED;tat online</span>
+                        <span x-show="leasingLoading" style="display:none">Na&#x10D;&#xED;t&#xE1;m&#x2026;</span>
+                    </button>
+                    <p x-show="leasingError" class="as-form__hint" style="display:none;color:red">
+                        Nepoda&#x159;ilo se p&#x159;esm&#x11B;rovat na kalkulaci. Zkuste to pros&#xED;m znovu.
+                    </p>
+                    <div class="as-price__actions-sep">
+                        <button type="button" class="as-detail__btn" @click="openReserve()">NEZ&#xC1;VAZN&#xC1; REZERVACE</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+  <div class="as-container">
+        
+<section class="as-detail-section">
+        <h2 class="as-detail-section__title">Kde n&#xE1;s najdete?</h2>
+    <div class="as-dealer">
+            <a class="as-dealer__map as-dealer__map--photo" href="https://www.google.com/maps/dir/?api=1&amp;destination=50.14940145715958%2C14.503396996898275" target="_blank" rel="noopener noreferrer"
+               role="img" aria-label="Mapa pobo&#x10D;ky &#x2013; otev&#x159;&#xED;t navigaci"
+               style="background-image: url('https://maps.googleapis.com/maps/api/staticmap?size=600x370&amp;center=50.14940145715958,14.503396996898275&amp;zoom=17&amp;markers=color:0x00AFEC%7C50.14940145715958,14.503396996898275&amp;key=MAPS_KEY');"></a>
+        <div class="as-dealer__info">
+                <span class="as-dealer__heading"> Kontaktujete p&#x159;&#xED;mo na&#x161;eho prodejce</span>
+                <div class="as-dealer__phones">
+                        <a href="tel:700000000" class="as-phone">700 000 000</a>
+                        <a href="tel:600000000" class="as-phone">600 000 000</a>
+                </div>
+                <div class="as-dealer__details">
+                        <table class="as-dealer__hours">
+                                <tr>
+                                    <td>Pond&#x11B;l&#xED;</td>
+                                    <td>9.00 - 17.30</td>
+                                </tr>
+                                <tr>
+                                    <td>&#xDA;ter&#xFD;</td>
+                                    <td>9.00 - 17.30</td>
+                                </tr>
+                                <tr>
+                                    <td>St&#x159;eda</td>
+                                    <td>9.00 - 17.30</td>
+                                </tr>
+                                <tr>
+                                    <td>&#x10C;tvrtek</td>
+                                    <td>9.00 - 17.30</td>
+                                </tr>
+                                <tr>
+                                    <td>P&#xE1;tek</td>
+                                    <td>9.00 - 17.30</td>
+                                </tr>
+                                <tr>
+                                    <td>Sobota</td>
+                                    <td>Zav&#x159;eno</td>
+                                </tr>
+                                <tr>
+                                    <td>Ned&#x11B;le</td>
+                                    <td>Zav&#x159;eno</td>
+                                </tr>
+                                <tr>
+                                    <td>St&#xE1;tn&#xED; sv&#xE1;tky</td>
+                                    <td>Zav&#x159;eno</td>
+                                </tr>
+                        </table>
+                        <div class="as-dealer__branch"><p>Autosalon ČSOB Leasing&nbsp;</p><p>Kostelecká ul.910&nbsp;</p><p>Praha 9 Čakovice 196 00</p></div>
+                </div>
+        </div>
+    </div>
+</section>
+
+
+        <section class="as-detail-section" id="napiste-nam">
+            <h2 class="as-detail-section__title">Pot&#x159;ebujete poradit s autem?</h2>
+            <div class="as-help">
+                <div class="as-help__form-col">
+                    <span class="as-help__title">Napi&#x161;te n&#xE1;m</span>
+                    <form method="post" action="/api/autosalon/car-inquiry" data-recaptcha-action="as_car_inquiry" x-data="{ email: '', emailDirty: false }">
+                        <input name="__RequestVerificationToken" type="hidden" value="CfDJ8Cen62qFEBJPqEm3_m5ld-_no4u1LePos3mY62bJw8hzmCLRMvsBUke570-6tBcq5HsE13ZtvvMOiPWzy8IJ3Mjd1WN8HvCQ8-HXx2FgE2QX9Bo3lk1VepPZ5TO6HEC57wNQrHUQth1hMBe1f_rL6Yw" />
+                        <input type="hidden" name="RecaptchaToken" />
+                        <input type="hidden" name="CarDescription" value="308 SW 1.5 BlueHDi 130 S&amp;S EAT8" />
+                        <input type="hidden" name="CaseId" value="129227" />
+                        <div class="as-help-form__row">
+                            <span class="as-help-form__star">*</span>
+                            <textarea name="Question" class="as-form__field" rows="4"
+                                      placeholder="V&#xE1;&#x161; dotaz" required maxlength="4000"></textarea>
+                        </div>
+                        <div class="as-help-form__row">
+                            <span class="as-help-form__star">*</span>
+                            <div class="as-help-form__email-wrap">
+                                <input type="email" name="Email" class="as-form__field"
+                                       placeholder="E-mail" x-model="email"
+                                       @blur="emailDirty = true" required maxlength="500" />
+                                <span class="as-help-form__error"
+                                      x-show="emailDirty && email.length > 0 && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)"
+                                      style="display:none">
+                                    Email nen&#xED; validn&#xED;
+                                </span>
+                            </div>
+                        </div>
+                        <p class="as-form__hint">
+                            V&#xE1;mi uveden&#xE9; kontaktn&#xED; &#xFA;daje pou&#x17E;ijeme pouze za &#xFA;&#x10D;elem zpracov&#xE1;n&#xED; a zasl&#xE1;n&#xED; odpov&#x11B;di na va&#x161;i popt&#xE1;vku.
+                        </p>
+                        <button type="submit" class="as-detail__btn as-detail__btn--secondary as-help__submit">Odeslat</button>
+                    </form>
+                </div>
+
+                <div class="as-help__separator"><span>nebo</span></div>
+
+                <div>
+                    <span class="as-help__title">Zavolejte n&#xE1;m</span>
+                    <table class="as-dealer__hours">
+                        <tr><td>Po &#x2013; P&#xE1;:</td><td>9.00 &#x2013; 17.30</td></tr>
+                        <tr><td>So &#x2013; Ne:</td><td>Zav&#x159;eno</td></tr>
+                        <tr><td>St&#xE1;tn&#xED; sv&#xE1;tky:</td><td>Zav&#x159;eno</td></tr>
+                    </table>
+                    <div class="as-dealer__phones">
+                            <a href="tel:+420700000000" class="as-phone">700 000 000</a>
+                            <a href="tel:+420600000000" class="as-phone">600 000 000</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+</div>
+    <div class="as-modal__overlay" id="rezervace-vozidla"
+         x-show="reserveOpen" x-transition.opacity
+         @click.self="reserveOpen = false" style="display:none">
+        <div class="as-modal">
+            <button type="button" class="as-modal__close" aria-label="Zav&#x159;&#xED;t" @click="reserveOpen = false"></button>
+            <div class="as-modal__body">
+                <h2 class="as-modal__title">Kontaktn&#xED; &#xFA;daje</h2>
+                <form method="post" action="/api/autosalon/car-reservation" data-recaptcha-action="as_car_reservation" x-data="{ email: '', emailDirty: false, phone: '', phoneDirty: false }">
+                    <input name="__RequestVerificationToken" type="hidden" value="CfDJ8Cen62qFEBJPqEm3_m5ld-_no4u1LePos3mY62bJw8hzmCLRMvsBUke570-6tBcq5HsE13ZtvvMOiPWzy8IJ3Mjd1WN8HvCQ8-HXx2FgE2QX9Bo3lk1VepPZ5TO6HEC57wNQrHUQth1hMBe1f_rL6Yw" />
+                    <input type="hidden" name="RecaptchaToken" />
+                    <input type="hidden" name="CarDescription" value="308 SW 1.5 BlueHDi 130 S&amp;S EAT8" />
+                    <div class="as-form__group">
+                        <label class="as-form__label" for="as-reservation-name">Jm&#xE9;no a p&#x159;&#xED;jmen&#xED; *</label>
+                        <input type="text" id="as-reservation-name" name="CustomerName" class="as-form__field"
+                               autocomplete="name" required maxlength="500" />
+                    </div>
+
+                    <div class="as-form__group">
+                        <label class="as-form__label" for="as-reservation-date">Term&#xED;n prohl&#xED;dky vozu *</label>
+                        <input type="date" id="as-reservation-date" name="PickupDate" class="as-form__field" required />
+                    </div>
+
+                    <div class="as-form__group">
+                        <label class="as-form__label" for="as-reservation-phone">Telefon *</label>
+                        <div class="as-help-form__email-wrap">
+                            <input type="tel" id="as-reservation-phone" name="Phone" class="as-form__field"
+                                   x-model="phone" @blur="phoneDirty = true"
+                                   autocomplete="tel" inputmode="tel" pattern="\+?[0-9 ]{9,20}" required maxlength="20" />
+                            <span class="as-help-form__error"
+                                  x-show="phoneDirty && phone.length > 0 && !/^\+?[0-9 ]{9,20}$/.test(phone)"
+                                  style="display:none">
+                                Telefon nen&#xED; validn&#xED;
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="as-form__group">
+                        <label class="as-form__label" for="as-reservation-email">Email *</label>
+                        <div class="as-help-form__email-wrap">
+                            <input type="email" id="as-reservation-email" name="Email" class="as-form__field"
+                                   x-model="email" @blur="emailDirty = true"
+                                   autocomplete="email" required maxlength="500" />
+                            <span class="as-help-form__error"
+                                  x-show="emailDirty && email.length > 0 && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)"
+                                  style="display:none">
+                                Email nen&#xED; validn&#xED;
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="as-form__group">
+                        <label class="as-form__label" for="as-reservation-note">Pozn&#xE1;mka</label>
+                        <textarea id="as-reservation-note" name="Note" class="as-form__field" maxlength="4000"></textarea>
+                    </div>
+
+                    <p class="as-form__hint">Povinn&#xE1; pole *</p>
+
+                    <div class="as-form__disclaimer">
+                        <span class="as-form__disclaimer-title">Informace o zpracov&#xE1;n&#xED; osobn&#xED;ch &#xFA;daj&#x16F;</span>
+                        Potvrzuji, že mnou uvedené údaje jsou pravdivé a stisknutím tlačítka „Odeslat rezervaci“ prohlašuji, že jsem se seznámil/a s <a href="https://www.csobleasing.cz/informace-pro-zakazniky/ochrana-osobnich-udaju" target="_blank" rel="noopener">informacemi o zpracování osobních údajů</a>.
+                    </div>
+
+                    <button type="submit" class="as-form__submit">Odeslat rezervaci</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="https://www.google.com/recaptcha/api.js?render=6LeUAX0pAAAAAAGApG3TK5o6tgV_MbSq8LqKFJhZ" async defer></script>
+    <script>
+        (function () {
+            // The partial may be rendered more than once per page (e.g. several form widgets);
+            // initialize only once so forms are not bound twice (which would submit them twice).
+            if (window.recaptchaV3) {
+                return;
+            }
+
+            var siteKey = '6LeUAX0pAAAAAAGApG3TK5o6tgV_MbSq8LqKFJhZ';
+
+            // Token helper for Blazor components (called via JS interop).
+            window.recaptchaV3 = {
+                getToken: function (action) {
+                    return new Promise(function (resolve, reject) {
+                        grecaptcha.ready(function () {
+                            grecaptcha.execute(siteKey, { action: action }).then(resolve, reject);
+                        });
+                    });
+                }
+            };
+
+            function attachRecaptcha(form) {
+                if (form.dataset.recaptchaBound) {
+                    return;
+                }
+                form.dataset.recaptchaBound = 'true';
+
+                form.addEventListener('submit', function (e) {
+                    var tokenInput = form.querySelector('input[name="RecaptchaToken"]');
+                    if (!tokenInput || tokenInput.value) {
+                        return;
+                    }
+                    e.preventDefault();
+                    window.recaptchaV3.getToken(form.dataset.recaptchaAction).then(function (token) {
+                        tokenInput.value = token;
+                        form.requestSubmit();
+                    });
+                });
+            }
+
+            function attachAll() {
+                document.querySelectorAll('form[data-recaptcha-action]').forEach(attachRecaptcha);
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', attachAll);
+            } else {
+                attachAll();
+            }
+        })();
+    </script>
+
+
+    <div class="as-layer" role="dialog" aria-modal="true" aria-labelledby="as-techspec-title"
+         x-show="specOpen" x-transition.opacity @keydown.escape.window="specOpen = false" style="display:none">
+        <button type="button" class="as-layer__close" aria-label="Zav&#x159;&#xED;t" @click="specOpen = false"></button>
+        <h2 class="as-techspec__title" id="as-techspec-title">Kompletn&#xED; technick&#xE1; specifikace</h2>
+        <div class="as-techspec__cols">
+            <div>
+                <div class="as-techspec__params">
+                        <div>
+                            <span class="as-techspec__param-label">Zna&#x10D;ka</span>
+                            <span class="as-techspec__param-value">PEUGEOT</span>
+                        </div>
+                        <div>
+                            <span class="as-techspec__param-label">Model</span>
+                            <span class="as-techspec__param-value">308</span>
+                        </div>
+                        <div>
+                            <span class="as-techspec__param-label">Karoserie</span>
+                            <span class="as-techspec__param-value">kombi</span>
+                        </div>
+                        <div>
+                            <span class="as-techspec__param-label">V provozu od</span>
+                            <span class="as-techspec__param-value">1. 7. 2020</span>
+                        </div>
+                        <div>
+                            <span class="as-techspec__param-label">Tachometr</span>
+                            <span class="as-techspec__param-value">106&#xA0;137 km</span>
+                        </div>
+                        <div>
+                            <span class="as-techspec__param-label">Palivo</span>
+                            <span class="as-techspec__param-value">nafta motorov&#xE1;</span>
+                        </div>
+                        <div>
+                            <span class="as-techspec__param-label">Objem</span>
+                            <span class="as-techspec__param-value">1&#xA0;499 cm&#xB3;</span>
+                        </div>
+                        <div>
+                            <span class="as-techspec__param-label">P&#x159;evodovka</span>
+                            <span class="as-techspec__param-value">automatick&#xE1;</span>
+                        </div>
+                        <div>
+                            <span class="as-techspec__param-label">Pohon</span>
+                            <span class="as-techspec__param-value">4x2</span>
+                        </div>
+                        <div>
+                            <span class="as-techspec__param-label">Barva</span>
+                            <span class="as-techspec__param-value">b&#xED;l&#xE1; Nacr&#xE9;</span>
+                        </div>
+                        <div>
+                            <span class="as-techspec__param-label">V&#xFD;kon</span>
+                            <span class="as-techspec__param-value">96 kW (131 k)</span>
+                        </div>
+                        <div>
+                            <span class="as-techspec__param-label">ID</span>
+                            <span class="as-techspec__param-value">129227</span>
+                        </div>
+                </div>
+                    <div class="as-techspec__dekra">
+                        <span class="as-techspec__dekra-title">DEKRA Protokol</span>
+                        <a href="/getContentAsset/e77d046b-b416-430b-9eab-c1f72d497b9d/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_VEP_130-20994-INZERCE-2026-09-08_15-09-17.pdf?language=cz" class="as-detail__btn" target="_blank" rel="noopener">Zobrazit</a>
+                    </div>
+            </div>
+            <div>
+                    <div class="as-techspec__group">
+                        <span class="as-techspec__group-title">Pohon a technika</span>
+                            <span class="as-techspec__group-item">Parkovac&#xED; senzory vp&#x159;edu i vzadu</span>
+                            <span class="as-techspec__group-item">Vzduchov&#xE9; odpru&#x17E;en&#xED; </span>
+                            <span class="as-techspec__group-item">Parkovac&#xED; asistent </span>
+                            <span class="as-techspec__group-item">Sportovn&#xED; podvozek </span>
+                            <span class="as-techspec__group-item">Senzor opot&#x159;eben&#xED; brzd </span>
+                            <span class="as-techspec__group-item">Regulace tuhosti podvozku </span>
+                            <span class="as-techspec__group-item">Parkovac&#xED; asistent </span>
+                            <span class="as-techspec__group-item">Nastaviteln&#xE1; v&#xFD;&#x161;ka podvozku </span>
+                    </div>
+                    <div class="as-techspec__group">
+                        <span class="as-techspec__group-title">Vnit&#x159;n&#xED; v&#xFD;bava a komfort</span>
+                            <span class="as-techspec__group-item">V&#xFD;&#x161;kov&#x11B; nastaviteln&#xFD; volant </span>
+                            <span class="as-techspec__group-item">Z&#xE1;mek p&#x159;evodovky </span>
+                            <span class="as-techspec__group-item">V&#xFD;&#x161;kov&#x11B; nastaviteln&#xFD; volant </span>
+                            <span class="as-techspec__group-item">Naviga&#x10D;n&#xED; syst&#xE9;m </span>
+                            <span class="as-techspec__group-item">Isofix</span>
+                            <span class="as-techspec__group-item">Naviga&#x10D;n&#xED; syst&#xE9;m </span>
+                            <span class="as-techspec__group-item">Multifunk&#x10D;n&#xED; volant </span>
+                            <span class="as-techspec__group-item">MaxiDot</span>
+                            <span class="as-techspec__group-item">Mal&#xFD; ko&#x17E;en&#xFD; paket </span>
+                            <span class="as-techspec__group-item">Loketn&#xED; op&#x11B;rka zadn&#xED; </span>
+                            <span class="as-techspec__group-item">Ko&#x17E;en&#xE9; &#x10D;aloun&#x11B;n&#xED; </span>
+                            <span class="as-techspec__group-item">Isofix</span>
+                            <span class="as-techspec__group-item">Klimatizace automatick&#xE1;</span>
+                            <span class="as-techspec__group-item">Vyh&#x159;&#xED;van&#xE1; sedadla vp&#x159;edu</span>
+                            <span class="as-techspec__group-item">Tempomat</span>
+                    </div>
+                    <div class="as-techspec__group">
+                        <span class="as-techspec__group-title">Vn&#x11B;j&#x161;&#xED; vzhled a v&#xFD;bava</span>
+                            <span class="as-techspec__group-item">Ta&#x17E;n&#xE9; za&#x159;&#xED;zen&#xED; </span>
+                            <span class="as-techspec__group-item">Senzor sv&#x11B;tel </span>
+                            <span class="as-techspec__group-item">P&#x159;&#xED;davn&#xE9; sv&#x11B;tlomety </span>
+                            <span class="as-techspec__group-item">Mlhovky</span>
+                            <span class="as-techspec__group-item">Kontrola tlaku pneu </span>
+                            <span class="as-techspec__group-item">LED sv&#x11B;tlomety</span>
+                    </div>
+                    <div class="as-techspec__group">
+                        <span class="as-techspec__group-title">Bezpe&#x10D;nost</span>
+                            <span class="as-techspec__group-item">Sledov&#xE1;n&#xED; &#xFA;navy &#x159;idi&#x10D;e </span>
+                            <span class="as-techspec__group-item">Sledov&#xE1;n&#xED; j&#xED;zdn&#xED;ho pruhu </span>
+                            <span class="as-techspec__group-item">Startov&#xE1;n&#xED; tla&#x10D;&#xED;tkem </span>
+                            <span class="as-techspec__group-item">Hl&#xED;d&#xE1;n&#xED; mrtv&#xE9;ho &#xFA;hlu </span>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="as-lightbox" x-show="galleryOpen" x-transition.opacity style="display:none"
+         @keydown.escape.window="closeGallery()">
+        <img :src="galleryImages[galleryIndex]" class="as-lightbox__img" :alt="'Foto ' + (galleryIndex + 1)" />
+        <button type="button" class="as-lightbox__close" aria-label="Zav&#x159;&#xED;t" @click="closeGallery()">✕</button>
+        <button type="button" class="as-lightbox__prev" aria-label="P&#x159;edchoz&#xED;"
+                x-show="galleryImages.length > 1" @click="galleryPrev()">&#8249;</button>
+        <button type="button" class="as-lightbox__next" aria-label="Dal&#x161;&#xED;"
+                x-show="galleryImages.length > 1" @click="galleryNext()">&#8250;</button>
+        <span class="as-lightbox__counter"
+              x-show="galleryImages.length > 1"
+              x-text="(galleryIndex + 1) + ' / ' + galleryImages.length"></span>
+    </div>
+
+</div>
+
+
+<script>
+    const _asCarImages = ["/getContentAsset/bd295c9a-0312-4a0f-ae7c-a0b4c06370b8/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_0.jpg?language=cz","/getContentAsset/1a2b25cb-d957-4dfc-8e28-8ef07ffc9f9e/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_1.jpg?language=cz","/getContentAsset/f858f1fe-5c1b-48a5-88ea-87c8f75d4083/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_2.jpg?language=cz","/getContentAsset/d738c51f-834b-457d-b0ea-b9dce79f5454/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_3.jpg?language=cz","/getContentAsset/5771b29a-9ea9-49d8-a99f-ce37149ec311/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_4.jpg?language=cz","/getContentAsset/8c20b573-2978-43c1-98e9-167606efea06/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_5.jpg?language=cz","/getContentAsset/39284835-5917-4778-8310-d5ec648f150f/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_6.jpg?language=cz","/getContentAsset/2cdbe77c-f5fe-4b9d-ad73-5c3d6622a99f/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_7.jpg?language=cz","/getContentAsset/ca0b7def-3d00-4a1f-bafb-bb82c2945077/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_8.jpg?language=cz","/getContentAsset/d5976239-1b4a-4419-85d3-06b2fdf4e7bf/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_9.jpg?language=cz","/getContentAsset/0631552a-8a8d-4826-9b6b-70e75e5e04c8/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_10.jpg?language=cz","/getContentAsset/6e0ca92a-ff83-4b60-9afb-8421eb36755f/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_11.jpg?language=cz","/getContentAsset/75b78cc7-e931-428f-94ee-e26e9da8a452/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_12.jpg?language=cz","/getContentAsset/f84feb9d-56ab-4fa8-8a1a-74faa2e40e4f/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_13.jpg?language=cz","/getContentAsset/9cd70f11-1efa-4327-9f18-15781b6d7933/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_14.jpg?language=cz"];
+    const _asCarData = {"id":"129227","brand":"PEUGEOT","model":"308","description":"308 SW 1.5 BlueHDi 130 S\u0026S EAT8","type":"kombi","price":"289000","firstRegistration":"2020-07-01","mileage":"106137","fuel":"nafta motorov\u00E1","engineCapacity":"1499","power":"96","transmission":"automatick\u00E1","gear":"4x2","imageUrl":"/getContentAsset/bd295c9a-0312-4a0f-ae7c-a0b4c06370b8/ec207f32-4b29-4406-85c9-2f44edcd24a0/129227_G_0.jpg?language=cz"};
+
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('asCarDetail', () => ({
+            specOpen: false,
+
+            // Reservation modal — reopened only to show a submission error; success shows the thank-you layer
+            reserveOpen: false,
+
+            // Car loan redirect state
+            leasingLoading: false,
+            leasingError: false,
+
+            // Gallery / lightbox
+            galleryImages: _asCarImages,
+            galleryOpen: false,
+            galleryIndex: 0,
+
+            openReserve() {
+                this.reserveOpen = true;
+            },
+
+            carLoanRedirect() {
+                const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
+                this.leasingLoading = true;
+                this.leasingError = false;
+
+                fetch('/api/autosalon/set-car-context', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ..._asCarData, url: window.location.href })
+                })
+                .then(res => {
+                    if (!res.ok) throw new Error('Context storage returned ' + res.status);
+                    return res.json();
+                })
+                .then(data => {
+                    if (data && data.carLoanUrl) {
+                        if (isSafari) {
+                            window.location.href = data.carLoanUrl;
+                        } else {
+                            const a = document.createElement('a');
+                            a.href = data.carLoanUrl;
+                            a.target = '_blank';
+                            a.rel = 'noopener';
+                            a.click();
+                            this.leasingLoading = false;
+                        }
+                    } else {
+                        throw new Error('Missing carLoanUrl in response');
+                    }
+                })
+                .catch(err => {
+                    console.error('[AutoSalon] carLoanRedirect failed:', err);
+                    this.leasingLoading = false;
+                    this.leasingError = true;
+                });
+            },
+
+            openGallery(index) {
+                if (!this.galleryImages.length) return;
+                this.galleryIndex = index;
+                this.galleryOpen = true;
+            },
+            closeGallery() {
+                this.galleryOpen = false;
+            },
+            galleryPrev() {
+                this.galleryIndex = (this.galleryIndex - 1 + this.galleryImages.length) % this.galleryImages.length;
+            },
+            galleryNext() {
+                this.galleryIndex = (this.galleryIndex + 1) % this.galleryImages.length;
+            }
+        }));
+    });
+</script>
+
+    </main>
+
+    
+<footer class="as-footer" x-data="asFooter">
+    <div class="as-footer__wrapper">
+        <div class="as-footer__inner">
+                <ul class="as-footer__column" :class="{ 'as-footer__column--expanded': expandedColumn === 'column-0' }">
+                    <li class="as-footer__column-label" @click="toggleColumn('column-0')">O n&#xE1;s</li>
+                        <li class="as-footer__column-item">
+                            <a href="https://www.csobleasing.cz/" class="as-footer__link" target="_blank">&#x10C;SOB Leasing</a>
+                        </li>
+                        <li class="as-footer__column-item">
+                            <a href="/o-nas/faq" class="as-footer__link" target="_self">&#x10C;ast&#xE9; dotazy</a>
+                        </li>
+                </ul>
+                <ul class="as-footer__column" :class="{ 'as-footer__column--expanded': expandedColumn === 'column-1' }">
+                    <li class="as-footer__column-label" @click="toggleColumn('column-1')">Informace pro z&#xE1;kazn&#xED;ky</li>
+                        <li class="as-footer__column-item">
+                            <a href="https://www.csobpm.cz/informace-pro-zakazniky/Cookies-a-podminky-pouzivani" class="as-footer__link" target="_self">Cookies a podm&#xED;nky pou&#x17E;&#xED;v&#xE1;n&#xED;</a>
+                        </li>
+                        <li class="as-footer__column-item">
+                            <a href="https://www.csob.cz/csob/ochrana-osobnich-udaju" class="as-footer__link" target="_blank">Ochrana osobn&#xED;ch &#xFA;daj&#x16F;</a>
+                        </li>
+                        <li class="as-footer__column-item">
+                            <a href="https://www.csobleasing.cz/informace-pro-zakazniky/informace-pro-spotrebitele#reklamace" class="as-footer__link" target="_blank">Reklama&#x10D;n&#xED; &#x159;&#xE1;d</a>
+                        </li>
+                </ul>
+        </div>
+    </div>
+</footer>
+
+
+    <script src="/_content/Kentico.Content.Web.Rcl/Content/Bundles/Public/systemFormComponents.min.js"></script>
+
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('asHeader', () => ({
+                drawerOpen: false,
+                isActive(path) {
+                    if (!path) return false;
+                    // Normalize trailing slashes; empty string collapses to root.
+                    const current = window.location.pathname.replace(/\/+$/, '') || '/';
+                    const target = path.replace(/\/+$/, '') || '/';
+                    // Root must match exactly, otherwise it would light up on every page.
+                    if (target === '/') return current === '/';
+                    // Exact match or a deeper sub-path (boundary-aware to avoid prefix collisions).
+                    return current === target || current.startsWith(target + '/');
+                }
+            }));
+
+            Alpine.data('asFooter', () => ({
+                expandedColumn: null,
+                toggleColumn(name) {
+                    this.expandedColumn = this.expandedColumn === name ? null : name;
+                }
+            }));
+        });
+    </script>
+    <script defer src="/autosalon/assets/js/catalog-url.js?v=AQWto5YsCEJNiRbboocWm0BI3vrbrBaJffiAOE8CpA8"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.15.12/dist/cdn.min.js"></script>
+    <script type="module" src="/autosalon/assets/js/autosalon.min.js?v=AbpHGcgLb-kRsJGnwFEktk7uzpZOCcBY74-YBdrKVGs"></script>
+<script src="/_content/Kentico.Xperience.TagManager/js/xperience-tag-manager.js?v=TtMOjnP7C3BlwtJokJNEQ6vzf8k5yEol-AKk2EPFSpU" type="module"></script></body>
+</html>

@@ -1,12 +1,12 @@
 {% from "_icons.html" import icon %}
 {# Source switches; shared by the wizard and the Sources page. #}
 {% if consent_missing %}<p class="error" role="alert">{{ t("sources.consent_missing", source=consent_missing) }}</p>{% endif %}
-{% for kind in ("portal", "classifieds") %}
+{% for kind in ("portal", "dealer", "leasing", "auction", "classifieds") %}
 {% set listed = sources | selectattr("kind", "equalto", kind) | rejectattr("consent") | list %}
 {% if listed %}
 <fieldset>
   <legend>{{ t("sources.kind." ~ kind) }}</legend>
-  {% if kind == "classifieds" %}<small class="muted">{{ t("sources.classifieds.hint") }}</small>{% endif %}
+  {% if kind in ("auction", "classifieds") %}<small class="muted">{{ t("sources." ~ kind ~ ".hint") }}</small>{% endif %}
   {% for s in listed %}
     <label><input type="checkbox" role="switch" name="source_{{ s.id }}" {% if s.on %}checked{% endif %}> {{ s.label }}</label>
   {% endfor %}

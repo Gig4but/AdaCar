@@ -1,0 +1,11 @@
+# *
+User-agent: *
+Disallow: /nabidka-vozu-pro-klienty
+Disallow: /en/nabidka-vozu-pro-klienty
+
+# Host
+Host: https://www.carsandcare.cz
+
+# Sitemaps
+Sitemap: https://www.carsandcare.cz/sitemap.xml
+Sitemap: https://www.carsandcare.cz/dynamic-sitemap.xml

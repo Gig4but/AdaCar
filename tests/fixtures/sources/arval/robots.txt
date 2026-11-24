@@ -1,0 +1,41 @@
+User-agent: *
+Disallow: /userdata/_CHANGELOG.php
+Disallow: /hodnotit/
+Disallow: /evaluate/
+Disallow: /*diskuse$
+Disallow: /*discussion$
+Disallow: /*send$
+Disallow: /*volba_dis*
+Disallow: /cz/anketa
+Disallow: /sk/survey
+Disallow: /gb/survey
+Disallow: /enableMobile/
+Disallow: /disableMobile/
+Noindex: /*script.php*
+Disallow: /shop.order.script.php?akce=potvrdit-objednavku*
+Disallow: /shop.order.script.php?akce=vytvorit-objednavku*
+Disallow: /shop.order.script.php?akce=aktualizovat-objednavku*
+
+User-agent: Seznambot
+Robot-version: 2.0
+Disallow: /userdata/_CHANGELOG.php
+Disallow: /hodnotit/
+Disallow: /evaluate/
+Disallow: /*diskuse$
+Disallow: /*discussion$
+Disallow: /*send$
+Disallow: /*volba_dis*
+Disallow: /cz/anketa
+Disallow: /sk/survey
+Disallow: /gb/survey
+Disallow: /enableMobile/
+Disallow: /disableMobile/
+Noindex: /*script.php*
+Disallow: /shop.order.script.php\?akce=potvrdit-objednavku*
+Disallow: /shop.order.script.php\?akce=vytvorit-objednavku*
+Disallow: /shop.order.script.php\?akce=aktualizovat-objednavku*
+
+User-agent: MJ12bot
+Disallow:
+
+Sitemap: https://www.arvalauto.cz/sitemap.xml

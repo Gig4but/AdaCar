@@ -21,7 +21,7 @@ Shared services: a small **local AI model** (reads free-text ads, flags suspicio
 puts the photo of the car from the front first, turns a question in a sentence into filters)
 and a **local routing engine** (MOTIS: travel times, routes, offline map).
 
-Status: **M0–M7 done** (2026-11-19); the first public release is the owner's step (README).
+Status: **M0–M8 done** (2026-11-24); the first public release is the owner's step (README).
 How the code is organized: [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ---
@@ -65,11 +65,12 @@ How the code is organized: [ARCHITECTURE.md](ARCHITECTURE.md).
 | dasweltauto.cz | JSON API of its pages (GET), full pass | ~5.6k | allowed | **M2** |
 | proverenevozy.toyota.cz | HTML, newest first | ~3.7k | none (404) | **M2** |
 | bazar.cz, ojeteauto.cz, hyperinzerce.cz, annonce.cz, inzeruj.cz | classifieds, HTML, newest first (inzeruj: full pass); annonce asks 20 s between requests | ~6k, ~8k, ~1.3k, ?, ~90 | allowed | **M2** |
-| autoesa.cz | HTML, ~5.7k | — | allowed | skipped: no car says where it stands |
-| skodaplus.cz | GraphQL POST only | — | allowed | later: needs POST in the crawler |
-| hyundai-promise.cz | HTML, 9 per page, session-held paging | ~1.3k | allowed | later |
-| sbazar.cz; avizo.cz, autobazar-online.cz, autoinzerce.cz, yauto.cz | — | — | sbazar disallows all; the rest show a bot challenge | not read |
-| carvago.com | cars abroad | — | — | not Czech |
+| autoesa.cz | HTML, ~5.7k | — | allowed | **M8, opt-in**: no car says where it stands |
+| skodaplus.cz | GraphQL POST only | — | allowed | not read; its dealers' own sites are (M8) |
+| hyundai-promise.cz | HTML, `?strana=<n>`, 9 per page | ~1.3k | allowed | **M8** |
+| sbazar.cz; avizo.cz, autobazar-online.cz, autoinzerce.cz (not Auto-inzerce.cz), yauto.cz | — | — | sbazar disallows all; the rest show a bot challenge | not read |
+| carvago.com | `__NEXT_DATA__`; no car stands in CZ (filter: 0), imports only | ~1M | allowed | **M8, opt-in** |
+| 38 more sites (M8) | dealers, makers' programs, leasing companies, auctions, classifieds: see M8 | | | **M8** |
 | Facebook Marketplace | Edge + Playwright session (AdaWork `social/` reader) | — | forbidden by Meta's terms | opt-in with warnings, later |
 
 ### 2.2 Free text and duplicates
@@ -86,7 +87,9 @@ How the code is organized: [ARCHITECTURE.md](ARCHITECTURE.md).
 3. Dealer aggregators: tipcars.com, autobazar.eu, cars.cz, autanet.cz.
 4. Dealer chains and makers' programs: AAA Auto, Mototechna, Auto Jarov, Das WeltAuto, Toyota.
 5. Smaller classifieds: bazar.cz, ojeteauto.cz, hyperinzerce.cz, annonce.cz, inzeruj.cz.
-6. Facebook Marketplace (opt-in).
+6. M8: big dealers' own sites, more makers' programs, leasing and rental companies' sales,
+   auctions open to private buyers.
+7. Facebook Marketplace (opt-in).
 
 ### 2.4 Vehicle and seller checks (M4 spike, verified 2026-11-18)
 
@@ -146,7 +149,8 @@ Layers and threads: [ARCHITECTURE.md](ARCHITECTURE.md).
 A `CrawlSource` (`scraper/crawl.py`) gives its listings (one or more per region), how to read
 a listing page into leads (with a card each) and a detail page into a `ParsedCar`, and its
 pace and limits. `crawl()` does the rest the same way for every source: new ads, known ones
-only touched, detail pages within a per-run limit, re-reads of old details, expiry after a
+only touched, detail pages within a per-run limit, re-reads of old details and of ads whose
+card shows another price than before (`CarAd.card_price`), expiry after a
 complete pass (a region counts once **all** its listings were read to the end), or after N
 days unseen for newest-first sources.
 
@@ -400,6 +404,39 @@ all phone numbers and e-mails (fake ones keep the pages' layout).
 app on an empty data folder starts and serves the wizard, Settings and the licenses. Not
 tried: the installer on a clean Windows (`dist\sandbox.wsb`).
 
+### M8 — More sources — done (2026-11-24)
+The owner asked for every source that is not blocked. 62 candidates were checked live
+(listing, detail, robots.txt, the AdaCar User-Agent); 41 added, so 57 sources in all, in
+five groups on the Sources page (`SourceKind`: portal, dealer, leasing, auction, classifieds):
+- Portals: Automodul.cz (opt-in: ~550 MB a run), SportovníVozy.cz, Carvago (opt-in: imports).
+- Dealers and makers' programs: Škoda dealers' own sites (113 hosts listed in the module,
+  read per region from their sitemaps), Hyundai Promise, Nissan, Subaru, Renault and Dacia
+  RENEW (cards only: robots.txt disallows the car pages), Auto ESA, Auto Louda, Autorro (only
+  its Czech regions), HAVEX-auto, Autosalon Klokočka, Auto Nord, AUTO IN Garant, Automaton,
+  Andy-auta, Lenner Motors, Emil Frey Select, Autocentrum BARTH, UH CAR, MACH MOTORS, Auto
+  Volf, Auto Palace, AR CARS, Renocar, Autodraft.
+- Leasing and rental companies: Arval, Cars & Care, ČSOB Leasing Autosalon, Ayvens, SIXT
+  Autobazar, Future Drivalia.
+- Auctions open to private buyers (price = the starting bid, or CarAukce's guide price; the
+  date in the text, `expires_at`):
+  OK Dražby, Exdražby, Portál dražeb (executors), Dražby Finanční správy, CarAukce, AutoAukce.
+- Classifieds: Aukro, Auto-inzerce.cz.
+- Off by default besides those above: sources whose cars name no place (Auto ESA, Auto Louda,
+  HAVEX-auto, AUTO IN Garant, Renault RENEW, Renocar, CarAukce), since a travel-time limit
+  leaves such cars out (`routing/commute.py: within`).
+- Not added: Sbazar, Land Rover/Jaguar (robots.txt disallows all); mobile.de, Porsche,
+  Mercedes, Tesla, Stellantis, Avízo, Direct auto, Kia, Volvo Selekt (refuse the app or a bot
+  challenge); AutoScout24 (no car in CZ); BMW/MINI (data only from a disallowed API);
+  Škoda Plus central site, ÚZSVM, DAVO CAR (list only by POST or session paging); Lexus
+  Select and Drazby.cz (all their cars are in Toyota and Exdražby); Police ČR sales (PDFs).
+- Also: robots.txt with a byte order mark was ignored (Auto Louda's); GMC added to the makes.
+Sites that list cars only in a sitemap give no cards: their cars appear once their pages are
+read (300 a run), so the first runs fill them in over several searches.
+
+After M8: a known car's new price on its listing card re-reads its page, so its price
+history and drop alert follow (before, the card was only touched until the 30-day re-read);
+the makes Alpine, Alpina, McLaren and XPeng (not RAM: "rám", a frame, reads the same).
+
 ---
 
 ## 10. Testing strategy
@@ -417,7 +454,11 @@ AI model 1–3 GB (M3).
   on after a warning; then 3 s between requests and a pause on the first refusal. Re-evaluated
   for the public release (2026-11-19): kept so, opt-in.
 - Saved pages in `tests/fixtures/` carry no real phone numbers, e-mails or private sellers'
-  names: replace them with fake ones when saving new pages.
+  names: replace them with fake ones when saving new pages (also dealers' staff, executors'
+  debtors and licence plates; numbers in `wa.me/`, `00420…` and JSON fields too).
+- A site that refuses the AdaCar User-Agent or shows a bot challenge is not read; no source
+  pretends to be a browser. `Request-rate` in robots.txt is not parsed: such a source sets
+  its `delay` by hand (Nissan: 5 s).
 - Personal data (seller names, phone numbers) stays on the PC; social posts are deleted 14
   days after last seen.
 - Spojenka timetables: non-commercial use only → the app stays personal and free.

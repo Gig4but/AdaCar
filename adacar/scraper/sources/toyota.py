@@ -18,7 +18,7 @@ from urllib.parse import urljoin
 
 from selectolax.lexbor import LexborHTMLParser, LexborNode
 
-from adacar.core import ParsedCar, ScrapeQuery
+from adacar.core import ParsedCar, ScrapeQuery, SourceKind
 from adacar.geo.places import PlaceResolver
 from adacar.normalize import cars
 from adacar.normalize.text import clean_spaces, fold, node_text
@@ -108,6 +108,7 @@ def parse_card(box: LexborNode, places: PlaceResolver) -> Lead | None:
 class Toyota(CrawlSource):
     id = SOURCE_ID
     label = "Toyota Prověřené vozy"
+    kind: SourceKind = "dealer"
     newest_first = True
     nationwide = True
     max_pages = 200  # the first run reads the whole stock (~190 pages)

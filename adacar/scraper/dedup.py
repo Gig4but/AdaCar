@@ -24,6 +24,7 @@ from adacar.normalize.text import fold
 KM_SHARE = 0.02
 KM_ABSOLUTE = 2000
 PRICE_SHARE = 0.15
+SERIES = {"rada", "trida", "serie", "series", "class"}
 VIN = re.compile(r"^[A-HJ-NPR-Z0-9]{17}$")  # no I, O, Q
 
 
@@ -34,9 +35,18 @@ def valid_vin(vin: str | None) -> str | None:
 
 
 def model_key(model: str | None) -> str:
-    """ "Octavia Combi" -> "octavia"; "Golf" -> "golf"."""
+    """ "Octavia Combi" -> "octavia"; "Golf" -> "golf"; "Řada 3" -> "rada 3"."""
     words = re.findall(r"[a-z0-9]+", fold(model or ""))
+    if len(words) > 1 and words[0] in SERIES:
+        return " ".join(words[:2])
     return words[0] if words else ""
+
+
+def models_agree(a: str, b: str) -> bool:
+    if not a or not b or a == b:
+        return True
+    short, long = sorted((a, b), key=len)
+    return short in SERIES and long.startswith(short + " ")
 
 
 @dataclass
@@ -132,7 +142,7 @@ class DedupIndex:
                 continue
             if new.vin and e.vin and new.vin != e.vin:
                 continue
-            if new.model and e.model and new.model != e.model:
+            if not models_agree(new.model, e.model):
                 continue
             if not _close(new.km, e.km, KM_SHARE, KM_ABSOLUTE):
                 continue

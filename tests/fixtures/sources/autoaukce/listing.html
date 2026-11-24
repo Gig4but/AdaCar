@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="preconnect" href="https://www.google.com">
+	<link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+
+	<title>Online aukce vozů - aktuální nabídka | AutoAukce.cz</title>
+	<meta name="description" content="AutoAukce.cz - Největší aukční portál s automobily v ČR">
+
+<link href="/assets/common.b9593db64808a1c4cff8.css" rel="stylesheet" type="text/css">
+<link href="/assets/815.6a700e9e8ac8abb9a041.css" rel="stylesheet" type="text/css">
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="/img/favicon.ico">
+	<meta name="apple-mobile-web-app-title" content="AutoAukce.cz">
+	<meta name="application-name" content="AutoAukce.cz">
+	<meta name="msapplication-TileColor" content="#5c60f5">
+	<meta name="msapplication-config" content="/img/browserconfig.xml">
+	<meta name="theme-color" content="#5c60f5">
+	<meta name="format-detection" content="telephone=no">
+
+	<script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js" type="6b64450a5117967bf76ac156-text/javascript"></script>
+<style>
+		.pace {
+			-webkit-pointer-events: none;
+			pointer-events: none;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			user-select: none;
+		}
+
+		.pace-inactive {
+			display: none;
+		}
+
+		.pace .pace-progress {
+			background: #5C60F5;
+			position: fixed;
+			z-index: 2000;
+			top: 72px;
+			right: 100%;
+			width: 100%;
+			height: 2px;
+		}
+
+		@media (max-width: 992px) {
+			.pace .pace-progress {
+				top: 57px;
+			}
+		}
+	</style>
+	<script type="6b64450a5117967bf76ac156-text/javascript">
+		const STRIPE_PUBLIC_KEY = "pk_live_51Ndv4JA2rOA8qxSW61OzwngzsuQWt7FM822KzCMPhrPcQMwjHXt7gQY9tD80GAla6xca4GItBfy1jGzAmzhoSINb00wThw0wa0";
+	</script>
+</head>
+
+<body class="">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white px-0 py-2 border-bottom position-sticky top-0">
+    <div class="container-xl">
+        <button class="navbar-toggler ms-n2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNav" aria-controls="offcanvasNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <a href="/" class="navbar-brand py-0 me-md-12">
+            <img src="/img/logo.svg" alt="AutoAukce.cz">
+        </a>
+
+            <div class="navbar-nav order-lg-3 align-items-lg-center ms-lg-auto">
+                <a href="#signModal" data-bs-toggle="modal" class="btn btn-primary w-full w-lg-auto d-none d-lg-inline-block">
+                    <i class="fa-light fa-right-to-bracket fa-lg me-md-2"></i> <span class="d-none d-md-inline">Přihlášení</span>
+                </a>
+                <a href="#signModal" data-bs-toggle="modal" class="btn btn-link btn-sm w-full pe-1 w-lg-auto d-lg-none">
+                    <i class="fa-light fa-right-to-bracket text-xl me-md-2"></i>
+                </a>
+            </div>
+
+        <div class="offcanvas offcanvas-start position-lg-relative w-4/5" tabindex="-1" id="offcanvasNav" aria-labelledby="offcanvasNavLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavLabel">Navigace</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body d-flex flex-column pt-0 pb-18 pb-lg-0">
+                <form class="form-light ms-lg-auto me-lg-4 mt-0 mb-3 my-lg-0 order-lg-2 position-lg-absolute end-0 top-1 bg-white ps-lg-12 d-none d-lg-block">
+                    <div id="autocomplete"></div>
+                </form>
+                <div class="navbar-nav justify-content-start flex-grow-1 pe-3">
+                    <a href="/" class="nav-item nav-link active" aria-current="page"><i class="fa-sharp fa-light fa-gavel fa-fw fa-lg me-2"></i> Aukce</a>
+                    <a href="/auction/" class="nav-item nav-link "><i class="fa-sharp fa-light fa-handshake-angle fa-fw fa-lg me-2"></i> Zadat aukci</a>
+                    <a href="/fleet-aukce" class="nav-item nav-link "><i class="fa-light fa-car-building fa-fw fa-lg me-2"></i> Fleet aukce</a>
+                    <a href="/home/faq" class="nav-item nav-link "><i class="fa-light fa-circle-question fa-fw fa-lg me-2"></i> Nejčastější dotazy</a>
+                    <a href="/home/contact" class="nav-item nav-link "><i class="fa-sharp fa-light fa-circle-phone fa-fw fa-lg me-2"></i> Kontakt</a>
+                </div>
+
+                <ul class="list-inline mb-0 d-lg-none">
+                    <li class="list-inline-item">
+                        <a class="text-lg text-muted px-1" target="_blank" href="https://www.facebook.com/portalautoaukce">
+                            <i class="fa-brands fa-facebook fa-lg"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="text-lg text-muted px-1" target="_blank" href="https://www.instagram.com/auto_aukce">
+                            <i class="fa-brands fa-instagram fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="navbar-nav flex-grow-0 d-lg-none">
+                    <a href="/jak-overujeme-aukce" class="nav-item nav-link pb-0">Jak ověřujeme aukce?</a>
+                    <a href="/home/history" class="nav-item nav-link pb-0">Úspěšné aukce</a>
+                    <a href="/cdn-cgi/l/email-protection#1e777078715e7f6b6a717f6b757d7b307d64" class="nav-item nav-link pb-0">Podpora</a>
+                    <a href="/home/terms" class="nav-item nav-link pb-0">Podmínky používání</a>
+                    <a href="/home/privacy" class="nav-item nav-link">Zásady ochrany osobních údajů</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+
+
+	<div class="position-fixed w-full bottom-24" style="z-index: 10001;">
+	</div>
+
+
+<div class="container my-7 pb-20">
+    <div class="bg-soft-warning rounded-md-3 mt-n7 mt-md-0 mx-n3 mx-md-0 p-4 p-md-6 pb-0 pb-md-0 mb-6">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h1 class="h2 text-highlight-warning">Doporučujeme</h1>
+
+            <div>
+                <button type="button" class="btn btn-white btn-sm" data-bs-target="#carouselPromoted" data-bs-slide="prev">
+                    <i class="fa-light fa-chevron-left"></i>
+                </button>
+                <button type="button" class="btn btn-white btn-sm" data-bs-target="#carouselPromoted" data-bs-slide="next">
+                    <i class="fa-light fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="carouselPromoted" class="carousel slide" data-bs-ride="true">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+
+<div class="card auction-card rounded transition-all ease-in duration-500 border-primary-hover p-2 mb-7" id="snippet-auctionCard-422-">
+    <div class="row gx-3">
+        <div class="col-lg-5 mb-3 mb-lg-0">
+            <div class="ratio ratio-16x9 h-full overflow-hidden rounded">
+                        <img src="https://autoaukce.fra1.cdn.digitaloceanspaces.com/auctions/422/w61vub4bqzmi82wfkyudn8ps_medium.jpg" alt="Tesla Model Y" style="object-fit: cover;" class="card-img rounded ">
+
+            </div>
+        </div>
+        <div class="col-lg-7 d-flex flex-column justify-content-between">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h3 class="auction-card__title">
+                        Tesla Model Y <small class="auction-card__subtitle text-muted fw-normal">SR LFP DPH</small>
+                    </h3>
+                    <div class="mb-2">
+                        <span class="bg-danger auction-card__badge rounded-pill font-bold text-white px-2 py-1">Prodej podléhá schválení</span>
+                    </div>
+                    <div class="auction-card__meta text-muted">Elektro,  Automatická</div>
+                </div>
+                <div class="text-end">
+                    <h3 class="auction-card__title">2023</h3>
+                    <div class="auction-card__meta text-muted">177 292 km</div>
+                </div>
+            </div>
+
+            <div class="bg-soft-primary rounded d-flex px-3 py-3 py-md-4 my-3 justify-content-between align-items-center">
+                <div class="auction-card__price-badge promoted fw-bold">
+                    <i class="fa-light fa-money-bill me-1 me-md-2"></i>
+                    604 000 Kč
+                </div>
+
+                <div class="auction-card__time-badge promoted fw-bold">
+                        <i class="fa-light fa-hourglass-half me-1 me-md-2"></i> <span class="countdown" data-value="2026-11-27T11:15:00+00:00">3d 1h 11m 26s</span>
+                </div>
+            </div>
+
+            <div class="row gx-2 gx-md-2 gy-2 gy-md-0">
+
+                    <div class="col-6 col-sm-3">
+                        <a href="https://autoaukce.fra1.cdn.digitaloceanspaces.com/auctions/422/2xc9ttvyrjohz535btcabj2e.jpg" class="d-block ratio glightbox overflow-hidden rounded-3" style="aspect-ratio: 5/4;">
+                            <img src="https://autoaukce.fra1.cdn.digitaloceanspaces.com/auctions/422/2xc9ttvyrjohz535btcabj2e_thumb.jpg" class="img-fluid object-fit-cover " alt="Tesla Model Y">
+                        </a>
+                    </div>
+
+
+                    <div class="col-6 col-sm-3">
+                        <a href="https://autoaukce.fra1.cdn.digitaloceanspaces.com/auctions/422/v15xmhm1qn9yl3lwimd3o6ge.jpg" class="d-block ratio glightbox overflow-hidden rounded-3" style="aspect-ratio: 5/4;">
+                            <img src="https://autoaukce.fra1.cdn.digitaloceanspaces.com/auctions/422/v15xmhm1qn9yl3lwimd3o6ge_thumb.jpg" class="img-fluid object-fit-cover " alt="Tesla Model Y">
+                        </a>
+                    </div>
+
+
+                    <div class="col-6 col-sm-3">
+                        <a href="https://autoaukce.fra1.cdn.digitaloceanspaces.com/auctions/422/zwic4sogfdjwne9sdvkizhoo.jpg" class="d-block ratio glightbox overflow-hidden rounded-3" style="aspect-ratio: 5/4;">
+                            <img src="https://autoaukce.fra1.cdn.digitaloceanspaces.com/auctions/422/zwic4sogfdjwne9sdvkizhoo_thumb.jpg" class="img-fluid object-fit-cover " alt="Tesla Model Y">
+                        </a>
+                    </div>
+
+
+                    <div class="col-6 col-sm-3">
+                        <a href="https://autoaukce.fra1.cdn.digitaloceanspaces.com/auctions/422/1jmspzjp0ymjixo2cp5yje2r.jpg" class="d-block ratio glightbox overflow-hidden rounded-3" style="aspect-ratio: 5/4;">
+                            <img src="https://autoaukce.fra1.cdn.digitaloceanspaces.com/auctions/422/1jmspzjp0ymjixo2cp5yje2r_thumb.jpg" class="img-fluid object-fit-cover " alt="Tesla Model Y">
+                        </a>
+                    </div>
+
+            </div>
+        </div>
+    </div>
+
+        <a href="/detail/422-tesla-model-y-2023-modra" class="stretched-link"></a>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="6b64450a5117967bf76ac156-text/javascript">
+        if (typeof countDownDate === 'function') {
+            document.querySelectorAll('#snippet-auctionCard-' + 422 +'- .countdown').forEach(el => {
+                countDownDate(el);
+            });
+        }
+    </script>
+</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row align-items-center justify-content-between mb-5">
+        <div class="col-md-auto order-2 order-md-1 d-none d-lg-block">
+        </div>
+
+        <div class="col-md-auto col-12 text-md-end mt-5 mt-md-0 order-1 order-md-2">
+            <div class="mx-n2 d-flex justify-content-between">
+                <a href="#offcanvasFilters" data-bs-toggle="offcanvas" class="btn d-inline-flex btn-sm btn-neutral position-relative mx-2">
+                    <span class="pe-2">
+                        <i class="fa-sharp fa-light fa-filter"></i>
+                    </span>
+                    <span>Filtrovat</span>
+                </a>
+                <a href="/vlozit-aukci" class="btn d-inline-flex btn-sm btn-dark mx-2">
+                    <span class="pe-2">
+                        <i class="fa-light fa-circle-plus"></i>
+                    </span>
+                    <span>Založit aukci</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+        <h2 class="h3 mb-5">
+            Fleet aukce
+            <span class="badge bg-primary text-uppercase ms-2">Nové</span>
+        </h2>
+
+        <div class="row">
+                <div class="col-md-6 col-lg-4 col-xl-3">
+                    <a href="/skupina/10-ev-vozdla" class="text-decoration-none">
+                        <div class="card auction-card d-flex d-lg-block rounded transition-all ease-in duration-300 border-primary-hover mb-7">
+                            <div class="p-2 position-relative overflow-hidden">
+                                <div class="ratio ratio-4x3">
+                                        <img src="https://autoaukce.fra1.cdn.digitaloceanspaces.com/auctions/422/w61vub4bqzmi82wfkyudn8ps_thumb.jpg" alt="EV vozdla" style="object-fit: cover;" class="card-img rounded">
+                                </div>
+                                <span class="d-inline-flex align-items-center badge bg-dark text-light lh-lg bg-opacity-75 rounded rounded-top-end-0 rounded-bottom-start-0 position-absolute bottom-0 end-0" style="margin: 0.5rem;">
+                                    <i class="fa-light fa-layer-group me-1"></i> 2 aukce
+                                </span>
+
+                                <div class="bg-primary auction-card__verified position-absolute font-bold text-white px-2">
+                                    Fleet aukce
+                                </div>
+                            </div>
+                            <div class="card-body position-relative lh-none p-2 pt-0">
+                                <h5 class="auction-card__title mb-1">EV vozdla</h5>
+                                <div class="bg-white border-top pt-3 pb-1 mt-3 d-flex justify-content-between align-items-center">
+                                    <span class="text-primary font-bold text-lg">
+                                        2 vozy
+                                    </span>
+                                    <span class="font-bold text-dark">
+                                            <i class="fa-light fa-stopwatch me-1"></i>
+                                            <span class="countdown" data-value="2026-11-27T11:15:00+00:00">3d 1h 11m 26s</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+        </div>
+
+    <h2 class="h3 mb-5">Aktuální aukce</h2>
+
+    <div class="row" id="snippet--auctions" data-naja-snippet-append>
+                <div class="col-md-6 col-lg-4 col-xl-3">
+
+<div class="card auction-card rounded transition-all ease-in duration-300 border-primary-hover     mb-7" id="snippet-auctionCard-350-">
+    <div class="p-2 position-relative overflow-hidden">
+        <div class="ratio ratio-4x3  ">
+                    <img src="https://autoaukce.fra1.cdn.digitaloceanspaces.com/auctions/350/tl62d7ktbnc8niisuuw0t65l_thumb.jpg" alt="BMW Řada 3" style="object-fit: cover;" class="card-img rounded ">
+
+        </div>
+
+        <div class="bg-success auction-card__verified position-absolute font-bold text-white px-2">
+            Ověřeno
+        </div>
+
+        <div class="position-absolute top-2 end-2 bg-white ps-2 pe-1 pb-1 rounded-2 rounded-top-0 rounded-end-0" style="z-index: 2;">
+                <a href="#signModal" data-bs-toggle="modal" class="link-warning"><i class="fa-light fa-star"></i></a>
+        </div>
+    </div>
+
+    <div class="card-body position-relative lh-none p-2 pt-0">
+
+
+        <div class="d-flex flex-wrap gap-1 mb-2 ">
+            <div class="bg-danger auction-card__badge rounded-pill font-bold text-white px-2 d-inline-flex position-relative align-items-baseline gap-1">
+                Prodej podléhá schválení
+
+<a href="javascript:;"
+   class="auction-type-help stretched-link text-white"
+   data-bs-toggle="popover"
+   data-bs-trigger="hover focus"
+   data-bs-html="true"
+   data-bs-placement="bottom"
+   data-bs-title="Typy aukcí"
+   data-bs-content="
+&lt;div class=&quot;text-start lh-snug&quot;&gt;
+    &lt;p class=&quot;fw-bold badge bg-success text-sm mb-1&quot;&gt;Garantovaná aukce&lt;/p&gt;
+    &lt;ul class=&quot;ps-6 text-xs mb-2&quot; style=&quot;font-size:.8rem;&quot;&gt;
+        &lt;li&gt;Nejvyšší nabídka po skončení aukce automaticky znamená prodej&lt;/li&gt;
+        &lt;li&gt;Bez dalšího schvalování prodávajícím&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;p class=&quot;fw-bold badge bg-info text-sm mb-1&quot;&gt;Aukce s&amp;nbsp;rezervní cenou&lt;/p&gt;
+    &lt;ul class=&quot;ps-6 text-xs mb-2&quot; style=&quot;font-size:.8rem;&quot;&gt;
+        &lt;li&gt;Prodávající zadá neveřejnou minimální cenu&lt;/li&gt;
+        &lt;li&gt;Pokud je dosažena, aukce se automaticky uzavře jako prodaná&lt;/li&gt;
+        &lt;li&gt;Pokud dosažena není, výsledek jde ke schválení prodávajícímu&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;p class=&quot;fw-bold badge bg-danger text-sm mb-1&quot;&gt;Aukce podléhající schválení&lt;/p&gt;
+    &lt;ul class=&quot;ps-6 text-xs mb-0&quot; style=&quot;font-size:.8rem;&quot;&gt;
+        &lt;li&gt;Nejvyšší nabídka je po skončení pouze návrh&lt;/li&gt;
+        &lt;li&gt;Prodávající následně schválí nebo neschválí výsledek&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+"
+   tabindex="0"
+   role="button"
+   aria-label="Informace o typech aukcí"
+   style="text-decoration: none;"
+><i class="fa-light fa-circle-question "></i></a>
+
+            </div>
+
+
+
+
+        </div>
+
+        <h5 class="auction-card__title mb-1">BMW Řada 3 <small class="auction-card__subtitle text-muted fw-normal">320i V6 Touring (E30) Touring</small></h5>
+
+        <div class="auction-card__meta d-flex justify-content-between w-full mb-0">
+            <span>1989</span>
+            <span>208 000 km</span>
+        </div>
+
+        <div class="auction-card__meta auction-card__meta--muted d-flex justify-content-between w-full text-muted">
+            <span>Benzín, 2.0, 95 kw</span>
+            <span>Manuální</span>
+        </div>
+
+        <div class="bg-white border-top pt-3 pb-1 mt-3 d-flex justify-content-between align-items-center">
+            <span class="text-primary font-bold text-lg">
+                245 000 Kč
+            </span>
+
+            <span class="font-bold text-dark">
+                    <i class="fa-light fa-stopwatch me-1"></i>
+                    <span class="countdown" data-value="2026-11-26T13:16:00+00:00">2d 3h 12m 26s</span>
+            </span>
+        </div>
+    </div>
+
+        <a href="#signModal" data-bs-toggle="modal" class="stretched-link"></a>
+
+
+
+    <script type="6b64450a5117967bf76ac156-text/javascript">
+        if (typeof countDownDate === 'function') {
+            document.querySelectorAll('#snippet-auctionCard-' + 350 +'- .countdown').forEach(el => {
+                countDownDate(el);
+            });
+        }
+    </script>
+</div>
+                </div>
+                <div class="col-md-6 col-lg-4 col-xl-3">
+
+<div class="card auction-card rounded transition-all ease-in duration-300 border-primary-hover    border-warning border border-2 mb-7" id="snippet-auctionCard-422-">
+    <div class="p-2 position-relative overflow-hidden">
+        <div class="ratio ratio-4x3  ">
+                    <img src="https://autoaukce.fra1.cdn.digitaloceanspaces.com/auctions/422/w61vub4bqzmi82wfkyudn8ps_thumb.jpg" alt="Tesla Model Y" style="object-fit: cover;" class="card-img rounded ">
+
+        </div>
+
+
+        <div class="position-absolute top-2 end-2 bg-white ps-2 pe-1 pb-1 rounded-2 rounded-top-0 rounded-end-0" style="z-index: 2;">
+                <a href="#signModal" data-bs-toggle="modal" class="link-warning"><i class="fa-light fa-star"></i></a>
+        </div>
+    </div>
+
+    <div class="card-body position-relative lh-none p-2 pt-0">
+
+
+        <div class="d-flex flex-wrap gap-1 mb-2 ">
+            <div class="bg-danger auction-card__badge rounded-pill font-bold text-white px-2 d-inline-flex position-relative align-items-baseline gap-1">
+                Prodej podléhá schválení
+
+<a href="javascript:;"
+   class="auction-type-help stretched-link text-white"
+   data-bs-toggle="popover"
+   data-bs-trigger="hover focus"
+   data-bs-html="true"
+   data-bs-placement="bottom"
+   data-bs-title="Typy aukcí"
+   data-bs-content="
+&lt;div class=&quot;text-start lh-snug&quot;&gt;
+    &lt;p class=&quot;fw-bold badge bg-success text-sm mb-1&quot;&gt;Garantovaná aukce&lt;/p&gt;
+    &lt;ul class=&quot;ps-6 text-xs mb-2&quot; style=&quot;font-size:.8rem;&quot;&gt;
+        &lt;li&gt;Nejvyšší nabídka po skončení aukce automaticky znamená prodej&lt;/li&gt;
+        &lt;li&gt;Bez dalšího schvalování prodávajícím&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;p class=&quot;fw-bold badge bg-info text-sm mb-1&quot;&gt;Aukce s&amp;nbsp;rezervní cenou&lt;/p&gt;
+    &lt;ul class=&quot;ps-6 text-xs mb-2&quot; style=&quot;font-size:.8rem;&quot;&gt;
+        &lt;li&gt;Prodávající zadá neveřejnou minimální cenu&lt;/li&gt;
+        &lt;li&gt;Pokud je dosažena, aukce se automaticky uzavře jako prodaná&lt;/li&gt;
+        &lt;li&gt;Pokud dosažena není, výsledek jde ke schválení prodávajícímu&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;p class=&quot;fw-bold badge bg-danger text-sm mb-1&quot;&gt;Aukce podléhající schválení&lt;/p&gt;
+    &lt;ul class=&quot;ps-6 text-xs mb-0&quot; style=&quot;font-size:.8rem;&quot;&gt;
+        &lt;li&gt;Nejvyšší nabídka je po skončení pouze návrh&lt;/li&gt;
+        &lt;li&gt;Prodávající následně schválí nebo neschválí výsledek&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+"
+   tabindex="0"
+   role="button"
+   aria-label="Informace o typech aukcí"
+   style="text-decoration: none;"
+><i class="fa-light fa-circle-question "></i></a>
+
+            </div>
+
+            <div class="bg-warning auction-card__badge rounded-pill font-bold text-white px-2">
+                Doporučujeme
+            </div>
+
+
+
+        </div>
+
+        <h5 class="auction-card__title mb-1">Tesla Model Y <small class="auction-card__subtitle text-muted fw-normal">SR LFP DPH</small></h5>
+
+        <div class="auction-card__meta d-flex justify-content-between w-full mb-0">
+            <span>2023</span>
+            <span>177 292 km</span>
+        </div>
+
+        <div class="auction-card__meta auction-card__meta--muted d-flex justify-content-between w-full text-muted">
+            <span>Elektro,  250 kw</span>
+            <span>Automatická</span>
+        </div>
+
+        <div class="bg-white border-top pt-3 pb-1 mt-3 d-flex justify-content-between align-items-center">
+            <span class="text-primary font-bold text-lg">
+                604 000 Kč
+            </span>
+
+            <span class="font-bold text-dark">
+                    <i class="fa-light fa-stopwatch me-1"></i>
+                    <span class="countdown" data-value="2026-11-27T11:15:00+00:00">3d 1h 11m 26s</span>
+            </span>
+        </div>
+    </div>
+
+        <a href="#signModal" data-bs-toggle="modal" class="stretched-link"></a>
+
+
+
+    <script type="6b64450a5117967bf76ac156-text/javascript">
+        if (typeof countDownDate === 'function') {
+            document.querySelectorAll('#snippet-auctionCard-' + 422 +'- .countdown').forEach(el => {
+                countDownDate(el);
+            });
+        }
+    </script>
+</div>
+                </div>
+                <div class="col-md-6 col-lg-4 col-xl-3">
+
+<div class="card auction-card rounded transition-all ease-in duration-300 border-primary-hover     mb-7" id="snippet-auctionCard-410-">
+    <div class="p-2 position-relative overflow-hidden">
+        <div class="ratio ratio-4x3  ">
+                    <img src="https://autoaukce.fra1.cdn.digitaloceanspaces.com/auctions/410/u7l93zs6q3b5qmobor898w8k_thumb.jpg" alt="Ford Mustang Mach-E" style="object-fit: cover;" class="card-img rounded ">
+
+        </div>
+
+
+        <div class="position-absolute top-2 end-2 bg-white ps-2 pe-1 pb-1 rounded-2 rounded-top-0 rounded-end-0" style="z-index: 2;">
+                <a href="#signModal" data-bs-toggle="modal" class="link-warning"><i class="fa-light fa-star"></i></a>
+        </div>
+    </div>
+
+    <div class="card-body position-relative lh-none p-2 pt-0">
+
+
+        <div class="d-flex flex-wrap gap-1 mb-2 ">
+            <div class="bg-danger auction-card__badge rounded-pill font-bold text-white px-2 d-inline-flex position-relative align-items-baseline gap-1">
+                Prodej podléhá schválení
+
+<a href="javascript:;"
+   class="auction-type-help stretched-link text-white"
+   data-bs-toggle="popover"
+   data-bs-trigger="hover focus"
+   data-bs-html="true"
+   data-bs-placement="bottom"
+   data-bs-title="Typy aukcí"
+   data-bs-content="
+&lt;div class=&quot;text-start lh-snug&quot;&gt;
+    &lt;p class=&quot;fw-bold badge bg-success text-sm mb-1&quot;&gt;Garantovaná aukce&lt;/p&gt;
+    &lt;ul class=&quot;ps-6 text-xs mb-2&quot; style=&quot;font-size:.8rem;&quot;&gt;
+        &lt;li&gt;Nejvyšší nabídka po skončení aukce automaticky znamená prodej&lt;/li&gt;
+        &lt;li&gt;Bez dalšího schvalování prodávajícím&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;p class=&quot;fw-bold badge bg-info text-sm mb-1&quot;&gt;Aukce s&amp;nbsp;rezervní cenou&lt;/p&gt;
+    &lt;ul class=&quot;ps-6 text-xs mb-2&quot; style=&quot;font-size:.8rem;&quot;&gt;
+        &lt;li&gt;Prodávající zadá neveřejnou minimální cenu&lt;/li&gt;
+        &lt;li&gt;Pokud je dosažena, aukce se automaticky uzavře jako prodaná&lt;/li&gt;
+        &lt;li&gt;Pokud dosažena není, výsledek jde ke schválení prodávajícímu&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;p class=&quot;fw-bold badge bg-danger text-sm mb-1&quot;&gt;Aukce podléhající schválení&lt;/p&gt;
+    &lt;ul class=&quot;ps-6 text-xs mb-0&quot; style=&quot;font-size:.8rem;&quot;&gt;
+        &lt;li&gt;Nejvyšší nabídka je po skončení pouze návrh&lt;/li&gt;
+        &lt;li&gt;Prodávající následně schválí nebo neschválí výsledek&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+"
+   tabindex="0"
+   role="button"
+   aria-label="Informace o typech aukcí"
+   style="text-decoration: none;"
+><i class="fa-light fa-circle-question "></i></a>
+
+            </div>
+
+
+
+
+        </div>
+
+        <h5 class="auction-card__title mb-1">Ford Mustang Mach-E <small class="auction-card__subtitle text-muted fw-normal"></small></h5>
+
+        <div class="auction-card__meta d-flex justify-content-between w-full mb-0">
+            <span>2021</span>
+            <span>86 216 km</span>
+        </div>
+
+        <div class="auction-card__meta auction-card__meta--muted d-flex justify-content-between w-full text-muted">
+            <span>Elektro,  273 kw</span>
+            <span>Automatická</span>
+        </div>
+
+        <div class="bg-white border-top pt-3 pb-1 mt-3 d-flex justify-content-between align-items-center">
+            <span class="text-primary font-bold text-lg">
+                678 000 Kč
+            </span>
+
+            <span class="font-bold text-dark">
+                    <i class="fa-light fa-stopwatch me-1"></i>
+                    <span class="countdown" data-value="2026-12-01T11:16:00+00:00">7d 1h 12m 26s</span>
+            </span>
+        </div>
+    </div>
+
+        <a href="#signModal" data-bs-toggle="modal" class="stretched-link"></a>
+
+
+
+    <script type="6b64450a5117967bf76ac156-text/javascript">
+        if (typeof countDownDate === 'function') {
+            document.querySelectorAll('#snippet-auctionCard-' + 410 +'- .countdown').forEach(el => {
+                countDownDate(el);
+            });
+        }
+    </script>
+</div>
+                </div>
+                <div class="col-md-6 col-lg-4 col-xl-3">
+
+<div class="card auction-card rounded transition-all ease-in duration-300 border-primary-hover     mb-7" id="snippet-auctionCard-351-">
+    <div class="p-2 position-relative overflow-hidden">
+        <div class="ratio ratio-4x3  ">
+                    <img src="https://autoaukce.fra1.cdn.digitaloceanspaces.com/auctions/351/ck1tpi3uomaah0opcbq8n49z_thumb.jpg" alt="Mercedes-Benz SL" style="object-fit: cover;" class="card-img rounded ">
+
+        </div>
+
+        <div class="bg-success auction-card__verified position-absolute font-bold text-white px-2">
+            Ověřeno
+        </div>
+
+        <div class="position-absolute top-2 end-2 bg-white ps-2 pe-1 pb-1 rounded-2 rounded-top-0 rounded-end-0" style="z-index: 2;">
+                <a href="#signModal" data-bs-toggle="modal" class="link-warning"><i class="fa-light fa-star"></i></a>
+        </div>
+    </div>
+
+    <div class="card-body position-relative lh-none p-2 pt-0">
+
+
+        <div class="d-flex flex-wrap gap-1 mb-2 ">
+            <div class="bg-danger auction-card__badge rounded-pill font-bold text-white px-2 d-inline-flex position-relative align-items-baseline gap-1">
+                Prodej podléhá schválení
+
+<a href="javascript:;"
+   class="auction-type-help stretched-link text-white"
+   data-bs-toggle="popover"
+   data-bs-trigger="hover focus"
+   data-bs-html="true"
+   data-bs-placement="bottom"
+   data-bs-title="Typy aukcí"
+   data-bs-content="
+&lt;div class=&quot;text-start lh-snug&quot;&gt;
+    &lt;p class=&quot;fw-bold badge bg-success text-sm mb-1&quot;&gt;Garantovaná aukce&lt;/p&gt;
+    &lt;ul class=&quot;ps-6 text-xs mb-2&quot; style=&quot;font-size:.8rem;&quot;&gt;
+        &lt;li&gt;Nejvyšší nabídka po skončení aukce automaticky znamená prodej&lt;/li&gt;
+        &lt;li&gt;Bez dalšího schvalování prodávajícím&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;p class=&quot;fw-bold badge bg-info text-sm mb-1&quot;&gt;Aukce s&amp;nbsp;rezervní cenou&lt;/p&gt;
+    &lt;ul class=&quot;ps-6 text-xs mb-2&quot; style=&quot;font-size:.8rem;&quot;&gt;
+        &lt;li&gt;Prodávající zadá neveřejnou minimální cenu&lt;/li&gt;
+        &lt;li&gt;Pokud je dosažena, aukce se automaticky uzavře jako prodaná&lt;/li&gt;
+        &lt;li&gt;Pokud dosažena není, výsledek jde ke schválení prodávajícímu&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;p class=&quot;fw-bold badge bg-danger text-sm mb-1&quot;&gt;Aukce podléhající schválení&lt;/p&gt;
+    &lt;ul class=&quot;ps-6 text-xs mb-0&quot; style=&quot;font-size:.8rem;&quot;&gt;
+        &lt;li&gt;Nejvyšší nabídka je po skončení pouze návrh&lt;/li&gt;
+        &lt;li&gt;Prodávající následně schválí nebo neschválí výsledek&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+"
+   tabindex="0"
+   role="button"
+   aria-label="Informace o typech aukcí"
+   style="text-decoration: none;"
+><i class="fa-light fa-circle-question "></i></a>
+
+            </div>
+
+
+
+
+        </div>
+
+        <h5 class="auction-card__title mb-1">Mercedes-Benz SL <small class="auction-card__subtitle text-muted fw-normal">300 SL (R129) RWD Kabrio - Hardtop</small></h5>
+
+        <div class="auction-card__meta d-flex justify-content-between w-full mb-0">
+            <span>1992</span>
+            <span>120 000 km</span>
+        </div>
+
+        <div class="auction-card__meta auction-card__meta--muted d-flex justify-content-between w-full text-muted">
+            <span>Benzín, 3.0, 140 kw</span>
+            <span>Automatická</span>
+        </div>
+
+        <div class="bg-white border-top pt-3 pb-1 mt-3 d-flex justify-content-between align-items-center">
+            <span class="text-primary font-bold text-lg">
+                394 000 Kč
+            </span>
+
+            <span class="font-bold text-dark">
+                    <i class="fa-light fa-stopwatch me-1"></i>
+                    <span class="countdown" data-value="2026-12-02T10:17:00+00:00">8d 0h 13m 26s</span>
+            </span>
+        </div>
+    </div>
+
+        <a href="#signModal" data-bs-toggle="modal" class="stretched-link"></a>
+
+
+
+    <script type="6b64450a5117967bf76ac156-text/javascript">
+        if (typeof countDownDate === 'function') {
+            document.querySelectorAll('#snippet-auctionCard-' + 351 +'- .countdown').forEach(el => {
+                countDownDate(el);
+            });
+        }
+    </script>
+</div>
+                </div>
+    </div>
+
+    <div id="snippet--pagination">
+    </div>
+</div>
+
+<div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="true" tabindex="-1" id="offcanvasFilters" aria-labelledby="offcanvasFilters">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="Label">Filtrování</h5>
+        <button type="button" class="btn-close text-reset text-xs" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <form action="/" method="post" id="frm-filterForm" class="d-flex flex-column flex-grow-1">
+    <div class="offcanvas-body pt-0" style="height: 80vh;">
+        <div class="mb-3 pb-5 border-bottom">
+            <label for="frm-filterForm-manufacturer" class="form-label">Značka</label>
+            <select name="manufacturer" id="frm-filterForm-manufacturer" class="form-select"><option value="">Vyberte značku ze seznamu</option><option value="1">Abarth</option><option value="2">Acura</option><option value="3">Aixam</option><option value="4">Alfa Romeo</option><option value="5">Alpina</option><option value="6">ARO</option><option value="7">Aston Martin</option><option value="8">Audi</option><option value="9">Austin</option><option value="10">Austro Fiat</option><option value="11">Austro-Daimler</option><option value="12">Auverland</option><option value="13">Bellier</option><option value="14">Bentley</option><option value="15">Bitter</option><option value="16">BMW</option><option value="17">Bugatti</option><option value="18">Buick</option><option value="19">Cadillac</option><option value="20">Casalini</option><option value="21">Caterham</option><option value="22">Citroën</option><option value="23">Cupra</option><option value="24">Dacia</option><option value="25">RAM</option><option value="26">DAELIM</option><option value="27">Daewoo</option><option value="28">Daihatsu</option><option value="29">Delage</option><option value="30">Dodge</option><option value="31">DR</option><option value="32">DS</option><option value="33">Eagle</option><option value="34">Ferrari</option><option value="35">Fiat</option><option value="36">Fisker</option><option value="37">Ford</option><option value="38">GAZ</option><option value="39">GMC</option><option value="40">Gonow</option><option value="41">Gordon</option><option value="42">Great Wall</option><option value="43">Grecav</option><option value="44">Hispano-Suiza</option><option value="45">Holden</option><option value="46">Honda</option><option value="47">Honker</option><option value="48">Hummer</option><option value="49">Hurtan</option><option value="50">Hyundai</option><option value="51">Changhe</option><option value="52">Chatenet</option><option value="53">Chevrolet</option><option value="54">Chrysler</option><option value="55">Infiniti</option><option value="56">Isuzu</option><option value="57">Italcar</option><option value="58">Iveco</option><option value="59">JAC</option><option value="60">Jaguar</option><option value="61">JDM</option><option value="62">Jeep</option><option value="63">Kaipan</option><option value="64">Kia</option><option value="65">Koenigsegg</option><option value="66">Lada</option><option value="67">Lamborghini</option><option value="68">Lancia</option><option value="69">Land Rover</option><option value="70">Lexus</option><option value="71">Ligier</option><option value="72">Lincoln</option><option value="73">Lotus</option><option value="74">Mahindra</option><option value="75">Marcos</option><option value="76">Martin Motors</option><option value="77">Maruti</option><option value="78">Maserati</option><option value="79">Maxus</option><option value="80">Maybach</option><option value="81">Mazda</option><option value="82">McLaren</option><option value="83">Mercedes-Benz</option><option value="84">Mercury</option><option value="85">MG</option><option value="86">Microcar</option><option value="87">Minerva</option><option value="88">Mini</option><option value="89">Mitsubishi</option><option value="90">Morgan</option><option value="91">Moskvič</option><option value="92">MTX</option><option value="93">Nissan</option><option value="94">Oldsmobile</option><option value="95">Oltcit</option><option value="96">Opel</option><option value="97">Pagani</option><option value="98">Peugeot</option><option value="99">Plymouth</option><option value="100">Polestar</option><option value="101">Polski Fiat</option><option value="102">Pontiac</option><option value="103">Porsche</option><option value="104">Praga</option><option value="105">Proton</option><option value="106">Rayton Fissore</option><option value="107">Renault</option><option value="108">Rolls-Royce</option><option value="109">Rover</option><option value="110">Saab</option><option value="111">Santana</option><option value="112">Saturn</option><option value="113">Scion</option><option value="114">Seat</option><option value="115">Shuanghuan</option><option value="116">Simca</option><option value="117">Smart</option><option value="118">SsangYong</option><option value="119">Subaru</option><option value="120">Suzuki</option><option value="121">Škoda</option><option value="122">Tata</option><option value="123">Tatra</option><option value="124">Tavria</option><option value="125">Tesla</option><option value="126">Toyota</option><option value="127">Trabant</option><option value="128">Triumph</option><option value="129">TVR</option><option value="130">UAZ</option><option value="131">Ultima</option><option value="132">Volkswagen</option><option value="133">Volvo</option><option value="134">Wartburg</option><option value="135">Yugo</option><option value="136">Zastava</option><option value="137">ZhiDou</option><option value="138">Ostatní</option><option value="139">Dongfeng</option><option value="140">Ineos</option><option value="142">SWM</option></select>
+
+            <div id="snippet--filterModels" class="mt-3">
+
+                <div class="row overflow-y-auto" style="max-height: 125px;">
+                </div>
+            </div>
+        </div>
+        <div class="mb-3 pb-5 border-bottom">
+            <label for="frm-filterForm-year_from" class="form-label">Rok výroby od - do</label>
+
+            <div class="row align-items-center">
+                <div class="col">
+                    <input type="number" name="year_from" placeholder="1970" min="1900" max="2026" id="frm-filterForm-year_from" data-nette-rules='[{"op":":integer","msg":"Musí být celé číslo"},{"op":":min","msg":"Musí být větší než 1900","arg":1900},{"op":":max","msg":"Musí být menší než 2026","arg":2026}]' class="form-control">
+                </div>
+                <div class="col-auto">
+                    -
+                </div>
+                <div class="col">
+                    <input type="number" name="year_to" placeholder="2026" min="1900" max="2026" id="frm-filterForm-year_to" data-nette-rules='[{"op":":integer","msg":"Musí být celé číslo"},{"op":":min","msg":"Musí být větší než 1900","arg":1900},{"op":":max","msg":"Musí být menší než 2026","arg":2026}]' class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="mb-3 pb-5 border-bottom">
+            <label class="form-label">Palivo</label>
+
+            <div class="row">
+                    <div class="col-6 d-flex mb-2">
+                        <div class="me-3">
+                            <input class="form-check-input" type="checkbox" name="fuel[]" id="frm-filterForm-fuel-Benzín" value="Benzín">
+                        </div>
+                        <div>
+                            <label class="form-label mb-0" for="frm-filterForm-fuel-Benzín">
+                                Benzín
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-6 d-flex mb-2">
+                        <div class="me-3">
+                            <input class="form-check-input" type="checkbox" name="fuel[]" id="frm-filterForm-fuel-Nafta" value="Nafta">
+                        </div>
+                        <div>
+                            <label class="form-label mb-0" for="frm-filterForm-fuel-Nafta">
+                                Nafta
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-6 d-flex mb-2">
+                        <div class="me-3">
+                            <input class="form-check-input" type="checkbox" name="fuel[]" id="frm-filterForm-fuel-CNG" value="CNG">
+                        </div>
+                        <div>
+                            <label class="form-label mb-0" for="frm-filterForm-fuel-CNG">
+                                CNG
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-6 d-flex mb-2">
+                        <div class="me-3">
+                            <input class="form-check-input" type="checkbox" name="fuel[]" id="frm-filterForm-fuel-LPG" value="LPG">
+                        </div>
+                        <div>
+                            <label class="form-label mb-0" for="frm-filterForm-fuel-LPG">
+                                LPG
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-6 d-flex mb-2">
+                        <div class="me-3">
+                            <input class="form-check-input" type="checkbox" name="fuel[]" id="frm-filterForm-fuel-Hybridní" value="Hybridní">
+                        </div>
+                        <div>
+                            <label class="form-label mb-0" for="frm-filterForm-fuel-Hybridní">
+                                Hybridní
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-6 d-flex mb-2">
+                        <div class="me-3">
+                            <input class="form-check-input" type="checkbox" name="fuel[]" id="frm-filterForm-fuel-Elektro" value="Elektro">
+                        </div>
+                        <div>
+                            <label class="form-label mb-0" for="frm-filterForm-fuel-Elektro">
+                                Elektro
+                            </label>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="mb-3 pb-5 border-bottom">
+            <label class="form-label">Převodovka</label>
+
+            <div class="row">
+                    <div class="col-6 d-flex mb-2">
+                        <div class="me-3">
+                            <input class="form-check-input" type="checkbox" name="transmission[]" id="frm-filterForm-transmission-Manuální" value="Manuální">
+                        </div>
+                        <div>
+                            <label class="form-label mb-0" for="frm-filterForm-transmission-Manuální">
+                                Manuální
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-6 d-flex mb-2">
+                        <div class="me-3">
+                            <input class="form-check-input" type="checkbox" name="transmission[]" id="frm-filterForm-transmission-Automatická" value="Automatická">
+                        </div>
+                        <div>
+                            <label class="form-label mb-0" for="frm-filterForm-transmission-Automatická">
+                                Automatická
+                            </label>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="mb-3 pb-5 border-bottom">
+            <label for="frm-filterForm-auction_type" class="form-label">Typ aukce</label>
+            <select name="auction_type" id="frm-filterForm-auction_type" class="form-select"><option value="">Všechny typy</option><option value="guaranteed">Garantovaný prodej</option><option value="reserve">Aukce s rezervní cenou</option><option value="approval">Prodej podléhá schválení</option></select>
+        </div>
+        <div class="mb-3 pb-5 border-bottom">
+            <div class="row">
+                <div class="col-6 d-flex mb-2">
+                    <div class="me-3">
+                        <input class="form-check-input" type="checkbox" name="fleet" id="frm-filterForm-fleet">
+                    </div>
+                    <div>
+                        <label class="form-label mb-0" for="frm-filterForm-fleet">Pouze fleet aukce</label>
+                    </div>
+                </div>
+                <div class="col-6 d-flex mb-2">
+                    <div class="me-3">
+                        <input class="form-check-input" type="checkbox" name="ending_today" id="frm-filterForm-ending_today">
+                    </div>
+                    <div>
+                        <label class="form-label mb-0" for="frm-filterForm-ending_today">Končí dnes</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer p-5 d-flex justify-content-between bg-surface-secondary position-absolute bottom-0 w-full">
+        <button type="button" class="btn btn-sm btn-neutral" data-bs-dismiss="offcanvas">Zavřít</button>
+        <button type="submit" class="btn btn-sm btn-primary">Filtrovat</button>
+    </div>
+    <input type="hidden" name="_do" value="filterForm-submit"></form>
+
+</div>
+
+<footer class="pt-12 pt-lg-24 mt-lg-32 bg-surface-secondary d-none d-lg-block">
+    <div class="mt-n48 mb-20 d-none d-lg-block">
+        <div class="container max-w-screen-xl">
+            <div class="row mt-5">
+                <div class="col-10 mx-auto">
+                    <div class="card-group bg-white shadow-5 rounded-4 border-top border-top-3 border-primary overflow-hidden">
+                        <div class="card shadow-none border-0 mb-0">
+                            <div class="card-body">
+                                <h2 class="font-weight-bold text-center mb-0">
+                                    Až o 10%
+                                </h2>
+                                <p class="text-center text-muted mb-0">
+                                    vyšší prodejní cena
+                                </p>
+                            </div>
+                        </div>
+                        <div class="card shadow-none border-0 mb-0">
+                            <div class="card-body">
+                                <h2 class="font-weight-bold text-center mb-0">
+                                    Již za 10 dní
+                                </h2>
+                                <p class="text-center text-muted mb-0">
+                                    prodáno
+                                </p>
+                            </div>
+                        </div>
+                        <div class="card shadow-none border-0 mb-0">
+                            <div class="card-body">
+                                <h2 class="font-weight-bold text-center mb-0">
+                                    90%
+                                </h2>
+                                <p class="text-center text-muted mb-0">
+                                    prodejců prodá vůz na poprvé
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mb-24">
+        <style>
+            .partner-logo img {
+                max-height: 60px;
+                filter: grayscale(100%);
+                opacity: .7;
+                transition: filter .3s ease, opacity .3s ease;
+            }
+            .partner-logo:hover img {
+                filter: grayscale(0%);
+                opacity: 1;
+            }
+        </style>
+        <h4 class="text-center text-muted text-uppercase ls-wide mb-5">Partneři</h4>
+        <div class="d-flex flex-wrap justify-content-center align-items-center gap-5 gap-lg-8">
+            <a href="https://www.auresholdings.eu/en/" target="_blank" rel="noopener" class="partner-logo">
+                <img src="/img/partners/logo-aures.svg" alt="Aures" class="img-fluid">
+            </a>
+            <a href="https://www.siko.cz" target="_blank" rel="noopener" class="partner-logo">
+                <img src="/img/partners/logo-SIKO-CZ.png" alt="SIKO" class="img-fluid">
+            </a>
+            <a href="https://www.kofola.cz" target="_blank" rel="noopener" class="partner-logo">
+                <img src="/img/partners/KOFOLA-logo-cs-horizontalne-CMYK.png" alt="Kofola" class="img-fluid">
+            </a>
+            <a href="https://www.hornbach.cz" target="_blank" rel="noopener" class="partner-logo">
+                <img src="/img/partners/Hornbach_(retailer)-Logo.wine.png" alt="Hornbach" class="img-fluid">
+            </a>
+            <a href="https://www.radeklanda.cz" target="_blank" rel="noopener" class="partner-logo">
+                <img src="/img/partners/Logo_Landa_v2.svg" style="height: 60px;" alt="Landa" class="img-fluid">
+            </a>
+            <a href="https://www.ostrava.cz" target="_blank" rel="noopener" class="partner-logo">
+                <img src="/img/partners/Ostraqva.jpeg" alt="Ostraqva" class="img-fluid">
+            </a>
+            <a href="https://www.interlacto.cz" target="_blank" rel="noopener" class="partner-logo">
+                <img src="/img/partners/favicon-interlacto.png" alt="Interlacto" class="img-fluid">
+            </a>
+            <a href="https://www.zzsuk.cz" target="_blank" rel="noopener" class="partner-logo">
+                <img src="/img/partners/logo_ZZS_UK-1.jpg" alt="ZZS UK" class="img-fluid">
+            </a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 mb-5 mb-lg-0 text-center text-lg-start">
+                <h1 class="h3 d-flex align-items-center justify-content-center justify-content-lg-start">
+                    <img src="/img/logo.svg" class="h-14" alt="AutoAukce.cz">
+                </h1>
+
+                <p class="text-sm text-muted mt-5 mb-5">
+                    Rozjeď to v aukci. Online a naplno.
+                </p>
+
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item">
+                        <a class="text-lg text-muted px-1" target="_blank" href="https://www.facebook.com/portalautoaukce">
+                            <i class="fa-brands fa-facebook"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="text-lg text-muted px-1" target="_blank" href="https://www.instagram.com/auto_aukce">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg col-sm-3 col-6 ms-lg-auto mb-4 mb-sm-0">
+                <h6 class="mb-3">Portál</h6>
+
+                <ul class="list-unstyled text-sm">
+                    <li class="py-1"><a href="/" class="text-muted">Aukce</a></li>
+                    <li class="py-1"><a href="/auction/" class="text-muted">Zadat aukci</a></li>
+                    <li class="py-1"><a href="/fleet-aukce" class="text-muted">Fleet aukce</a></li>
+                    <li class="py-1"><a href="/home/history" class="text-muted">Úspěšné aukce</a></li>
+                    <li class="py-1"><a href="/home/affiliate" class="text-muted">Vydělávejte s námi</a></li>
+                    <li class="py-1"><a href="/automobilove-ikony" class="text-muted">Ikony v automobilovém světě</a></li>
+                    <li class="py-1"><a href="/home/rules" class="text-muted">Pravidla aukcí</a></li>
+                </ul>
+            </div>
+            <div class="col-lg col-sm-3 col-6 mb-4 mb-sm-0">
+                <h6 class="mb-3">O nás</h6>
+
+                <ul class="list-unstyled text-sm">
+                    <li class="py-1"><a href="/sluzby" class="text-muted">Služby</a></li>
+                    <li class="py-1"><a href="/proc-zvolit-autoaukce-cz" class="text-muted">Kdo jsme?</a></li>
+                    <li class="py-1"><a href="/home/about" class="text-muted">Jak to funguje?</a></li>
+                    <li class="py-1"><a href="/jak-overujeme-aukce" class="text-muted">Jak ověřujeme aukce?</a></li>
+                    <li class="py-1"><a href="https://autoaukce.cz/guide.pdf" class="text-muted">Jak správně nafotit vůz?</a></li>
+                    <li class="py-1"><a href="/cdn-cgi/l/email-protection#ec85828a83ac8d9998838d99878f89c28f96" class="text-muted">Podpora</a></li>
+                    <li class="py-1"><a href="/home/contact" class="text-muted">Kontakt</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3 d-none d-lg-block">
+                <h6 class="text-sm mb-2">Upozornění na nové aukce</h6>
+
+                <p class="text-sm text-muted">
+                    Získejte každý den sourhn nových aukcí z našeho portálu, přehledně, e-mailem.
+                </p>
+
+                <div id="snippet--newsletterForm">
+                        <form action="/" method="post" id="frm-newsletterForm" class="ajax mt-4">
+                            <div class="form-row">
+                                <div class="col-12">
+                                    <input type="email" name="email" placeholder="Váš e-mail" id="frm-newsletterForm-email" required data-nette-rules='[{"op":":filled","msg":"Toto pole je povinné."},{"op":":email","msg":"Zadejte prosím platnou e-mailovou adresu"}]' class="form-control mb-2">
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary w-full">
+                                        Chci odebírat
+                                    </button>
+                                </div>
+                            </div>
+                        <input type="hidden" name="_do" value="newsletterForm-submit"></form>
+
+                </div>
+
+                <p class="m-0 mt-2 lh-tighter">
+                    <small class="text-muted text-xs">
+                        Odesláním formuláře souhlasíte s <a href="/home/privacy" target="_blank" class="">zásadami zpracování osobních údajů</a>.
+                    </small>
+                </p>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-12">
+            <div class="col-md-8">
+                <div class="row justify-content-center justify-content-md-between align-items-center mb-5">
+                    <div class="col col-md-auto text-center">
+                        <img class="img-fluid" style="max-height: 60px;" src="/img/nextgen.png" alt="Nextgeneration EU">
+                    </div>
+                    <div class="col col-md-auto text-center">
+                        <img class="img-fluid" style="max-height: 60px;" src="/img/npo.png" alt="Národní plán obnovy">
+                    </div>
+                    <div class="col col-md-auto text-center">
+                        <img class="img-fluid" style="max-height: 60px;" src="/img/mk.png" alt="Ministerstvo Kultury">
+                    </div>
+                </div>
+                <p class="text-sm text-center">Projekt <strong>Auto aukce, reg. č. 0380000847</strong> byl financován Evropskou unií – Next Generation EU</p>
+            </div>
+        </div>
+        <hr class="mt-10 mb-7" />
+        <div class="row align-items-center justify-content-md-between pb-7">
+            <div class="col-md-6">
+                <div class="copyright text-sm text-center text-md-start">
+                    &copy; 2026 <a href="/" class="h6 text-sm font-bold">AutoAukce.cz</a>. Všechna práva vyhrazena.
+                </div>
+            </div>
+            <div class="col-md-6">
+                <ul class="nav justify-content-center justify-content-md-end mt-3 mt-md-0 mx-md-n4">
+                    <li class="nav-item">
+                        <a href="/home/terms" class="nav-link text-muted">
+                            Podmínky používání
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/home/privacy" class="nav-link text-muted">
+                            Zásady ochrany osobních údajů
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<nav class="position-fixed bottom-0 w-full bg-white border-top h-16 z-1001 d-lg-none">
+    <ul class="nav nav-justified pt-1">
+        <li class="nav-item">
+            <a href="/" class="nav-link active">
+                <i class="fa-light fa-gavel text-xl"></i>
+                <span class="d-block text-xs">Aukce</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="/vlozit-aukci" class="nav-link text-muted">
+                <i class="fa-light fa-handshake-angle text-xl"></i>
+                <span class="d-block text-xs">Nová aukce</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="/fleet-aukce" class="nav-link text-muted">
+                <i class="fa-light fa-question-circle text-xl"></i>
+                <span class="d-block text-xs">Fleet aukce</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="/sign/profile" class="nav-link text-muted">
+                <i class="fa-light fa-cogs text-xl"></i>
+                <span class="d-block text-xs">Nastavení</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<div class="modal" id="signModal" tabindex="-1" aria-labelledby="signModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-4">
+            <div class="modal-body">
+                <div class="text-center mb-8">
+                    <div class="icon icon-shape rounded-circle bg-opacity-10 bg-primary text-primary text-lg mb-4">
+                        <i class="fa-light fa-right-to-bracket"></i>
+                    </div>
+                    <h1 class="ls-tight font-bolder h2">
+                        Přihlášení
+                    </h1>
+                    <p class="mt-2">
+                        <small>Ještě nemáte účet?</small>
+                        <a href="/sign/in" class="text-primary text-sm font-semibold">Zaregistrujte se</a>
+                    </p>
+                </div>
+                <div id="snippet--signModalErrors">
+                    <form action="/" method="post" id="frm-signInForm" class="ajax">
+
+                        <div class="mb-5">
+                            <label for="frm-signInForm-email" class="form-label">E-mail</label>
+                            <input type="email" name="email" placeholder="Vaše e-mailová adresa" id="frm-signInForm-email" required data-nette-rules='[{"op":":filled","msg":"Toto pole je povinné."},{"op":":email","msg":"Zadejte prosím platnou e-mailovou adresu."}]' class="form-control">
+                        </div>
+                        <div class="mb-5">
+                            <label for="frm-signInForm-password" class="form-label">Heslo</label>
+                            <input type="password" name="password" placeholder="Vaše heslo" id="frm-signInForm-password" required data-nette-rules='[{"op":":filled","msg":"Toto pole je povinné."}]' class="form-control" autocomplete="current-password">
+                        </div>
+                        <div>
+                            <button type="submit" name="login" value="Přihlásit" class="btn btn-primary w-full" data-spinner>
+                                Přihlásit
+                            </button>
+                        </div>
+                    <input type="hidden" name="request" value=""><input type="hidden" name="_do" value="signInForm-submit"></form>
+
+                </div>
+                <div class="py-5 text-center">
+                    <span class="text-xs text-uppercase font-semibold">nebo pomocí</span>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 d-flex justify-content-center mb-3">
+                        <div id="g_id_onload"
+                             data-client_id="151457940731-k44743c66tcmnjdof3a2i89smn01gq81.apps.googleusercontent.com"
+                             data-context="signin"
+                             data-ux_mode="popup"
+                             data-login_uri="/sign/google"
+                             data-auto_prompt="false">
+                        </div>
+
+                        <div class="g_id_signin"
+                             data-type="standard"
+                             data-shape="rectangular"
+                             data-theme="outline"
+                             data-text="continue_with"
+                             data-size="large"
+                             data-logo_alignment="left">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="supportModal" tabindex="-1" aria-labelledby="supportModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-3">
+            <div class="modal-header">
+                <h5 class="modal-title">Podpora</h5>
+                <div class="text-xs ms-auto">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            </div>
+            <div class="modal-body" id="snippet--support">
+                <form action="/" method="post" id="frm-support" class="ajax">
+                    <div class="mb-3">
+                        <label for="frm-support-email" class="form-label">Váš e-mail</label>
+                        <input type="email" name="email" id="frm-support-email" required data-nette-rules='[{"op":":filled","msg":"Toto pole je povinné."},{"op":":email","msg":"Zadejte prosím platnou e-mailovou adresu."}]' class="form-control">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="frm-support-message" class="form-label">Zpráva</label>
+                        <textarea name="message" rows="10" id="frm-support-message" required data-nette-rules='[{"op":":filled","msg":"Toto pole je povinné."}]' class="form-control"></textarea>
+                    </div>
+
+                    <button type="button" class="btn btn-primary w-full recaptcha">
+                        Odeslat
+                    </button>
+                <input type="hidden" name="token" value=""><input type="hidden" name="_do" value="support-submit"></form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+	<a href="https://wa.me/420700000000?text=" class="btn btn-primary rounded-pill position-fixed bottom-5 end-5 shadow-2 d-none d-lg-block">
+		<i class="fa-light fa-question-circle fa-lg me-2"></i> Máte dotaz?
+	</a>
+
+	<pwa-install
+		manifest-url="/site.webmanifest"
+		use-local-storage="true"
+	>
+	</pwa-install>
+
+		<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://www.google.com/recaptcha/api.js?render=6LcUwZYoAAAAAD5Ahio6mW_nf8iXwR_THt13RZma" type="6b64450a5117967bf76ac156-text/javascript"></script>
+<script src="/assets/common.5fe42934427c66823fcd.min.js" type="6b64450a5117967bf76ac156-application/javascript" data-naja-script-id="script-9ea1f9591d82e7bbf5b96b9b5d70b92e1354aedb"></script>
+<script src="/assets/815.e902fb4d1c82347f8fb6.min.js" type="6b64450a5117967bf76ac156-application/javascript" data-naja-script-id="script-e8dd4dd250b2a6bad881acdd8d283df6524840af"></script>
+		<script src="https://accounts.google.com/gsi/client" async type="6b64450a5117967bf76ac156-text/javascript"></script>
+
+<script src="/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="6b64450a5117967bf76ac156-|49" defer></script></body>
+</html>

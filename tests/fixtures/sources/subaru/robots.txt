@@ -1,0 +1,20 @@
+User-agent: *
+Disallow: /360/
+Disallow: /download/svolavaci-akce/
+Disallow: /estimator-test/
+Disallow: /estimator-test-1/
+Disallow: /intra/
+Disallow: /dokumenty/
+Disallow: /vin/
+Disallow: solterra-prehledd.html
+Disallow: /e-katalog/solterra-22/
+Disallow: solterra-high.html
+Disallow: solterra-mid.html
+Disallow: solterra-technologie.html
+Disallow: solterra-bev.html
+Disallow: solterra-design.html
+Disallow: solterra-bezpecnost.html
+Disallow: solterra-spojeni.html
+
+
+Sitemap: https://www.subaru.cz/sitemap.xml

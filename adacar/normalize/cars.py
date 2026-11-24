@@ -127,12 +127,17 @@ def power_in_text(*texts: str | None) -> int | None:
 # Checked in order: an "LPG" or "hybrid" car also names its petrol engine.
 _FUEL_WORDS = (
     ("plugin_hybrid", r"plug-?in|phev"),
-    ("hybrid", r"hybrid|hev(?![a-z])"),
+    ("hybrid", r"(?:full)?hybrid|f?hev(?![a-z])"),
     ("lpg", r"lpg"),
     ("cng", r"cng|g-tec"),
     ("electric", r"elektromobil|elektrina|elektro(?![a-z-])|(?<![a-z])ev(?![a-z])|\bbev\b"),
-    ("diesel", r"nafta|naftov|diesel|tdi|crdi|dci|hdi|cdi|tdci|jtd|d4d|multijet|bluehdi|cdti"),
-    ("petrol", r"benzin|tsi|tfsi|fsi|mpi|tce|gdi|ecoboost|vtec"),
+    (
+        "diesel",
+        r"nafta|naftov|(?:turbo-?)?diesel|(?:bi|blue|twin)?tdi|crdi|dci|b?hdi|(?:v|blue)?cdi"
+        r"|i-?ctdi|tdci|jtd|d4d"
+        r"|multijet|bluehdi|cdti|ecoblue",
+    ),
+    ("petrol", r"benzin|(?:e|m|eco)?tsi|e?tfsi|fsi|mpi|tce|t?gdi|ecoboost|i?vtec|vc-?t"),
 )
 _GEARBOX_WORDS = (
     (
@@ -153,8 +158,8 @@ _BODY_WORDS = (
     ("liftback", r"liftback"),
     ("hatchback", r"hatchback|hatch"),
     ("sedan", r"sedan|limuzin"),
-    ("coupe", r"kupe|coupe"),
-    ("cabrio", r"kabrio|cabrio|roadster|spider"),
+    ("coupe", r"kupe|(?:gran|sport)?coupe"),
+    ("cabrio", r"kabrio|(?:gran)?cabrio|roadster|spider"),
     ("pickup", r"pick-?up"),
     ("van", r"dodavk|(?<![a-z])van(?![a-z])"),
 )
@@ -164,14 +169,14 @@ def _first(words: tuple[tuple[str, str], ...], *texts: str | None) -> str | None
     for text in texts:
         folded = fold(text or "")
         for code, pattern in words:
-            if re.search(rf"(?<![a-z]){pattern}", folded):
+            if re.search(rf"(?<![a-z])(?:{pattern})", folded):
                 return code
     return None
 
 
 def _every(words: tuple[tuple[str, str], ...], *texts: str | None) -> set[str]:
     folded = " ".join(fold(text or "") for text in texts)
-    return {code for code, pattern in words if re.search(rf"(?<![a-z]){pattern}", folded)}
+    return {code for code, pattern in words if re.search(rf"(?<![a-z])(?:{pattern})", folded)}
 
 
 def fuels_in_text(*texts: str | None) -> set[str]:

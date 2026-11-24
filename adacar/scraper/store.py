@@ -131,6 +131,7 @@ class _Known:
     is_primary: bool
     detail_at: datetime | None
     price: int | None  # the ad's own last price
+    card_price: int | None
 
     @property
     def has_detail(self) -> bool:
@@ -164,6 +165,7 @@ class CarStore:
                 CarAd.is_primary,
                 CarAd.detail_at,
                 CarAd.price,
+                CarAd.card_price,
             ).where(CarAd.source_id == source_id)
         )
         self._known = {r[0]: _Known(*r[1:]) for r in rows}
@@ -208,6 +210,11 @@ class CarStore:
         known = self._known.get(external_id)
         return (known.detail_at if known else None) or datetime.min
 
+    def card_price_changed(self, external_id: str, price: int | None) -> bool:
+        """The ad's listing card shows another price than when the ad was stored."""
+        known = self._known.get(external_id)
+        return bool(known and None not in (price, known.card_price) and price != known.card_price)
+
     # --- writing ----------------------------------------------------------------------------
 
     def add_all(self, cars: Iterable[ParsedCar]) -> StoreStats:
@@ -216,19 +223,27 @@ class CarStore:
         self.commit()
         return self.stats
 
-    def touch(self, external_id: str) -> None:
-        """The source still offers this car, unchanged as far as we know."""
+    def touch(self, external_id: str, card_price: int | None = None) -> None:
+        """The source still offers this car, unchanged as far as we know. `card_price` is kept
+        for an ad stored before card prices were (later changes re-read the ad instead)."""
+        known = self._known.get(external_id)
+        if known and known.car_id >= 0 and known.card_price is None and card_price is not None:
+            known.card_price = card_price
+            self._set_ad(external_id, card_price=card_price)
         if external_id not in self._unchanged_ids:
             self._unchanged_ids.add(external_id)
             self.stats.unchanged += 1
         self._seen_external_ids.append(external_id)
         self._count()
 
-    def add(self, parsed: ParsedCar, detail: bool = True) -> None:
-        """`detail`: the record is complete (False: only what a listing card shows)."""
+    def add(self, parsed: ParsedCar, detail: bool = True, card_price: int | None = None) -> None:
+        """`detail`: the record is complete (False: only what a listing card shows).
+        `card_price`: what the ad's listing card showed (a card itself shows its price)."""
         now = utcnow()
         digest = parsed.content_hash()
         known = self._known.get(parsed.external_id)
+        if not detail:
+            card_price = parsed.price
 
         if known is None:
             with self.dedup.lock:
@@ -237,27 +252,24 @@ class CarStore:
                 if isinstance(ref, Car) and object_session(ref) is not self.session:
                     match = None  # another source's car, not saved yet: no id to join
                 if match is not None:
-                    self._attach(match, parsed, digest, detail, now)
+                    self._attach(match, parsed, digest, detail, now, card_price)
                     self.stats.merged += 1
                 else:
-                    self._create(parsed, digest, detail, now)
+                    self._create(parsed, digest, detail, now, card_price)
                     self.stats.new += 1
             self._known[parsed.external_id] = _Known(
-                -1, digest, match is None, now if detail else None, parsed.price
+                -1, digest, match is None, now if detail else None, parsed.price, card_price
             )
             self._added.append(parsed.external_id)
         elif digest == known.digest:
             self.touch(parsed.external_id)
+            values: dict[str, object] = {}
             if detail:  # read again (e.g. a newer `modified`) but unchanged
-                known.detail_at = now
-                self.session.execute(
-                    update(CarAd)
-                    .where(
-                        CarAd.source_id == self.source_id,
-                        CarAd.external_id == parsed.external_id,
-                    )
-                    .values(detail_at=now)
-                )
+                known.detail_at = values["detail_at"] = now
+            if card_price is not None and card_price != known.card_price:
+                known.card_price = values["card_price"] = card_price
+            if values:
+                self._set_ad(parsed.external_id, **values)
             return
         elif known.car_id < 0:
             return  # a second, different copy in the same run (an API repeating an ad)
@@ -266,7 +278,7 @@ class CarStore:
             if parsed.external_id in self._unchanged_ids:
                 self._unchanged_ids.discard(parsed.external_id)
                 self.stats.unchanged -= 1
-            self._update(known, parsed, digest, detail, now)
+            self._update(known, parsed, digest, detail, now, card_price)
             known.digest = digest
             if detail:
                 known.detail_at = now
@@ -277,7 +289,22 @@ class CarStore:
         if self._pending >= self.batch_size:
             self.commit()
 
-    def _source_row(self, parsed: ParsedCar, digest: str, detail: bool, now: datetime, primary):
+    def _set_ad(self, external_id: str, **values: object) -> None:
+        self.session.execute(
+            update(CarAd)
+            .where(CarAd.source_id == self.source_id, CarAd.external_id == external_id)
+            .values(**values)
+        )
+
+    def _source_row(
+        self,
+        parsed: ParsedCar,
+        digest: str,
+        detail: bool,
+        now: datetime,
+        primary,
+        card_price: int | None,
+    ):
         return CarAd(
             source_id=self.source_id,
             external_id=parsed.external_id,
@@ -285,13 +312,16 @@ class CarStore:
             is_primary=primary,
             status="active",
             price=parsed.price,
+            card_price=card_price,
             content_hash=digest,
             detail_at=now if detail else None,
             first_seen_at=now,
             last_seen_at=now,
         )
 
-    def _create(self, parsed: ParsedCar, digest: str, detail: bool, now: datetime) -> None:
+    def _create(
+        self, parsed: ParsedCar, digest: str, detail: bool, now: datetime, card_price: int | None
+    ) -> None:
         car = Car(
             **car_values(parsed),
             location_id=self._location_id(parsed.location),
@@ -301,7 +331,7 @@ class CarStore:
             last_seen_at=now,
             updated_at=now,
         )
-        car.ads.append(self._source_row(parsed, digest, detail, now, primary=True))
+        car.ads.append(self._source_row(parsed, digest, detail, now, True, card_price))
         self._add_images(car, parsed.images, set(), now)
         self.session.add(car)
         entry = DedupIndex.entry_for(parsed, self.source_id)
@@ -311,10 +341,16 @@ class CarStore:
             self._new_entries.append(entry)
 
     def _attach(
-        self, match: Entry, parsed: ParsedCar, digest: str, detail: bool, now: datetime
+        self,
+        match: Entry,
+        parsed: ParsedCar,
+        digest: str,
+        detail: bool,
+        now: datetime,
+        card_price: int | None,
     ) -> None:
         ref = match.ref
-        row = self._source_row(parsed, digest, detail, now, primary=False)
+        row = self._source_row(parsed, digest, detail, now, False, card_price)
         car = ref if isinstance(ref, Car) else self.session.get_one(Car, ref)
         car.ads.append(row)
         match.sources.add(self.source_id)
@@ -354,7 +390,13 @@ class CarStore:
         car.last_seen_at = now
 
     def _update(
-        self, known: _Known, parsed: ParsedCar, digest: str, detail: bool, now: datetime
+        self,
+        known: _Known,
+        parsed: ParsedCar,
+        digest: str,
+        detail: bool,
+        now: datetime,
+        card_price: int | None,
     ) -> None:
         source_values = {
             "last_seen_at": now,
@@ -365,6 +407,8 @@ class CarStore:
         }
         if detail:
             source_values["detail_at"] = now
+        if card_price is not None:
+            source_values["card_price"] = known.card_price = card_price
         self.session.execute(
             update(CarAd)
             .where(
@@ -529,8 +573,11 @@ class CarStore:
             self._locations[loc.key], self._precision[loc_id] = loc_id, loc.precision
         return self._locations[loc.key]
 
-    def mostly_unseen(self, kraje: Collection[str] | None = None) -> bool:
-        """Fewer than half of the cars the source offered before this pass were seen in it.
+    def mostly_unseen(
+        self, kraje: Collection[str] | None = None, ended_aside: bool = False
+    ) -> bool:
+        """Fewer than half of the cars the source offered before this pass were seen in it
+        (with `ended_aside`, auctions that have ended do not count).
 
         Then the dump or the pages are rather broken than so many cars gone at once, so the
         caller expires nothing. A source with fewer than 20 cars may lose them all.
@@ -544,6 +591,9 @@ class CarStore:
         ]
         if kraje is not None:
             offered.append(_in_regions(kraje))
+        if ended_aside:
+            ended = select(Car.id).where(Car.expires_at < self.started_at)
+            offered.append(CarAd.car_id.not_in(ended))
         last_seen = self.session.scalars(select(CarAd.last_seen_at).where(*offered)).all()
         unseen = sum(when < self.started_at for when in last_seen)
         return len(last_seen) >= 20 and unseen * 2 > len(last_seen)

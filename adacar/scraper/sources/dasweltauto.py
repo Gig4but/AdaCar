@@ -17,7 +17,7 @@ import json
 from typing import Any
 from urllib.parse import urlencode
 
-from adacar.core import ParsedCar, ScrapeQuery
+from adacar.core import ParsedCar, ScrapeQuery, SourceKind
 from adacar.geo.places import PlaceResolver
 from adacar.normalize.text import clean_spaces, fold
 from adacar.normalize.vocab import make_code
@@ -188,6 +188,7 @@ def parse_record(data: dict, places: PlaceResolver) -> ParsedCar | None:
 class DasWeltAuto(CrawlSource):
     id = SOURCE_ID
     label = "Das WeltAuto"
+    kind: SourceKind = "dealer"
     nationwide = True
     max_pages = 100  # ~56 pages today
 
